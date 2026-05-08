@@ -1,0 +1,27 @@
+---
+export const prerender = true;
+
+import Layout from "@/layouts/Layout.astro";
+import LearnConditionPage from "@/components/learn/LearnConditionPage.astro";
+import { conditions, type ConditionId } from "@/content/conditions/registry";
+import { getLearnLayoutSeo } from "@/content/learn-seo";
+import type { Lang } from "@/config/languages";
+
+const lang: Lang = "de";
+
+export function getStaticPaths() {
+  return conditions.map((c) => ({ params: { condition: c.id } }));
+}
+
+const { condition } = Astro.params;
+const id = condition as ConditionId;
+if (!conditions.some((c) => c.id === id)) {
+  return Astro.redirect("/de/learn", 308);
+}
+
+const { title, description } = getLearnLayoutSeo(id, lang);
+---
+
+<Layout {title} {description} {lang}>
+  <LearnConditionPage conditionId={id} {lang} />
+</Layout>

@@ -6,7 +6,13 @@ const STOREFRONT_ACCESS_TOKEN = "784883c28d6484a8804b44ae00adfb99";
 export const SHOPIFY_COURSE_PRODUCTS = {
   ESSENTIALS_COURSE: "9846187786568",
   PROFESSIONALS_COURSE: "9846188081480",
+  PLANTAR_FASCIITIS_COURSE: "10048943227208",
 } as const;
+
+export type ShopifyCourseSlug =
+  | "achilles_rupture_course"
+  | "achilles_rupture_professionals_course"
+  | "plantar_fasciitis_course";
 
 /**
  * Splint product ID (numeric; order webhook line_items[].product_id).
@@ -20,7 +26,24 @@ export const SHOPIFY_SPLINT_PRODUCT_ID = "8572432253256";
 export const SHOPIFY_COURSE_VARIANTS = {
   ESSENTIALS_COURSE: "gid://shopify/ProductVariant/52265314353480",
   PROFESSIONALS_COURSE: "gid://shopify/ProductVariant/52265315828040",
+  PLANTAR_FASCIITIS_COURSE: "gid://shopify/ProductVariant/53062046056776",
 } as const;
+
+/** ISO 3166-1 alpha-2 — regions where course checkout on Shopify is enabled. */
+export const COURSE_SHOPIFY_CHECKOUT_COUNTRY_CODES: ReadonlySet<string> =
+  new Set([
+    "US",
+    "GB",
+    "AU",
+    "NZ",
+    "CA",
+  ]);
+
+export function isCourseShopifyCheckoutAllowed(countryCode: string): boolean {
+  const u = (countryCode || "").trim().toUpperCase();
+  const normalized = u === "UK" ? "GB" : u;
+  return COURSE_SHOPIFY_CHECKOUT_COUNTRY_CODES.has(normalized);
+}
 
 export interface ShopifyPrice {
   amount: string;
@@ -52,17 +75,20 @@ export async function fetchCoursePrice(
   `;
 
   try {
-    const response = await fetch(`https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Shopify-Storefront-Access-Token": STOREFRONT_ACCESS_TOKEN,
+    const response = await fetch(
+      `https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Shopify-Storefront-Access-Token": STOREFRONT_ACCESS_TOKEN,
+        },
+        body: JSON.stringify({
+          query,
+          variables: { country: countryCode },
+        }),
       },
-      body: JSON.stringify({
-        query,
-        variables: { country: countryCode },
-      }),
-    });
+    );
 
     if (!response.ok) {
       throw new Error(`Shopify API error: ${response.status}`);

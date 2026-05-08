@@ -1,4 +1,5 @@
 ---
+conditionId: achilles-rupture
 title: "Achilles Surgery vs Non-Surgical: What Evidence Shows"
 status: "published"
 description: "Achilles rupture surgery vs non-surgical care: re-rupture, infection, and what UKSTAR really compared. Plain-language summary for patients facing the decision."

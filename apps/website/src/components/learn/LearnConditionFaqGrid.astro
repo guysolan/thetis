@@ -1,0 +1,117 @@
+---
+import type { ConditionId } from "@/content/conditions/registry";
+import type { Lang } from "@/config/languages";
+import { languages } from "@/config/languages";
+import {
+    getArticleRoutesByConditionId,
+    generateRouteForLanguage,
+} from "@/content/routes";
+import { getLearnFaqCardIcon } from "@/content/learn-faq-grid-icons";
+import { cn } from "@/lib/utils";
+
+interface Props {
+    conditionId: ConditionId;
+    lang: Lang;
+}
+
+const { conditionId, lang } = Astro.props;
+const language = languages.find((l) => l.code === lang)!;
+const baseRoutes = getArticleRoutesByConditionId(conditionId);
+const cards = baseRoutes.map((base) => {
+    const r = generateRouteForLanguage(base, language);
+    const Icon = getLearnFaqCardIcon(base.slug);
+    return { ...r, Icon };
+});
+
+const copy: Record<
+    Lang,
+    { title: string; description: string; readGuide: string; id: string }
+> = {
+    en: {
+        id: "learn-faq-grid-heading",
+        title: "FAQs",
+        description:
+            "In-depth answers organised by topic — diagnosis, treatment, recovery, and what to expect next.",
+        readGuide: "Read guide →",
+    },
+    de: {
+        id: "learn-faq-grid-heading",
+        title: "FAQs",
+        description:
+            "Ausführliche Antworten nach Themen sortiert — Diagnose, Behandlung, Genesung und was als Nächstes folgt.",
+        readGuide: "Zum Leitfaden →",
+    },
+    fr: {
+        id: "learn-faq-grid-heading",
+        title: "FAQ",
+        description:
+            "Réponses détaillées par thème — diagnostic, traitement, récupération et la suite.",
+        readGuide: "Lire le guide →",
+    },
+    es: {
+        id: "learn-faq-grid-heading",
+        title: "Preguntas frecuentes",
+        description:
+            "Respuestas en profundidad por tema: diagnóstico, tratamiento, recuperación y próximos pasos.",
+        readGuide: "Ver guía →",
+    },
+    it: {
+        id: "learn-faq-grid-heading",
+        title: "FAQ",
+        description:
+            "Risposte approfondite per tema: diagnosi, trattamento, recupero e cosa aspettarsi dopo.",
+        readGuide: "Apri la guida →",
+    },
+};
+
+const t = copy[lang];
+---
+
+{
+    cards.length > 0 ? (
+        <section
+            class="bg-white dark:bg-neutral-950 py-12 border-neutral-200 dark:border-neutral-800 border-b"
+            aria-labelledby={t.id}
+        >
+            <div class="mx-auto px-4 max-w-6xl">
+                <h2
+                    id={t.id}
+                    class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
+                >
+                    {t.title}
+                </h2>
+                <p class="mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-base">
+                    {t.description}
+                </p>
+
+                <ul class="gap-4 grid sm:grid-cols-2 lg:grid-cols-3">
+                    {cards.map(({ href, title, description, Icon }) => (
+                        <li>
+                            <a
+                                href={href}
+                                class={cn(
+                                    "group flex sm:flex-row flex-col gap-4 bg-primary/[0.03] hover:bg-primary/10 dark:bg-primary/5 dark:hover:bg-primary/10 shadow-sm hover:shadow-md p-5 border border-primary/20 hover:border-primary/40 rounded-2xl h-full transition-all",
+                                )}
+                            >
+                                <div class="flex flex-shrink-0 justify-center items-center bg-primary/10 group-hover:bg-primary/15 rounded-xl w-12 h-12 text-primary transition-colors">
+                                    <Icon className="w-6 h-6" aria-hidden />
+                                </div>
+                                <div class="flex flex-col flex-1 gap-2 min-w-0">
+                                    <h3 class="font-semibold text-neutral-900 dark:text-neutral-100 group-hover:text-primary text-lg leading-snug transition-colors">
+                                        {title}
+                                    </h3>
+                                    <p class="text-neutral-600 dark:text-neutral-400 text-sm line-clamp-3 leading-relaxed">
+                                        {description}
+                                    </p>
+                                    <span class="mt-auto pt-1 font-medium text-primary text-sm">
+                                        {t.readGuide}
+                                    </span>
+                                </div>
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </section>
+    ) : null
+}

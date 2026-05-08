@@ -1,0 +1,23 @@
+---
+import type { ConditionId } from "@/content/conditions/registry";
+import LearnConditionHero from "@/components/learn/LearnConditionHero.astro";
+import LearnConditionFaqGrid from "@/components/learn/LearnConditionFaqGrid.astro";
+import LearnConditionPageExtras from "@/components/learn/LearnConditionPageExtras.astro";
+import AchillesSplintLearnBand from "@/components/condition/AchillesSplintLearnBand.astro";
+import type { Lang } from "@/config/languages";
+
+interface Props {
+    conditionId: ConditionId;
+    lang: Lang;
+}
+
+const { conditionId, lang } = Astro.props;
+const showAchillesSplintBand = conditionId === "achilles-rupture";
+---
+
+<main class="space-y-0">
+    <LearnConditionHero {conditionId} {lang} />
+    {showAchillesSplintBand ? <AchillesSplintLearnBand {lang} /> : null}
+    <LearnConditionFaqGrid {conditionId} {lang} />
+    <LearnConditionPageExtras {conditionId} {lang} />
+</main>

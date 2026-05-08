@@ -1,0 +1,243 @@
+---
+import type { ConditionId } from "@/content/conditions/registry";
+import { getConditionById } from "@/content/conditions/registry";
+import type { Lang } from "@/config/languages";
+import { languages } from "@/config/languages";
+import {
+  getArticleRoutesByConditionId,
+  getCourseRouteForCondition,
+  getRecoveryPhaseRoutesForCondition,
+  generateRouteForLanguage,
+  getRouteBySlugAndLanguage,
+} from "@/content/routes";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+
+interface Props {
+  conditionId: ConditionId;
+  lang: Lang;
+}
+
+const { conditionId, lang } = Astro.props;
+
+const copy: Record<
+  Lang,
+  {
+    sectionTitle: string;
+    products: string;
+    course: string;
+    faqs: string;
+    guides: string;
+    articles: string;
+    articlesBlurb: string;
+    articlesCta: string;
+    noProducts: string;
+  }
+> = {
+  en: {
+    sectionTitle: "Resources for this condition",
+    products: "1. Products",
+    course: "2. Course",
+    faqs: "3. FAQs",
+    guides: "4. Patient guides",
+    articles: "5. Articles",
+    articlesBlurb:
+      "Longer evidence-based reads on this condition (blog — English).",
+    articlesCta: "Browse articles",
+    noProducts:
+      "No products for this condition yet. See the course, FAQs, and guides below.",
+  },
+  de: {
+    sectionTitle: "Ressourcen zu dieser Beschwerde",
+    products: "1. Produkte",
+    course: "2. Kurs",
+    faqs: "3. FAQs",
+    guides: "4. Patientenleitfäden",
+    articles: "5. Artikel",
+    articlesBlurb:
+      "Ausführlichere evidenzbasierte Texte zu dieser Beschwerde (Blog — Englisch).",
+    articlesCta: "Artikel ansehen",
+    noProducts:
+      "Noch keine Produkte für diese Beschwerde. Siehe Kurs, FAQs und Leitfäden unten.",
+  },
+  fr: {
+    sectionTitle: "Ressources pour cette pathologie",
+    products: "1. Produits",
+    course: "2. Cours",
+    faqs: "3. FAQ",
+    guides: "4. Guides patient",
+    articles: "5. Articles",
+    articlesBlurb:
+      "Articles plus longs, fondés sur les données, pour cette pathologie (blog — anglais).",
+    articlesCta: "Voir les articles",
+    noProducts:
+      "Pas encore de produits pour cette pathologie. Voir le cours, les FAQ et les guides ci-dessous.",
+  },
+  es: {
+    sectionTitle: "Recursos para esta condición",
+    products: "1. Productos",
+    course: "2. Curso",
+    faqs: "3. Preguntas frecuentes",
+    guides: "4. Guías para pacientes",
+    articles: "5. Artículos",
+    articlesBlurb:
+      "Lecturas más extensas basadas en evidencia para esta condición (blog en inglés).",
+    articlesCta: "Ver artículos",
+    noProducts:
+      "Aún no hay productos para esta condición. Consulta el curso, las preguntas frecuentes y las guías abajo.",
+  },
+  it: {
+    sectionTitle: "Risorse per questa condizione",
+    products: "1. Prodotti",
+    course: "2. Corso",
+    faqs: "3. FAQ",
+    guides: "4. Guide per il paziente",
+    articles: "5. Articoli",
+    articlesBlurb:
+      "Letture più approfondite basate su evidenze per questa condizione (blog in inglese).",
+    articlesCta: "Vedi gli articoli",
+    noProducts:
+      "Nessun prodotto per questa condizione. Vedi corso, FAQ e guide sotto.",
+  },
+};
+
+const t = copy[lang];
+const language = languages.find((l) => l.code === lang)!;
+const c = getConditionById(conditionId);
+
+const productLinks = (c.productRouteSlugs ?? [])
+  .map((slug) => getRouteBySlugAndLanguage(slug, lang))
+  .filter((r): r is NonNullable<typeof r> => r != null);
+
+const courseLink = getCourseRouteForCondition(conditionId, lang);
+
+const faqRoutes = getArticleRoutesByConditionId(conditionId).map((b) =>
+  generateRouteForLanguage(b, language),
+);
+
+const guideRoutes = getRecoveryPhaseRoutesForCondition(conditionId).map((b) =>
+  generateRouteForLanguage(b, language),
+);
+---
+
+<section
+  class="bg-white dark:bg-neutral-950 py-12 border-neutral-200 dark:border-neutral-800 border-b"
+  aria-labelledby="condition-resources-heading"
+>
+  <div class="mx-auto px-4 max-w-6xl">
+    <h2
+      id="condition-resources-heading"
+      class="mb-8 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
+    >
+      {t.sectionTitle}
+    </h2>
+
+    <div class="space-y-10">
+      <div id="condition-products">
+        <h3 class="mb-3 font-semibold text-primary text-lg">{t.products}</h3>
+        {
+          productLinks.length > 0 ? (
+            <ul class="space-y-3">
+              {productLinks.map((p) => (
+                <li>
+                  <a
+                    href={p.href}
+                    class={cn(
+                      buttonVariants({ variant: "outline", size: "lg" }),
+                      "w-full sm:w-auto justify-start font-medium text-left",
+                    )}
+                  >
+                    {p.title}
+                  </a>
+                  {p.description ? (
+                    <p class="mt-1 max-w-2xl text-neutral-600 text-sm">
+                      {p.description}
+                    </p>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="text-neutral-600 text-sm">{t.noProducts}</p>
+          )
+        }
+      </div>
+
+      <div id="condition-course">
+        <h3 class="mb-3 font-semibold text-primary text-lg">{t.course}</h3>
+        {
+          courseLink ? (
+            <div>
+              <a
+                href={courseLink.href}
+                class={cn(
+                  buttonVariants({ variant: "default", size: "lg" }),
+                  "font-semibold",
+                )}
+              >
+                {courseLink.title}
+              </a>
+              {courseLink.description ? (
+                <p class="mt-2 max-w-2xl text-neutral-600 text-sm">
+                  {courseLink.description}
+                </p>
+              ) : null}
+            </div>
+          ) : (
+            <p class="text-neutral-600 text-sm">Course link unavailable.</p>
+          )
+        }
+      </div>
+
+      <div id="condition-faqs">
+        <h3 class="mb-3 font-semibold text-primary text-lg">{t.faqs}</h3>
+        <ul class="space-y-2">
+          {
+            faqRoutes.map((f) => (
+              <li>
+                <a
+                  href={f.href}
+                  class="font-medium text-neutral-800 dark:text-neutral-200 hover:text-primary text-base hover:underline underline-offset-4"
+                >
+                  {f.title}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div id="condition-guides">
+        <h3 class="mb-3 font-semibold text-primary text-lg">{t.guides}</h3>
+        <ul class="space-y-2">
+          {
+            guideRoutes.map((g) => (
+              <li>
+                <a
+                  href={g.href}
+                  class="font-medium text-neutral-800 dark:text-neutral-200 hover:text-primary text-base hover:underline underline-offset-4"
+                >
+                  {g.title}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div id="condition-articles">
+        <h3 class="mb-3 font-semibold text-primary text-lg">{t.articles}</h3>
+        <p class="mb-3 max-w-2xl text-neutral-600 text-sm">{t.articlesBlurb}</p>
+        <a
+          href={`/blog/condition/${conditionId}`}
+          class={cn(
+            buttonVariants({ variant: "outline", size: "lg" }),
+            "font-semibold",
+          )}
+        >
+          {t.articlesCta}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

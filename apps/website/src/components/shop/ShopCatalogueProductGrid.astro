@@ -1,0 +1,99 @@
+---
+import type { AchillesProduct } from "@thetis/catalogue";
+import { orderedShopProductsForDisplay } from "@thetis/catalogue";
+import type { Lang } from "@/config/languages";
+import ShopCataloguePartnerNotes from "@/components/shop/ShopCataloguePartnerNotes.astro";
+import ShopCatalogueProductCards from "@/components/shop/ShopCatalogueProductCards.astro";
+
+interface Props {
+  lang: Lang;
+  products: AchillesProduct[];
+  /** Section `<h2>` — overrides `catalogueSection` when set */
+  sectionTitle?: string;
+  /** `recommended` = condition shop grid title; `allProducts` = main /shop index */
+  catalogueSection?: "recommended" | "allProducts";
+  showPartnerNotes?: boolean;
+  /** Nested under a parent section (e.g. main shop “Recommended by condition”) — uses `<h3>` and no outer grey band */
+  embedded?: boolean;
+  /** Shown under the group heading when `embedded` */
+  conditionHubHref?: string;
+  conditionHubCta?: string;
+}
+
+const {
+  lang,
+  products,
+  sectionTitle: sectionTitleProp,
+  catalogueSection = "recommended",
+  showPartnerNotes = true,
+  embedded = false,
+  conditionHubHref,
+  conditionHubCta,
+} = Astro.props;
+
+const copy: Record<
+  Lang,
+  {
+    recommended: string;
+    allProductsTitle: string;
+  }
+> = {
+  en: {
+    recommended: "Recommended gear",
+    allProductsTitle: "All products",
+  },
+  de: {
+    recommended: "Empfohlene Artikel",
+    allProductsTitle: "Alle Produkte",
+  },
+  fr: {
+    recommended: "Équipement recommandé",
+    allProductsTitle: "Tous les produits",
+  },
+  es: {
+    recommended: "Equipo recomendado",
+    allProductsTitle: "Todos los productos",
+  },
+  it: {
+    recommended: "Attrezzatura consigliata",
+    allProductsTitle: "Tutti i prodotti",
+  },
+};
+
+const t = copy[lang];
+const sectionTitle =
+  sectionTitleProp ??
+  (catalogueSection === "allProducts" ? t.allProductsTitle : t.recommended);
+const shopProducts = orderedShopProductsForDisplay(products);
+---
+
+{
+  embedded ? (
+    <div class="mb-14 last:mb-0">
+      <h3 class="mb-1 font-bold text-neutral-900 dark:text-neutral-100 text-xl md:text-2xl">
+        {sectionTitle}
+      </h3>
+      {conditionHubHref && conditionHubCta ? (
+        <p class="mb-5">
+          <a
+            href={conditionHubHref}
+            class="font-medium text-primary text-sm hover:underline"
+          >
+            {conditionHubCta}
+          </a>
+        </p>
+      ) : null}
+      <ShopCatalogueProductCards lang={lang} products={shopProducts} />
+    </div>
+  ) : (
+    <section class="bg-neutral-50 dark:bg-neutral-950 py-12">
+      <div class="mx-auto px-4 max-w-6xl">
+        <h2 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-2xl">
+          {sectionTitle}
+        </h2>
+        {showPartnerNotes ? <ShopCataloguePartnerNotes lang={lang} /> : null}
+        <ShopCatalogueProductCards lang={lang} products={shopProducts} />
+      </div>
+    </section>
+  )
+}

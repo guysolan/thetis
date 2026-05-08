@@ -20,5 +20,8 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# Copied from @thetis/catalogue (see sync-catalogue-images)
+public/images/catalogue-products
+
 # jetbrains setting folder
 .idea/

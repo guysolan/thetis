@@ -1,4 +1,5 @@
 ---
+conditionId: achilles-rupture
 title: "When to Start Scar Massage After Achilles Surgery"
 status: "published"
 description: "Most patients can start gentle scar massage after Achilles surgery once the wound is fully closed. Learn timing, technique, and red flags to stop."

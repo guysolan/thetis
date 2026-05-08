@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import ShopIndexHero from "@/components/shop/ShopIndexHero.astro";
+import ShopFromThetisSection from "@/components/shop/ShopFromThetisSection.astro";
+import ShopRecommendedByCondition from "@/components/shop/ShopRecommendedByCondition.astro";
+import type { Lang } from "@/config/languages";
+
+const lang: Lang = "es";
+---
+
+<Layout
+  title="Tienda — productos de recuperación"
+  description="Férula nocturna Thetis más equipo seleccionado para cada condición — botas, plantillas y socios."
+  {lang}
+>
+  <ColorGradient>
+    <main class="pb-16 md:pb-24">
+      <ShopIndexHero {lang} />
+      <ShopFromThetisSection {lang} />
+      <ShopRecommendedByCondition {lang} />
+    </main>
+  </ColorGradient>
+</Layout>

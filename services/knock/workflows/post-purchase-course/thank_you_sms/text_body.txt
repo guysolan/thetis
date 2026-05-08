@@ -1,8 +1,8 @@
-Thank you for your Thetis Course order ({{ data.order_number }}).
-You now have the full week-by-week recovery guide.
+Thank you for your {{ data.course_name }} order ({{ data.order_number }}).
+{{ data.sms_summary }}
 
-Log in here: {{ vars.course_url }}
-We recommend starting with 'Emergency care' and the 'Week 1 checklist' — they set the foundation for your recovery.
+Log in here: {{ data.course_url }}
+We recommend starting with {{ data.sms_start_lessons }}.
 
 Reply anytime if you have questions.
 

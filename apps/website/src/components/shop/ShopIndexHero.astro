@@ -1,0 +1,59 @@
+---
+/**
+ * Main /shop index: compact title + tagline only. Product detail lives in
+ * `ShopFromThetisSection` below.
+ */
+import type { Lang } from "@/config/languages";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const copy: Record<Lang, { tagline: string }> = {
+  en: {
+    tagline:
+      "Surgeon-curated recovery gear for every stage — from our splint and course to condition-specific picks.",
+  },
+  de: {
+    tagline:
+      "Von Chirurgen kuratiertes Recovery-Equipment für jede Phase — von Schiene und Kurs bis zu Tipps pro Beschwerde.",
+  },
+  fr: {
+    tagline:
+      "Équipement de récupération sélectionné par des chirurgiens — de l’attelle et du cours aux conseils par pathologie.",
+  },
+  es: {
+    tagline:
+      "Material de recuperación seleccionado por cirujanos — de la férula y el curso a recomendaciones por condición.",
+  },
+  it: {
+    tagline:
+      "Equipaggiamento per il recupero curato dai chirurghi — dal tutore e dal corso ai consigli per condizione.",
+  },
+};
+
+const t = copy[lang];
+---
+
+<section
+  class="border-neutral-200 dark:border-neutral-800 border-b color-gradient"
+  aria-labelledby="shop-index-heading"
+>
+  <div class="mx-auto px-4 py-8 md:py-10 max-w-6xl">
+    <div class="text-center">
+      <h1
+        id="shop-index-heading"
+        class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl"
+      >
+        Shop
+      </h1>
+      <p
+        class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed"
+      >
+        {t.tagline}
+      </p>
+    </div>
+  </div>
+</section>

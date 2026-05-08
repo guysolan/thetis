@@ -11,7 +11,9 @@ interface UserProgress {
 export function useCourseProgress() {
   const { email } = useSimpleAuth();
   const [completedLessons, setCompletedLessons] = useState<string[]>([]);
-  const [currentBookmark, setCurrentBookmarkState] = useState<string | null>(null);
+  const [currentBookmark, setCurrentBookmarkState] = useState<string | null>(
+    null,
+  );
   const [loading, setLoading] = useState(true);
 
   // Load progress from database on mount and when email changes
@@ -85,12 +87,16 @@ export function useCourseProgress() {
         if (error) {
           console.error("Error saving progress:", error);
           // Revert optimistic update
-          setCompletedLessons((prev) => prev.filter((slug) => slug !== lessonSlug));
+          setCompletedLessons((prev) =>
+            prev.filter((slug) => slug !== lessonSlug)
+          );
         }
       } catch (error) {
         console.error("Failed to save progress:", error);
         // Revert optimistic update
-        setCompletedLessons((prev) => prev.filter((slug) => slug !== lessonSlug));
+        setCompletedLessons((prev) =>
+          prev.filter((slug) => slug !== lessonSlug)
+        );
       }
     },
     [email, completedLessons],
@@ -139,12 +145,13 @@ export function useCourseProgress() {
   );
 
   const getCompletionPercentage = useCallback(
-    (totalLessons: number): number => {
-      if (totalLessons === 0) return 0;
-      const percentage = Math.round((completedLessons.length / totalLessons) * 100);
-      return Math.min(percentage, 100);
+    (courseSlugs: string[]): number => {
+      if (courseSlugs.length === 0) return 0;
+      const completed =
+        courseSlugs.filter((s) => completedLessons.includes(s)).length;
+      return Math.min(Math.round((completed / courseSlugs.length) * 100), 100);
     },
-    [completedLessons.length],
+    [completedLessons],
   );
 
   const clearProgress = useCallback(async () => {

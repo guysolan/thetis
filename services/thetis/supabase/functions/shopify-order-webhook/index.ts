@@ -4,12 +4,98 @@ import { createHmac } from "node:crypto";
 
 // Shopify product IDs -> product_slug. Keep splint in sync with SHOPIFY_SPLINT_PRODUCT_ID in apps/website/src/lib/shopify-course-price.ts
 const PRODUCT_TO_SLUG: Record<string, string> = {
-    "9846187786568": "standard_course", // Standard / Essentials Course
-    "9846188081480": "premium_course", // Premium / Professionals Course
+    "9846187786568": "achilles_rupture_course", // Achilles Rupture / Essentials Course
+    "9846188081480": "achilles_rupture_professionals_course", // Achilles / Professionals Course
+    "10048943227208": "plantar_fasciitis_course", // Plantar Fasciitis Course
     "8572432253256": "splint", // Achilles Rupture Splint (all sizes/sides)
 };
 
-const COURSE_SLUGS = ["standard_course", "premium_course"];
+// Fallback when product_id is missing or a test/reused product: REST variant_id (numeric)
+const VARIANT_TO_SLUG: Record<string, string> = {
+    "52265314353480": "achilles_rupture_course",
+    "52265315828040": "achilles_rupture_professionals_course",
+    "53062046056776": "plantar_fasciitis_course",
+};
+
+function productSlugForLineItem(item: ShopifyLineItem): string | undefined {
+    const pid = item.product_id;
+    if (pid != null && pid !== 0) {
+        const fromProduct = PRODUCT_TO_SLUG[String(pid)];
+        if (fromProduct) return fromProduct;
+    }
+    const vid = item.variant_id;
+    if (vid != null && vid !== 0) {
+        return VARIANT_TO_SLUG[String(vid)];
+    }
+    return undefined;
+}
+
+const COURSE_SLUGS = [
+    "achilles_rupture_course",
+    "achilles_rupture_professionals_course",
+    "plantar_fasciitis_course",
+];
+
+interface CoursePostPurchaseContent {
+    course_name: string;
+    thank_you_summary: string;
+    start_lessons: string;
+    start_lesson_reason: string;
+    path_summary: string;
+    key_principle: string;
+    affiliate_course_description: string;
+    sms_summary: string;
+    sms_start_lessons: string;
+    sms_key_principle: string;
+}
+
+const ACHILLES_COURSE_CONTENT: CoursePostPurchaseContent = {
+    course_name: "Achilles Rupture Recovery Course",
+    thank_you_summary:
+        "You now have the full week-by-week recovery guide — from emergency care and the first week through the boot phase, physio, and return to sport. Everything in one place, when you need it.",
+    start_lessons: "Emergency care and Week 1 checklist",
+    start_lesson_reason:
+        "they set the foundation for your recovery: toes down 24/7, what's normal vs urgent, and your first follow-up",
+    path_summary:
+        "emergency care -> early treatment -> boot phase -> transition -> physio -> return to sport",
+    key_principle:
+        "Keep your foot pointed down (plantarflexion) unless your clinician says otherwise. That keeps the tendon ends together and supports healing.",
+    affiliate_course_description: "Achilles recovery course",
+    sms_summary: "You now have the full week-by-week recovery guide.",
+    sms_start_lessons: "Emergency care and Week 1 checklist",
+    sms_key_principle:
+        "Keep your foot pointed down (plantarflexion) unless your clinician says otherwise.",
+};
+
+const COURSE_POST_PURCHASE_CONTENT: Record<string, CoursePostPurchaseContent> =
+    {
+        achilles_rupture_course: ACHILLES_COURSE_CONTENT,
+        achilles_rupture_professionals_course: ACHILLES_COURSE_CONTENT,
+        plantar_fasciitis_course: {
+            course_name: "Plantar Fasciitis Course",
+            thank_you_summary:
+                "You now have the full step-by-step heel pain guide — from understanding plantar fasciitis through Level 1 foundation treatment, further options, and when specialist care is worth discussing.",
+            start_lessons:
+                "Why Does My Heel Hurt? and The Three-Level Treatment Approach",
+            start_lesson_reason:
+                "they explain what's happening at the heel, why quick fixes often disappoint, and how to work through the basics consistently",
+            path_summary:
+                "understanding your heel pain -> Level 1 foundation care -> further treatment options -> surgery decisions if symptoms persist",
+            key_principle:
+                "Think in months, not days. The basics done consistently usually matter more than chasing a miracle treatment.",
+            affiliate_course_description: "plantar fasciitis course",
+            sms_summary:
+                "You now have the step-by-step heel pain guide, from the basics through further treatment options.",
+            sms_start_lessons:
+                "Why Does My Heel Hurt? and The Three-Level Treatment Approach",
+            sms_key_principle:
+                "Think in months, not days. Consistent basics beat chasing quick fixes.",
+        },
+    };
+
+function contentForCourse(productSlug: string): CoursePostPurchaseContent {
+    return COURSE_POST_PURCHASE_CONTENT[productSlug] ?? ACHILLES_COURSE_CONTENT;
+}
 
 // Verify Shopify webhook signature
 function verifyShopifyWebhook(
@@ -42,8 +128,8 @@ function verifyShopifyWebhook(
 
 interface ShopifyLineItem {
     id: number;
-    product_id: number;
-    variant_id: number;
+    product_id: number | null;
+    variant_id: number | null;
     title: string;
     quantity: number;
     price: string;
@@ -149,44 +235,53 @@ Deno.serve(async (req) => {
 
     const { data: existingEvent } = await supabase
         .from("webhook_events")
-        .select("id")
+        .select("id, processed")
         .eq("event_id", webhookId)
-        .single();
+        .maybeSingle();
 
-    if (existingEvent) {
-        console.log(`Webhook ${webhookId} already processed, skipping`);
+    if (existingEvent?.processed) {
+        console.log(`Webhook ${webhookId} already fully processed, skipping`);
         return new Response(JSON.stringify({ message: "Already processed" }), {
             status: 200,
             headers: { "Content-Type": "application/json" },
         });
     }
 
-    // Log the webhook event
-    const { error: logError } = await supabase.from("webhook_events").insert({
-        event_id: webhookId,
-        event_type: topic,
-        source: "shopify",
-        payload: order,
-        processed: false,
-    });
+    // Log the webhook event (first attempt only). Retries after a crash must not
+    // bail out just because this row exists with processed = false.
+    if (!existingEvent) {
+        const { error: logError } = await supabase.from("webhook_events")
+            .insert({
+                event_id: webhookId,
+                event_type: topic,
+                source: "shopify",
+                payload: order,
+                processed: false,
+            });
 
-    if (logError) {
-        console.error("Failed to log webhook event:", logError);
+        if (logError) {
+            console.error("Failed to log webhook event:", logError);
+        }
     }
 
     // Find all tracked products in the order (courses, splint, future)
-    const trackedItems = order.line_items.filter(
-        (item) => PRODUCT_TO_SLUG[String(item.product_id)],
+    const trackedItems = order.line_items.filter((item) =>
+        productSlugForLineItem(item)
     );
 
     if (trackedItems.length === 0) {
         const productIdsInOrder = order.line_items.map(
-            (i) => `${i.product_id} (${i.title})`,
+            (i) =>
+                `product_id=${i.product_id} variant_id=${i.variant_id} (${i.title})`,
         );
         console.log(
-            `Order ${order.order_number} contains no tracked products. Line item product_ids: ${
+            `Order ${order.order_number} contains no tracked products. Line items: ${
                 productIdsInOrder.join(", ")
-            }. Tracked: courses 9846187786568, 9846188081480; splint 8572432253256.`,
+            }. Tracked product_ids: ${
+                Object.keys(PRODUCT_TO_SLUG).join(", ")
+            }; PF variant fallback: ${
+                Object.keys(VARIANT_TO_SLUG).join(", ")
+            }.`,
         );
         await supabase
             .from("webhook_events")
@@ -198,7 +293,27 @@ Deno.serve(async (req) => {
         );
     }
 
-    const customerEmail = (order.customer?.email || order.email).toLowerCase();
+    const rawEmail = order.customer?.email || order.email;
+    const customerEmail = typeof rawEmail === "string"
+        ? rawEmail.trim().toLowerCase()
+        : "";
+    if (!customerEmail) {
+        const msg =
+            "Order has no customer or order email; cannot record purchases";
+        console.error(`${msg} (order ${order.order_number}, id ${order.id})`);
+        await supabase
+            .from("webhook_events")
+            .update({
+                processed: true,
+                processed_at: new Date().toISOString(),
+                error_message: msg,
+            })
+            .eq("event_id", webhookId);
+        return new Response(JSON.stringify({ message: msg }), {
+            status: 200,
+            headers: { "Content-Type": "application/json" },
+        });
+    }
     const purchasesCreated: string[] = [];
     const errors: string[] = [];
 
@@ -244,7 +359,7 @@ Deno.serve(async (req) => {
 
     // Create purchases for each tracked product (courses, splint, future)
     for (const item of trackedItems) {
-        const productSlug = PRODUCT_TO_SLUG[String(item.product_id)];
+        const productSlug = productSlugForLineItem(item)!;
 
         const { data: existingPurchase } = await supabase
             .from("purchases")
@@ -314,10 +429,12 @@ Deno.serve(async (req) => {
         })
         .eq("event_id", webhookId);
 
-    // Trigger Knock post-purchase workflows (one per product type: course, splint)
+    // Trigger Knock post-purchase workflows (course-specific content, plus splint)
     const KNOCK_API_KEY = Deno.env.get("KNOCK_API_KEY");
     if (KNOCK_API_KEY && productsOrdered.length > 0) {
-        const hasCourse = productsOrdered.some((s) => COURSE_SLUGS.includes(s));
+        const courseSlugsOrdered = productsOrdered.filter((s) =>
+            COURSE_SLUGS.includes(s)
+        );
         const hasSplint = productsOrdered.includes("splint");
         const COURSE_URL = Deno.env.get("COURSE_URL") ||
             "https://course.thetismedical.com";
@@ -332,7 +449,8 @@ Deno.serve(async (req) => {
             review_url: REVIEW_URL,
         };
 
-        if (hasCourse) {
+        for (const courseSlug of courseSlugsOrdered) {
+            const courseData = contentForCourse(courseSlug);
             try {
                 const r = await fetch(
                     "https://api.knock.app/v1/workflows/post-purchase-course/trigger",
@@ -345,12 +463,16 @@ Deno.serve(async (req) => {
                         body: JSON.stringify({
                             recipients: [
                                 {
-                                    id: `order-${order.id}-course`,
+                                    id: `order-${order.id}-${courseSlug}`,
                                     email: customerEmail,
                                 },
                             ],
-                            cancellation_key: `order-${order.id}-course`,
-                            data: triggerData,
+                            cancellation_key: `order-${order.id}-${courseSlug}`,
+                            data: {
+                                ...triggerData,
+                                course_slug: courseSlug,
+                                ...courseData,
+                            },
                         }),
                     },
                 );
@@ -359,11 +481,16 @@ Deno.serve(async (req) => {
                         "Knock course trigger failed:",
                         await r.text(),
                     );
-                } else {console.log(
-                        `Knock post-purchase-course triggered for order #${order.order_number}`,
-                    );}
+                } else {
+                    console.log(
+                        `Knock post-purchase-course triggered for ${courseSlug} - order #${order.order_number}`,
+                    );
+                }
             } catch (e) {
-                console.error("Knock course trigger error:", e);
+                console.error(
+                    `Knock course trigger error for ${courseSlug}:`,
+                    e,
+                );
             }
         }
         if (hasSplint) {

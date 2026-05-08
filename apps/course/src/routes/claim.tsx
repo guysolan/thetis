@@ -3,7 +3,13 @@ import { useEffect, useState } from "react";
 import { useSimpleAuth } from "@/hooks/use-simple-auth";
 import { useEnrollment } from "@/hooks/use-enrollment";
 import { supabase } from "@/lib/supabase"; // Still needed for enrollment check
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@thetis/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@thetis/ui/card";
 import { Button } from "@thetis/ui/button";
 import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
@@ -19,8 +25,10 @@ export const Route = createFileRoute("/claim")({
 });
 
 function ClaimPage() {
-  const { email: currentEmail, loading: authLoading, signIn, isAuthenticated } = useSimpleAuth();
-  const { hasAccess, loading: enrollmentLoading } = useEnrollment();
+  const { email: currentEmail, loading: authLoading, signIn, isAuthenticated } =
+    useSimpleAuth();
+  const { hasAccess, hasAnyCourseAccess, loading: enrollmentLoading } =
+    useEnrollment();
   const { email: prefillEmail, order } = useSearch({ from: "/claim" });
   const [email, setEmail] = useState(prefillEmail || "");
   const [loading, setLoading] = useState(false);
@@ -30,10 +38,12 @@ function ClaimPage() {
   const [orderValid, setOrderValid] = useState<boolean | null>(null);
   const [hasPurchase, setHasPurchase] = useState<boolean | null>(null);
   const [hasAttemptedValidation, setHasAttemptedValidation] = useState(false);
-  const [enrollmentInfo, setEnrollmentInfo] = useState<{
-    courseType: string;
-    orderNumber: string;
-  } | null>(null);
+  const [enrollmentInfo, setEnrollmentInfo] = useState<
+    {
+      courseType: string;
+      orderNumber: string;
+    } | null
+  >(null);
 
   // If we have both email and order from URL, verify the order
   // If not, we'll allow manual email entry (skip order verification)
@@ -56,7 +66,13 @@ function ClaimPage() {
           .select("product_slug, shopify_order_number, status")
           .eq("shopify_customer_email", emailToCheck)
           .eq("status", "active")
-          .in("product_slug", ["standard_course", "premium_course"])
+          .in("product_slug", [
+            "achilles_rupture_course",
+            "achilles_rupture_professionals_course",
+            "plantar_fasciitis_course",
+            "standard_course",
+            "premium_course",
+          ])
           .limit(1);
 
         if (hasOrderParams && order) {
@@ -80,7 +96,13 @@ function ClaimPage() {
         } else {
           setHasPurchase(true);
           setOrderValid(true);
-          const courseType = data.product_slug === "premium_course" ? "premium" : "standard";
+          const courseType =
+            data.product_slug === "achilles_rupture_professionals_course" ||
+              data.product_slug === "premium_course"
+              ? "premium"
+              : data.product_slug === "plantar_fasciitis_course"
+              ? "plantar fasciitis"
+              : "standard";
           setEnrollmentInfo({
             courseType,
             orderNumber: data.shopify_order_number,
@@ -107,10 +129,13 @@ function ClaimPage() {
 
   // If logged in and already has access, redirect to home
   useEffect(() => {
-    if (!authLoading && !enrollmentLoading && isAuthenticated && hasAccess("standard")) {
+    if (
+      !authLoading && !enrollmentLoading && isAuthenticated &&
+      hasAnyCourseAccess()
+    ) {
       window.location.href = "/";
     }
-  }, [isAuthenticated, authLoading, enrollmentLoading, hasAccess]);
+  }, [isAuthenticated, authLoading, enrollmentLoading, hasAnyCourseAccess]);
 
   // After successful claim, redirect to home
   useEffect(() => {
@@ -143,7 +168,13 @@ function ClaimPage() {
         .select("product_slug, shopify_order_number, status")
         .eq("shopify_customer_email", emailToCheck)
         .eq("status", "active")
-        .in("product_slug", ["standard_course", "premium_course"])
+        .in("product_slug", [
+          "achilles_rupture_course",
+          "achilles_rupture_professionals_course",
+          "plantar_fasciitis_course",
+          "standard_course",
+          "premium_course",
+        ])
         .limit(1);
 
       if (hasOrderParams && order) {
@@ -155,7 +186,9 @@ function ClaimPage() {
 
       if (checkError || !data) {
         // No purchase found - show error
-        setError("No purchase found for this email. Please check your email or contact support.");
+        setError(
+          "No purchase found for this email. Please check your email or contact support.",
+        );
         setLoading(false);
         return;
       }
@@ -166,7 +199,9 @@ function ClaimPage() {
       setLoading(false);
     } catch (err) {
       console.error("Failed to validate purchase:", err);
-      setError("An error occurred while validating your purchase. Please try again.");
+      setError(
+        "An error occurred while validating your purchase. Please try again.",
+      );
       setLoading(false);
     }
   };
@@ -206,14 +241,20 @@ function ClaimPage() {
             <div className="bg-muted p-4 rounded-lg">
               <p className="mb-2 font-medium text-sm">Details:</p>
               {prefillEmail && (
-                <p className="text-muted-foreground text-sm">Email: {prefillEmail}</p>
+                <p className="text-muted-foreground text-sm">
+                  Email: {prefillEmail}
+                </p>
               )}
-              {order && <p className="text-muted-foreground text-sm">Order: {order}</p>}
+              {order && (
+                <p className="text-muted-foreground text-sm">Order: {order}</p>
+              )}
             </div>
             <div className="space-y-2">
               <p className="text-muted-foreground text-sm">This could mean:</p>
               <ul className="space-y-1 text-muted-foreground text-sm list-disc list-inside">
-                <li>The order hasn't been processed yet (wait a few minutes)</li>
+                <li>
+                  The order hasn't been processed yet (wait a few minutes)
+                </li>
                 <li>The email or order number doesn't match</li>
                 <li>The order doesn't contain a course product</li>
               </ul>
@@ -260,16 +301,18 @@ function ClaimPage() {
       <Card className="w-full max-w-md">
         <CardHeader>
           <CardTitle>
-            {hasOrderParams ? "Thanks for your purchase!" : "Access Your Course"}
+            {hasOrderParams
+              ? "Thanks for your purchase!"
+              : "Access Your Course"}
           </CardTitle>
           <CardDescription>
             {hasPurchase && enrollmentInfo
               ? `We found your ${enrollmentInfo.courseType} course purchase (${enrollmentInfo.orderNumber}). Click below to access your course!`
               : hasPurchase
-                ? `We found your course purchase. Click below to access your course!`
-                : hasOrderParams
-                  ? `Order ${order} is ready. Enter your email to access your course.`
-                  : "Enter your email to access your purchased course."}
+              ? `We found your course purchase. Click below to access your course!`
+              : hasOrderParams
+              ? `Order ${order} is ready. Enter your email to access your course.`
+              : "Enter your email to access your purchased course."}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -294,15 +337,27 @@ function ClaimPage() {
               )}
             </div>
 
-            {error && hasAttemptedValidation && <p className="text-destructive text-sm">{error}</p>}
-            {!hasPurchase && email && !verifying && hasAttemptedValidation && !error && (
+            {error && hasAttemptedValidation && (
+              <p className="text-destructive text-sm">{error}</p>
+            )}
+            {!hasPurchase && email && !verifying && hasAttemptedValidation &&
+              !error && (
               <p className="mt-1 text-destructive text-xs">
-                No purchase found for this email. Please check your email or contact support.
+                No purchase found for this email. Please check your email or
+                contact support.
               </p>
             )}
 
-            <Button type="submit" className="w-full" disabled={loading || !email.trim()}>
-              {loading ? "Validating..." : hasPurchase ? "Access Your Course" : "Validate Email"}
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={loading || !email.trim()}
+            >
+              {loading
+                ? "Validating..."
+                : hasPurchase
+                ? "Access Your Course"
+                : "Validate Email"}
             </Button>
 
             {hasPurchase && enrollmentInfo && (
@@ -310,7 +365,9 @@ function ClaimPage() {
                 <p className="mb-1 font-medium text-sm">
                   Your {enrollmentInfo.courseType} course is ready!
                 </p>
-                <p className="text-muted-foreground text-xs">Order: {enrollmentInfo.orderNumber}</p>
+                <p className="text-muted-foreground text-xs">
+                  Order: {enrollmentInfo.orderNumber}
+                </p>
               </div>
             )}
           </form>

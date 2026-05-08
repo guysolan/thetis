@@ -1,4 +1,5 @@
 ---
+conditionId: achilles-rupture
 title: "Achilles Tendon Healing: Why Early Protection Matters"
 status: "published"
 description: "After an Achilles rupture, tendon healing moves through three phases. Learn why weeks 3–6 are fragile, how length is protected, and how to stay safe in a boot."

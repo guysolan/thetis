@@ -14,9 +14,9 @@ const LocationSelect = ({ finalRegion }: { finalRegion: string }) => {
         <SelectValue placeholder="Select region" />
       </SelectTrigger>
       <SelectContent>
-        <SelectItem value="us">United States (USD)</SelectItem>
-        <SelectItem value="uk">United Kingdom (GBP)</SelectItem>
-        <SelectItem value="au">Australia (AUD)</SelectItem>
+        <SelectItem value="us">United States</SelectItem>
+        <SelectItem value="uk">United Kingdom</SelectItem>
+        <SelectItem value="au">Australia</SelectItem>
       </SelectContent>
     </Select>
   );

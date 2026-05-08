@@ -1,0 +1,27 @@
+---
+export const prerender = true;
+
+import Layout from "@/layouts/Layout.astro";
+import ShopConditionPage from "@/components/shop/ShopConditionPage.astro";
+import { conditions, type ConditionId } from "@/content/conditions/registry";
+import { getShopLayoutSeo } from "@/content/learn-seo";
+import type { Lang } from "@/config/languages";
+
+const lang: Lang = "fr";
+
+export function getStaticPaths() {
+  return conditions.map((c) => ({ params: { condition: c.id } }));
+}
+
+const { condition } = Astro.params;
+const id = condition as ConditionId;
+if (!conditions.some((c) => c.id === id)) {
+  return Astro.redirect("/fr/shop", 308);
+}
+
+const { title, description } = getShopLayoutSeo(id, lang);
+---
+
+<Layout {title} {description} {lang}>
+  <ShopConditionPage conditionId={id} {lang} />
+</Layout>

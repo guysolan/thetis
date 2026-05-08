@@ -100,6 +100,15 @@ export interface ImageBlock {
   caption?: string;
 }
 
+export interface ImageRowBlock {
+  type: "image-row";
+  images: {
+    src: string;
+    alt: string;
+  }[];
+  caption?: string;
+}
+
 export interface IllustrationPromptBlock {
   type: "illustration-prompt";
   title: string;
@@ -144,6 +153,7 @@ export type ContentBlock =
   | CardBlock
   | SectionBlock
   | ImageBlock
+  | ImageRowBlock
   | IllustrationPromptBlock
   | ProductImageBlock
   | RehabProtocolTableBlock

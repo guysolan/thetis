@@ -24,10 +24,18 @@ interface CartLine {
   };
 }
 
+export interface CartLineAttribute {
+  key: string;
+  value: string;
+}
+
 interface Cart {
   id: string;
   checkoutUrl: string;
   totalQuantity: number;
+  buyerIdentity?: {
+    countryCode: string | null;
+  } | null;
   cost: {
     totalAmount: {
       amount: string;
@@ -77,6 +85,13 @@ interface CartLinesRemoveResponse {
   };
 }
 
+interface CartBuyerIdentityUpdateResponse {
+  cartBuyerIdentityUpdate: {
+    cart: Cart;
+    userErrors: Array<{ field: string[]; message: string }>;
+  };
+}
+
 async function storefrontFetch<T>(
   query: string,
   variables: Record<string, unknown> = {},
@@ -108,6 +123,9 @@ const CART_FRAGMENT = `
         id
         checkoutUrl
         totalQuantity
+        buyerIdentity {
+            countryCode
+        }
         cost {
             totalAmount {
                 amount
@@ -146,7 +164,12 @@ const CART_FRAGMENT = `
     }
 `;
 
-export async function createCart(variantId: string, quantity: number = 1): Promise<Cart> {
+export async function createCart(
+  variantId: string,
+  quantity: number = 1,
+  buyerCountryCode?: string,
+  attributes?: CartLineAttribute[],
+): Promise<Cart> {
   const query = `
         mutation cartCreate($input: CartInput!) {
             cartCreate(input: $input) {
@@ -162,16 +185,27 @@ export async function createCart(variantId: string, quantity: number = 1): Promi
         ${CART_FRAGMENT}
     `;
 
-  const variables = {
-    input: {
-      lines: [
-        {
-          merchandiseId: variantId,
-          quantity,
-        },
-      ],
-    },
+  const input: {
+    lines: Array<{
+      merchandiseId: string;
+      quantity: number;
+      attributes?: CartLineAttribute[];
+    }>;
+    buyerIdentity?: { countryCode: string };
+  } = {
+    lines: [
+      {
+        merchandiseId: variantId,
+        quantity,
+        ...(attributes?.length ? { attributes } : {}),
+      },
+    ],
   };
+  if (buyerCountryCode) {
+    input.buyerIdentity = { countryCode: buyerCountryCode };
+  }
+
+  const variables = { input };
 
   const data = await storefrontFetch<CartCreateResponse>(query, variables);
 
@@ -196,10 +230,42 @@ export async function getCart(cartId: string): Promise<Cart | null> {
   return data.cart;
 }
 
+export async function updateCartBuyerCountry(
+  cartId: string,
+  countryCode: string,
+): Promise<Cart> {
+  const query = `
+        mutation cartBuyerIdentityUpdate($cartId: ID!, $buyerIdentity: CartBuyerIdentityInput!) {
+            cartBuyerIdentityUpdate(cartId: $cartId, buyerIdentity: $buyerIdentity) {
+                cart {
+                    ...CartFragment
+                }
+                userErrors {
+                    field
+                    message
+                }
+            }
+        }
+        ${CART_FRAGMENT}
+    `;
+
+  const data = await storefrontFetch<CartBuyerIdentityUpdateResponse>(query, {
+    cartId,
+    buyerIdentity: { countryCode },
+  });
+
+  if (data.cartBuyerIdentityUpdate.userErrors.length > 0) {
+    throw new Error(data.cartBuyerIdentityUpdate.userErrors[0].message);
+  }
+
+  return data.cartBuyerIdentityUpdate.cart;
+}
+
 export async function addToCart(
   cartId: string,
   variantId: string,
   quantity: number = 1,
+  attributes?: CartLineAttribute[],
 ): Promise<Cart> {
   const query = `
         mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
@@ -222,6 +288,7 @@ export async function addToCart(
       {
         merchandiseId: variantId,
         quantity,
+        ...(attributes?.length ? { attributes } : {}),
       },
     ],
   };
@@ -274,7 +341,10 @@ export async function updateCartLine(
   return data.cartLinesUpdate.cart;
 }
 
-export async function removeFromCart(cartId: string, lineId: string): Promise<Cart> {
+export async function removeFromCart(
+  cartId: string,
+  lineId: string,
+): Promise<Cart> {
   const query = `
         mutation cartLinesRemove($cartId: ID!, $lineIds: [ID!]!) {
             cartLinesRemove(cartId: $cartId, lineIds: $lineIds) {
@@ -324,7 +394,9 @@ interface VariantPriceResponse {
 export async function getVariantPrice(
   variantId: string,
   countryCode: string = "GB",
-): Promise<{ amount: string; currencyCode: string; formattedPrice: string } | null> {
+): Promise<
+  { amount: string; currencyCode: string; formattedPrice: string } | null
+> {
   // Use 'node' query since 'productVariant' is not available in Storefront API
   const query = `
         query getVariantPrice($variantId: ID!, $country: CountryCode) @inContext(country: $country) {

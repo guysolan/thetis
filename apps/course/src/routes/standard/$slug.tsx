@@ -37,7 +37,7 @@ async function loadSectionContent(
 
   try {
     const module = await import(
-      `@/content/course/standard/${folder}/${slug}.tsx`
+      `@/content/course/achilles-rupture/${folder}/${slug}.tsx`
     );
 
     // Verify the module has required exports
@@ -135,7 +135,7 @@ function SectionPage() {
     setCurrentBookmark,
   } = useCourseProgress();
   const isComplete = isLessonComplete(section.slug);
-  const completionPercentage = getCompletionPercentage(totalSections);
+  const completionPercentage = getCompletionPercentage(sections.map((s) => s.slug));
   const completedCount =
     sections.filter((s) => isLessonComplete(s.slug)).length;
 

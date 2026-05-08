@@ -1,0 +1,57 @@
+---
+import type { ConditionId } from "@/content/conditions/registry";
+import { conditions } from "@/content/conditions/registry";
+import type { Lang } from "@/config/languages";
+import {
+  getLocalizedLearnHubHref,
+  getLocalizedShopHubHref,
+} from "@/lib/condition-nav";
+
+interface Props {
+  lang: Lang;
+  /** Shop hubs use `/shop/...`, learn hubs use `/learn/...`. */
+  hub: "shop" | "learn";
+  conditionId: ConditionId;
+  label: string;
+  /** Must be unique on the page (e.g. `shop-condition-select` / `learn-condition-select`). */
+  selectId: string;
+}
+
+const { lang, hub, conditionId, label, selectId } = Astro.props;
+
+const hrefFor = (id: ConditionId) =>
+  hub === "shop"
+    ? getLocalizedShopHubHref(lang, id)
+    : getLocalizedLearnHubHref(lang, id);
+
+const conditionSelectClass =
+  "w-full sm:min-w-[280px] sm:w-auto rounded-xl border-2 border-primary/25 bg-white dark:bg-neutral-900 px-3 py-2.5 text-neutral-900 dark:text-neutral-100 text-base shadow-sm focus:outline-none focus:ring-2 focus:ring-primary/35 focus:border-primary/50";
+---
+
+<div
+  class="flex sm:flex-row flex-col lg:justify-start sm:items-center gap-2.5 sm:gap-3 mb-5 w-full max-w-md"
+>
+  <label
+    for={selectId}
+    class="font-semibold text-neutral-800 dark:text-neutral-200 text-sm shrink-0"
+  >
+    {label}
+  </label>
+  <select
+    id={selectId}
+    class={conditionSelectClass}
+    aria-label={label}
+    onchange="window.location.href=this.value"
+  >
+    {
+      conditions.map((cond) => (
+        <option
+          value={hrefFor(cond.id)}
+          selected={cond.id === conditionId}
+        >
+          {cond.label}
+        </option>
+      ))
+    }
+  </select>
+</div>

@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "type": "module",
   "scripts": {
-    "dev": "astro dev --port=2112",
-    "build": "astro build",
-    "preview": "astro preview",
+    "sync-catalogue-images": "node ../../packages/catalogue/scripts/sync-product-images.mjs",
+    "dev": "pnpm run sync-catalogue-images && astro dev --port=2112",
+    "build": "pnpm run sync-catalogue-images && astro build",
+    "preview": "pnpm run sync-catalogue-images && astro preview",
     "astro": "astro"
   },
   "dependencies": {

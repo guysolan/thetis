@@ -10,7 +10,7 @@ import path from "path";
 
 const contentDir = path.join(
     process.cwd(),
-    "../../apps/course/src/content/course/standard",
+    "../../apps/course/src/content/course/achilles-rupture",
 );
 const positionsFile = path.join(
     process.cwd(),
@@ -31,7 +31,8 @@ interface ContentIssue {
 
 function extractImageImports(content: string): string[] {
     const imports: string[] = [];
-    const importRegex = /import\s+\w+\s+from\s+["']\.\.\/\.\.\/\.\.\/assets\/([^"']+)["']/g;
+    const importRegex =
+        /import\s+\w+\s+from\s+["']\.\.\/\.\.\/\.\.\/assets\/([^"']+)["']/g;
     let match;
     while ((match = importRegex.exec(content)) !== null) {
         imports.push(match[1]);
@@ -39,9 +40,12 @@ function extractImageImports(content: string): string[] {
     return imports;
 }
 
-function checkPositions(content: string, positions: Map<string, string>): ContentIssue[] {
+function checkPositions(
+    content: string,
+    positions: Map<string, string>,
+): ContentIssue[] {
     const issues: ContentIssue[] = [];
-    
+
     // Check for position violations
     const checks = [
         {
@@ -51,7 +55,8 @@ function checkPositions(content: string, positions: Map<string, string>): Conten
         },
         {
             keyword: /VACOped.*better|Aircast.*better|boot.*better/i,
-            position: "Both can produce excellent outcomes, compliance matters more than brand",
+            position:
+                "Both can produce excellent outcomes, compliance matters more than brand",
             positionNum: 2,
         },
         {
@@ -61,12 +66,14 @@ function checkPositions(content: string, positions: Map<string, string>): Conten
         },
         {
             keyword: /stretch.*early|early.*stretch/i,
-            position: "Avoid aggressive stretching until tendon is fully healed (12-18 months)",
+            position:
+                "Avoid aggressive stretching until tendon is fully healed (12-18 months)",
             positionNum: 4,
         },
         {
             keyword: /night.*splint.*week\s*[0-9]|splint.*week\s*[0-9]/i,
-            position: "From the time the patient gets a boot in non-op, 2 weeks if had an operation",
+            position:
+                "From the time the patient gets a boot in non-op, 2 weeks if had an operation",
             positionNum: 5,
         },
         {
@@ -75,7 +82,8 @@ function checkPositions(content: string, positions: Map<string, string>): Conten
             positionNum: 6,
         },
         {
-            keyword: /physio.*start.*week\s*([0-9]+)|physiotherapy.*week\s*([0-9]+)/i,
+            keyword:
+                /physio.*start.*week\s*([0-9]+)|physiotherapy.*week\s*([0-9]+)/i,
             position: "Week 3-6 (early physio)",
             positionNum: 10,
         },
@@ -86,7 +94,8 @@ function checkPositions(content: string, positions: Map<string, string>): Conten
         },
         {
             keyword: /return.*run.*week|run.*week\s*([0-9]+)/i,
-            position: "Criteria-based only (25+ heel raises etc.) - timing secondary",
+            position:
+                "Criteria-based only (25+ heel raises etc.) - timing secondary",
             positionNum: 12,
         },
         {
@@ -109,19 +118,27 @@ function checkPositions(content: string, positions: Map<string, string>): Conten
 
 function findContentRepetition(files: Map<string, string>): ContentIssue[] {
     const issues: ContentIssue[] = [];
-    const contentSnippets = new Map<string, Array<{ file: string; snippet: string }>>();
+    const contentSnippets = new Map<
+        string,
+        Array<{ file: string; snippet: string }>
+    >();
 
     // Extract key content snippets (simplified - would need better NLP)
     for (const [filename, content] of files.entries()) {
         // Look for common patterns that might indicate repetition
-        const sections = content.match(/type:\s*"(?:text|card|section)".*?content:\s*"([^"]{50,200})"/gs);
+        const sections = content.match(
+            /type:\s*"(?:text|card|section)".*?content:\s*"([^"]{50,200})"/gs,
+        );
         if (sections) {
             sections.forEach((section) => {
                 const snippet = section.substring(0, 100).toLowerCase();
                 if (!contentSnippets.has(snippet)) {
                     contentSnippets.set(snippet, []);
                 }
-                contentSnippets.get(snippet)!.push({ file: filename, snippet: section });
+                contentSnippets.get(snippet)!.push({
+                    file: filename,
+                    snippet: section,
+                });
             });
         }
     }
@@ -190,7 +207,8 @@ function main() {
     const positions = new Map<string, string>();
 
     // Parse positions (simplified)
-    const positionRegex = /## (\d+)\.\s+(.+?)\n\n\*\*Position:\*\*\s*(.+?)(?=\n\n##|\n---|$)/gs;
+    const positionRegex =
+        /## (\d+)\.\s+(.+?)\n\n\*\*Position:\*\*\s*(.+?)(?=\n\n##|\n---|$)/gs;
     let match;
     while ((match = positionRegex.exec(positionsContent)) !== null) {
         const num = match[1];
@@ -220,9 +238,12 @@ function main() {
     console.log(`Content issues found: ${allIssues.length}`);
 
     const byType = {
-        duplicate_image: allIssues.filter((i) => i.type === "duplicate_image").length,
-        content_repetition: allIssues.filter((i) => i.type === "content_repetition").length,
-        position_violation: allIssues.filter((i) => i.type === "position_violation").length,
+        duplicate_image:
+            allIssues.filter((i) => i.type === "duplicate_image").length,
+        content_repetition:
+            allIssues.filter((i) => i.type === "content_repetition").length,
+        position_violation:
+            allIssues.filter((i) => i.type === "position_violation").length,
     };
 
     console.log(`\nIssues by type:`);

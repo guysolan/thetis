@@ -1,4 +1,5 @@
 ---
+conditionId: achilles-rupture
 title: "Achilles Boot Comparison Tool: Walking Boot Finder"
 status: "published"
 description: "Compare Achilles walking boots by weight, price, and fit. Recovery outcomes track your protocol more than brand—confirm any switch with your clinician."

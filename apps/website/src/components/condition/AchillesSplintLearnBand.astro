@@ -1,0 +1,202 @@
+---
+/**
+ * Prominent splint context on Achilles rupture learn hub (all languages).
+ */
+import type { Lang } from "@/config/languages";
+import { getRouteBySlugAndLanguage } from "@/content/routes";
+import { getLocalizedShopHubHref } from "@/lib/condition-nav";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import AddToCartButton from "@/components/cart/AddToCartButton.tsx";
+import { NIGHT_SPLINT_VARIANTS } from "@/lib/shopify/variants";
+import { Moon, ShieldCheck } from "lucide-react";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+
+const splint = getRouteBySlugAndLanguage("achilles-rupture-splint", lang);
+const shopHref = getLocalizedShopHubHref(lang, "achilles-rupture");
+const learnMoreSplintHref =
+  lang === "en" ? "/splint" : (splint?.href ?? "/splint");
+
+const copy: Record<
+  Lang,
+  {
+    kicker: string;
+    title: string;
+    body: string;
+    bullets: string[];
+    ctaAddToCart: string;
+    ctaLearnMore: string;
+    ctaShop: string;
+  }
+> = {
+  en: {
+    kicker: "Thetis product",
+    title: "More comfortable nights during recovery",
+    body: "Many people use our Achilles night splint alongside their walking boot—so you can hold a safe plantarflexed position at rest without sleeping in the full boot (when your clinical team agrees).",
+    bullets: [
+      "Designed for Achilles rupture rehab",
+      "Lightweight night-time option vs. the full boot",
+      "Pairs with the week-by-week guidance below",
+    ],
+    ctaAddToCart: "Add to cart",
+    ctaLearnMore: "Learn more",
+    ctaShop: "Shop all picks",
+  },
+  de: {
+    kicker: "Thetis-Produkt",
+    title: "Ruhigere Nächte in der Genesung",
+    body: "Viele Nutzer kombinieren unsere Nachtschiene mit dem Gehboot—sichere Plantarflexion in Ruhe, ohne nachts im vollen Boot zu schlafen (wenn Ihr Team das freigibt).",
+    bullets: [
+      "Für die Achillessehnenruptur-Rehabilitation entwickelt",
+      "Leichte Nacht-Alternative zum vollen Boot",
+      "Ergänzt die wöchentlichen Leitfäden auf dieser Seite",
+    ],
+    ctaAddToCart: "In den Warenkorb",
+    ctaLearnMore: "Mehr erfahren",
+    ctaShop: "Alle Artikel",
+  },
+  fr: {
+    kicker: "Produit Thetis",
+    title: "Des nuits plus confortables",
+    body: "Beaucoup utilisent notre attelle de nuit avec la botte de marche—pour maintenir une bonne position au repos sans dormir en botte complète (si votre équipe soignante l’accepte).",
+    bullets: [
+      "Conçue pour la rééducation de rupture d’Achille",
+      "Option de nuit plus légère que la botte complète",
+      "Complète les guides semaine par semaine ci-dessous",
+    ],
+    ctaAddToCart: "Ajouter au panier",
+    ctaLearnMore: "En savoir plus",
+    ctaShop: "Toute la boutique",
+  },
+  es: {
+    kicker: "Producto Thetis",
+    title: "Noches más cómodas en la recuperación",
+    body: "Muchas personas usan nuestra férula nocturna junto a la bota: plantarflexión segura en reposo sin dormir con la bota completa (si su equipo clínico lo aprueba).",
+    bullets: [
+      "Diseñada para la rehabilitación de rotura de Aquiles",
+      "Opción nocturna más ligera que la bota completa",
+      "Complementa las guías semana a semana de esta página",
+    ],
+    ctaAddToCart: "Añadir al carrito",
+    ctaLearnMore: "Más información",
+    ctaShop: "Ver tienda",
+  },
+  it: {
+    kicker: "Prodotto Thetis",
+    title: "Notti più comode durante il recupero",
+    body: "Molti usano il nostro tutore notturno con lo stivale: plantarflexione sicura a riposo senza dormire con lo stivale completo (se il team clinico è d’accordo).",
+    bullets: [
+      "Progettato per la riabilitazione della rottura di Achille",
+      "Opzione notturna più leggera dello stivale completo",
+      "Si affianca alle guide settimanali qui sotto",
+    ],
+    ctaAddToCart: "Aggiungi al carrello",
+    ctaLearnMore: "Scopri di più",
+    ctaShop: "Vai allo shop",
+  },
+};
+
+const t = copy[lang];
+---
+
+<section
+  class="bg-white dark:bg-neutral-950 py-12 md:py-14 border-neutral-200 dark:border-neutral-800 border-b"
+  aria-labelledby="achilles-splint-learn-heading"
+>
+  <div class="mx-auto px-4 max-w-6xl">
+    <div class="flex md:flex-row flex-col items-center gap-10 md:gap-14">
+      {
+        splint ? (
+          <a
+            href={learnMoreSplintHref}
+            class="block hover:opacity-95 shadow-md hover:shadow-lg border border-primary/25 rounded-2xl ring-1 ring-primary/10 w-full max-w-[280px] md:max-w-[300px] overflow-hidden transition-opacity shrink-0"
+          >
+            <img
+              src="/images/night_splint_bed_top_square.jpg"
+              alt=""
+              width={600}
+              height={600}
+              class="w-full object-cover aspect-square"
+              loading="lazy"
+            />
+          </a>
+        ) : (
+          <div class="border border-primary/25 rounded-2xl w-full max-w-[280px] overflow-hidden shrink-0">
+            <img
+              src="/images/night_splint_bed_top_square.jpg"
+              alt=""
+              width={600}
+              height={600}
+              class="w-full object-cover aspect-square"
+              loading="lazy"
+            />
+          </div>
+        )
+      }
+      <div class="flex-1 min-w-0 md:text-left text-center">
+        <div
+          class="inline-flex items-center gap-2 bg-primary/10 mb-3 px-3 py-1.5 rounded-full font-semibold text-primary text-xs uppercase tracking-wide"
+        >
+          <Moon className="w-3.5 h-3.5" aria-hidden />
+          {t.kicker}
+        </div>
+        <h2
+          id="achilles-splint-learn-heading"
+          class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl leading-tight"
+        >
+          {t.title}
+        </h2>
+        <p
+          class="mx-auto md:mx-0 mb-5 max-w-2xl text-neutral-600 dark:text-neutral-400 text-base leading-relaxed"
+        >
+          {t.body}
+        </p>
+        <ul class="space-y-2.5 mx-auto md:mx-0 mb-6 max-w-xl text-left">
+          {
+            t.bullets.map((line) => (
+              <li class="flex gap-2.5 text-neutral-700 dark:text-neutral-300 text-sm">
+                <ShieldCheck
+                  className="mt-0.5 w-4 h-4 text-primary shrink-0"
+                  aria-hidden
+                />
+                <span>{line}</span>
+              </li>
+            ))
+          }
+        </ul>
+        <div class="flex flex-wrap justify-center md:justify-start gap-3">
+          <AddToCartButton
+            client:load
+            variantId={NIGHT_SPLINT_VARIANTS.largeLeft}
+            size="lg"
+          >
+            {t.ctaAddToCart}
+          </AddToCartButton>
+          <a
+            href={learnMoreSplintHref}
+            class={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "font-semibold",
+            )}
+          >
+            {t.ctaLearnMore}
+          </a>
+          <a
+            href={shopHref}
+            class={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "font-semibold",
+            )}
+          >
+            {t.ctaShop}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

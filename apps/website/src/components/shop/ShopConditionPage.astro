@@ -1,0 +1,820 @@
+---
+import type { ConditionId } from "@/content/conditions/registry";
+import { getConditionById } from "@/content/conditions/registry";
+import type { Lang } from "@/config/languages";
+import {
+  getCatalogueProductsForCondition,
+  orderedShopProductsForDisplay,
+} from "@thetis/catalogue";
+import { getRouteBySlugAndLanguage } from "@/content/routes";
+import { conditionHubChooseConditionLabel } from "@/content/condition-hub-select-labels";
+import ConditionHubSelect from "@/components/condition/ConditionHubSelect.astro";
+import { getCourseRouteForShopCondition } from "@/lib/condition-nav";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import CourseBuyButton from "@/components/CourseBuyButton.tsx";
+import SplintShopBuyButton from "@/components/shop/SplintShopBuyButton.tsx";
+import PriceDisplay from "@/components/PriceDisplay.tsx";
+import VariantPriceDisplay from "@/components/shop/VariantPriceDisplay.tsx";
+import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
+import { NIGHT_SPLINT_VARIANTS } from "@/lib/shopify/variants";
+import { COURSE_VARIANTS } from "@/lib/shopify/products";
+import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
+import ShopCatalogueProductGrid from "@/components/shop/ShopCatalogueProductGrid.astro";
+import posterImage from "../../../../../packages/catalogue/assets/poster-image.png";
+import achillesCourseImage from "../../../../../packages/catalogue/assets/achilles-rope-ends-pointed-down.png";
+import {
+  BookOpen,
+  Check,
+  RotateCcw,
+  ShieldCheck,
+  ShoppingBag,
+  Truck,
+} from "lucide-react";
+
+interface Props {
+  conditionId: ConditionId;
+  lang: Lang;
+}
+
+const { conditionId, lang } = Astro.props;
+const c = getConditionById(conditionId);
+const courseProductId =
+  conditionId === "plantar-fasciitis"
+    ? SHOPIFY_COURSE_PRODUCTS.PLANTAR_FASCIITIS_COURSE
+    : SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE;
+const courseVariantId =
+  conditionId === "plantar-fasciitis"
+    ? COURSE_VARIANTS.PLANTAR_FASCIITIS
+    : COURSE_VARIANTS.ESSENTIALS;
+const courseSlug =
+  conditionId === "plantar-fasciitis"
+    ? "plantar_fasciitis_course"
+    : "achilles_rupture_course";
+const courseImageAlt =
+  conditionId === "plantar-fasciitis"
+    ? "Plantar fasciitis course lesson preview"
+    : "Achilles tendon healing position comparison";
+
+function shopConditionHeroTagline(lang: Lang, conditionLabel: string): string {
+  const name = conditionLabel
+    .split(/\s+/)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+    .join(" ");
+  const byLang: Record<Lang, string> = {
+    en: `Shop recovery gear curated by surgeons for ${name}.`,
+    de: `Von Chirurgen kuratiertes Recovery-Equipment für ${name}.`,
+    fr: `Équipement de récupération sélectionné par des chirurgiens pour ${name}.`,
+    es: `Material de recuperación seleccionado por cirujanos para ${name}.`,
+    it: `Equipaggiamento per il recupero selezionato dai chirurghi per ${name}.`,
+  };
+  return byLang[lang];
+}
+
+const copy: Record<
+  Lang,
+  {
+    titleSuffix: string;
+    ourProducts: string;
+    noOurProducts: string;
+    recommended: string;
+    noRecommended: string;
+    partnerNote: string;
+    accessoryToLabel: string;
+    alternativeToLabel: string;
+    priorityMedalEssential: string;
+    priorityMedalRecommended: string;
+    priorityMedalOptional: string;
+    viewCourse: string;
+    viewProduct: string;
+    externalSiteBadge: string;
+    externalLinkAria: string;
+    recommendedExternalHint: string;
+  }
+> = {
+  en: {
+    titleSuffix: "— Shop",
+    accessoryToLabel: "Accessory to:",
+    alternativeToLabel: "Alternative to:",
+    priorityMedalEssential: "Essential",
+    priorityMedalRecommended: "Recommended",
+    priorityMedalOptional: "Optional",
+    viewCourse: "View course →",
+    viewProduct: "View product →",
+    ourProducts: "From Thetis",
+    noOurProducts: "We do not list an on-site product for this condition yet.",
+    recommended: "Recommended gear",
+    noRecommended:
+      "We have not published a curated list for this condition yet — check back soon.",
+    partnerNote:
+      "Some links go to partner retailers (for example Amazon). They may earn us a small commission at no extra cost to you.",
+    externalSiteBadge: "External site",
+    externalLinkAria: "Opens external website in a new tab",
+    recommendedExternalHint:
+      "Partner links are labeled and open in a new tab so you always know when you are leaving Thetis.",
+  },
+  de: {
+    titleSuffix: "— Shop",
+    accessoryToLabel: "Zubehör für:",
+    alternativeToLabel: "Alternative zu:",
+    priorityMedalEssential: "Essenziell",
+    priorityMedalRecommended: "Empfohlen",
+    priorityMedalOptional: "Optional",
+    viewCourse: "Zum Kurs →",
+    viewProduct: "Zum Produkt →",
+    ourProducts: "Thetis",
+    noOurProducts: "Noch kein On-Site-Produkt für diese Beschwerde.",
+    recommended: "Empfohlene Artikel",
+    noRecommended:
+      "Für diese Beschwerde gibt es noch keine Kuratierte Liste — bald mehr.",
+    partnerNote:
+      "Einige Links führen zu Partner-Shops (z. B. Amazon). Dies kann uns eine kleine Provision einbringen.",
+    externalSiteBadge: "Externe Seite",
+    externalLinkAria: "Öffnet externe Website in neuem Tab",
+    recommendedExternalHint:
+      "Partner-Links sind gekennzeichnet und öffnen in einem neuen Tab.",
+  },
+  fr: {
+    titleSuffix: "— Boutique",
+    accessoryToLabel: "Accessoire pour :",
+    alternativeToLabel: "Alternative à :",
+    priorityMedalEssential: "Essentiel",
+    priorityMedalRecommended: "Recommandé",
+    priorityMedalOptional: "Optionnel",
+    viewCourse: "Voir le cours →",
+    viewProduct: "Voir le produit →",
+    ourProducts: "Thetis",
+    noOurProducts: "Pas encore de produit sur le site pour cette pathologie.",
+    recommended: "Équipement recommandé",
+    noRecommended:
+      "Pas encore de liste pour cette pathologie — revenez bientôt.",
+    partnerNote:
+      "Certains liens mènent vers des partenaires (par ex. Amazon) ; commission possible.",
+    externalSiteBadge: "Site externe",
+    externalLinkAria: "Ouvre un site externe dans un nouvel onglet",
+    recommendedExternalHint:
+      "Les liens partenaires sont indiqués et s’ouvrent dans un nouvel onglet.",
+  },
+  es: {
+    titleSuffix: "— Tienda",
+    accessoryToLabel: "Accesorio para:",
+    alternativeToLabel: "Alternativa a:",
+    priorityMedalEssential: "Esencial",
+    priorityMedalRecommended: "Recomendado",
+    priorityMedalOptional: "Opcional",
+    viewCourse: "Ver el curso →",
+    viewProduct: "Ver el producto →",
+    ourProducts: "Thetis",
+    noOurProducts: "Aún no hay producto en el sitio para esta condición.",
+    recommended: "Equipo recomendado",
+    noRecommended:
+      "Aún no hay lista curada para esta condición — vuelve pronto.",
+    partnerNote:
+      "Algunos enlaces son de socios (p. ej. Amazon); posible comisión.",
+    externalSiteBadge: "Sitio externo",
+    externalLinkAria: "Abre un sitio externo en una pestaña nueva",
+    recommendedExternalHint:
+      "Los enlaces de socios están marcados y se abren en una pestaña nueva.",
+  },
+  it: {
+    titleSuffix: "— Shop",
+    accessoryToLabel: "Accessorio per:",
+    alternativeToLabel: "Alternativa a:",
+    priorityMedalEssential: "Essenziale",
+    priorityMedalRecommended: "Consigliato",
+    priorityMedalOptional: "Opzionale",
+    viewCourse: "Vai al corso →",
+    viewProduct: "Vai al prodotto →",
+    ourProducts: "Thetis",
+    noOurProducts: "Nessun prodotto on-site ancora per questa condizione.",
+    recommended: "Attrezzatura consigliata",
+    noRecommended:
+      "Nessuna lista curata ancora per questa condizione — torna presto.",
+    partnerNote:
+      "Alcuni link sono verso partner (es. Amazon); possibile commissione.",
+    externalSiteBadge: "Sito esterno",
+    externalLinkAria: "Apre un sito esterno in una nuova scheda",
+    recommendedExternalHint:
+      "I link partner sono contrassegnati e si aprono in una nuova scheda.",
+  },
+};
+
+const t = copy[lang];
+const courseRoute = getCourseRouteForShopCondition(lang, conditionId);
+
+/** Rich “From Thetis” cards + reviews (Achilles shop only). */
+const achillesFromThetisCopy: Record<
+  Lang,
+  {
+    freeShipping: string;
+    guarantee30Day: string;
+    easyReturns: string;
+    instantAccess: string;
+    readersLine: string;
+    addCourse: string;
+    splintImageAlt: string;
+    reviewsKicker: string;
+    reviewsTitle: string;
+    reviewsSubtitle: string;
+    reviewsViewAll: string;
+  }
+> = {
+  en: {
+    freeShipping: "Free shipping",
+    guarantee30Day: "30-day guarantee",
+    easyReturns: "Easy returns",
+    instantAccess: "Instant access — start today",
+    readersLine: "Join 20,000 readers",
+    addCourse: "Add course to cart",
+    splintImageAlt: "Thetis night splint for Achilles recovery",
+    reviewsKicker: "TRUSTED BY THOUSANDS",
+    reviewsTitle: "Join 5,000+ Patients Who've Found Relief",
+    reviewsSubtitle:
+      "Real reviews from real patients recovering from Achilles rupture",
+    reviewsViewAll: "View all reviews",
+  },
+  de: {
+    freeShipping: "Kostenloser Versand",
+    guarantee30Day: "30-Tage-Garantie",
+    easyReturns: "Einfache Rückgabe",
+    instantAccess: "Sofortiger Zugang — heute starten",
+    readersLine: "Schließen Sie sich 20.000 Lesern an",
+    addCourse: "Kurs in den Warenkorb",
+    splintImageAlt: "Thetis Nachtschiene für die Achilles-Genesung",
+    reviewsKicker: "VON TAUSENDEN VERTRAUT",
+    reviewsTitle: "Schließen Sie sich über 5.000 Patienten an",
+    reviewsSubtitle: "Echte Bewertungen von Patienten nach Achillessehnenriss",
+    reviewsViewAll: "Alle Bewertungen",
+  },
+  fr: {
+    freeShipping: "Livraison gratuite",
+    guarantee30Day: "Garantie 30 jours",
+    easyReturns: "Retours faciles",
+    instantAccess: "Accès instantané — commencez aujourd’hui",
+    readersLine: "Rejoignez 20 000 lecteurs",
+    addCourse: "Ajouter le cours au panier",
+    splintImageAlt: "Attelle de nuit Thetis pour la récupération d’Achille",
+    reviewsKicker: "APPROUVÉ PAR DES MILLIERS",
+    reviewsTitle: "Rejoignez plus de 5 000 patients soulagés",
+    reviewsSubtitle:
+      "De vrais avis de patients en récupération après rupture d’Achille",
+    reviewsViewAll: "Voir tous les avis",
+  },
+  es: {
+    freeShipping: "Envío gratis",
+    guarantee30Day: "Garantía de 30 días",
+    easyReturns: "Devoluciones fáciles",
+    instantAccess: "Acceso instantáneo — empiece hoy",
+    readersLine: "Únete a 20.000 lectores",
+    addCourse: "Añadir curso al carrito",
+    splintImageAlt: "Férula nocturna Thetis para la recuperación de Aquiles",
+    reviewsKicker: "CON LA CONFIANZA DE MILES",
+    reviewsTitle: "Únase a más de 5.000 pacientes aliviados",
+    reviewsSubtitle: "Opiniones reales de pacientes con rotura de Aquiles",
+    reviewsViewAll: "Ver todas las opiniones",
+  },
+  it: {
+    freeShipping: "Spedizione gratuita",
+    guarantee30Day: "Garanzia 30 giorni",
+    easyReturns: "Resi facili",
+    instantAccess: "Accesso immediato — inizia oggi",
+    readersLine: "Unisciti a 20.000 lettori",
+    addCourse: "Aggiungi corso al carrello",
+    splintImageAlt: "Tutore notturno Thetis per il recupero di Achille",
+    reviewsKicker: "SCELTO DA MIGLIAIA DI PERSONE",
+    reviewsTitle: "Unisciti a oltre 5.000 pazienti che hanno trovato sollievo",
+    reviewsSubtitle:
+      "Recensioni vere da pazienti in recupero dopo rottura di Achille",
+    reviewsViewAll: "Vedi tutte le recensioni",
+  },
+};
+
+const at = achillesFromThetisCopy[lang];
+
+let catalogue = getCatalogueProductsForCondition(conditionId);
+const hasSplint =
+  conditionId === "achilles-rupture" &&
+  (c.productRouteSlugs?.includes("achilles-rupture-splint") ?? false);
+if (hasSplint) {
+  catalogue = catalogue.filter((p) => p.id !== "thetis-night-splint");
+}
+
+const shopProducts = orderedShopProductsForDisplay(catalogue);
+
+const productLinks = (c.productRouteSlugs ?? [])
+  .map((slug) => getRouteBySlugAndLanguage(slug, lang))
+  .filter((r): r is NonNullable<typeof r> => r != null);
+
+const fromThetisLinks = [
+  ...(courseRoute ? [courseRoute] : []),
+  ...productLinks,
+];
+
+const splintRoute = getRouteBySlugAndLanguage("achilles-rupture-splint", lang);
+const reviewsRoute = getRouteBySlugAndLanguage("reviews", lang);
+const isAchillesShop = conditionId === "achilles-rupture";
+
+/** Short EN URL; other locales use translated splint PDP. */
+const learnMoreSplintHref =
+  lang === "en" ? "/splint" : (splintRoute?.href ?? "/splint");
+
+const shopAchillesHero: Record<
+  Lang,
+  {
+    kicker: string;
+    sub: string;
+    splintCaption: string;
+    ctaAddToCart: string;
+    /** Amazon / partner checkout (opens in a new tab). */
+    ctaBuyPartner: string;
+    ctaLearnMore: string;
+  }
+> = {
+  en: {
+    kicker: "Achilles rupture essentials",
+    sub: "Our night splint is the centrepiece—then explore boots, wedges, and comfort picks we reference in the guides.",
+    splintCaption:
+      "Hold a safe plantarflexed position at night without sleeping in the full boot (when your team agrees).",
+    ctaAddToCart: "Add to cart",
+    ctaBuyPartner: "Buy now",
+    ctaLearnMore: "Learn more",
+  },
+  de: {
+    kicker: "Das Wichtigste bei der Ruptur",
+    sub: "Die Nachtschiene steht im Mittelpunkt—dazu Schuhe, Keile und Komfort-Artikel aus unseren Leitfäden.",
+    splintCaption:
+      "Sichere Plantarflexion nachts ohne volles Boot (wenn Ihr Team es erlaubt).",
+    ctaAddToCart: "In den Warenkorb",
+    ctaBuyPartner: "Jetzt kaufen",
+    ctaLearnMore: "Mehr erfahren",
+  },
+  fr: {
+    kicker: "L’essentiel rupture d’Achille",
+    sub: "L’attelle de nuit au centre—puis bottes, cales et confort issus de nos guides.",
+    splintCaption:
+      "Position sécurisée la nuit sans dormir en botte complète (si votre équipe l’accepte).",
+    ctaAddToCart: "Ajouter au panier",
+    ctaBuyPartner: "Acheter",
+    ctaLearnMore: "En savoir plus",
+  },
+  es: {
+    kicker: "Lo esencial en la rotura",
+    sub: "La férula nocturna es el eje—luego botas, cuñas y artículos de nuestras guías.",
+    splintCaption:
+      "Plantarflexión segura por la noche sin la bota completa (si su equipo lo aprueba).",
+    ctaAddToCart: "Añadir al carrito",
+    ctaBuyPartner: "Comprar",
+    ctaLearnMore: "Más información",
+  },
+  it: {
+    kicker: "Rottura di Achille: il necessario",
+    sub: "Il tutore notturno è al centro—poi stivali, zeppe e comfort dalle nostre guide.",
+    splintCaption:
+      "Plantarflexione sicura di notte senza lo stivale completo (se il team è d’accordo).",
+    ctaAddToCart: "Aggiungi al carrello",
+    ctaBuyPartner: "Acquista",
+    ctaLearnMore: "Scopri di più",
+  },
+};
+
+const ah = shopAchillesHero[lang];
+const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
+---
+
+<main class="space-y-0">
+  {
+    isAchillesShop ? (
+      <section class="pb-12 md:pb-16 border-neutral-200 dark:border-neutral-800 border-b color-gradient">
+        <div class="mx-auto px-4 max-w-6xl">
+          <div class="items-center gap-10 lg:gap-14 grid lg:grid-cols-2">
+            <div class="order-2 lg:order-1 lg:text-left text-center">
+              <div class="inline-flex justify-center items-center bg-primary/10 mb-4 p-3 rounded-full">
+                <ShoppingBag className="w-6 h-6 text-primary" />
+              </div>
+              <ConditionHubSelect
+                lang={lang}
+                hub="shop"
+                conditionId={conditionId}
+                label={chooseConditionLabel}
+                selectId="shop-condition-select"
+              />
+              <p class="mb-2 font-semibold text-primary text-xs uppercase tracking-wide">
+                {ah.kicker}
+              </p>
+              <h1 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl leading-tight">
+                {c.label}
+                <span class="text-primary"> {t.titleSuffix}</span>
+              </h1>
+              <p class="mx-auto lg:mx-0 max-w-xl text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed">
+                {ah.sub}
+              </p>
+              <p class="flex flex-wrap justify-center lg:justify-start gap-3 mt-6">
+                <SplintShopBuyButton
+                  client:load
+                  variantId={NIGHT_SPLINT_VARIANTS.largeLeft}
+                  size="lg"
+                  addToCartLabel={ah.ctaAddToCart}
+                  externalBuyLabel={ah.ctaBuyPartner}
+                />
+                <a
+                  href={learnMoreSplintHref}
+                  class={cn(
+                    buttonVariants({ variant: "outline", size: "lg" }),
+                    "font-semibold",
+                  )}
+                >
+                  {ah.ctaLearnMore}
+                </a>
+              </p>
+              <div class="bg-white/80 dark:bg-neutral-900/60 shadow-sm mx-auto lg:mx-0 mt-8 p-4 border border-primary/20 rounded-xl max-w-lg text-left">
+                <p class="text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed">
+                  {ah.splintCaption}
+                </p>
+              </div>
+            </div>
+            <div class="flex justify-center lg:justify-end order-1 lg:order-2">
+              {splintRoute ? (
+                <a
+                  href={learnMoreSplintHref}
+                  class="block hover:opacity-95 w-full max-w-[560px] transition-opacity"
+                >
+                  <img
+                    src={posterImage.src}
+                    alt="Achilles rupture recovery products collage"
+                    width={680}
+                    height={680}
+                    class="w-full h-auto object-contain"
+                    loading="eager"
+                  />
+                </a>
+              ) : (
+                <div class="w-full max-w-[560px]">
+                  <img
+                    src={posterImage.src}
+                    alt="Achilles rupture recovery products collage"
+                    width={680}
+                    height={680}
+                    class="w-full h-auto object-contain"
+                    loading="eager"
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    ) : (
+      <section class="pb-12 md:pb-16 border-neutral-200 dark:border-neutral-800 border-b color-gradient">
+        <div class="mx-auto px-4 max-w-6xl">
+          <div class="items-center gap-10 lg:gap-14 grid lg:grid-cols-2">
+            <div class="order-2 lg:order-1 lg:text-left text-center">
+              <div class="inline-flex justify-center items-center bg-primary/10 mb-4 p-3 rounded-full">
+                <ShoppingBag className="w-6 h-6 text-primary" />
+              </div>
+              <ConditionHubSelect
+                lang={lang}
+                hub="shop"
+                conditionId={conditionId}
+                label={chooseConditionLabel}
+                selectId="shop-condition-select"
+              />
+              <h1 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl leading-tight">
+                {c.label}
+              </h1>
+              <p class="mx-auto lg:mx-0 max-w-xl text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed">
+                {shopConditionHeroTagline(lang, c.label)}
+              </p>
+            </div>
+            <div class="flex justify-center lg:justify-end order-1 lg:order-2">
+              <div
+                class="flex justify-center items-center bg-gradient-to-br from-primary/20 dark:from-primary/28 via-primary/8 dark:via-primary/12 to-transparent shadow-lg border border-primary/25 rounded-2xl ring-1 ring-primary/10 w-full max-w-[340px] aspect-square"
+                aria-hidden="true"
+              >
+                <ShoppingBag
+                  className="w-[28%] max-w-[7rem] h-auto text-primary/35"
+                  strokeWidth={1.25}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <section
+    class="bg-white dark:bg-neutral-950 py-12 border-neutral-200 dark:border-neutral-800 border-b"
+  >
+    <div class="mx-auto px-4 max-w-6xl">
+      <h2
+        class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-2xl"
+      >
+        {t.ourProducts}
+      </h2>
+      {
+        isAchillesShop ? (
+          <div
+            class={cn(
+              "gap-8 grid",
+              courseRoute ? "md:grid-cols-2" : "md:grid-cols-1 max-w-2xl",
+            )}
+          >
+            <article class="flex flex-col bg-neutral-50 dark:bg-neutral-900/50 shadow-sm p-6 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
+              <a
+                href={learnMoreSplintHref}
+                class="block hover:opacity-95 mr-auto mb-5 border border-primary/20 dark:border-primary/30 rounded-xl w-full max-w-[320px] aspect-square overflow-hidden"
+              >
+                <img
+                  src="/images/night_splint_bed_top_square.jpg"
+                  alt={at.splintImageAlt}
+                  width={680}
+                  height={680}
+                  class="w-full h-full object-center object-cover"
+                  loading="lazy"
+                />
+              </a>
+              <h3 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl leading-snug">
+                {splintRoute?.title ?? "Achilles Night Splint"}
+              </h3>
+              <p class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                {splintRoute?.description ?? ""}
+              </p>
+              <PriceDisplay
+                client:load
+                size="lg"
+                showFreeShipping={false}
+                className="mb-4"
+              />
+              <div class="flex flex-wrap gap-2 mb-5">
+                <span class="inline-flex items-center gap-1.5 bg-primary/10 px-2.5 py-1 rounded-full font-medium text-neutral-800 dark:text-neutral-200 text-xs leading-none">
+                  <Truck className="w-3.5 h-3.5 text-primary" aria-hidden />
+                  {at.freeShipping}
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-primary/10 px-2.5 py-1 rounded-full font-medium text-neutral-800 dark:text-neutral-200 text-xs leading-none">
+                  <ShieldCheck
+                    className="w-3.5 h-3.5 text-primary"
+                    aria-hidden
+                  />
+                  {at.guarantee30Day}
+                </span>
+                <span class="inline-flex items-center gap-1.5 bg-primary/10 px-2.5 py-1 rounded-full font-medium text-neutral-800 dark:text-neutral-200 text-xs leading-none">
+                  <RotateCcw className="w-3.5 h-3.5 text-primary" aria-hidden />
+                  {at.easyReturns}
+                </span>
+              </div>
+              <div class="flex sm:flex-row flex-col flex-wrap gap-3 mt-auto">
+                <SplintShopBuyButton
+                  client:load
+                  variantId={NIGHT_SPLINT_VARIANTS.largeLeft}
+                  size="lg"
+                  className="w-full sm:w-auto"
+                  addToCartLabel={ah.ctaAddToCart}
+                  externalBuyLabel={ah.ctaBuyPartner}
+                />
+                <a
+                  href={learnMoreSplintHref}
+                  class={cn(
+                    buttonVariants({ variant: "outline", size: "lg" }),
+                    "w-full sm:w-auto font-semibold",
+                  )}
+                >
+                  {ah.ctaLearnMore}
+                </a>
+              </div>
+            </article>
+            {courseRoute ? (
+              <article class="flex flex-col bg-neutral-50 dark:bg-neutral-900/50 shadow-sm p-6 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
+                <div class="mr-auto mb-5 border border-primary/15 rounded-xl w-full max-w-[320px] overflow-hidden">
+                  <img
+                    src={achillesCourseImage.src}
+                    alt={courseImageAlt}
+                    width={1024}
+                    height={1024}
+                    class="w-full h-auto object-cover"
+                    loading="lazy"
+                  />
+                </div>
+                <h3 class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl leading-snug">
+                  {courseRoute.title}
+                </h3>
+                <p class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                  {courseRoute.description}
+                </p>
+                <VariantPriceDisplay
+                  client:load
+                  variantId={courseVariantId}
+                  size="lg"
+                  stripUsPrefix
+                  className="mb-2"
+                />
+                <p class="flex items-center gap-2 mb-4 text-primary text-sm">
+                  <Check className="w-4 h-4 shrink-0" aria-hidden />
+                  {at.instantAccess}
+                </p>
+                <p class="mb-6 font-semibold text-neutral-800 dark:text-neutral-200 text-sm">
+                  {at.readersLine}
+                </p>
+                <div class="flex sm:flex-row flex-col flex-wrap gap-3 mt-auto">
+                  <CourseBuyButton
+                    client:load
+                    productId={courseProductId}
+                    courseSlug={courseSlug}
+                    size="lg"
+                    className="w-full sm:w-auto"
+                  >
+                    {at.addCourse}
+                  </CourseBuyButton>
+                  <a
+                    href={courseRoute.href}
+                    class={cn(
+                      buttonVariants({ variant: "outline", size: "lg" }),
+                      "w-full sm:w-auto font-semibold",
+                    )}
+                  >
+                    {t.viewCourse.replace(/\s*→\s*$/, "")}
+                  </a>
+                </div>
+              </article>
+            ) : null}
+          </div>
+        ) : fromThetisLinks.length === 0 ? (
+          <p class="text-neutral-600 dark:text-neutral-400">
+            {t.noOurProducts}
+          </p>
+        ) : (
+          <ul class="gap-4 grid sm:grid-cols-2">
+            {fromThetisLinks.map((r) => {
+              const isCourse =
+                courseRoute !== null && r.href === courseRoute.href;
+              const isBuyableCourse =
+                isCourse && conditionId === "plantar-fasciitis";
+              const showSplintThumb =
+                !isCourse &&
+                isAchillesShop &&
+                (r.href.includes("achilles-rupture-splint") ||
+                  r.href.includes("achillessehnenriss-schiene") ||
+                  r.href.includes("attelle-rupture") ||
+                  r.href.includes("tutore-tendine") ||
+                  r.href.includes("bota-ortopedica"));
+              const rowLayout =
+                isCourse || showSplintThumb
+                  ? "sm:flex-row flex-col"
+                  : "flex-col";
+              return (
+                <li>
+                  {isBuyableCourse ? (
+                    <article class="flex sm:flex-row flex-col items-stretch gap-5 bg-primary/5 shadow-sm p-5 sm:p-6 border border-primary/20 rounded-xl">
+                      <div class="flex justify-center items-center bg-primary/10 border border-primary/15 rounded-xl w-[150px] h-[150px] shrink-0">
+                        <BookOpen
+                          className="w-14 h-14 text-primary"
+                          aria-hidden
+                        />
+                      </div>
+                      <div class="flex flex-col flex-1 min-w-0">
+                        <h3 class="mb-2 font-semibold text-primary text-lg leading-snug">
+                          {r.title}
+                        </h3>
+                        <p class="mb-3 text-neutral-600 dark:text-neutral-400 text-sm">
+                          {r.description}
+                        </p>
+                        <VariantPriceDisplay
+                          client:load
+                          variantId={courseVariantId}
+                          size="lg"
+                          stripUsPrefix
+                          className="mb-2"
+                        />
+                        <p class="flex items-center gap-2 mb-4 text-primary text-sm">
+                          <Check className="w-4 h-4 shrink-0" aria-hidden />
+                          {at.instantAccess}
+                        </p>
+                        <div class="flex sm:flex-row flex-col flex-wrap gap-3 mt-auto">
+                          <CourseBuyButton
+                            client:load
+                            productId={courseProductId}
+                            courseSlug={courseSlug}
+                            size="lg"
+                            className="w-full sm:w-auto"
+                          >
+                            {at.addCourse}
+                          </CourseBuyButton>
+                          <a
+                            href={r.href}
+                            class={cn(
+                              buttonVariants({
+                                variant: "outline",
+                                size: "lg",
+                              }),
+                              "w-full sm:w-auto font-semibold",
+                            )}
+                          >
+                            {t.viewCourse.replace(/\s*→\s*$/, "")}
+                          </a>
+                        </div>
+                      </div>
+                    </article>
+                  ) : (
+                    <a
+                      href={r.href}
+                      class={cn(
+                        "flex items-stretch gap-5 bg-primary/5 hover:bg-primary/10 shadow-sm hover:shadow-md p-5 sm:p-6 border border-primary/20 hover:border-primary/40 rounded-xl transition-all",
+                        rowLayout,
+                      )}
+                    >
+                      {isCourse ? (
+                        <div class="flex justify-center items-center bg-primary/10 border border-primary/15 rounded-xl w-[150px] h-[150px] shrink-0">
+                          <BookOpen
+                            className="w-14 h-14 text-primary"
+                            aria-hidden
+                          />
+                        </div>
+                      ) : showSplintThumb ? (
+                        <div class="border border-primary/15 rounded-xl w-[150px] h-[150px] overflow-hidden shrink-0">
+                          <img
+                            src="/images/night_splint_bed_top_square.jpg"
+                            alt=""
+                            class="w-full h-full object-cover"
+                            width={150}
+                            height={150}
+                            loading="lazy"
+                          />
+                        </div>
+                      ) : null}
+                      <div class="flex flex-col flex-1 min-w-0">
+                        <h3 class="mb-2 font-semibold text-primary text-lg leading-snug">
+                          {r.title}
+                        </h3>
+                        <p class="flex-1 text-neutral-600 dark:text-neutral-400 text-sm">
+                          {r.description}
+                        </p>
+                        <span class="inline-block mt-3 font-medium text-primary text-sm">
+                          {isCourse ? t.viewCourse : t.viewProduct}
+                        </span>
+                      </div>
+                    </a>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )
+      }
+    </div>
+  </section>
+
+  {
+    isAchillesShop ? (
+      <section class="bg-gradient-to-b from-white dark:from-neutral-950 via-primary/5 dark:via-primary/10 to-white dark:to-neutral-950 py-12 md:py-16 border-neutral-200 dark:border-neutral-800 border-b">
+        <div class="mx-auto px-4 max-w-7xl">
+          <div class="mb-8 md:mb-12 text-center">
+            <div class="inline-flex items-center gap-2 bg-primary/10 mb-4 px-4 py-2 rounded-full">
+              <Check className="w-4 md:w-5 h-4 md:h-5 text-primary" />
+              <p class="font-medium text-primary text-xs md:text-sm uppercase tracking-widest">
+                {at.reviewsKicker}
+              </p>
+            </div>
+            <h2 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl lg:text-4xl">
+              {at.reviewsTitle}
+            </h2>
+            <p class="mx-auto mb-6 max-w-3xl text-neutral-600 dark:text-neutral-400 text-base md:text-lg">
+              {at.reviewsSubtitle}
+            </p>
+          </div>
+          <div class="mb-8">
+            <EnhancedReviewCarousel client:load />
+          </div>
+          {reviewsRoute ? (
+            <div class="text-center">
+              <a
+                href={reviewsRoute.href}
+                class="inline-flex items-center gap-2 hover:bg-primary px-6 py-3 border-2 border-primary rounded-lg font-semibold text-primary hover:text-white transition-colors"
+              >
+                {at.reviewsViewAll}
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </a>
+            </div>
+          ) : null}
+        </div>
+      </section>
+    ) : null
+  }
+
+  <ShopCatalogueProductGrid
+    lang={lang}
+    products={shopProducts}
+    sectionTitle={t.recommended}
+  />
+</main>

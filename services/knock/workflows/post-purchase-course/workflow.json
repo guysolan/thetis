@@ -11,7 +11,7 @@
           "attachment_key": "attachments",
           "layout_key": "default"
         },
-        "subject": "Your Thetis Course is ready",
+        "subject": "Your {{ data.course_name }} is ready",
         "visual_blocks@": "thank_you/visual_blocks.json"
       },
       "type": "channel"
@@ -380,7 +380,7 @@
           "attachment_key": "attachments",
           "layout_key": "default"
         },
-        "subject": "Earn $50 — share this with your surgeon or physio",
+        "subject": "Earn $50 by sharing Thetis with your clinician",
         "visual_blocks@": "affiliate_ask/visual_blocks.json"
       },
       "type": "channel"

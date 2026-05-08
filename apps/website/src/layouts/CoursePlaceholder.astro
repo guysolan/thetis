@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import type { Lang } from "@/config/languages";
+
+export interface Props {
+    title: string;
+    description: string;
+    lang?: Lang;
+}
+
+const { title, description, lang = "en" } = Astro.props;
+---
+
+<Layout title={title} description={description} lang={lang}>
+    <main class="mx-auto px-4 py-20 max-w-2xl">
+        <h1 class="mb-4 font-bold text-neutral-900 text-3xl">{title}</h1>
+        <p class="mb-8 text-neutral-600 text-lg">{description}</p>
+        <p class="text-neutral-600">
+            <a href="/course" class="font-medium text-primary hover:underline"
+                >Achilles rupture recovery course →</a
+            >
+        </p>
+    </main>
+</Layout>

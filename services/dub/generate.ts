@@ -24,7 +24,7 @@ const DUB_API_BASE = "https://api.dub.co";
 
 const sourceCataloguePath = join(
   repoRoot,
-  "packages/catalogue/src/achilles-rupture.ts",
+  "packages/catalogue/src/catalogue.ts",
 );
 const embeddedOutPath = join(__dirname, "achilles-rupture.embedded.ts");
 const mapPath = join(__dirname, "dub-link-map.json");
@@ -463,7 +463,9 @@ function embedAchillesCatalogue() {
 
   const footerIdx = text.indexOf("\n];\n\nconst byId");
   if (footerIdx === -1) {
-    console.error("Could not find ACHILLES_RUPTURE_PRODUCTS array end.");
+    console.error(
+      "Could not find CATALOGUE_PRODUCTS array end (footer anchor).",
+    );
     process.exit(1);
   }
 
@@ -478,7 +480,7 @@ function embedAchillesCatalogue() {
   }
 
   if (spans.length === 0) {
-    console.error("No products found in achilles-rupture.ts");
+    console.error("No products found in catalogue.ts");
     process.exit(1);
   }
 

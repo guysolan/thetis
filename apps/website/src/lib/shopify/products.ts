@@ -15,6 +15,7 @@ export const SPLINT_VARIANT_IDS = Object.values(SPLINT_VARIANTS);
 export const COURSE_VARIANTS = {
   ESSENTIALS: "gid://shopify/ProductVariant/52265314353480",
   PROFESSIONALS: "gid://shopify/ProductVariant/52265315828040",
+  PLANTAR_FASCIITIS: "gid://shopify/ProductVariant/53062046056776",
 } as const;
 
 export const COURSE_VARIANT_IDS = Object.values(COURSE_VARIANTS);
@@ -68,10 +69,14 @@ export function getUpsellSuggestions(
 ): (typeof UPSELL_PRODUCTS)[keyof typeof UPSELL_PRODUCTS][] {
   const hasSplint = cartContainsSplint(variantIds);
   const hasCourse = cartContainsCourse(variantIds);
+  const hasAchillesCourse = variantIds.some((id) =>
+    id === COURSE_VARIANTS.ESSENTIALS || id === COURSE_VARIANTS.PROFESSIONALS
+  );
   const hasEssentials = variantIds.includes(COURSE_VARIANTS.ESSENTIALS);
   const hasProfessionals = variantIds.includes(COURSE_VARIANTS.PROFESSIONALS);
 
-  const suggestions: (typeof UPSELL_PRODUCTS)[keyof typeof UPSELL_PRODUCTS][] = [];
+  const suggestions: (typeof UPSELL_PRODUCTS)[keyof typeof UPSELL_PRODUCTS][] =
+    [];
 
   // If has splint but no courses, suggest standard course only (premium coming soon)
   if (hasSplint && !hasCourse) {
@@ -79,8 +84,9 @@ export function getUpsellSuggestions(
     // Premium course is coming soon - don't suggest it
   }
 
-  // If has course but no splint, suggest splint
-  if (hasCourse && !hasSplint) {
+  // If has an Achilles course but no splint, suggest splint.
+  // Plantar fasciitis course buyers should not see Achilles recovery products.
+  if (hasAchillesCourse && !hasSplint) {
     suggestions.push(UPSELL_PRODUCTS.splint);
   }
 

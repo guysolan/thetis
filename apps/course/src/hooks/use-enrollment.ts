@@ -2,13 +2,30 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/lib/supabase";
 import { useSimpleAuth } from "./use-simple-auth";
 
-type CourseType = "standard" | "premium" | "essentials" | "professionals";
+export type CourseType =
+  | "standard"
+  | "premium"
+  | "essentials"
+  | "professionals"
+  | "plantar-fasciitis";
 
-const COURSE_SLUGS = ["standard_course", "premium_course"];
+const COURSE_SLUGS = [
+  "achilles_rupture_course",
+  "achilles_rupture_professionals_course",
+  "plantar_fasciitis_course",
+  // pre-rename rows until DB migration is applied
+  "standard_course",
+  "premium_course",
+];
 
-/** Maps product_slug to display course_type */
 function slugToCourseType(slug: string): CourseType {
-  return slug === "premium_course" ? "premium" : "standard";
+  if (slug === "achilles_rupture_professionals_course") return "premium";
+  if (slug === "plantar_fasciitis_course") return "plantar-fasciitis";
+  if (slug === "achilles_rupture_course") return "standard";
+  // legacy rows (before product_slug rename migration)
+  if (slug === "premium_course") return "premium";
+  if (slug === "standard_course") return "standard";
+  return "standard";
 }
 
 interface Enrollment {
@@ -37,7 +54,9 @@ export function useEnrollment() {
       try {
         const { data, error } = await supabase
           .from("purchases")
-          .select("id, product_slug, status, purchased_at, shopify_order_number")
+          .select(
+            "id, product_slug, status, purchased_at, shopify_order_number",
+          )
           .eq("shopify_customer_email", email.toLowerCase())
           .eq("status", "active")
           .in("product_slug", COURSE_SLUGS);
@@ -73,13 +92,25 @@ export function useEnrollment() {
   }, [email, authLoading]);
 
   const hasAccess = (courseType: CourseType): boolean => {
-    const effective: CourseType =
-      courseType === "essentials"
-        ? "standard"
-        : courseType === "professionals"
-          ? "premium"
-          : courseType;
-    return enrollments.some((e) => e.course_type === effective && e.status === "active");
+    let effective: CourseType;
+    switch (courseType) {
+      case "essentials":
+        effective = "standard";
+        break;
+      case "professionals":
+        effective = "premium";
+        break;
+      default:
+        effective = courseType;
+    }
+    return enrollments.some(
+      (e) => e.course_type === effective && e.status === "active",
+    );
+  };
+
+  /** True when the user has at least one active course purchase. */
+  const hasAnyCourseAccess = (): boolean => {
+    return enrollments.some((e) => e.status === "active");
   };
 
   const getEnrollments = (): Enrollment[] => {
@@ -90,6 +121,7 @@ export function useEnrollment() {
     enrollments,
     loading,
     hasAccess,
+    hasAnyCourseAccess,
     getEnrollments,
   };
 }

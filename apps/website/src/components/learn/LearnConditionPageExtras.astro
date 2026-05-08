@@ -1,0 +1,438 @@
+---
+import type { ConditionId } from "@/content/conditions/registry";
+import { conditions, getConditionById } from "@/content/conditions/registry";
+import type { Lang } from "@/config/languages";
+import { languages } from "@/config/languages";
+import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
+import CourseCTA from "@/components/CTA/CourseCTA.astro";
+import LearnConditionPhaseTimeline from "@/components/learn/LearnConditionPhaseTimeline.astro";
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { Clock } from "lucide-react";
+import {
+    getCourseRouteForCondition,
+    getRecoveryPhaseRoutesForCondition,
+    generateRouteForLanguage,
+    getRouteBySlugAndLanguage,
+} from "@/content/routes";
+import { recoveryPhaseRoutes } from "@/content/routes/achilles-rupture";
+import {
+    getLocalizedLearnHubHref,
+    getLocalizedShopHubHref,
+} from "@/lib/condition-nav";
+
+interface Props {
+    conditionId: ConditionId;
+    lang: Lang;
+}
+
+const { conditionId, lang } = Astro.props;
+const language = languages.find((l) => l.code === lang)!;
+const c = getConditionById(conditionId);
+
+const switcherCopy: Record<Lang, { title: string; blurb: string }> = {
+    en: {
+        title: "Recovery guides by condition",
+        blurb: "Choose a condition to open its learn hub.",
+    },
+    de: {
+        title: "Genesungsleitfäden nach Beschwerde",
+        blurb: "Wählen Sie eine Beschwerde, um den Lern-Hub zu öffnen.",
+    },
+    fr: {
+        title: "Guides par pathologie",
+        blurb: "Choisissez une pathologie pour ouvrir son espace.",
+    },
+    es: {
+        title: "Guías por condición",
+        blurb: "Elige una condición para abrir su centro de aprendizaje.",
+    },
+    it: {
+        title: "Guide per condizione",
+        blurb: "Scegli una condizione per aprire il relativo hub.",
+    },
+};
+
+const continueCopy: Record<
+    Lang,
+    {
+        title: string;
+        articlesTitle: string;
+        articlesBlurb: string;
+        articlesCta: string;
+        shopTitle: string;
+        shopBlurb: string;
+        shopCta: string;
+    }
+> = {
+    en: {
+        title: "Articles & curated shop",
+        articlesTitle: "Evidence-based articles",
+        articlesBlurb: "Longer reads on this condition (blog).",
+        articlesCta: "Browse articles",
+        shopTitle: "Curated recovery gear",
+        shopBlurb: "Our picks and trusted catalogue items for this condition.",
+        shopCta: "Open shop hub",
+    },
+    de: {
+        title: "Artikel & Kuratierte Auswahl",
+        articlesTitle: "Evidenzbasierte Artikel",
+        articlesBlurb: "Ausführlichere Texte zu dieser Beschwerde (Blog).",
+        articlesCta: "Artikel ansehen",
+        shopTitle: "Recovery-Auswahl",
+        shopBlurb: "Unsere Empfehlungen und geprüfte Katalogartikel.",
+        shopCta: "Zum Shop-Hub",
+    },
+    fr: {
+        title: "Articles & boutique",
+        articlesTitle: "Articles fondés sur les preuves",
+        articlesBlurb: "Lectures plus longues sur cette pathologie (blog).",
+        articlesCta: "Voir les articles",
+        shopTitle: "Matériel de récupération",
+        shopBlurb: "Notre sélection et le catalogue pour cette pathologie.",
+        shopCta: "Ouvrir la boutique",
+    },
+    es: {
+        title: "Artículos y tienda",
+        articlesTitle: "Artículos basados en evidencia",
+        articlesBlurb: "Lecturas más extensas sobre esta condición (blog).",
+        articlesCta: "Ver artículos",
+        shopTitle: "Material de recuperación",
+        shopBlurb: "Nuestra selección y el catálogo para esta condición.",
+        shopCta: "Ir a la tienda",
+    },
+    it: {
+        title: "Articoli e shop",
+        articlesTitle: "Articoli basati su evidenze",
+        articlesBlurb: "Letture più approfondite su questa condizione (blog).",
+        articlesCta: "Vedi articoli",
+        shopTitle: "Attrezzatura per il recupero",
+        shopBlurb: "La nostra selezione e il catalogo per questa condizione.",
+        shopCta: "Apri lo shop",
+    },
+};
+
+const productCopy: Record<Lang, string> = {
+    en: "Our products for this condition",
+    de: "Unsere Produkte zu dieser Beschwerde",
+    fr: "Nos produits pour cette pathologie",
+    es: "Nuestros productos para esta condición",
+    it: "I nostri prodotti per questa condizione",
+};
+
+const quickCopy: Record<
+    Lang,
+    { title: string; blurb: string; achilles: Record<string, string> }
+> = {
+    en: {
+        title: "Not sure where to start?",
+        blurb: "Jump to the part of the pathway that fits where you are.",
+        achilles: {
+            weeks01: "Just injured",
+            weeks46: "In the boot",
+            weeks1012: "Leaving the boot",
+            weeks1325: "Physio phase",
+        },
+    },
+    de: {
+        title: "Unsicher, wo Sie anfangen?",
+        blurb: "Springen Sie zu dem Abschnitt, der zu Ihrer Situation passt.",
+        achilles: {
+            weeks01: "Frisch verletzt",
+            weeks46: "Im Gehboot",
+            weeks1012: "Boot wird abgesetzt",
+            weeks1325: "Physio-Phase",
+        },
+    },
+    fr: {
+        title: "Vous ne savez pas par où commencer ?",
+        blurb: "Accédez directement à l’étape qui vous correspond.",
+        achilles: {
+            weeks01: "Blessure récente",
+            weeks46: "Dans la botte",
+            weeks1012: "Sortie de botte",
+            weeks1325: "Kinésithérapie",
+        },
+    },
+    es: {
+        title: "¿No sabes por dónde empezar?",
+        blurb: "Salta a la parte del camino que encaje contigo.",
+        achilles: {
+            weeks01: "Lesión reciente",
+            weeks46: "Con la bota",
+            weeks1012: "Quitando la bota",
+            weeks1325: "Fisioterapia",
+        },
+    },
+    it: {
+        title: "Non sai da dove iniziare?",
+        blurb: "Vai alla parte del percorso più vicina a te.",
+        achilles: {
+            weeks01: "Appena infortunato",
+            weeks46: "Con lo stivale",
+            weeks1012: "Tolgo lo stivale",
+            weeks1325: "Fisioterapia",
+        },
+    },
+};
+
+const genericCourseCopy: Record<Lang, { title: string; cta: string }> = {
+    en: { title: "Structured course for this condition", cta: "View course" },
+    de: { title: "Strukturierter Kurs zu dieser Beschwerde", cta: "Zum Kurs" },
+    fr: {
+        title: "Parcours structuré pour cette pathologie",
+        cta: "Voir le cours",
+    },
+    es: { title: "Curso estructurado para esta condición", cta: "Ver curso" },
+    it: {
+        title: "Percorso strutturato per questa condizione",
+        cta: "Vai al corso",
+    },
+};
+
+const sc = switcherCopy[lang];
+const cc = continueCopy[lang];
+const qc = quickCopy[lang];
+const gc = genericCourseCopy[lang];
+
+const shopHref = getLocalizedShopHubHref(lang, conditionId);
+const blogHref = `/blog/condition/${conditionId}`;
+
+const productLinks = (c.productRouteSlugs ?? [])
+    .map((slug) => getRouteBySlugAndLanguage(slug, lang))
+    .filter((r): r is NonNullable<typeof r> => r != null);
+
+function achillesQuickLinks(): {
+    href: string;
+    label: string;
+    variant: "default" | "outline";
+}[] {
+    const pairs: [string, keyof typeof qc.achilles][] = [
+        ["guide/weeks-0-1", "weeks01"],
+        ["guide/weeks-4-6", "weeks46"],
+        ["guide/weeks-10-12", "weeks1012"],
+        ["guide/weeks-13-25", "weeks1325"],
+    ];
+    return pairs.map(([slug, key], i) => {
+        const base = recoveryPhaseRoutes.find((r) => r.slug === slug);
+        const href = base
+            ? generateRouteForLanguage(base, language).href
+            : `/${slug}`;
+        return {
+            href,
+            label: qc.achilles[key],
+            variant: i === 0 ? ("default" as const) : ("outline" as const),
+        };
+    });
+}
+
+const guideBases = getRecoveryPhaseRoutesForCondition(conditionId);
+const genericQuickLinks = guideBases.slice(0, 4).map((base, i) => {
+    const r = generateRouteForLanguage(base, language);
+    return {
+        href: r.href,
+        label:
+            r.title.replace(/^[^:]+:\s*/, "").slice(0, 42) ||
+            r.title.slice(0, 42),
+        variant: i === 0 ? ("default" as const) : ("outline" as const),
+    };
+});
+
+const quickLinks =
+    conditionId === "achilles-rupture"
+        ? achillesQuickLinks()
+        : genericQuickLinks;
+
+const courseRoute = getCourseRouteForCondition(conditionId, lang);
+---
+
+<section
+    class="bg-white dark:bg-neutral-950 py-12 border-neutral-200 dark:border-neutral-800 border-b"
+>
+    <div class="mx-auto px-4 max-w-6xl">
+        <h2
+            class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl text-center"
+        >
+            {sc.title}
+        </h2>
+        <p
+            class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg text-center"
+        >
+            {sc.blurb}
+        </p>
+        <ul
+            class="flex sm:flex-row flex-col flex-wrap justify-center gap-4 sm:gap-6"
+        >
+            {
+                conditions
+                    .slice()
+                    .sort((a, b) => a.sortOrder - b.sortOrder)
+                    .map((cond) => (
+                        <li class="sm:flex-1 sm:min-w-[200px] sm:max-w-xs">
+                            <a
+                                href={getLocalizedLearnHubHref(lang, cond.id)}
+                                class={cn(
+                                    buttonVariants({
+                                        variant: "outline",
+                                        size: "lg",
+                                    }),
+                                    "justify-center w-full font-semibold text-center",
+                                )}
+                            >
+                                {cond.label}
+                            </a>
+                        </li>
+                    ))
+            }
+        </ul>
+    </div>
+</section>
+
+<section class="bg-neutral-50 dark:bg-neutral-900/50 py-12">
+    <div class="mx-auto px-4 max-w-3xl">
+        <SubscribeBlock source="guide_index" {lang} />
+    </div>
+</section>
+
+<section
+    class="bg-white dark:bg-neutral-950 py-12 border-neutral-200 dark:border-neutral-800 border-b"
+>
+    <div class="mx-auto px-4 max-w-6xl">
+        <h2
+            class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
+        >
+            {cc.title}
+        </h2>
+        <div class="gap-6 grid md:grid-cols-2">
+            <div
+                class="bg-primary/[0.04] dark:bg-primary/10 p-6 border border-primary/20 rounded-2xl"
+            >
+                <h3
+                    class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-lg"
+                >
+                    {cc.articlesTitle}
+                </h3>
+                <p class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm">
+                    {cc.articlesBlurb}
+                </p>
+                <a
+                    href={blogHref}
+                    class={cn(
+                        buttonVariants({ variant: "outline", size: "lg" }),
+                        "font-semibold",
+                    )}
+                >
+                    {cc.articlesCta}
+                </a>
+            </div>
+            <div
+                class="bg-primary/[0.04] dark:bg-primary/10 p-6 border border-primary/20 rounded-2xl"
+            >
+                <h3
+                    class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-lg"
+                >
+                    {cc.shopTitle}
+                </h3>
+                <p class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm">
+                    {cc.shopBlurb}
+                </p>
+                <a
+                    href={shopHref}
+                    class={cn(
+                        buttonVariants({ variant: "default", size: "lg" }),
+                        "font-semibold",
+                    )}
+                >
+                    {cc.shopCta}
+                </a>
+            </div>
+        </div>
+
+        {
+            productLinks.length > 0 ? (
+                <div class="mt-10">
+                    <h3 class="mb-3 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
+                        {productCopy[lang]}
+                    </h3>
+                    <ul class="flex flex-wrap gap-3">
+                        {productLinks.map((p) => (
+                            <li>
+                                <a
+                                    href={p.href}
+                                    class={cn(
+                                        buttonVariants({
+                                            variant: "outline",
+                                            size: "default",
+                                        }),
+                                        "font-medium",
+                                    )}
+                                >
+                                    {p.title}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ) : null
+        }
+
+        {
+            courseRoute && conditionId !== "achilles-rupture" ? (
+                <div class="mt-10">
+                    <h3 class="mb-3 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
+                        {gc.title}
+                    </h3>
+                    <a
+                        href={courseRoute.href}
+                        class={cn(
+                            buttonVariants({ variant: "outline", size: "lg" }),
+                            "font-semibold",
+                        )}
+                    >
+                        {courseRoute.title || gc.cta}
+                    </a>
+                </div>
+            ) : null
+        }
+    </div>
+</section>
+
+<LearnConditionPhaseTimeline {conditionId} {lang} />
+
+{
+    quickLinks.length >= 2 ? (
+        <section class="bg-primary/5 dark:bg-primary/10 py-16">
+            <div class="mx-auto px-4 max-w-4xl text-center">
+                <h2 class="mb-4 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl">
+                    {qc.title}
+                </h2>
+                <p class="mb-8 text-neutral-600 dark:text-neutral-400 text-lg">
+                    {qc.blurb}
+                </p>
+                <div class="flex flex-wrap justify-center gap-3">
+                    {quickLinks.map(({ href, label, variant }) => (
+                        <a
+                            href={href}
+                            class={cn(
+                                buttonVariants({ variant, size: "lg" }),
+                                "gap-2",
+                            )}
+                        >
+                            {conditionId === "achilles-rupture" &&
+                            variant === "default" ? (
+                                <Clock className="w-4 h-4" />
+                            ) : null}
+                            {label}
+                        </a>
+                    ))}
+                </div>
+            </div>
+        </section>
+    ) : null
+}
+
+{
+    conditionId === "achilles-rupture" ? (
+        <CourseCTA {lang} variant="full" />
+    ) : null
+}

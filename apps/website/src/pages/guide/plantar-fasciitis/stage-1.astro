@@ -1,0 +1,14 @@
+---
+import GuideLayout from "@/layouts/GuideLayout.astro";
+import { metadata, content } from "@/content/guide/plantar-fasciitis/stage-1";
+import { plantarFasciitisGuideNavPhases } from "@/content/guide/plantar-fasciitis";
+---
+
+<GuideLayout
+ title={metadata.title}
+    description={metadata.description}
+    slug={`guide/plantar-fasciitis/${metadata.slug}`}
+    lang="en"
+    content={content}
+    navPhases={plantarFasciitisGuideNavPhases}
+/>
