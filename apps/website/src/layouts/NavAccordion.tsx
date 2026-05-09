@@ -93,7 +93,7 @@ const NavLink = ({
     className="group flex items-start gap-3 active:bg-neutral-100 dark:active:bg-white/[0.08] p-3 rounded-xl transition-colors"
   >
     {icon && (
-      <span className="flex justify-center items-center bg-neutral-100 dark:bg-white/[0.08] rounded-lg w-10 h-10 text-neutral-600 dark:text-neutral-300 shrink-0">
+      <span className="flex justify-center items-center dark:bg-white/[0.08] rounded-lg w-10 h-10 text-neutral-600 shrink-0">
         {icon}
       </span>
     )}

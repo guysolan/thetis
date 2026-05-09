@@ -91,7 +91,7 @@ const NavigationMenuItem = React.forwardRef<
 NavigationMenuItem.displayName = "NavigationMenuItem";
 
 const navigationMenuTriggerStyle = cva(
-  "group/navigation-menu-trigger inline-flex justify-center items-center bg-background data-open:bg-accent/50 data-popup-open:bg-accent/50 hover:bg-accent focus:bg-accent dark:data-open:bg-accent/50 dark:data-popup-open:bg-accent/50 disabled:opacity-50 px-4 py-2 rounded-md outline-none w-max h-10 font-medium text-neutral-900 dark:text-neutral-50 text-base transition-colors hover:text-accent-foreground focus:text-accent-foreground dark:hover:text-accent-foreground disabled:pointer-events-none",
+  "group/navigation-menu-trigger inline-flex justify-center items-center bg-background data-open:bg-accent/50 data-popup-open:bg-accent/50 hover:bg-accent focus:bg-accent dark:data-open:bg-accent/50 dark:data-popup-open:bg-accent/50 disabled:opacity-50 px-4 py-2 rounded-md outline-none ring-0 shadow-none focus:outline-none focus:shadow-none focus:ring-0 focus-visible:outline-none focus-visible:shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 w-max h-10 font-medium text-neutral-900 dark:text-neutral-50 text-base transition-colors hover:text-accent-foreground focus:text-accent-foreground dark:hover:text-accent-foreground disabled:pointer-events-none",
 );
 
 const NavigationMenuTrigger = React.forwardRef<
@@ -127,7 +127,7 @@ const NavigationMenuContent = React.forwardRef<
       className={cn(
         "data-ending-style:opacity-0 data-starting-style:opacity-0 p-1 outline-none w-auto h-full transition-[opacity,transform,translate] duration-[0.35s] ease-[cubic-bezier(0.22,1,0.36,1)]",
         "data-ending-style:data-[activation-direction=left]:translate-x-[50%] data-ending-style:data-[activation-direction=right]:translate-x-[-50%] data-starting-style:data-[activation-direction=left]:translate-x-[-50%] data-starting-style:data-[activation-direction=right]:translate-x-[50%]",
-        "[&_[data-slot=navigation-menu-link]]:focus:outline-none [&_[data-slot=navigation-menu-link]]:focus:ring-0",
+        "[&_[data-slot=navigation-menu-link]]:focus:outline-none [&_[data-slot=navigation-menu-link]]:focus:ring-0 [&_[data-slot=navigation-menu-link]]:focus:shadow-none [&_[data-slot=navigation-menu-link]]:focus-visible:outline-none [&_[data-slot=navigation-menu-link]]:focus-visible:ring-0 [&_[data-slot=navigation-menu-link]]:focus-visible:shadow-none",
         className,
       )}
       {...props}
@@ -169,11 +169,12 @@ const NavigationMenuPositioner = React.forwardRef<
       >
         <NavigationMenuPrimitive.Popup
           className={cn(
-            "relative bg-white dark:bg-neutral-900 data-ending-style:opacity-0 data-starting-style:opacity-0 shadow-xl rounded-lg outline-none ring-1 ring-black/[0.06] dark:ring-white/10 w-[var(--popup-width)] max-w-[min(var(--available-width),100vw)] h-[var(--popup-height)] text-neutral-900 dark:text-neutral-50 origin-[var(--transform-origin)] data-ending-style:scale-90 data-starting-style:scale-90 transition-[opacity,transform,width,height,scale,translate] duration-[0.35s] data-ending-style:duration-150 ease-[cubic-bezier(0.22,1,0.36,1)]",
+            // Root renders `<nav tabIndex={-1}>` — suppress UA focus ring on open while submenu manages tab stops on triggers/links.
+            "thetis-navigation-popup relative bg-white dark:bg-neutral-900 data-ending-style:opacity-0 data-starting-style:opacity-0 shadow-xl rounded-lg outline-none focus:outline-none focus-visible:outline-none ring-1 ring-black/[0.06] dark:ring-white/10 w-[var(--popup-width)] max-w-[min(var(--available-width),100vw)] h-[var(--popup-height)] text-neutral-900 dark:text-neutral-50 origin-[var(--transform-origin)] data-ending-style:scale-90 data-starting-style:scale-90 transition-[opacity,transform,width,height,scale,translate] duration-[0.35s] data-ending-style:duration-150 ease-[cubic-bezier(0.22,1,0.36,1)]",
             navigationMenuViewportWidth,
           )}
         >
-          <NavigationMenuPrimitive.Viewport className="relative size-full overflow-hidden text-popover-foreground" />
+          <NavigationMenuPrimitive.Viewport className="relative outline-none size-full overflow-hidden text-popover-foreground" />
         </NavigationMenuPrimitive.Popup>
       </NavigationMenuPrimitive.Positioner>
     </NavigationMenuPrimitive.Portal>
@@ -190,7 +191,7 @@ const NavigationMenuLink = React.forwardRef<
       ref={ref}
       data-slot="navigation-menu-link"
       className={cn(
-        "flex items-center gap-2 rounded-lg p-2 text-sm outline-none transition-all hover:bg-accent focus:bg-accent focus-visible:outline focus-visible:outline-1 focus-visible:ring-[3px] focus-visible:ring-ring/50 data-active:bg-accent/50 data-active:hover:bg-accent data-active:focus:bg-accent [&_svg:not([class*='size-'])]:size-4",
+        "flex items-center gap-2 rounded-lg p-2 text-sm outline-none ring-0 shadow-none transition-all hover:bg-accent focus:bg-accent focus:outline-none focus:shadow-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:shadow-none focus-visible:ring-0 focus-visible:ring-offset-0 data-active:bg-accent/50 data-active:hover:bg-accent data-active:focus:bg-accent [&_svg:not([class*='size-'])]:size-4",
         className,
       )}
       {...props}
