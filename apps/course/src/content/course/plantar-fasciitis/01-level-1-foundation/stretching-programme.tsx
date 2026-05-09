@@ -1,4 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 import pfStretchingExercisesGuidePage1 from "@/assets/pf-stretching-exercises-guide-v26-page-1.png";
 import pfStretchingExercisesGuidePage2 from "@/assets/pf-stretching-exercises-guide-v26-page-2.png";
 
@@ -49,14 +50,18 @@ export const content: SectionContent = {
     {
       type: "text",
       content:
-        "Using a slant board, as detailed in the next lesson, is extremely effective and will nearly always bring improvement within a few weeks when used methodically and consistently.",
+        `Using a slant board, as detailed in the next lesson, is extremely effective and will nearly always bring improvement within a few weeks when used methodically and consistently. Shop: ${mdShopPair(
+          "slant-board-calf-stretcher",
+        )}.`,
     },
     {
       type: "list",
       style: "bullet",
       items: [
         "Stretch every day, not just when pain flares.",
-        "Night splints are controversial, but can be worth trying.",
+        `Night splints are controversial, but can be worth trying (${mdShopPair(
+          "pf-night-splint-united-ortho-b07cd185s3",
+        )}).`,
         "Toe stretches are an additional useful measure for plantar fasciitis.",
       ],
     },

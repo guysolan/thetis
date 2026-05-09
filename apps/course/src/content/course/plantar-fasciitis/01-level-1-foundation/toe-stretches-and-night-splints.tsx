@@ -1,4 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 import pfMorningToeStretch from "@/assets/pf-morning-toe-stretch.png";
 import pfNightSplintOptions from "@/assets/pf-night-splint-options.png";
 
@@ -35,6 +36,18 @@ export const content: SectionContent = {
           caption:
             "Evidence is mixed, but night splints can still be worth a practical trial.",
         },
+        {
+          type: "list",
+          style: "bullet",
+          items: [
+            `**Night splint (United Ortho example)** — dorsal-style overnight stretch option for plantar fasciitis morning pain. Shop: ${mdShopPair(
+              "pf-night-splint-united-ortho-b07cd185s3",
+            )}.`,
+            `**Night splint (dorsal alternative)** — similar role with different fit/strap design. Shop: ${mdShopPair(
+              "pf-night-splint-dorsal-b0gwlbcjfm",
+            )}.`,
+          ],
+        },
       ],
     },
     {
@@ -51,6 +64,12 @@ export const content: SectionContent = {
           type: "text",
           content:
             "Perform slant board stretches with your knees locked perfectly straight to target the tightest part of the calf muscles. Build duration progressively over several weeks.",
+        },
+        {
+          type: "text",
+          content: `**Product option:** Slant board / calf stretch wedge — useful for consistent home setup. Shop: ${mdShopPair(
+            "slant-board-calf-stretcher",
+          )}.`,
         },
       ],
     },

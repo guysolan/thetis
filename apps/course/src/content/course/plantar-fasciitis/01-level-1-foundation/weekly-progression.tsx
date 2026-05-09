@@ -1,4 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 
 export const metadata = {
   slug: "weekly-progression",
@@ -39,10 +40,14 @@ export const content: SectionContent = {
               type: "list",
               style: "bullet",
               items: [
-                "Purchase a slant board and use low gradient, 3 minutes at a time.",
+                `Purchase a slant board and use low gradient, 3 minutes at a time (${mdShopPair(
+                  "slant-board-calf-stretcher",
+                )}).`,
                 "Toe stretches.",
                 "Reduce step count.",
-                "Supportive shoes.",
+                `Supportive shoes (${mdShopPair(
+                  "neutral-running-shoes-guide",
+                )}).`,
                 "Record your body weight accurately and honestly.",
               ],
             },

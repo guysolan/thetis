@@ -1,4 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 import pfFootwearSupportiveVsFlat from "@/assets/pf-footwear-supportive-vs-flat.png";
 
 export const metadata = {
@@ -41,6 +42,28 @@ export const content: SectionContent = {
         "Barefoot walking on hard floors",
         "Very flat flip-flops",
         "Minimalist shoes while symptoms are active",
+      ],
+    },
+    {
+      type: "card",
+      title: "Product options",
+      variant: "muted",
+      content: [
+        {
+          type: "list",
+          style: "bullet",
+          items: [
+            `**Supportive running shoes (neutral guide)** — cushioned, supportive trainers are usually the most practical first step. Shop: ${mdShopPair(
+              "neutral-running-shoes-guide",
+            )}.`,
+            `**Supportive flip-flops/sandals (example)** — use structured, cushioned options rather than very flat flip-flops. Shop: ${mdShopPair(
+              "fitflop-iqushion-flip-flops",
+            )}.`,
+            `**Heel-lift insoles (generic)** — may help some patients with symptom relief, especially if shoes are otherwise supportive. Shop: ${mdShopPair(
+              "heel-wedge-insoles-generic",
+            )}.`,
+          ],
+        },
       ],
     },
     {

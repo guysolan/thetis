@@ -1,4 +1,5 @@
 import type { SectionContent } from "@/components/course/types";
+import { mdShopPair } from "@/lib/catalogue-links";
 import pfCombKnotsAnalogy from "@/assets/pf-comb-knots-analogy.png";
 import pfSlantBoardKeyMessages from "@/assets/pf-slant-board-key-messages.png";
 import pfSlantBoardStretchesBanner from "@/assets/pf-slant-board-stretches-banner.png";
@@ -21,6 +22,22 @@ export const content: SectionContent = {
       src: pfSlantBoardStretchesBanner,
       alt: "Slant board stretches banner with slant board and standing stretch position.",
       caption: "Simple setup, repeated daily, gives the best results.",
+    },
+    {
+      type: "card",
+      title: "Where to buy a slant board",
+      variant: "default",
+      content: [
+        {
+          type: "list",
+          style: "bullet",
+          items: [
+            `**Slant board / calf stretch wedge** — adjustable setup for consistent daily calf stretching at home. Shop: ${mdShopPair(
+              "slant-board-calf-stretcher",
+            )}.`,
+          ],
+        },
+      ],
     },
     {
       type: "section",
