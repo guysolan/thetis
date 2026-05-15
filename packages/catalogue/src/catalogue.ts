@@ -185,7 +185,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Structured lessons covering every stage of Achilles rupture recovery",
     tags: ["course", "education", "recovery"],
-    imagePath: "/images/catalogue-products/achilles-rope-ends-pointed-down.png",
+    imagePath: "/images/catalogue-products/achilles-rupture-recovery-course-aircast-mike-professional-square-v5-.png",
     description:
       "Instant access after checkout — guided lessons you can follow at home.",
     features: [],
@@ -210,7 +210,7 @@ export const CATALOGUE_PRODUCTS: AchillesProduct[] = [
     keyBenefit:
       "Stretching, loading, footwear, and treatment steps you can follow at home",
     tags: ["course", "education", "plantar"],
-    imagePath: "/images/catalogue-products/plantar-fasciitis-course-banner.png",
+    imagePath: "/images/catalogue-products/plantar-fasciitis-course-mike-doc-professional-square-v3-natural.png",
     description:
       "Instant access after checkout — a clear path through rehab at home.",
     features: [],

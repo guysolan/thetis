@@ -27,7 +27,6 @@ import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
 import ShopCatalogueProductGrid from "@/components/shop/ShopCatalogueProductGrid.astro";
 import ProductCollage from "@/components/shop/ProductCollage.tsx";
 import ReviewsLink from "@/components/ReviewsLink.tsx";
-import achillesCourseImage from "../../../../../packages/catalogue/assets/achilles-rope-ends-pointed-down.png";
 import {
   BookOpen,
   Check,
@@ -59,19 +58,23 @@ const courseSlug =
 const courseImageAlt =
   conditionId === "plantar-fasciitis"
     ? "Plantar fasciitis course lesson preview"
-    : "Achilles tendon healing position comparison";
+    : "Achilles rupture recovery course illustration with a clinician explaining foot position";
+const achillesCourseImage =
+  "/images/catalogue-products/achilles-rupture-recovery-course-aircast-mike-professional-square-v5-.png";
 
 const courseComingSoon =
   conditionId === "achilles-tendinitis" ||
   conditionId === "insertional-achilles-tendonitis";
 
 const plantarCourseThumbAlt: Record<Lang, string> = {
-  en: "Illustration from the plantar fasciitis course: slant-board stretches",
-  de: "Illustration aus dem Plantarfasziitis-Kurs: Schrägbrett-Dehnübungen",
-  fr: "Illustration du cours fasciite plantaire : étirements sur planche inclinée",
-  es: "Ilustración del curso de fascitis plantar: estiramientos en tabla inclinada",
-  it: "Illustrazione dal corso sulla fascite plantare: stiramenti sul piano inclinato",
+  en: "Plantar fasciitis course illustration with a clinician explaining foot support and exercises",
+  de: "Illustration zum Plantarfasziitis-Kurs mit einem Arzt, der Fußstützen und Übungen erklärt",
+  fr: "Illustration du cours fasciite plantaire avec un clinicien expliquant les supports et exercices du pied",
+  es: "Ilustración del curso de fascitis plantar con un médico explicando soportes y ejercicios para el pie",
+  it: "Illustrazione del corso sulla fascite plantare con un medico che spiega supporti ed esercizi per il piede",
 };
+const plantarCourseImage =
+  "/images/catalogue-products/plantar-fasciitis-course-mike-doc-professional-square-v3-natural.png";
 
 const copy: Record<
   Lang,
@@ -588,7 +591,7 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
               <article class="flex flex-col bg-neutral-50 dark:bg-neutral-900/50 shadow-sm p-6 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
                 <div class="mr-auto mb-5 border border-primary/15 rounded-xl w-full max-w-[320px] overflow-hidden">
                   <img
-                    src={achillesCourseImage.src}
+                    src={achillesCourseImage}
                     alt={courseImageAlt}
                     width={1024}
                     height={1024}
@@ -668,7 +671,7 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                     <article class="flex sm:flex-row flex-col items-stretch gap-5 bg-primary/5 shadow-sm p-5 sm:p-6 border border-primary/20 rounded-xl">
                       <div class="border border-primary/15 rounded-xl w-[150px] h-[150px] overflow-hidden shrink-0">
                         <img
-                          src="/images/catalogue-products/plantar-fasciitis-course-banner.png"
+                          src={plantarCourseImage}
                           alt={plantarCourseThumbAlt[lang]}
                           width={150}
                           height={150}
@@ -723,7 +726,7 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                     <article class="flex sm:flex-row flex-col items-stretch gap-5 bg-neutral-100/80 dark:bg-neutral-900/40 shadow-sm p-5 sm:p-6 border border-neutral-300 dark:border-neutral-600 border-dashed rounded-xl">
                       <div class="border border-neutral-300 dark:border-neutral-600 rounded-xl w-[150px] h-[150px] overflow-hidden shrink-0">
                         <img
-                          src="/images/catalogue-products/plantar-fasciitis-course-banner.png"
+                          src={plantarCourseImage}
                           alt={plantarCourseThumbAlt[lang]}
                           width={150}
                           height={150}
