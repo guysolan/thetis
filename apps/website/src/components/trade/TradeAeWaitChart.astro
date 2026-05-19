@@ -1,0 +1,116 @@
+---
+import { aeWaitComparison } from "@/content/evidence/evidenceStudies";
+
+export interface Props {
+  chartTitle?: string;
+  averageLabel?: string;
+  maximumLabel?: string;
+  daysLabel?: string;
+}
+
+const {
+  chartTitle = "Time from A&E to specialist assessment",
+  averageLabel = "Average wait time",
+  maximumLabel = "Maximum wait time",
+  daysLabel = "days",
+} = Astro.props;
+
+const { labels, meanDays, maxDays, chartMaxDays } = aeWaitComparison;
+---
+
+<div
+  class="bg-white dark:bg-neutral-900 p-5 sm:p-6 border border-neutral-200 dark:border-neutral-700 rounded-xl"
+>
+  <h4
+    class="mb-6 font-medium text-neutral-900 dark:text-neutral-100 text-base text-center"
+  >
+    {chartTitle}
+  </h4>
+  <div class="space-y-10">
+    {
+      labels.map((label, index) => (
+        <div>
+          <p class="flex items-center mb-4 font-medium text-neutral-900 dark:text-neutral-100 text-sm">
+            <span
+              class:list={[
+                "inline-block mr-2 rounded-full w-2.5 h-2.5",
+                index === 0 ? "bg-neutral-400" : "bg-primary",
+              ]}
+            />
+            {label}
+          </p>
+          <div class="space-y-5 ml-4">
+            <div>
+              <div class="flex justify-between mb-1.5 text-sm">
+                <span class="text-neutral-500">{averageLabel}</span>
+                <span
+                  class:list={[
+                    "font-semibold",
+                    index === 0
+                      ? "text-neutral-700 dark:text-neutral-300"
+                      : "text-primary",
+                  ]}
+                >
+                  {meanDays[index]} {daysLabel}
+                </span>
+              </div>
+              <div class="bg-neutral-100 dark:bg-neutral-800 rounded-full h-2 overflow-hidden">
+                <div
+                  class:list={[
+                    "rounded-full h-2",
+                    index === 0 ? "bg-neutral-400" : "bg-primary",
+                  ]}
+                  style={{
+                    width: `${(meanDays[index] / chartMaxDays) * 100}%`,
+                  }}
+                />
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1.5 text-sm">
+                <span class="text-neutral-500">{maximumLabel}</span>
+                <span
+                  class:list={[
+                    "font-semibold",
+                    index === 0
+                      ? "text-neutral-700 dark:text-neutral-300"
+                      : "text-primary",
+                  ]}
+                >
+                  {maxDays[index]} {daysLabel}
+                </span>
+              </div>
+              <div class="bg-neutral-100 dark:bg-neutral-800 rounded-full h-2 overflow-hidden">
+                <div
+                  class:list={[
+                    "rounded-full h-2",
+                    index === 0 ? "bg-neutral-400" : "bg-primary",
+                  ]}
+                  style={{ width: `${(maxDays[index] / chartMaxDays) * 100}%` }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+  <div
+    class="gap-4 grid sm:grid-cols-2 mt-8 pt-6 border-neutral-200 dark:border-neutral-700 border-t text-sm"
+  >
+    <div>
+      <p class="font-medium text-neutral-900 dark:text-neutral-100">
+        67% faster assessment
+      </p>
+      <p class="text-neutral-600 dark:text-neutral-400">
+        Mean wait 8.7 → 2.9 days
+      </p>
+    </div>
+    <div>
+      <p class="font-medium text-neutral-900 dark:text-neutral-100">
+        74% shorter maximum waits
+      </p>
+      <p class="text-neutral-600 dark:text-neutral-400">Max wait 23 → 6 days</p>
+    </div>
+  </div>
+</div>

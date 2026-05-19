@@ -1,0 +1,143 @@
+---
+import {
+  sleepingSafeAndSoundStudy,
+  safetyStudyStats,
+} from "@/content/evidence/evidenceStudies";
+
+export interface Props {
+  imageAlt?: string;
+}
+
+const {
+  imageAlt = "Patient wearing the Achilles rupture night splint in bed",
+} = Astro.props;
+
+const stats = safetyStudyStats;
+---
+
+<div
+  class="bg-white dark:bg-neutral-900 p-5 sm:p-6 border border-neutral-200 dark:border-neutral-700 rounded-xl"
+>
+  <div class="items-start gap-6 grid sm:grid-cols-2">
+    <div>
+      <img
+        src="/images/night_splint_bed_top_square.jpg"
+        alt={imageAlt}
+        class="rounded-lg w-full"
+        width={480}
+        height={480}
+        loading="lazy"
+      />
+      <div class="gap-3 grid grid-cols-2 mt-3">
+        <div
+          class="bg-primary/5 px-3 py-3 border border-primary/30 rounded-lg text-center"
+        >
+          <p class="font-bold text-primary text-2xl">
+            {stats.patientsRecorded}
+          </p>
+          <p class="mt-0.5 text-neutral-600 dark:text-neutral-400 text-xs">
+            patients recorded
+          </p>
+        </div>
+        <div
+          class="bg-primary/5 px-3 py-3 border border-primary/30 rounded-lg text-center"
+        >
+          <p class="font-bold text-primary text-2xl">
+            {stats.reportedInjuries}
+          </p>
+          <p class="mt-0.5 text-neutral-600 dark:text-neutral-400 text-xs">
+            reported injuries
+          </p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h4
+        class="mb-4 font-medium text-neutral-900 dark:text-neutral-100 text-base"
+      >
+        Safety statistical analysis
+      </h4>
+      <div class="space-y-4">
+        <div>
+          <div class="flex justify-between mb-1 text-xs">
+            <span class="text-neutral-600 dark:text-neutral-400"
+              >Sample size adequacy</span
+            >
+            <span class="font-medium text-primary"
+              >{stats.sampleSizeAdequacy}</span
+            >
+          </div>
+          <div
+            class="bg-neutral-100 dark:bg-neutral-800 rounded-full h-1.5 overflow-hidden"
+          >
+            <div
+              class="bg-primary rounded-full h-1.5"
+              style={{ width: stats.sampleSizeAdequacy }}
+            >
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-1 text-xs">
+            <span class="text-neutral-600 dark:text-neutral-400"
+              >Statistical power</span
+            >
+            <span class="font-medium text-primary"
+              >{stats.statisticalPower}</span
+            >
+          </div>
+          <div
+            class="bg-neutral-100 dark:bg-neutral-800 rounded-full h-1.5 overflow-hidden"
+          >
+            <div
+              class="bg-primary rounded-full h-1.5"
+              style={{ width: stats.statisticalPower }}
+            >
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="flex justify-between mb-1 text-xs">
+            <span class="text-neutral-600 dark:text-neutral-400"
+              >Confidence level</span
+            >
+            <span class="font-medium text-primary">{stats.confidenceLevel}</span
+            >
+          </div>
+          <div
+            class="bg-neutral-100 dark:bg-neutral-800 rounded-full h-1.5 overflow-hidden"
+          >
+            <div
+              class="bg-primary rounded-full h-1.5"
+              style={{ width: stats.confidenceLevel }}
+            >
+            </div>
+          </div>
+        </div>
+      </div>
+      <p
+        class="mt-4 text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed"
+      >
+        With 95% confidence, night-time injury risk is
+        <span class="font-semibold text-primary"
+          >{stats.injuryRiskUpperBound}</span
+        > — comparable to a walking boot with better sleep comfort.
+      </p>
+      <p
+        class="mt-3 text-neutral-600 dark:text-neutral-400 text-xs leading-relaxed"
+      >
+        <span class="font-medium text-primary">Source:</span>
+        <a
+          href={sleepingSafeAndSoundStudy.pdfHref}
+          class="text-primary hover:underline"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Sleeping safe and sound
+        </a>
+        — {sleepingSafeAndSoundStudy.institution}.{" "}
+        {sleepingSafeAndSoundStudy.keyFinding}
+      </p>
+    </div>
+  </div>
+</div>

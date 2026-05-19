@@ -1,0 +1,63 @@
+---
+import { Image } from "astro:assets";
+import type { Review } from "@/components/reviews/types";
+
+interface Props {
+  review: Review & { type?: string };
+  label: string;
+}
+
+const { review, label } = Astro.props;
+
+const quote = review.short || review.title;
+const hasImage = review.image && typeof review.image !== "string";
+---
+
+<figure
+  class="flex flex-col bg-white dark:bg-neutral-900 shadow-sm p-6 border border-neutral-200 dark:border-neutral-700 rounded-2xl h-full"
+>
+  <figcaption
+    class="mb-3 font-medium text-primary text-xs uppercase tracking-wide"
+  >
+    {label}
+  </figcaption>
+  <blockquote class="flex-1">
+    <p
+      class="mb-3 font-semibold text-neutral-900 dark:text-neutral-100 text-lg leading-snug"
+    >
+      "{quote}"
+    </p>
+    {
+      review.body && review.short && review.body !== review.short && (
+        <p class="text-neutral-600 dark:text-neutral-400 text-sm line-clamp-4">
+          {review.body}
+        </p>
+      )
+    }
+  </blockquote>
+  <div
+    class="flex items-center gap-3 mt-6 pt-4 border-neutral-100 dark:border-neutral-800 border-t"
+  >
+    {
+      hasImage && (
+        <Image
+          src={review.image}
+          alt={review.name}
+          width={48}
+          height={48}
+          class="rounded-full w-12 h-12 object-cover"
+        />
+      )
+    }
+    <div>
+      <p class="font-semibold text-neutral-900 dark:text-neutral-100">
+        {review.name}
+      </p>
+      {
+        review.description && (
+          <p class="text-neutral-500 text-sm">{review.description}</p>
+        )
+      }
+    </div>
+  </div>
+</figure>

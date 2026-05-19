@@ -1,5 +1,6 @@
 ---
 import type { Lang } from "@/config/languages.ts";
+import { safetyStudyStats } from "@/content/evidence/evidenceStudies";
 
 export interface Props {
     lang: Lang;
@@ -141,7 +142,9 @@ const currentContent = content[lang];
                     <div
                         class="bg-white dark:bg-gray-700 shadow-md hover:shadow-lg p-4 border-2 border-primary rounded-lg text-center hover:scale-105 transition-all duration-200 transform"
                     >
-                        <p class="font-bold text-primary text-3xl">3,000+</p>
+                        <p class="font-bold text-primary text-3xl">
+                            {safetyStudyStats.patientsRecorded}
+                        </p>
                         <p
                             class="mt-1 font-medium text-gray-700 dark:text-gray-300 text-sm"
                         >
@@ -151,7 +154,9 @@ const currentContent = content[lang];
                     <div
                         class="bg-white dark:from-gray-700 shadow-md hover:shadow-lg p-4 border-2 border-primary rounded-lg text-center hover:scale-105 transition-all duration-200 transform"
                     >
-                        <p class="font-bold text-primary text-3xl">Zero</p>
+                        <p class="font-bold text-primary text-3xl">
+                            {safetyStudyStats.reportedInjuries}
+                        </p>
                         <p
                             class="mt-1 font-medium text-gray-700 dark:text-gray-300 text-sm"
                         >

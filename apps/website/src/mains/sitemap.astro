@@ -60,7 +60,11 @@ const content: Record<Lang, { title: string; description: string }> = {
                         </h2>
                         <ul class="space-y-2">
                             {allRoutes
-                                .filter((route) => route.lang === language.code)
+                                .filter(
+                                    (route) =>
+                                        route.lang === language.code &&
+                                        route.slug !== "trade",
+                                )
                                 .map((route) => (
                                     <li>
                                         <a

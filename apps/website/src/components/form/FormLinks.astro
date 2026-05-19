@@ -1,5 +1,5 @@
 ---
-import { ExternalLink, CircleDot, Circle } from "lucide-astro";
+import { CircleDot, Circle } from "lucide-astro";
 import { cn } from "@/lib/utils";
 import type { Lang } from "@/config/languages.ts";
 import { contactRoutes } from "@/content/routes.tsx";
@@ -57,10 +57,6 @@ const currentUrl = Astro.url.pathname;
           >
             <Circle size={18} className="" />
             {reason.text}
-            <ExternalLink
-              size={18}
-              className="text-zinc-400 dark:group-hover:text-primary/90 dark:text-zinc-500 group-hover:text-primary"
-            />
           </a>
         )}
       </li>

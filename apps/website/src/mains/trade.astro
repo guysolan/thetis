@@ -1,0 +1,654 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Slide from "@/components/Slide.astro";
+import DownloadList from "@/components/DownloadList.astro";
+import SizeChart from "@/components/SizeChart.astro";
+import { tradeSkuCatalog } from "@/content/trade/tradeSkuCatalog";
+import ColorGradient from "@/components/ColorGradient.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { getRouteBySlugAndLanguage } from "@/content/routes";
+import { tradePageContent } from "@/content/trade/tradePageContent";
+import {
+  tradeClinicalDownloads,
+  tradeProductDownloads,
+} from "@/content/trade/downloads";
+import { athletes } from "@/components/reviews/content/athletes";
+import { patients } from "@/components/reviews/content/patients";
+import { translatedClinicians } from "@/components/reviews/content/professional-opinions";
+import TradeReviewsCarousel from "@/components/trade/TradeReviewsCarousel";
+import type { TradeReviewItem } from "@/components/trade/TradeReviewsCarousel";
+import TradeAeWaitChart from "@/components/trade/TradeAeWaitChart.astro";
+import TradeSafetyGraphic from "@/components/trade/TradeSafetyGraphic.astro";
+import TradeEvidenceSources from "@/components/trade/TradeEvidenceSources.astro";
+import SleepSurveyDonutChart from "@/components/trade/SleepSurveyDonutChart";
+import TradeMarketsTable from "@/components/trade/TradeMarketsTable.astro";
+import TradePricingSection from "@/components/trade/TradePricingSection.astro";
+import TradePatentTimeline from "@/components/trade/TradePatentTimeline.astro";
+import type { Lang } from "@/config/languages.ts";
+import {
+  AlertTriangle,
+  ArrowRight,
+  Check,
+  Globe,
+  Moon,
+  Sun,
+  X,
+} from "lucide-astro";
+
+const { lang = "en" } = Astro.props as { lang?: Lang };
+
+const t = tradePageContent[lang] ?? tradePageContent.en;
+
+const partnerRoute = getRouteBySlugAndLanguage("become-a-partner", lang);
+const splintRoute = getRouteBySlugAndLanguage("splint", lang);
+const professionalsRoute = getRouteBySlugAndLanguage("professionals", lang);
+
+const evidenceRoute = getRouteBySlugAndLanguage("evidence", lang);
+
+function clinicianReview(name: string, contentLang: Lang = lang) {
+  const c = translatedClinicians.find((clinician) => clinician.name === name);
+  if (!c) return null;
+  const copy = c.content[contentLang] ?? c.content.en;
+  return {
+    ...c,
+    description: copy.description,
+    title: copy.title,
+    short: copy.short,
+    body: copy.body,
+    link: c.link,
+    clinics: c.clinics,
+    clinicImages: c.clinicImages,
+  };
+}
+
+const athleteOrder = [
+  "Holger Rune",
+  "Steff Evans",
+  "Ollie Lawrence",
+  "Andrew Lawrence",
+  "Olivia Blatch",
+  "Kim Daybell",
+];
+
+const tradeAthletes = athleteOrder
+  .map((name) => athletes.find((a) => a.name === name))
+  .filter((a): a is (typeof athletes)[number] => Boolean(a));
+
+function normalizePatientForTrade(p: (typeof patients)[number]) {
+  return {
+    ...p,
+    description: "",
+    image: p.image as (typeof athletes)[number]["image"] | undefined,
+    link: p.link ?? "",
+    clinics: p.clinics ?? [],
+    clinicImages: p.clinicImages ?? [],
+    short: p.short ?? p.title,
+  };
+}
+
+const tradePatients = [
+  ...patients.filter((p) => p.is_pinned),
+  ...patients.filter((p) => !p.is_pinned),
+]
+  .filter(
+    (patient, index, list) =>
+      list.findIndex((item) => item.name === patient.name) === index,
+  )
+  .slice(0, 12)
+  .map(normalizePatientForTrade);
+
+const tradeClinicians = translatedClinicians
+  .map((clinician) => clinicianReview(clinician.name))
+  .filter((c): c is NonNullable<typeof c> => Boolean(c));
+
+function toTradeReviewItem(review: {
+  name: string;
+  description?: string;
+  title: string;
+  short?: string;
+  body?: string;
+  image?: { src?: string } | string;
+  country?: string;
+  stars?: number;
+}): TradeReviewItem {
+  const imageSrc =
+    typeof review.image === "string" ? review.image : review.image?.src;
+  return {
+    id: review.name,
+    name: review.name,
+    description: review.description || undefined,
+    title: review.title,
+    short: review.short,
+    body: review.body,
+    imageSrc,
+    country: review.country,
+    stars: review.stars,
+  };
+}
+
+const tradeAthleteItems = tradeAthletes.map(toTradeReviewItem);
+const tradePatientItems = tradePatients.map((patient, index) => {
+  const item = toTradeReviewItem(patient);
+  return {
+    ...item,
+    id: `${patient.name}-${patient.country}-${index}`,
+  };
+});
+const tradeClinicianItems = tradeClinicians.map(toTradeReviewItem);
+
+const canonicalByLang: Record<Lang, string> = {
+  en: "https://thetismedical.com/trade",
+  de: "https://thetismedical.com/de/handel",
+  fr: "https://thetismedical.com/fr/commerce-distributeurs",
+  es: "https://thetismedical.com/trade",
+  it: "https://thetismedical.com/it/commercio-distribuzione",
+};
+---
+
+<Layout
+  title={t.meta.title}
+  description={t.meta.description}
+  image="https://thetismedical.com/images/night_splint_bed_top_square.jpg"
+  lang={lang}
+>
+  <Fragment slot="head">
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href={canonicalByLang[lang] ?? canonicalByLang.en} />
+    <slot name="head" />
+  </Fragment>
+
+  <main class="bg-white dark:bg-black">
+    <div class="border-neutral-200 border-b">
+      <ColorGradient>
+        <div class="mx-auto px-4 py-16 md:py-20 max-w-[1200px]">
+          <p
+            class="mb-3 font-medium text-primary text-sm text-center uppercase tracking-wide"
+          >
+            {t.hero.eyebrow}
+          </p>
+          <h1
+            class="mb-4 font-bold text-3xl md:text-5xl text-center leading-tight"
+          >
+            {t.hero.title}
+          </h1>
+          <p
+            class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-300 text-lg text-center"
+          >
+            {t.hero.subtitle}
+          </p>
+          <div class="flex flex-wrap justify-center gap-3">
+            <a
+              href={partnerRoute?.href ?? "/become-a-partner"}
+              class={cn(buttonVariants({ size: "lg" }), "gap-2")}
+            >
+              {t.hero.primaryCta}
+              <ArrowRight class="w-4 h-4" />
+            </a>
+          </div>
+          <ul
+            class="gap-4 grid grid-cols-2 md:grid-cols-4 mt-12"
+            aria-label="Product highlights"
+          >
+            {
+              t.stats.map((stat) => (
+                <li class="bg-white/80 dark:bg-neutral-900/50 px-4 py-5 border border-neutral-200 dark:border-neutral-700 rounded-xl text-center">
+                  <p class="font-bold text-primary text-2xl md:text-3xl">
+                    {stat.value}
+                  </p>
+                  <p class="mt-1 text-neutral-600 dark:text-neutral-400 text-sm">
+                    {stat.label}
+                  </p>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </ColorGradient>
+    </div>
+
+    <Slide
+      title={t.sleepSurvey.title}
+      paragraph={t.sleepSurvey.intro}
+      background="light"
+    >
+      <div class="items-center gap-8 grid md:grid-cols-2 mx-auto max-w-4xl">
+        <ul class="gap-4 grid">
+          {
+            t.sleepSurvey.stats.map((stat) =>
+              stat.variant === "warn" ? (
+                <li class="bg-amber-50 dark:bg-amber-950/40 px-5 py-4 border border-amber-200 dark:border-amber-800 rounded-xl">
+                  <div class="flex items-center gap-2.5">
+                    <AlertTriangle
+                      class="w-7 h-7 text-amber-600 dark:text-amber-500 shrink-0"
+                      aria-hidden="true"
+                    />
+                    <p class="font-bold text-amber-700 dark:text-amber-400 text-3xl">
+                      {stat.value}
+                    </p>
+                  </div>
+                  <p class="mt-1 text-amber-900/90 dark:text-amber-100/90 text-sm">
+                    {stat.label}
+                  </p>
+                </li>
+              ) : (
+                <li class="bg-white dark:bg-neutral-900 px-5 py-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+                  <p class="font-bold text-primary text-3xl">{stat.value}</p>
+                  <p class="mt-1 text-neutral-700 dark:text-neutral-300 text-sm">
+                    {stat.label}
+                  </p>
+                </li>
+              ),
+            )
+          }
+        </ul>
+        <div class="flex justify-center w-full min-h-[320px]">
+          <SleepSurveyDonutChart client:visible />
+        </div>
+      </div>
+      <p class="mx-auto mt-6 max-w-2xl text-neutral-500 text-xs text-center">
+        {t.sleepSurvey.source}
+      </p>
+    </Slide>
+
+    <Slide title={t.market.title} paragraph={t.market.intro}>
+      <ul class="gap-3 grid mx-auto mb-8 max-w-2xl">
+        {
+          t.market.bullets.map((bullet) => (
+            <li class="flex gap-2 text-neutral-800 dark:text-neutral-200">
+              <Check class="w-5 h-5 text-primary shrink-0" />
+              {bullet}
+            </li>
+          ))
+        }
+      </ul>
+      <p class="text-center">
+        <a
+          href={t.market.incidenceLink}
+          class={cn(buttonVariants({ variant: "outline" }), "gap-2")}
+        >
+          {t.market.incidenceLinkLabel}
+          <ArrowRight class="w-4 h-4" />
+        </a>
+      </p>
+    </Slide>
+
+    <Slide
+      title={t.commercial.title}
+      paragraph={t.commercial.intro}
+      background="light"
+    >
+      <TradeMarketsTable
+        tableHeaders={t.commercial.tableHeaders}
+        marketsFootnote={t.commercial.marketsFootnote}
+      />
+    </Slide>
+
+    <Slide
+      title={t.pricing.title}
+      paragraph={t.pricing.intro}
+      background="light"
+    >
+      <TradePricingSection
+        patientRrpTitle={t.pricing.patientRrpTitle}
+        patientRrpBody={t.pricing.patientRrpBody}
+        hospitalRrpTitle={t.pricing.hospitalRrpTitle}
+        hospitalRrpBody={t.pricing.hospitalRrpBody}
+        marginTitle={t.pricing.marginTitle}
+        marginBody={t.pricing.marginBody}
+        manufacturingTitle={t.pricing.manufacturingTitle}
+        manufacturingBody={t.pricing.manufacturingBody}
+      />
+    </Slide>
+
+    <Slide title={t.pathway.title} paragraph={t.pathway.intro}>
+      <div class="gap-4 grid md:grid-cols-2 mx-auto max-w-3xl">
+        <div
+          class="flex gap-4 bg-primary/5 p-6 border border-neutral-200 dark:border-neutral-700 rounded-2xl"
+        >
+          <Sun class="w-8 h-8 text-primary shrink-0" aria-hidden="true" />
+          <div>
+            <p class="font-semibold text-primary">{t.pathway.dayLabel}</p>
+            <p class="mt-1 text-neutral-700 dark:text-neutral-300">
+              {t.pathway.dayText}
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex gap-4 bg-primary/10 p-6 border border-neutral-200 dark:border-neutral-700 rounded-2xl"
+        >
+          <Moon class="w-8 h-8 text-primary shrink-0" aria-hidden="true" />
+          <div>
+            <p class="font-semibold text-primary">{t.pathway.nightLabel}</p>
+            <p class="mt-1 text-neutral-700 dark:text-neutral-300">
+              {t.pathway.nightText}
+            </p>
+          </div>
+        </div>
+      </div>
+      <p
+        class="mx-auto mt-6 max-w-2xl text-neutral-600 dark:text-neutral-400 text-sm text-center"
+      >
+        {t.pathway.note}
+      </p>
+    </Slide>
+
+    <Slide title={t.testimonials.athletesTitle} background="light">
+      <TradeReviewsCarousel client:load reviews={tradeAthleteItems} />
+    </Slide>
+
+    <Slide title={t.product.title}>
+      <p
+        class="mx-auto mb-6 max-w-2xl text-neutral-700 dark:text-neutral-300 text-center"
+      >
+        {t.product.intro}
+      </p>
+      <ul class="gap-3 grid mx-auto max-w-2xl">
+        {
+          t.product.features.map((feature) => (
+            <li class="flex gap-3 text-neutral-800 dark:text-neutral-200">
+              <Check
+                class="mt-0.5 w-5 h-5 text-primary shrink-0"
+                aria-hidden="true"
+              />
+              <span>{feature}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </Slide>
+
+    <Slide title={t.testimonials.patientsTitle} background="light">
+      <TradeReviewsCarousel
+        client:load
+        reviews={tradePatientItems}
+        variant="patient"
+      />
+    </Slide>
+
+    <Slide title={t.indications.title}>
+      <div class="flex flex-col gap-5 mx-auto max-w-2xl">
+        <div
+          class="bg-primary/5 p-6 sm:p-8 border border-primary/30 rounded-2xl"
+        >
+          <h3 class="mb-4 font-semibold text-lg">{t.indications.forTitle}</h3>
+          <ul class="space-y-3">
+            {
+              t.indications.forItems.map((item) => (
+                <li class="flex gap-3 text-sm md:text-base">
+                  <Check
+                    class="mt-0.5 w-5 h-5 text-primary shrink-0"
+                    aria-hidden="true"
+                  />
+                  <span>{item}</span>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+        <div
+          class="flex gap-3 bg-neutral-50 dark:bg-neutral-900 px-5 py-4 border border-neutral-200 dark:border-neutral-700 rounded-xl"
+        >
+          <X
+            class="mt-0.5 w-5 h-5 text-neutral-500 shrink-0"
+            aria-hidden="true"
+          />
+          <div>
+            <p
+              class="font-semibold text-neutral-900 dark:text-neutral-100 text-sm"
+            >
+              {t.indications.notForTitle}
+            </p>
+            <p
+              class="mt-1 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed"
+            >
+              {t.indications.notForItems.join(" · ")}
+            </p>
+          </div>
+        </div>
+      </div>
+    </Slide>
+
+    <Slide
+      title={t.evidence.title}
+      paragraph={t.evidence.intro}
+      background="light"
+    >
+      <div class="space-y-10 mx-auto max-w-5xl">
+        <div>
+          <h3 class="mb-2 font-semibold text-lg">{t.evidence.aeTitle}</h3>
+          <p
+            class="mb-6 text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed"
+          >
+            {t.evidence.aeBody}
+          </p>
+          <TradeAeWaitChart />
+        </div>
+        <div>
+          <h3 class="mb-2 font-semibold text-lg">{t.evidence.safetyTitle}</h3>
+          <p
+            class="mb-6 text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed"
+          >
+            {t.evidence.safetyBody}
+          </p>
+          <TradeSafetyGraphic />
+        </div>
+        <TradeEvidenceSources
+          title={t.evidence.sourcesTitle}
+          evidencePageHref={evidenceRoute?.href ?? t.evidence.evidenceLink}
+          evidencePageLabel={t.evidence.evidenceLinkLabel}
+        />
+      </div>
+    </Slide>
+
+    <Slide title={t.testimonials.cliniciansTitle}>
+      <TradeReviewsCarousel client:load reviews={tradeClinicianItems} />
+    </Slide>
+
+    <Slide title={t.specs.title} background="light">
+      <dl
+        class="bg-white dark:bg-neutral-900 mx-auto border border-neutral-200 dark:border-neutral-700 rounded-xl divide-y divide-neutral-200 dark:divide-neutral-700 max-w-2xl"
+      >
+        {
+          t.specs.rows.map((row) => (
+            <div class="gap-1 sm:gap-4 grid sm:grid-cols-3 px-4 py-3">
+              <dt class="sm:col-span-1 font-medium text-neutral-900 dark:text-neutral-100">
+                {row.label}
+              </dt>
+              <dd class="sm:col-span-2 text-neutral-600 dark:text-neutral-400">
+                {row.value}
+              </dd>
+            </div>
+          ))
+        }
+      </dl>
+      <div class="mt-10">
+        <h3 class="mb-4 font-semibold text-xl text-center">Sizing</h3>
+        <SizeChart />
+      </div>
+    </Slide>
+
+    <Slide title={t.skus.title} paragraph={t.skus.intro}>
+      <div class="mx-auto max-w-4xl overflow-x-auto">
+        <table class="mb-8 w-full text-sm text-left border-collapse">
+          <thead>
+            <tr class="bg-primary/10 border-primary border-b-2">
+              {
+                t.skus.catalogHeaders.map((h) => (
+                  <th class="px-4 py-3 font-semibold whitespace-nowrap">{h}</th>
+                ))
+              }
+            </tr>
+          </thead>
+          <tbody>
+            {
+              tradeSkuCatalog.map((row) => (
+                <tr class="border-neutral-200 dark:border-neutral-700 border-b last:border-b-0">
+                  <td class="px-4 py-3 text-neutral-800 dark:text-neutral-200">
+                    {row.productName}
+                  </td>
+                  <td class="px-4 py-3 font-mono text-xs">{row.sku}</td>
+                  <td class="px-4 py-3 font-mono text-xs">{row.gtin}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+        <p
+          class="bg-primary/5 mt-6 px-4 py-3 border border-primary/30 rounded-lg text-neutral-700 dark:text-neutral-300 text-sm text-center leading-relaxed"
+        >
+          {t.skus.mixRecommendation}
+        </p>
+      </div>
+    </Slide>
+
+    <Slide title={t.ip.title} paragraph={t.ip.intro}>
+      <TradePatentTimeline
+        portfolioTitle={t.ip.portfolioTitle}
+        timelineTitle={t.ip.timelineTitle}
+        timelineFootnote={t.ip.timelineFootnote}
+      />
+    </Slide>
+
+    <Slide title={t.partnership.title} background="light">
+      <ul class="gap-6 grid md:grid-cols-2 mx-auto max-w-3xl">
+        {
+          t.partnership.models.map((model) => (
+            <li class="bg-white dark:bg-neutral-900 shadow-sm p-6 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
+              <h3 class="mb-2 font-semibold text-primary text-lg">
+                {model.title}
+              </h3>
+              <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+                {model.description}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+    </Slide>
+
+    <Slide title={t.channels.title} paragraph={t.channels.intro}>
+      <ul class="gap-3 grid sm:grid-cols-3 mx-auto mb-6 max-w-3xl">
+        {
+          t.channels.partners.map((p) => (
+            <li class="bg-primary/5 px-5 py-4 border border-primary/30 rounded-xl text-center">
+              <p class="font-semibold text-neutral-900 dark:text-neutral-100">
+                {p.name}
+              </p>
+              <p class="mt-1 text-neutral-600 dark:text-neutral-400 text-sm">
+                {p.country}
+              </p>
+            </li>
+          ))
+        }
+      </ul>
+      <p
+        class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400 text-sm text-center"
+      >
+        {t.channels.directNote}
+      </p>
+    </Slide>
+
+    <Slide title={t.territories.title} background="light">
+      <div class="mx-auto max-w-2xl text-center">
+        <h3
+          class="flex justify-center items-center gap-2 mb-3 font-semibold text-lg"
+        >
+          <Globe class="w-5 h-5 text-primary" />
+          {t.territories.openTitle}
+        </h3>
+        <ul class="flex flex-wrap justify-center gap-2 mb-4">
+          {
+            t.territories.openItems.map((country) => (
+              <li class="bg-primary px-4 py-1.5 rounded-full font-medium text-white text-sm">
+                {country}
+              </li>
+            ))
+          }
+        </ul>
+        <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+          {t.territories.existingNote}
+        </p>
+      </div>
+    </Slide>
+
+    <Slide title={t.support.title} background="light">
+      <ul class="space-y-2 mx-auto mb-6 max-w-2xl">
+        {
+          t.support.items.map((item) => (
+            <li class="flex gap-2">
+              <Check class="w-5 h-5 text-primary shrink-0" />
+              <span>{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <div
+        class="bg-white dark:bg-neutral-900 mx-auto mb-6 px-5 py-4 border border-neutral-200 dark:border-neutral-700 rounded-xl max-w-2xl"
+      >
+        <h3 class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100">
+          {t.support.reimbursementTitle}
+        </h3>
+        <p
+          class="text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed"
+        >
+          {t.support.reimbursementBody}
+        </p>
+      </div>
+      <p
+        class="bg-primary/5 mx-auto px-4 py-3 border border-primary/30 rounded-lg max-w-2xl text-neutral-700 dark:text-neutral-300 text-sm text-center"
+      >
+        {t.support.pricingNote}
+      </p>
+    </Slide>
+
+    <Slide title={t.downloads.title}>
+      <div class="space-y-10">
+        <DownloadList
+          title={t.downloads.productTitle}
+          downloads={[...tradeProductDownloads]}
+        />
+        <DownloadList
+          title={t.downloads.clinicalTitle}
+          downloads={[...tradeClinicalDownloads]}
+        />
+        <p class="text-neutral-600 dark:text-neutral-400 text-sm text-center">
+          {t.downloads.regulatoryNote}
+        </p>
+        <p class="text-center">
+          <a
+            href={professionalsRoute?.href ?? "/professionals"}
+            class="text-primary underline underline-offset-2"
+          >
+            More clinical resources →
+          </a>
+        </p>
+      </div>
+    </Slide>
+
+    <section
+      class="bg-gradient-to-bl from-primary/10 via-white to-primary/5 py-16 border-neutral-200 dark:border-neutral-800 border-t"
+    >
+      <div class="mx-auto px-4 max-w-2xl text-center">
+        <h2 class="mb-3 font-bold text-2xl md:text-3xl">{t.cta.title}</h2>
+        <p class="mb-8 text-neutral-600 dark:text-neutral-300">
+          {t.cta.description}
+        </p>
+        <div class="flex flex-wrap justify-center gap-3">
+          <a
+            href={partnerRoute?.href ?? "/become-a-partner"}
+            class={buttonVariants({ size: "lg" })}
+          >
+            {t.cta.partner}
+          </a>
+          <a
+            href={splintRoute?.href ?? "/splint"}
+            class={buttonVariants({ size: "lg", variant: "outline" })}
+          >
+            {t.cta.splint}
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

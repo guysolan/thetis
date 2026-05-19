@@ -14,6 +14,15 @@ const EXCLUDED_SITEMAP_SEGMENTS = new Set([
 ]);
 const EXCLUDED_EXACT_PATHS = new Set(["/old-index"]);
 
+/** B2B trade deck (noindex) — keep out of XML sitemap. */
+const EXCLUDED_B2B_TRADE_PATHS = new Set([
+  "/trade",
+  "/de/handel",
+  "/fr/commerce-distributeurs",
+  "/es/comercio-distribuidores",
+  "/it/commercio-distribuzione",
+]);
+
 function pathToPageFile(urlPath: string): string[] {
   const segments = urlPath.replace(/^\//, "").split("/").filter(Boolean);
   if (segments.length === 0) {
@@ -68,6 +77,10 @@ export function sitemapPageFilter(pageUrl: string): boolean {
     const lastSegment = segments.at(-1);
 
     if (EXCLUDED_EXACT_PATHS.has(normalizedPath)) {
+      return false;
+    }
+
+    if (EXCLUDED_B2B_TRADE_PATHS.has(normalizedPath)) {
       return false;
     }
 

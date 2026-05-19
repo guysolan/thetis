@@ -1,0 +1,105 @@
+---
+import {
+  tradePatentPortfolio,
+  tradePatentTimelineSteps,
+  type PatentTimelineStatus,
+} from "@/content/trade/tradePatentTimeline";
+
+export interface Props {
+  portfolioTitle: string;
+  timelineTitle: string;
+  timelineFootnote: string;
+}
+
+const { portfolioTitle, timelineTitle, timelineFootnote } = Astro.props;
+
+const statusLabel: Record<PatentTimelineStatus, string> = {
+  granted: "Granted",
+  filed: "Filed",
+  pending: "In examination",
+};
+
+const statusClass: Record<PatentTimelineStatus, string> = {
+  granted: "bg-primary text-white border-primary",
+  filed: "bg-primary/10 text-primary border-primary/40",
+  pending: "bg-white dark:bg-neutral-900 text-primary border-primary border-dashed",
+};
+---
+
+<div class="mx-auto max-w-3xl w-full">
+  <h3 class="mb-4 font-semibold text-neutral-900 dark:text-neutral-100 text-center">
+    {portfolioTitle}
+  </h3>
+  <ul class="gap-3 grid sm:grid-cols-2 mb-10">
+    {
+      tradePatentPortfolio.map((item) => (
+        <li class="bg-white dark:bg-neutral-900 px-4 py-3 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+          <p class="font-medium text-neutral-900 dark:text-neutral-100 text-sm">
+            {item.label}
+          </p>
+          <p class="mt-0.5 text-neutral-600 dark:text-neutral-400 text-xs">
+            {item.detail}
+          </p>
+        </li>
+      ))
+    }
+  </ul>
+
+  <h3 class="mb-6 font-semibold text-neutral-900 dark:text-neutral-100 text-center">
+    {timelineTitle}
+  </h3>
+
+  <ol class="relative mx-auto pl-2 max-w-xl">
+    <div
+      class="top-2 bottom-2 left-[11px] absolute bg-primary/20 w-0.5"
+      aria-hidden="true"
+    >
+    </div>
+    {
+      tradePatentTimelineSteps.map((step, index) => (
+        <li class:list={["relative flex gap-4 pb-8", index === tradePatentTimelineSteps.length - 1 && "pb-0"]}>
+          <div class="relative z-10 flex flex-col items-center shrink-0">
+            <span
+              class:list={[
+                "flex justify-center items-center border-2 rounded-full w-[22px] h-[22px] font-semibold text-[10px]",
+                step.status === "granted"
+                  ? "bg-primary border-primary text-white"
+                  : step.status === "pending"
+                    ? "bg-white dark:bg-neutral-900 border-primary text-primary"
+                    : "bg-primary/20 border-primary/50 text-primary",
+              ]}
+              aria-hidden="true"
+            >
+              {index + 1}
+            </span>
+          </div>
+          <div class="flex-1 min-w-0 pt-0.5">
+            <div class="flex flex-wrap items-center gap-2 mb-1">
+              <span class="font-semibold text-primary text-sm tabular-nums">
+                {step.year}
+              </span>
+              <span
+                class:list={[
+                  "px-2 py-0.5 border rounded-full font-medium text-[10px] uppercase tracking-wide",
+                  statusClass[step.status],
+                ]}
+              >
+                {statusLabel[step.status]}
+              </span>
+            </div>
+            <p class="font-medium text-neutral-900 dark:text-neutral-100 text-sm">
+              {step.title}
+            </p>
+            <p class="mt-1 text-neutral-600 dark:text-neutral-400 text-xs leading-relaxed">
+              {step.detail}
+            </p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+
+  <p class="mt-6 text-neutral-500 text-xs text-center leading-relaxed">
+    {timelineFootnote}
+  </p>
+</div>

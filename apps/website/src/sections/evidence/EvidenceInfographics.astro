@@ -1,5 +1,6 @@
 ---
 import type { Lang } from "@/config/languages";
+import { aeWaitComparison } from "@/content/evidence/evidenceStudies";
 
 export interface Props {
     lang: Lang;
@@ -91,18 +92,19 @@ const content = {
 const currentContent = content[lang];
 
 const data = {
-    labels: ["Plaster Cast", "Thetis splint"],
+    labels: [...aeWaitComparison.labels],
     datasets: [
         {
             label: "Mean Days A&E to Scan then Specialist",
-            data: [8.7, 2.9], // Mean Days
+            data: [...aeWaitComparison.meanDays],
         },
         {
             label: "Maximum Days A&E to Scan then Specialist",
-            data: [23, 6],
+            data: [...aeWaitComparison.maxDays],
         },
     ],
 };
+const chartMaxDays = aeWaitComparison.chartMaxDays;
 ---
 
 <!-- Study 1: A&E Initial Treatment -->
@@ -161,7 +163,7 @@ const data = {
                                         <div
                                             class={`h-full rounded-full ${index === 0 ? "bg-gray-400" : "bg-primary"}`}
                                             style={{
-                                                width: `${(data.datasets[0].data[index] / 23) * 100}%`,
+                                                width: `${(data.datasets[0].data[index] / chartMaxDays) * 100}%`,
                                             }}
                                         />
                                     </div>
@@ -183,7 +185,7 @@ const data = {
                                         <div
                                             class={`h-full rounded-full ${index === 0 ? "bg-gray-400" : "bg-primary"}`}
                                             style={{
-                                                width: `${(data.datasets[1].data[index] / 23) * 100}%`,
+                                                width: `${(data.datasets[1].data[index] / chartMaxDays) * 100}%`,
                                             }}
                                         />
                                     </div>

@@ -4,90 +4,200 @@ import Input from "@/components/form/Input.astro";
 import FormWrap from "@/components/form/FormWrap.astro";
 import TextArea from "@/components/form/TextArea.astro";
 import { inputStyle } from "@/components/form/Input.astro";
+import Checkbox from "@/components/form/Checkbox.astro";
 import OptOut from "@/components/form/OptOut.astro";
 import type { Lang } from "@/config/languages.ts";
 
 const { lang = "en" } = Astro.props as { lang: Lang };
 
-const content = {
+type TerritoryOption = { value: string; label: string };
+
+type PartnerFormContent = {
+    title: string;
+    description: string;
+    contactNameLabel: string;
+    businessEmailLabel: string;
+    companyNameLabel: string;
+    territoryLabel: string;
+    territoryHint: string;
+    territoryRequiredError: string;
+    territoryOptions: TerritoryOption[];
+    partnershipTypeLabel: string;
+    emptyPartnershipOption: string;
+    distributorOption: string;
+    licenseOption: string;
+    clinicOption: string;
+    clinicianOption: string;
+    otherOption: string;
+    additionalInfoLabel: string;
+    additionalInfoHint: string;
+    submitButton: string;
+};
+
+const content: Record<Lang, PartnerFormContent> = {
     en: {
         title: "Become a Partner",
         description:
-            "Looking to partner with us as a distributor, healthcare provider, or clinician? Fill out this form and we'll be in touch with next steps.",
-        contactNameLabel: "Contact Name",
-        businessEmailLabel: "Business Email",
-        partnershipTypeLabel: "Partnership Type",
+            "Tell us about your company and territory. We review distributor, licensing, and clinical partnership enquiries and respond with next steps.",
+        contactNameLabel: "Contact name",
+        businessEmailLabel: "Business email",
+        companyNameLabel: "Company name",
+        territoryLabel: "Territories of interest",
+        territoryHint: "Select all that apply",
+        territoryRequiredError: "Please select at least one territory.",
+        territoryOptions: [
+            { value: "de", label: "Germany" },
+            { value: "fr", label: "France" },
+            { value: "es", label: "Spain" },
+            { value: "it", label: "Italy" },
+            { value: "pl", label: "Poland" },
+            { value: "nordics", label: "Nordics (SE, DK, FI, NO)" },
+            { value: "uk-ie", label: "United Kingdom & Ireland" },
+            { value: "other", label: "Other" },
+        ],
+        partnershipTypeLabel: "Partnership type",
         emptyPartnershipOption: "Select partnership type",
-        distributorOption: "Distributor",
-        clinicOption: "Healthcare Provider/Clinic",
-        clinicianOption: "Individual Clinician",
+        distributorOption: "Distributor (national / regional)",
+        licenseOption: "License or manufacture under licence",
+        clinicOption: "Healthcare provider / clinic",
+        clinicianOption: "Individual clinician",
         otherOption: "Other",
-        additionalInfoLabel: "Additional Information",
-        submitButton: "Send Message",
+        additionalInfoLabel: "Additional information",
+        additionalInfoHint:
+            "Timeline, exclusivity interest, current brands carried, or anything else we should know.",
+        submitButton: "Send message",
     },
     de: {
         title: "Partner werden",
         description:
-            "Möchten Sie als Händler, Gesundheitsdienstleister oder Kliniker mit uns zusammenarbeiten? Füllen Sie dieses Formular aus und wir melden uns mit den nächsten Schritten bei Ihnen.",
+            "Beschreiben Sie Ihr Unternehmen und Ihr Vertriebsgebiet. Wir prüfen Anfragen zu Vertrieb, Lizenzierung und klinischen Partnerschaften und melden uns mit den nächsten Schritten.",
         contactNameLabel: "Kontaktname",
         businessEmailLabel: "Geschäfts-E-Mail",
+        companyNameLabel: "Firmenname",
+        territoryLabel: "Interessierte Gebiete",
+        territoryHint: "Alle zutreffenden auswählen",
+        territoryRequiredError: "Bitte wählen Sie mindestens ein Gebiet.",
+        territoryOptions: [
+            { value: "de", label: "Deutschland" },
+            { value: "fr", label: "Frankreich" },
+            { value: "es", label: "Spanien" },
+            { value: "it", label: "Italien" },
+            { value: "pl", label: "Polen" },
+            { value: "nordics", label: "Nordics (SE, DK, FI, NO)" },
+            { value: "uk-ie", label: "Vereinigtes Königreich & Irland" },
+            { value: "other", label: "Sonstiges" },
+        ],
         partnershipTypeLabel: "Partnerschaftstyp",
         emptyPartnershipOption: "Partnerschaftstyp auswählen",
-        distributorOption: "Händler",
-        clinicOption: "Gesundheitsdienstleister/Klinik",
+        distributorOption: "Händler (national / regional)",
+        licenseOption: "Lizenz oder Fertigung unter Lizenz",
+        clinicOption: "Gesundheitsdienstleister / Klinik",
         clinicianOption: "Einzelner Kliniker",
         otherOption: "Andere",
         additionalInfoLabel: "Zusätzliche Informationen",
+        additionalInfoHint:
+            "Zeitplan, Exklusivitätsinteresse, geführte Marken oder sonstige Hinweise.",
         submitButton: "Nachricht senden",
     },
     fr: {
         title: "Devenir Partenaire",
         description:
-            "Vous souhaitez devenir partenaire en tant que distributeur, prestataire de soins de santé ou clinicien ? Remplissez ce formulaire et nous vous contacterons pour les prochaines étapes.",
+            "Présentez votre entreprise et votre territoire. Nous examinons les demandes de distribution, de licence et de partenariat clinique, puis revenons vers vous.",
         contactNameLabel: "Nom du contact",
         businessEmailLabel: "E-mail professionnel",
+        companyNameLabel: "Nom de l'entreprise",
+        territoryLabel: "Territoires visés",
+        territoryHint: "Sélectionnez toutes les réponses pertinentes",
+        territoryRequiredError: "Veuillez sélectionner au moins un territoire.",
+        territoryOptions: [
+            { value: "de", label: "Allemagne" },
+            { value: "fr", label: "France" },
+            { value: "es", label: "Espagne" },
+            { value: "it", label: "Italie" },
+            { value: "pl", label: "Pologne" },
+            { value: "nordics", label: "Pays nordiques (SE, DK, FI, NO)" },
+            { value: "uk-ie", label: "Royaume-Uni et Irlande" },
+            { value: "other", label: "Autre" },
+        ],
         partnershipTypeLabel: "Type de partenariat",
         emptyPartnershipOption: "Sélectionner le type de partenariat",
-        distributorOption: "Distributeur",
-        clinicOption: "Prestataire de soins/Clinique",
+        distributorOption: "Distributeur (national / régional)",
+        licenseOption: "Licence ou fabrication sous licence",
+        clinicOption: "Prestataire de soins / clinique",
         clinicianOption: "Clinicien individuel",
         otherOption: "Autre",
         additionalInfoLabel: "Informations supplémentaires",
+        additionalInfoHint:
+            "Calendrier, intérêt pour l'exclusivité, marques distribuées, ou tout autre élément utile.",
         submitButton: "Envoyer le message",
     },
     es: {
         title: "Convertirse en Socio",
         description:
-            "¿Busca asociarse con nosotros como distribuidor, proveedor de atención médica o clínico? Complete este formulario y nos pondremos en contacto con los próximos pasos.",
+            "Cuéntenos su empresa y territorio. Revisamos consultas de distribución, licencia y alianzas clínicas y respondemos con los siguientes pasos.",
         contactNameLabel: "Nombre de contacto",
         businessEmailLabel: "Correo electrónico comercial",
+        companyNameLabel: "Nombre de la empresa",
+        territoryLabel: "Territorios de interés",
+        territoryHint: "Seleccione todas las que correspondan",
+        territoryRequiredError: "Seleccione al menos un territorio.",
+        territoryOptions: [
+            { value: "de", label: "Alemania" },
+            { value: "fr", label: "Francia" },
+            { value: "es", label: "España" },
+            { value: "it", label: "Italia" },
+            { value: "pl", label: "Polonia" },
+            { value: "nordics", label: "Nórdicos (SE, DK, FI, NO)" },
+            { value: "uk-ie", label: "Reino Unido e Irlanda" },
+            { value: "other", label: "Otro" },
+        ],
         partnershipTypeLabel: "Tipo de asociación",
         emptyPartnershipOption: "Seleccionar tipo de asociación",
-        distributorOption: "Distribuidor",
-        clinicOption: "Proveedor de atención médica/Clínica",
+        distributorOption: "Distribuidor (nacional / regional)",
+        licenseOption: "Licencia o fabricación bajo licencia",
+        clinicOption: "Proveedor de atención médica / clínica",
         clinicianOption: "Clínico individual",
         otherOption: "Otro",
         additionalInfoLabel: "Información adicional",
+        additionalInfoHint:
+            "Plazos, interés en exclusividad, marcas que distribuye u otra información útil.",
         submitButton: "Enviar mensaje",
     },
     it: {
         title: "Diventa Partner",
         description:
-            "Vuoi diventare nostro partner come distributore, fornitore di assistenza sanitaria o clinico? Compila questo modulo e ti contatteremo per i prossimi passi.",
+            "Descrivi azienda e territorio. Esaminiamo richieste di distribuzione, licenza e partnership clinica e rispondiamo con i prossimi passi.",
         contactNameLabel: "Nome del contatto",
         businessEmailLabel: "Email aziendale",
+        companyNameLabel: "Nome azienda",
+        territoryLabel: "Territori di interesse",
+        territoryHint: "Seleziona tutte le opzioni pertinenti",
+        territoryRequiredError: "Seleziona almeno un territorio.",
+        territoryOptions: [
+            { value: "de", label: "Germania" },
+            { value: "fr", label: "Francia" },
+            { value: "es", label: "Spagna" },
+            { value: "it", label: "Italia" },
+            { value: "pl", label: "Polonia" },
+            { value: "nordics", label: "Paesi nordici (SE, DK, FI, NO)" },
+            { value: "uk-ie", label: "Regno Unito e Irlanda" },
+            { value: "other", label: "Altro" },
+        ],
         partnershipTypeLabel: "Tipo di partnership",
         emptyPartnershipOption: "Seleziona tipo di partnership",
-        distributorOption: "Distributore",
-        clinicOption: "Fornitore di assistenza sanitaria/Clinica",
+        distributorOption: "Distributore (nazionale / regionale)",
+        licenseOption: "Licenza o produzione in licenza",
+        clinicOption: "Fornitore sanitario / clinica",
         clinicianOption: "Clinico individuale",
         otherOption: "Altro",
         additionalInfoLabel: "Informazioni aggiuntive",
+        additionalInfoHint:
+            "Tempistiche, interesse per l'esclusiva, marchi gestiti o altre informazioni utili.",
         submitButton: "Invia messaggio",
     },
 };
 
-const currentContent = content[lang as keyof typeof content];
+const currentContent = content[lang];
 ---
 
 <FormWrap formId="xwppakoz">
@@ -119,6 +229,43 @@ const currentContent = content[lang as keyof typeof content];
             </div>
 
             <div class="form-group">
+                <Label labelFor="company"
+                    >{currentContent.companyNameLabel}</Label
+                >
+                <Input name="company" type="text" required={true} />
+            </div>
+
+            <fieldset
+                id="partner-territories"
+                class="form-group border-0 p-0"
+                data-territory-error={currentContent.territoryRequiredError}
+            >
+                <legend class="mb-1 font-semibold text-base text-neutral-700">
+                    {currentContent.territoryLabel}
+                </legend>
+                <p class="mb-3 text-neutral-500 text-sm">
+                    {currentContent.territoryHint}
+                </p>
+                <div class="gap-3 grid sm:grid-cols-2">
+                    {
+                        currentContent.territoryOptions.map((option) => (
+                            <Checkbox
+                                name="territory"
+                                value={option.value}
+                                label={option.label}
+                            />
+                        ))
+                    }
+                </div>
+                <p
+                    id="territory-error"
+                    class="hidden mt-2 text-red-600 text-sm"
+                    role="alert"
+                >
+                </p>
+            </fieldset>
+
+            <div class="form-group">
                 <Label labelFor="partnerType"
                     >{currentContent.partnershipTypeLabel}</Label
                 >
@@ -128,9 +275,14 @@ const currentContent = content[lang as keyof typeof content];
                     name="partnerType"
                     class={`${inputStyle} w-full rounded-lg bg-white/90`}
                 >
-                    <option value="">{currentContent.emptyPartnershipOption}</option>
+                    <option value=""
+                        >{currentContent.emptyPartnershipOption}</option
+                    >
                     <option value="distributor"
                         >{currentContent.distributorOption}</option
+                    >
+                    <option value="license"
+                        >{currentContent.licenseOption}</option
                     >
                     <option value="clinic">{currentContent.clinicOption}</option
                     >
@@ -145,7 +297,12 @@ const currentContent = content[lang as keyof typeof content];
                 <Label labelFor="message"
                     >{currentContent.additionalInfoLabel}</Label
                 >
-                <TextArea name="message" rows={4} maxlength={1000} />
+                <TextArea
+                    name="message"
+                    rows={4}
+                    maxlength={1000}
+                    placeholder={currentContent.additionalInfoHint}
+                />
             </div>
 
             <OptOut />
@@ -159,3 +316,38 @@ const currentContent = content[lang as keyof typeof content];
         </div>
     </div>
 </FormWrap>
+
+<script>
+    const fieldset = document.getElementById("partner-territories");
+    const form = fieldset?.closest("form");
+    const errorEl = document.getElementById("territory-error");
+
+    form?.addEventListener("submit", (event) => {
+        const checked = form.querySelectorAll<HTMLInputElement>(
+            'input[name="territory"]:checked',
+        );
+        if (checked.length > 0) {
+            errorEl?.classList.add("hidden");
+            return;
+        }
+        event.preventDefault();
+        if (errorEl && fieldset) {
+            errorEl.textContent =
+                fieldset.dataset.territoryError ??
+                "Please select at least one territory.";
+            errorEl.classList.remove("hidden");
+        }
+        fieldset?.scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+
+    form
+        ?.querySelectorAll('input[name="territory"]')
+        .forEach((input) => {
+            input.addEventListener("change", () => {
+                const anyChecked = form.querySelector(
+                    'input[name="territory"]:checked',
+                );
+                if (anyChecked) errorEl?.classList.add("hidden");
+            });
+        });
+</script>

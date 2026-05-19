@@ -7,40 +7,31 @@ const sizes = {
 };
 ---
 
-<div class="relative overflow-x-auto">
-    <table
-        class="border-2 border-black w-full text-gray-500 text-left text-lg dark:text-gray-400"
-    >
-        <thead
-            class="bg-primary border-b font-semibold text-base text-white uppercase"
-        >
-            <tr>
-                <th scope="col" class="px-6 py-3"> Location</th>
-                <th scope="col" class="px-6 py-3"> Small</th>
-                <th scope="col" class="px-6 py-3"> Large</th>
-            </tr>
-        </thead>
-        <tbody>
-            {
-                Object.entries(sizes).map(([key, val], i) => (
-                    <tr class="bg-white border-b-2 border-black">
-                        <th
-                            scope="row"
-                            class="px-6 py-4 font-semibold text-gray-800 whitespace-nowrap"
-                        >
-                            {key}
-                        </th>
-                        <td class="px-6 py-4 font-normal text-black">
-                            {' '}
-                            &lt; {val}
-                        </td>
-                        <td class="px-6 py-4 font-normal text-black">
-                            {' '}
-                            &ge; {val}
-                        </td>
-                    </tr>
-                ))
-            }
-        </tbody>
-    </table>
+<div class="mx-auto max-w-md overflow-x-auto">
+  <table class="w-full text-sm text-left border-collapse">
+    <thead>
+      <tr class="bg-primary/10 border-primary border-b-2">
+        <th class="px-4 py-3 font-semibold">Location</th>
+        <th class="px-4 py-3 font-semibold">Small</th>
+        <th class="px-4 py-3 font-semibold">Large</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        Object.entries(sizes).map(([location, threshold]) => (
+          <tr class="border-neutral-200 dark:border-neutral-700 border-b">
+            <td class="px-4 py-3 font-medium text-neutral-900 dark:text-neutral-100">
+              {location}
+            </td>
+            <td class="px-4 py-3 text-neutral-700 dark:text-neutral-300">
+              &lt; {threshold}
+            </td>
+            <td class="px-4 py-3 text-neutral-700 dark:text-neutral-300">
+              &ge; {threshold}
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
 </div>

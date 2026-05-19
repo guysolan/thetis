@@ -875,6 +875,40 @@ export const contactRoutes: BaseRoute[] = [
   },
 ];
 
+/** B2B trade deck — direct URL only (noindex; omitted from contact links and footer). */
+export const tradeRoutes: BaseRoute[] = [
+  {
+    slug: "trade",
+    title: {
+      en: "Trade & Distribution",
+      de: "Handel & Distribution",
+      fr: "Commerce & distribution",
+      es: "Comercio y distribución",
+      it: "Commercio e distribuzione",
+    },
+    description: {
+      en:
+        "B2B overview for manufacturers and distributors of the Achilles rupture night splint.",
+      de: "B2B-Übersicht für Hersteller und Händler der Achilles-Nachtschiene.",
+      fr:
+        "Aperçu B2B pour fabricants et distributeurs de l'attelle de nuit Achille.",
+      es:
+        "Resumen B2B para fabricantes y distribuidores de la férula nocturna de Aquiles.",
+      it:
+        "Panoramica B2B per produttori e distributori della stecca notturna per Achille.",
+    },
+    icon: <Box />,
+    variant: "outline",
+    slugTranslations: {
+      en: "trade",
+      de: "handel",
+      fr: "commerce-distributeurs",
+      es: "comercio-distribuidores",
+      it: "commercio-distribuzione",
+    },
+  },
+];
+
 // Video routes
 export const videoRoutes: BaseRoute[] = [
   {
@@ -1181,6 +1215,7 @@ export const allBaseRoutes: BaseRoute[] = [
   ...productRoutes,
   ...partnerRoutes,
   ...contactRoutes,
+  ...tradeRoutes,
   ...videoRoutes,
   ...articleRoutes,
   ...legalRoutes,
