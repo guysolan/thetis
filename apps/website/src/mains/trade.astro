@@ -25,6 +25,8 @@ import SleepSurveyDonutChart from "@/components/trade/SleepSurveyDonutChart";
 import TradeMarketsTable from "@/components/trade/TradeMarketsTable.astro";
 import TradePricingSection from "@/components/trade/TradePricingSection.astro";
 import TradePatentTimeline from "@/components/trade/TradePatentTimeline.astro";
+import TradeLandingSection from "@/components/trade/TradeLandingSection.astro";
+import TradeRegulatorySection from "@/components/trade/TradeRegulatorySection.astro";
 import type { Lang } from "@/config/languages.ts";
 import {
   AlertTriangle,
@@ -159,53 +161,52 @@ const canonicalByLang: Record<Lang, string> = {
   </Fragment>
 
   <main class="bg-white dark:bg-black">
-    <div class="border-neutral-200 border-b">
-      <ColorGradient>
-        <div class="mx-auto px-4 py-16 md:py-20 max-w-[1200px]">
-          <p
-            class="mb-3 font-medium text-primary text-sm text-center uppercase tracking-wide"
-          >
-            {t.hero.eyebrow}
-          </p>
-          <h1
-            class="mb-4 font-bold text-3xl md:text-5xl text-center leading-tight"
-          >
-            {t.hero.title}
-          </h1>
-          <p
-            class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-300 text-lg text-center"
-          >
-            {t.hero.subtitle}
-          </p>
-          <div class="flex flex-wrap justify-center gap-3">
-            <a
-              href={partnerRoute?.href ?? "/become-a-partner"}
-              class={cn(buttonVariants({ size: "lg" }), "gap-2")}
-            >
-              {t.hero.primaryCta}
-              <ArrowRight class="w-4 h-4" />
-            </a>
-          </div>
-          <ul
-            class="gap-4 grid grid-cols-2 md:grid-cols-4 mt-12"
-            aria-label="Product highlights"
-          >
-            {
-              t.stats.map((stat) => (
-                <li class="bg-white/80 dark:bg-neutral-900/50 px-4 py-5 border border-neutral-200 dark:border-neutral-700 rounded-xl text-center">
-                  <p class="font-bold text-primary text-2xl md:text-3xl">
-                    {stat.value}
-                  </p>
-                  <p class="mt-1 text-neutral-600 dark:text-neutral-400 text-sm">
-                    {stat.label}
-                  </p>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </ColorGradient>
-    </div>
+    <TradeLandingSection
+      title={t.landing.title}
+      tagline={t.landing.tagline}
+      treatmentNote={t.landing.treatmentNote}
+      badges={t.landing.badges}
+      primaryCta={t.hero.primaryCta}
+      partnerHref={partnerRoute?.href ?? "/become-a-partner"}
+      productImageAlt={t.landing.productImageAlt}
+    />
+
+    <section class="bg-white dark:bg-black border-neutral-200 border-b">
+      <div class="mx-auto px-4 py-12 md:py-14 max-w-[1200px]">
+        <p
+          class="mb-2 font-medium text-primary text-sm text-center uppercase tracking-wide"
+        >
+          {t.hero.eyebrow}
+        </p>
+        <h2
+          class="mb-3 font-bold text-2xl md:text-3xl text-center leading-tight"
+        >
+          {t.hero.title}
+        </h2>
+        <p
+          class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-300 text-base md:text-lg text-center"
+        >
+          {t.hero.subtitle}
+        </p>
+        <ul
+          class="gap-4 grid grid-cols-2 md:grid-cols-4"
+          aria-label="Product highlights"
+        >
+          {
+            t.stats.map((stat) => (
+              <li class="bg-primary/5 dark:bg-neutral-900 px-4 py-5 border border-primary/20 dark:border-neutral-700 rounded-xl text-center">
+                <p class="font-bold text-primary text-2xl md:text-3xl">
+                  {stat.value}
+                </p>
+                <p class="mt-1 text-neutral-600 dark:text-neutral-400 text-sm">
+                  {stat.label}
+                </p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
 
     <Slide
       title={t.sleepSurvey.title}
@@ -503,24 +504,37 @@ const canonicalByLang: Record<Lang, string> = {
     </Slide>
 
     <Slide title={t.ip.title} paragraph={t.ip.intro}>
-      <TradePatentTimeline
-        portfolioTitle={t.ip.portfolioTitle}
-        timelineTitle={t.ip.timelineTitle}
-        timelineFootnote={t.ip.timelineFootnote}
-      />
+      <TradePatentTimeline portfolioTitle={t.ip.portfolioTitle} />
     </Slide>
+
+    <TradeRegulatorySection
+      title={t.regulatory.title}
+      intro={t.regulatory.intro}
+      items={t.regulatory.items}
+      footnote={t.regulatory.footnote}
+    />
 
     <Slide title={t.partnership.title} background="light">
       <ul class="gap-6 grid md:grid-cols-2 mx-auto max-w-3xl">
         {
           t.partnership.models.map((model) => (
-            <li class="bg-white dark:bg-neutral-900 shadow-sm p-6 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
+            <li class="flex flex-col bg-white dark:bg-neutral-900 shadow-sm p-6 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
               <h3 class="mb-2 font-semibold text-primary text-lg">
                 {model.title}
               </h3>
-              <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+              <p class="flex-1 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
                 {model.description}
               </p>
+              <a
+                href={partnerRoute?.href ?? "/become-a-partner"}
+                class={cn(
+                  buttonVariants({ variant: "default" }),
+                  "inline-flex items-center gap-2 mt-5 w-fit",
+                )}
+              >
+                {t.cta.partner}
+                <ArrowRight class="w-4 h-4" />
+              </a>
             </li>
           ))
         }

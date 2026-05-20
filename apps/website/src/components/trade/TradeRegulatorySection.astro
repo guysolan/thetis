@@ -1,0 +1,51 @@
+---
+import { Check } from "lucide-astro";
+
+export interface Props {
+  title: string;
+  intro: string;
+  items: string[];
+  footnote: string;
+}
+
+const { title, intro, items, footnote } = Astro.props;
+---
+
+<section
+  class="bg-neutral-50 dark:bg-neutral-950 border-neutral-200 border-y dark:border-neutral-800"
+  aria-labelledby="trade-regulatory-heading"
+>
+  <div class="mx-auto px-4 py-10 md:py-12 max-w-[1200px]">
+    <h2
+      id="trade-regulatory-heading"
+      class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-xl md:text-2xl text-center"
+    >
+      {title}
+    </h2>
+    <p
+      class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-sm md:text-base text-center leading-relaxed"
+    >
+      {intro}
+    </p>
+
+    <ul class="gap-3 grid sm:grid-cols-2 lg:grid-cols-3 mx-auto max-w-4xl">
+      {
+        items.map((item) => (
+          <li class="flex gap-2.5 bg-white dark:bg-neutral-900 px-4 py-3 border border-neutral-200 dark:border-neutral-700 rounded-xl text-sm leading-snug">
+            <Check
+              class="mt-0.5 w-4 h-4 text-primary shrink-0"
+              aria-hidden="true"
+            />
+            <span class="text-neutral-800 dark:text-neutral-200">{item}</span>
+          </li>
+        ))
+      }
+    </ul>
+
+    <p
+      class="mx-auto mt-6 max-w-2xl text-neutral-500 dark:text-neutral-500 text-xs text-center leading-relaxed"
+    >
+      {footnote}
+    </p>
+  </div>
+</section>

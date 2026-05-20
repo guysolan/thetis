@@ -237,10 +237,10 @@ const currentContent = content[lang];
 
             <fieldset
                 id="partner-territories"
-                class="form-group border-0 p-0"
+                class="form-group p-0 border-0"
                 data-territory-error={currentContent.territoryRequiredError}
             >
-                <legend class="mb-1 font-semibold text-base text-neutral-700">
+                <legend class="mb-1 font-semibold text-neutral-700 text-base">
                     {currentContent.territoryLabel}
                 </legend>
                 <p class="mb-3 text-neutral-500 text-sm">
@@ -340,14 +340,12 @@ const currentContent = content[lang];
         fieldset?.scrollIntoView({ behavior: "smooth", block: "center" });
     });
 
-    form
-        ?.querySelectorAll('input[name="territory"]')
-        .forEach((input) => {
-            input.addEventListener("change", () => {
-                const anyChecked = form.querySelector(
-                    'input[name="territory"]:checked',
-                );
-                if (anyChecked) errorEl?.classList.add("hidden");
-            });
+    form?.querySelectorAll('input[name="territory"]').forEach((input) => {
+        input.addEventListener("change", () => {
+            const anyChecked = form.querySelector(
+                'input[name="territory"]:checked',
+            );
+            if (anyChecked) errorEl?.classList.add("hidden");
         });
+    });
 </script>

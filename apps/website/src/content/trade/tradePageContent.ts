@@ -6,6 +6,13 @@ import {
 
 export type TradePageContent = {
   meta: { title: string; description: string };
+  landing: {
+    title: string;
+    tagline: string;
+    treatmentNote: string;
+    badges: [string, string, string];
+    productImageAlt: string;
+  };
   hero: {
     eyebrow: string;
     title: string;
@@ -13,6 +20,12 @@ export type TradePageContent = {
     primaryCta: string;
   };
   stats: { value: string; label: string }[];
+  regulatory: {
+    title: string;
+    intro: string;
+    items: string[];
+    footnote: string;
+  };
   pathway: {
     title: string;
     intro: string;
@@ -52,8 +65,6 @@ export type TradePageContent = {
     title: string;
     intro: string;
     portfolioTitle: string;
-    timelineTitle: string;
-    timelineFootnote: string;
   };
   territories: {
     title: string;
@@ -142,6 +153,18 @@ const en: TradePageContent = {
     description:
       "Partner with Thetis Medical to distribute the Achilles rupture night splint. Product overview, SKUs, clinical pathway, and downloads for manufacturers and distributors.",
   },
+  landing: {
+    title: "Achilles Tendon Rupture Splint",
+    tagline: "Would you sleep in rain boots?",
+    treatmentNote: "Applicable to both conservative and surgical treatment",
+    badges: [
+      "The world's only plantarflexion splint",
+      "Patented design",
+      "Designed with and loved by foot & ankle surgeons",
+    ],
+    productImageAlt:
+      "Thetis Achilles rupture night splint — plantarflexion for sleep",
+  },
   hero: {
     eyebrow: "B2B · Manufacturers & distributors",
     title: "Achilles rupture night splint",
@@ -155,6 +178,24 @@ const en: TradePageContent = {
     { value: "~200g", label: "Device weight" },
     { value: "4", label: "SKU variants" },
   ],
+  regulatory: {
+    title: "Regulatory & quality",
+    intro:
+      "Key registration and documentation points for distributor due diligence. Full technical file available to qualified partners on request.",
+    items: [
+      "Class I medical device · CE / UKCA marked under EU MDR",
+      "EUDAMED registered",
+      "EU Authorised Representative (EC-REP) appointed",
+      "UDI assigned (GS1) — traceable per unit",
+      "Declaration of Conformity, IFU, and labelling artwork on request",
+      "Medical-grade materials; biocompatible patient-contact components",
+      "Designed and manufactured in the United Kingdom",
+      "MHRA-registered manufacturer (UK responsible person)",
+      "Post-market surveillance and vigilance processes in place",
+    ],
+    footnote:
+      "Declaration of Conformity, technical documentation, risk management summary, and quality agreements are shared with qualified distribution partners on request (NDA if required).",
+  },
   sleepSurvey: {
     title: "Patient need — sleep in the boot",
     intro:
@@ -285,7 +326,8 @@ const en: TradePageContent = {
       },
       {
         label: "Regulatory",
-        value: "CE-marked medical device (EU); full regulatory pack on request",
+        value:
+          "Class I · CE / UKCA · EUDAMED · EC-REP · UDI — see Regulatory & quality above",
       },
       {
         label: "Manufacture",
@@ -307,9 +349,6 @@ const en: TradePageContent = {
     intro:
       "Thetis Medical owns a growing patent and design portfolio covering the Achilles rupture night splint — relevant for distribution, white-label, and in-region manufacturing under licence. UK and US design protection is in place; US and European utility patents are in late-stage examination.",
     portfolioTitle: "Portfolio at a glance",
-    timelineTitle: "Prosecution timeline",
-    timelineFootnote:
-      "Dates are filing or grant milestones as applicable. Utility grants in the US and Europe are anticipated late 2026 following examination responses filed in 2026. Full register details available to qualified partners under NDA.",
   },
   partnership: {
     title: "Partnership models",
@@ -363,7 +402,7 @@ const en: TradePageContent = {
     productTitle: "Product & patient materials",
     clinicalTitle: "Clinical & quality materials",
     regulatoryNote:
-      "Declaration of Conformity, UDI, and labelling artwork are available to qualified distribution partners on request.",
+      "Full regulatory dossier (DoC, IFU, UDI data, labelling) available to qualified distribution partners on request.",
   },
   cta: {
     title: "Next steps",
