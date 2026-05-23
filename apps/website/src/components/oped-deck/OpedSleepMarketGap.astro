@@ -1,0 +1,27 @@
+---
+import {
+  opedAnnualRuptures,
+  opedCannotSleepPct,
+  opedSleepMarketCopy,
+  opedSplintSales,
+} from "@/features/oped-deck/opedDeckContent";
+---
+
+<div class="bg-primary/5 p-5 border border-primary/25 rounded-xl">
+  <p class="mb-3 font-semibold text-slate-800 text-sm">Market scale</p>
+  <p class="text-slate-600 text-sm leading-relaxed">
+    <strong class="text-slate-800">{opedCannotSleepPct}% cannot sleep</strong> in
+    the boot (Thetis patient survey). In the US, UK, Germany, France, Australia,
+    and Canada alone there are {opedSleepMarketCopy.annualRupturesLabel} Achilles
+    ruptures per year - about {opedSleepMarketCopy.cannotSleepLabel} patients who
+    struggle to sleep in a walking boot.
+  </p>
+  <p class="mt-3 text-slate-600 text-sm leading-relaxed">
+    Thetis currently supplies {opedSleepMarketCopy.splintSalesLabel} night splints
+    in those regions ({opedSplintSales.us.toLocaleString("en-GB")} US,{" "}
+    {opedSplintSales.uk.toLocaleString("en-GB")} UK,{" "}
+    {opedSplintSales.ca.toLocaleString("en-GB")} Canada), leaving roughly{" "}
+    <strong class="text-primary">{opedSleepMarketCopy.unmetNeedLabel}</strong> boot
+    patients without a dedicated sleep solution each year.
+  </p>
+</div>

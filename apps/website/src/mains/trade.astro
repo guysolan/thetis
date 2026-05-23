@@ -26,7 +26,10 @@ import TradeMarketsTable from "@/components/trade/TradeMarketsTable.astro";
 import TradePricingSection from "@/components/trade/TradePricingSection.astro";
 import TradePatentTimeline from "@/components/trade/TradePatentTimeline.astro";
 import TradeLandingSection from "@/components/trade/TradeLandingSection.astro";
+import TradePartnerLanding from "@/components/trade/TradePartnerLanding.astro";
+import TradeEcosystemSection from "@/components/trade/TradeEcosystemSection.astro";
 import TradeRegulatorySection from "@/components/trade/TradeRegulatorySection.astro";
+import type { TradeDeckPartner } from "@/content/trade/decks";
 import type { Lang } from "@/config/languages.ts";
 import {
   AlertTriangle,
@@ -38,9 +41,14 @@ import {
   X,
 } from "lucide-astro";
 
-const { lang = "en" } = Astro.props as { lang?: Lang };
+const { lang = "en", partner } = Astro.props as {
+  lang?: Lang;
+  partner?: TradeDeckPartner;
+};
 
 const t = tradePageContent[lang] ?? tradePageContent.en;
+const pathway = partner?.pathway ?? t.pathway;
+const hiddenSections = new Set(partner?.hiddenSections ?? []);
 
 const partnerRoute = getRouteBySlugAndLanguage("become-a-partner", lang);
 const splintRoute = getRouteBySlugAndLanguage("splint", lang);
@@ -140,7 +148,9 @@ const tradePatientItems = tradePatients.map((patient, index) => {
 const tradeClinicianItems = tradeClinicians.map(toTradeReviewItem);
 
 const canonicalByLang: Record<Lang, string> = {
-  en: "https://thetismedical.com/trade",
+  en: partner
+    ? `https://thetismedical.com/decks/${partner.id}`
+    : "https://thetismedical.com/trade",
   de: "https://thetismedical.com/de/handel",
   fr: "https://thetismedical.com/fr/commerce-distributeurs",
   es: "https://thetismedical.com/trade",
@@ -149,8 +159,8 @@ const canonicalByLang: Record<Lang, string> = {
 ---
 
 <Layout
-  title={t.meta.title}
-  description={t.meta.description}
+  title={partner?.meta.title ?? t.meta.title}
+  description={partner?.meta.description ?? t.meta.description}
   image="https://thetismedical.com/images/night_splint_bed_top_square.jpg"
   lang={lang}
 >
@@ -161,22 +171,28 @@ const canonicalByLang: Record<Lang, string> = {
   </Fragment>
 
   <main class="bg-white dark:bg-black">
-    <TradeLandingSection
-      title={t.landing.title}
-      tagline={t.landing.tagline}
-      treatmentNote={t.landing.treatmentNote}
-      badges={t.landing.badges}
-      primaryCta={t.hero.primaryCta}
-      partnerHref={partnerRoute?.href ?? "/become-a-partner"}
-      productImageAlt={t.landing.productImageAlt}
-    />
+    {
+      partner ? (
+        <TradePartnerLanding partner={partner} />
+      ) : (
+        <TradeLandingSection
+          title={t.landing.title}
+          tagline={t.landing.tagline}
+          treatmentNote={t.landing.treatmentNote}
+          badges={t.landing.badges}
+          primaryCta={t.hero.primaryCta}
+          partnerHref={partnerRoute?.href ?? "/become-a-partner"}
+          productImageAlt={t.landing.productImageAlt}
+        />
+      )
+    }
 
     <section class="bg-white dark:bg-black border-neutral-200 border-b">
       <div class="mx-auto px-4 py-12 md:py-14 max-w-[1200px]">
         <p
           class="mb-2 font-medium text-primary text-sm text-center uppercase tracking-wide"
         >
-          {t.hero.eyebrow}
+          {partner ? `${partner.name} × Thetis Medical` : t.hero.eyebrow}
         </p>
         <h2
           class="mb-3 font-bold text-2xl md:text-3xl text-center leading-tight"
@@ -207,6 +223,8 @@ const canonicalByLang: Record<Lang, string> = {
         </ul>
       </div>
     </section>
+
+    {partner && <TradeEcosystemSection partner={partner} />}
 
     <Slide
       title={t.sleepSurvey.title}
@@ -252,66 +270,76 @@ const canonicalByLang: Record<Lang, string> = {
       </p>
     </Slide>
 
-    <Slide title={t.market.title} paragraph={t.market.intro}>
-      <ul class="gap-3 grid mx-auto mb-8 max-w-2xl">
-        {
-          t.market.bullets.map((bullet) => (
-            <li class="flex gap-2 text-neutral-800 dark:text-neutral-200">
-              <Check class="w-5 h-5 text-primary shrink-0" />
-              {bullet}
-            </li>
-          ))
-        }
-      </ul>
-      <p class="text-center">
-        <a
-          href={t.market.incidenceLink}
-          class={cn(buttonVariants({ variant: "outline" }), "gap-2")}
+    {
+      !hiddenSections.has("market") && (
+        <Slide title={t.market.title} paragraph={t.market.intro}>
+          <ul class="gap-3 grid mx-auto mb-8 max-w-2xl">
+            {t.market.bullets.map((bullet) => (
+              <li class="flex gap-2 text-neutral-800 dark:text-neutral-200">
+                <Check class="w-5 h-5 text-primary shrink-0" />
+                {bullet}
+              </li>
+            ))}
+          </ul>
+          <p class="text-center">
+            <a
+              href={t.market.incidenceLink}
+              class={cn(buttonVariants({ variant: "outline" }), "gap-2")}
+            >
+              {t.market.incidenceLinkLabel}
+              <ArrowRight class="w-4 h-4" />
+            </a>
+          </p>
+        </Slide>
+      )
+    }
+
+    {
+      !hiddenSections.has("commercial") && (
+        <Slide
+          title={t.commercial.title}
+          paragraph={t.commercial.intro}
+          background="light"
         >
-          {t.market.incidenceLinkLabel}
-          <ArrowRight class="w-4 h-4" />
-        </a>
-      </p>
-    </Slide>
+          <TradeMarketsTable
+            tableHeaders={t.commercial.tableHeaders}
+            marketsFootnote={t.commercial.marketsFootnote}
+          />
+        </Slide>
+      )
+    }
 
-    <Slide
-      title={t.commercial.title}
-      paragraph={t.commercial.intro}
-      background="light"
-    >
-      <TradeMarketsTable
-        tableHeaders={t.commercial.tableHeaders}
-        marketsFootnote={t.commercial.marketsFootnote}
-      />
-    </Slide>
+    {
+      !hiddenSections.has("pricing") && (
+        <Slide
+          title={t.pricing.title}
+          paragraph={t.pricing.intro}
+          background="light"
+        >
+          <TradePricingSection
+            patientRrpTitle={t.pricing.patientRrpTitle}
+            patientRrpBody={t.pricing.patientRrpBody}
+            hospitalRrpTitle={t.pricing.hospitalRrpTitle}
+            hospitalRrpBody={t.pricing.hospitalRrpBody}
+            marginTitle={t.pricing.marginTitle}
+            marginBody={t.pricing.marginBody}
+            manufacturingTitle={t.pricing.manufacturingTitle}
+            manufacturingBody={t.pricing.manufacturingBody}
+          />
+        </Slide>
+      )
+    }
 
-    <Slide
-      title={t.pricing.title}
-      paragraph={t.pricing.intro}
-      background="light"
-    >
-      <TradePricingSection
-        patientRrpTitle={t.pricing.patientRrpTitle}
-        patientRrpBody={t.pricing.patientRrpBody}
-        hospitalRrpTitle={t.pricing.hospitalRrpTitle}
-        hospitalRrpBody={t.pricing.hospitalRrpBody}
-        marginTitle={t.pricing.marginTitle}
-        marginBody={t.pricing.marginBody}
-        manufacturingTitle={t.pricing.manufacturingTitle}
-        manufacturingBody={t.pricing.manufacturingBody}
-      />
-    </Slide>
-
-    <Slide title={t.pathway.title} paragraph={t.pathway.intro}>
+    <Slide title={pathway.title} paragraph={pathway.intro}>
       <div class="gap-4 grid md:grid-cols-2 mx-auto max-w-3xl">
         <div
           class="flex gap-4 bg-primary/5 p-6 border border-neutral-200 dark:border-neutral-700 rounded-2xl"
         >
           <Sun class="w-8 h-8 text-primary shrink-0" aria-hidden="true" />
           <div>
-            <p class="font-semibold text-primary">{t.pathway.dayLabel}</p>
+            <p class="font-semibold text-primary">{pathway.dayLabel}</p>
             <p class="mt-1 text-neutral-700 dark:text-neutral-300">
-              {t.pathway.dayText}
+              {pathway.dayText}
             </p>
           </div>
         </div>
@@ -320,9 +348,9 @@ const canonicalByLang: Record<Lang, string> = {
         >
           <Moon class="w-8 h-8 text-primary shrink-0" aria-hidden="true" />
           <div>
-            <p class="font-semibold text-primary">{t.pathway.nightLabel}</p>
+            <p class="font-semibold text-primary">{pathway.nightLabel}</p>
             <p class="mt-1 text-neutral-700 dark:text-neutral-300">
-              {t.pathway.nightText}
+              {pathway.nightText}
             </p>
           </div>
         </div>
@@ -330,7 +358,7 @@ const canonicalByLang: Record<Lang, string> = {
       <p
         class="mx-auto mt-6 max-w-2xl text-neutral-600 dark:text-neutral-400 text-sm text-center"
       >
-        {t.pathway.note}
+        {pathway.note}
       </p>
     </Slide>
 
@@ -514,77 +542,79 @@ const canonicalByLang: Record<Lang, string> = {
       footnote={t.regulatory.footnote}
     />
 
-    <Slide title={t.partnership.title} background="light">
-      <ul class="gap-6 grid md:grid-cols-2 mx-auto max-w-3xl">
-        {
-          t.partnership.models.map((model) => (
-            <li class="flex flex-col bg-white dark:bg-neutral-900 shadow-sm p-6 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
-              <h3 class="mb-2 font-semibold text-primary text-lg">
-                {model.title}
-              </h3>
-              <p class="flex-1 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
-                {model.description}
-              </p>
-              <a
-                href={partnerRoute?.href ?? "/become-a-partner"}
-                class={cn(
-                  buttonVariants({ variant: "default" }),
-                  "inline-flex items-center gap-2 mt-5 w-fit",
-                )}
-              >
-                {t.cta.partner}
-                <ArrowRight class="w-4 h-4" />
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </Slide>
-
-    <Slide title={t.channels.title} paragraph={t.channels.intro}>
-      <ul class="gap-3 grid sm:grid-cols-3 mx-auto mb-6 max-w-3xl">
-        {
-          t.channels.partners.map((p) => (
-            <li class="bg-primary/5 px-5 py-4 border border-primary/30 rounded-xl text-center">
-              <p class="font-semibold text-neutral-900 dark:text-neutral-100">
-                {p.name}
-              </p>
-              <p class="mt-1 text-neutral-600 dark:text-neutral-400 text-sm">
-                {p.country}
-              </p>
-            </li>
-          ))
-        }
-      </ul>
-      <p
-        class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400 text-sm text-center"
-      >
-        {t.channels.directNote}
-      </p>
-    </Slide>
-
-    <Slide title={t.territories.title} background="light">
-      <div class="mx-auto max-w-2xl text-center">
-        <h3
-          class="flex justify-center items-center gap-2 mb-3 font-semibold text-lg"
-        >
-          <Globe class="w-5 h-5 text-primary" />
-          {t.territories.openTitle}
-        </h3>
-        <ul class="flex flex-wrap justify-center gap-2 mb-4">
-          {
-            t.territories.openItems.map((country) => (
-              <li class="bg-primary px-4 py-1.5 rounded-full font-medium text-white text-sm">
-                {country}
+    {
+      !hiddenSections.has("partnership") && (
+        <Slide title={t.partnership.title} background="light">
+          <ul class="gap-6 grid md:grid-cols-2 mx-auto max-w-3xl">
+            {t.partnership.models.map((model) => (
+              <li class="flex flex-col bg-white dark:bg-neutral-900 shadow-sm p-6 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
+                <h3 class="mb-2 font-semibold text-primary text-lg">
+                  {model.title}
+                </h3>
+                <p class="flex-1 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                  {model.description}
+                </p>
+                <a
+                  href={partnerRoute?.href ?? "/become-a-partner"}
+                  class={cn(
+                    buttonVariants({ variant: "default" }),
+                    "inline-flex items-center gap-2 mt-5 w-fit",
+                  )}
+                >
+                  {t.cta.partner}
+                  <ArrowRight class="w-4 h-4" />
+                </a>
               </li>
-            ))
-          }
-        </ul>
-        <p class="text-neutral-600 dark:text-neutral-400 text-sm">
-          {t.territories.existingNote}
-        </p>
-      </div>
-    </Slide>
+            ))}
+          </ul>
+        </Slide>
+      )
+    }
+
+    {
+      !hiddenSections.has("channels") && (
+        <Slide title={t.channels.title} paragraph={t.channels.intro}>
+          <ul class="gap-3 grid sm:grid-cols-3 mx-auto mb-6 max-w-3xl">
+            {t.channels.partners.map((p) => (
+              <li class="bg-primary/5 px-5 py-4 border border-primary/30 rounded-xl text-center">
+                <p class="font-semibold text-neutral-900 dark:text-neutral-100">
+                  {p.name}
+                </p>
+                <p class="mt-1 text-neutral-600 dark:text-neutral-400 text-sm">
+                  {p.country}
+                </p>
+              </li>
+            ))}
+          </ul>
+          <p class="mx-auto max-w-2xl text-neutral-600 dark:text-neutral-400 text-sm text-center">
+            {t.channels.directNote}
+          </p>
+        </Slide>
+      )
+    }
+
+    {
+      !hiddenSections.has("territories") && (
+        <Slide title={t.territories.title} background="light">
+          <div class="mx-auto max-w-2xl text-center">
+            <h3 class="flex justify-center items-center gap-2 mb-3 font-semibold text-lg">
+              <Globe class="w-5 h-5 text-primary" />
+              {t.territories.openTitle}
+            </h3>
+            <ul class="flex flex-wrap justify-center gap-2 mb-4">
+              {t.territories.openItems.map((country) => (
+                <li class="bg-primary px-4 py-1.5 rounded-full font-medium text-white text-sm">
+                  {country}
+                </li>
+              ))}
+            </ul>
+            <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+              {t.territories.existingNote}
+            </p>
+          </div>
+        </Slide>
+      )
+    }
 
     <Slide title={t.support.title} background="light">
       <ul class="space-y-2 mx-auto mb-6 max-w-2xl">

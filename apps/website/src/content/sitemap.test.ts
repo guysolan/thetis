@@ -82,6 +82,8 @@ describe("Sitemap accuracy", () => {
     );
     expect(sitemapPageFilter("https://x.com/fr/preuves/")).toBe(true);
     expect(sitemapPageFilter("https://x.com/trade/")).toBe(false);
+    expect(sitemapPageFilter("https://x.com/decks/oped/")).toBe(false);
+    expect(sitemapPageFilter("https://x.com/decks/oped/3/")).toBe(false);
     expect(sitemapPageFilter("https://x.com/de/handel/")).toBe(false);
   });
 

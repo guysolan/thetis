@@ -1,0 +1,63 @@
+---
+import {
+  sleepSurveyHeadlineStats,
+  sleepSurveySegments,
+  sleepSurveyTotal,
+} from "@/content/trade/sleepSurveyData";
+import { opedCannotSleepPct } from "@/features/oped-deck/opedDeckContent";
+
+function pct(count: number) {
+  return Math.round((count / sleepSurveyTotal) * 100);
+}
+
+const warnKeys = new Set(["tookOffBoot", "adjustedBoot"]);
+---
+
+<div class="bg-white/50 p-4 border border-slate-200 rounded-xl">
+  <p class="mb-1 font-bold text-primary text-3xl">{opedCannotSleepPct}%</p>
+  <p class="mb-3 text-slate-600 text-sm">
+    Cannot sleep well in the boot (n={sleepSurveyTotal})
+  </p>
+  <p class="mb-3 text-slate-500 text-xs">
+    {sleepSurveyHeadlineStats.adjustedOrRemovedPct}% removed or adjusted the boot
+    at night
+  </p>
+  <ul class="space-y-2">
+    {
+      sleepSurveySegments.map((segment) => {
+        const isWarn = warnKeys.has(segment.key);
+        return (
+          <li class="text-sm">
+            <div class="flex justify-between gap-3 mb-1">
+              <span
+                class:list={[
+                  "font-medium",
+                  isWarn ? "text-amber-800" : "text-slate-800",
+                ]}
+              >
+                {segment.label}
+              </span>
+              <span
+                class:list={[
+                  "tabular-nums",
+                  isWarn ? "text-amber-700" : "text-slate-500",
+                ]}
+              >
+                {segment.count} ({pct(segment.count)}%)
+              </span>
+            </div>
+            <div class="bg-slate-100 rounded-full h-1.5 overflow-hidden">
+              <div
+                class:list={[
+                  "rounded-full h-full",
+                  isWarn ? "bg-amber-500" : "bg-primary/70",
+                ]}
+                style={`width: ${pct(segment.count)}%`}
+              />
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
+</div>

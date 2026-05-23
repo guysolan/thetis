@@ -1,0 +1,326 @@
+---
+interface Props {
+  rating: number;
+  price: string;
+  partnerHref?: string;
+}
+
+const { rating, price, partnerHref = "/become-a-partner" } = Astro.props;
+---
+
+<div class="space-y-4 mt-4" data-oped-product-listing>
+  <div class="flex items-center gap-2">
+    <div class="flex" aria-hidden="true">
+      {
+        Array.from({ length: 5 }, (_, index) => {
+          const starValue = index + 1;
+          if (rating >= starValue) {
+            return (
+              <svg
+                class="fill-current w-4 h-4 text-amber-400"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+              </svg>
+            );
+          }
+
+          if (rating > index && rating < starValue) {
+            const fillPercent = (rating - index) * 100;
+            return (
+              <svg class="fill-current w-4 h-4" viewBox="0 0 20 20">
+                <defs>
+                  <clipPath id={`oped-star-partial-${index}`}>
+                    <rect x="0" y="0" width={`${fillPercent}%`} height="20" />
+                  </clipPath>
+                </defs>
+                <path
+                  class="fill-current text-neutral-200"
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                />
+                <path
+                  class="text-amber-400"
+                  clip-path={`url(#oped-star-partial-${index})`}
+                  d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                />
+              </svg>
+            );
+          }
+
+          return (
+            <svg
+              class="fill-current w-4 h-4 text-neutral-200"
+              viewBox="0 0 20 20"
+            >
+              <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+            </svg>
+          );
+        })
+      }
+    </div>
+    <span class="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+      {rating.toFixed(1)}/5 stars
+    </span>
+  </div>
+
+  <button
+    type="button"
+    data-oped-buy-btn
+    class="inline-flex justify-center items-center bg-primary hover:bg-primary/90 px-6 py-3 rounded-lg w-full sm:w-auto font-semibold text-white text-sm transition-colors"
+  >
+    Buy now for {price}
+  </button>
+
+  <div class="mx-auto py-4 border-neutral-200 border-t w-full max-w-md">
+    <div class="flex flex-col space-y-4">
+      <div class="flex flex-row justify-between items-center">
+        <p class="font-semibold text-lg">Choose your Options</p>
+        <button
+          type="button"
+          data-oped-size-toggle
+          class="font-semibold text-md text-primary underline underline-offset-2 cursor-pointer"
+        >
+          What Size am I?
+        </button>
+      </div>
+
+      <div
+        data-oped-size-calculator
+        class="hidden flex-col space-y-4 bg-neutral-50 p-4 rounded-lg"
+      >
+        <div class="flex flex-col space-y-2">
+          <label class="font-medium text-sm" for="oped-size-region">Region:</label>
+          <select
+            id="oped-size-region"
+            data-oped-size-region
+            class="px-3 py-2 border border-neutral-300 rounded-md"
+          >
+            <option value="EU">EU</option>
+            <option value="UK" selected>UK</option>
+            <option value="US Men">US Men</option>
+            <option value="US Women">US Women</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col space-y-2">
+          <label class="font-medium text-sm" for="oped-shoe-size"
+            >Your Shoe Size:</label
+          >
+          <input
+            id="oped-shoe-size"
+            data-oped-shoe-size
+            type="number"
+            step="0.5"
+            placeholder="Enter your shoe size"
+            class="px-3 py-2 border border-neutral-300 rounded-md"
+          />
+        </div>
+
+        <div
+          data-oped-size-result
+          class="hidden bg-primary/10 mt-4 p-4 rounded-md"
+        >
+          <p class="font-semibold text-center">
+            Recommended Size:
+            <span
+              data-oped-size-result-value
+              class="text-primary text-lg"
+            ></span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-wrap items-center gap-3">
+    <div
+      class="inline-flex items-center gap-0.5 bg-white dark:bg-neutral-800 px-0.5 py-0.5 border border-neutral-200 rounded-md h-8"
+      data-oped-size-group
+    >
+      <button
+        type="button"
+        data-oped-variant="size"
+        data-value="large"
+        aria-pressed="true"
+        class="inline-flex justify-center items-center bg-primary shadow-sm px-3 py-1 rounded-sm font-medium text-white text-md transition-all"
+      >
+        Large
+      </button>
+      <button
+        type="button"
+        data-oped-variant="size"
+        data-value="small"
+        aria-pressed="false"
+        class="inline-flex justify-center items-center hover:text-neutral-700 dark:hover:text-neutral-300 px-3 py-1 rounded-sm font-medium text-neutral-500 dark:text-neutral-400 text-md transition-all"
+      >
+        Small
+      </button>
+    </div>
+
+    <div
+      class="inline-flex items-center gap-0.5 bg-white dark:bg-neutral-800 px-0.5 py-0.5 border border-neutral-200 rounded-md h-8"
+      data-oped-side-group
+    >
+      <button
+        type="button"
+        data-oped-variant="side"
+        data-value="left"
+        aria-pressed="true"
+        class="inline-flex justify-center items-center bg-primary shadow-sm px-3 py-1 rounded-sm font-medium text-white text-md transition-all"
+      >
+        Left
+      </button>
+      <button
+        type="button"
+        data-oped-variant="side"
+        data-value="right"
+        aria-pressed="false"
+        class="inline-flex justify-center items-center hover:text-neutral-700 dark:hover:text-neutral-300 px-3 py-1 rounded-sm font-medium text-neutral-500 dark:text-neutral-400 text-md transition-all"
+      >
+        Right
+      </button>
+    </div>
+  </div>
+
+  <dialog
+    data-oped-partnership-dialog
+    class="backdrop:bg-black/50 open:flex bg-white dark:bg-neutral-900 shadow-xl p-0 border-0 rounded-xl w-[min(100%-2rem,28rem)] max-w-md"
+  >
+    <div class="p-6">
+      <h2
+        class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-xl text-center"
+      >
+        Partner with OPED on the night splint
+      </h2>
+      <p
+        class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm text-center leading-relaxed"
+      >
+        This listing shows real patient demand for the Thetis Achilles splint.
+        Guy Solan is open to a formal partnership conversation — licence or
+        acquisition — to put this SKU in every VACOped recovery pathway.
+      </p>
+      <p
+        class="mb-4 text-neutral-700 dark:text-neutral-300 text-sm text-center leading-relaxed"
+      >
+        Complete the VACOped + EVENup + splint bundle under OPED branding and
+        distribution.
+      </p>
+      <div class="flex flex-col gap-2">
+        <a
+          href={partnerHref}
+          class="inline-flex justify-center items-center bg-primary hover:bg-primary/90 px-4 py-2.5 rounded-lg font-medium text-white text-sm transition-colors"
+        >
+          Partnership enquiry
+        </a>
+        <button
+          type="button"
+          data-oped-dialog-close
+          class="inline-flex justify-center items-center hover:bg-neutral-50 dark:hover:bg-neutral-800 px-4 py-2.5 border border-neutral-200 rounded-lg font-medium text-neutral-700 dark:text-neutral-300 text-sm transition-colors"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </dialog>
+</div>
+
+<script>
+  const sizeThresholds = {
+    EU: 42,
+    UK: 8,
+    "US Men": 9,
+    "US Women": 10.5,
+  };
+
+  function initProductListing(root) {
+    if (!root || root.dataset.initialized === "true") return;
+    root.dataset.initialized = "true";
+
+    const dialog = root.querySelector("[data-oped-partnership-dialog]");
+    const buyBtn = root.querySelector("[data-oped-buy-btn]");
+    const closeBtn = root.querySelector("[data-oped-dialog-close]");
+    const sizeToggle = root.querySelector("[data-oped-size-toggle]");
+    const calculator = root.querySelector("[data-oped-size-calculator]");
+    const regionSelect = root.querySelector("[data-oped-size-region]");
+    const shoeSizeInput = root.querySelector("[data-oped-shoe-size]");
+    const sizeResult = root.querySelector("[data-oped-size-result]");
+    const sizeResultValue = root.querySelector("[data-oped-size-result-value]");
+
+    buyBtn?.addEventListener("click", () => {
+      if (dialog instanceof HTMLDialogElement) dialog.showModal();
+    });
+
+    closeBtn?.addEventListener("click", () => {
+      if (dialog instanceof HTMLDialogElement) dialog.close();
+    });
+
+    dialog?.addEventListener("click", (event) => {
+      if (event.target === dialog && dialog instanceof HTMLDialogElement) {
+        dialog.close();
+      }
+    });
+
+    sizeToggle?.addEventListener("click", () => {
+      calculator?.classList.toggle("hidden");
+      calculator?.classList.toggle("flex");
+    });
+
+    function updateRecommendedSize() {
+      if (
+        !(regionSelect instanceof HTMLSelectElement) ||
+        !(shoeSizeInput instanceof HTMLInputElement) ||
+        !(sizeResult instanceof HTMLElement) ||
+        !(sizeResultValue instanceof HTMLElement)
+      ) {
+        return;
+      }
+
+      const size = Number.parseFloat(shoeSizeInput.value);
+      const threshold =
+        sizeThresholds[regionSelect.value] ?? sizeThresholds.UK;
+
+      if (!Number.isFinite(size)) {
+        sizeResult.classList.add("hidden");
+        return;
+      }
+
+      sizeResultValue.textContent = size < threshold ? "Small" : "Large";
+      sizeResult.classList.remove("hidden");
+    }
+
+    regionSelect?.addEventListener("change", updateRecommendedSize);
+    shoeSizeInput?.addEventListener("input", updateRecommendedSize);
+
+    root.querySelectorAll("[data-oped-variant]").forEach((button) => {
+      button.addEventListener("click", () => {
+        if (!(button instanceof HTMLButtonElement)) return;
+
+        const group =
+          button.dataset.opedVariant === "size"
+            ? root.querySelector("[data-oped-size-group]")
+            : root.querySelector("[data-oped-side-group]");
+
+        group?.querySelectorAll("[data-oped-variant]").forEach((peer) => {
+          if (!(peer instanceof HTMLButtonElement)) return;
+          const active = peer === button;
+          peer.setAttribute("aria-pressed", String(active));
+          peer.classList.toggle("bg-primary", active);
+          peer.classList.toggle("text-white", active);
+          peer.classList.toggle("shadow-sm", active);
+          peer.classList.toggle("text-neutral-500", !active);
+          peer.classList.toggle("dark:text-neutral-400", !active);
+        });
+      });
+    });
+  }
+
+  document
+    .querySelectorAll("[data-oped-product-listing]")
+    .forEach((root) => initProductListing(root));
+
+  document.addEventListener("astro:page-load", () => {
+    document
+      .querySelectorAll("[data-oped-product-listing]")
+      .forEach((root) => initProductListing(root));
+  });
+</script>

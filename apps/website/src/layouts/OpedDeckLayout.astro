@@ -1,0 +1,94 @@
+---
+import "@thetis/ui/globals.css";
+import OpedDeckNavigator from "@/components/oped-deck/OpedDeckNavigator.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  initialPage: number;
+  slideCount: number;
+  appendix?: boolean;
+}
+
+const { title, description = "", initialPage, slideCount, appendix = false } =
+  Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, follow" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/images/dotty-logo.svg" />
+  </head>
+  <body class="bg-background w-full min-h-screen overflow-x-hidden text-foreground">
+    <div class="flex flex-col w-full min-h-screen">
+      <header
+        class="z-20 relative flex flex-shrink-0 justify-between items-center bg-white shadow-sm px-6 py-3 border-neutral-200 border-b"
+      >
+        <div class="flex items-center gap-3 min-w-0">
+          <img
+            src="/images/dotty-logo.svg"
+            alt="Thetis Medical"
+            width="28"
+            height="28"
+            class="shrink-0"
+          />
+          <div class="bg-neutral-200 w-px h-5 shrink-0" aria-hidden="true"></div>
+          <span class="font-bold text-neutral-800 text-sm tracking-tight">
+            OPED Medical
+          </span>
+          <span class="font-light text-neutral-300 text-sm" aria-hidden="true">×</span>
+          <span class="font-semibold text-primary text-sm">
+            Thetis Medical
+          </span>
+        </div>
+        <div class="flex items-center gap-3 shrink-0">
+          <span class="hidden sm:inline font-medium text-neutral-400 text-xs uppercase tracking-widest">
+            {appendix ? "Appendix" : "Confidential"}
+          </span>
+          {
+            appendix ? (
+              <a
+                href="/decks/oped/1"
+                class="bg-primary/10 hover:bg-primary/15 px-3 py-1 border border-primary/20 rounded-full font-semibold text-primary text-xs transition-colors"
+              >
+                ← Back to deck
+              </a>
+            ) : (
+              <span
+                data-oped-counter
+                class="bg-primary/10 px-3 py-1 border border-primary/20 rounded-full font-semibold text-primary text-xs"
+              >
+                {initialPage} / {slideCount}
+              </span>
+            )
+          }
+        </div>
+      </header>
+
+      <main class:list={["flex-1 overflow-y-auto", !appendix && "pb-20"]}>
+        <slot />
+      </main>
+
+      {!appendix && (
+        <OpedDeckNavigator slideCount={slideCount} initialPage={initialPage} />
+      )}
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  .oped-slide-panel[hidden] {
+    display: none !important;
+  }
+</style>

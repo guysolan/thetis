@@ -1,0 +1,62 @@
+---
+import { Image } from "astro:assets";
+import prototypeProgression from "@/assets/prototype-progression.png";
+---
+
+<div class="prototype-carousel">
+  <p class="mb-2 text-slate-500 text-xs text-center">
+    Scroll or use arrows to see early prototypes evolve
+  </p>
+  <div
+    class="bg-slate-950 border border-slate-200 rounded-xl overflow-hidden"
+  >
+    <div
+      id="prototype-scroll"
+      class="flex overflow-x-auto snap-x snap-mandatory scroll-smooth"
+      tabindex="0"
+      aria-label="Prototype progression carousel"
+    >
+      <Image
+        src={prototypeProgression}
+        alt="Seven Thetis Achilles night splint prototypes from first 3D-printed frame to finished product"
+        widths={[1200, 1800, 2400]}
+        sizes="(max-width: 768px) 100vw, 720px"
+        class="block h-40 md:h-52 w-auto max-w-none snap-center shrink-0"
+        loading="lazy"
+      />
+    </div>
+  </div>
+  <div class="flex justify-center items-center gap-3 mt-3">
+    <button
+      type="button"
+      data-prototype-prev
+      class="bg-white hover:bg-slate-50 px-3 py-1.5 border border-slate-200 rounded-lg text-slate-700 text-sm"
+      aria-label="Scroll prototypes left"
+    >
+      ←
+    </button>
+    <button
+      type="button"
+      data-prototype-next
+      class="bg-white hover:bg-slate-50 px-3 py-1.5 border border-slate-200 rounded-lg text-slate-700 text-sm"
+      aria-label="Scroll prototypes right"
+    >
+      →
+    </button>
+  </div>
+</div>
+
+<script>
+  const scrollEl = document.getElementById("prototype-scroll");
+  const prevBtn = document.querySelector("[data-prototype-prev]");
+  const nextBtn = document.querySelector("[data-prototype-next]");
+
+  function scrollByStep(direction: number) {
+    if (!scrollEl) return;
+    const step = Math.max(scrollEl.clientWidth * 0.35, 120);
+    scrollEl.scrollBy({ left: direction * step, behavior: "smooth" });
+  }
+
+  prevBtn?.addEventListener("click", () => scrollByStep(-1));
+  nextBtn?.addEventListener("click", () => scrollByStep(1));
+</script>

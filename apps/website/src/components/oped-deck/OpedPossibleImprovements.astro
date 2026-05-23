@@ -1,0 +1,58 @@
+---
+import { ArrowRight, Check } from "lucide-astro";
+import type { opedPitchPossibleImprovements } from "@/features/oped-deck/opedDeckPitchContent";
+
+interface Props {
+  content: typeof opedPitchPossibleImprovements;
+}
+
+const { content } = Astro.props;
+---
+
+<div class="space-y-6 mx-auto max-w-5xl">
+  <div class="bg-primary/5 p-6 border border-primary/30 rounded-xl">
+    <div class="flex sm:flex-row flex-col sm:justify-between sm:items-start gap-4 mb-4">
+      <p class="text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed">
+        {content.intro}
+      </p>
+      <div class="flex items-center gap-3 shrink-0">
+        <div class="text-center">
+          <p class="font-bold tabular-nums text-neutral-500 text-2xl">
+            {content.currentRating}
+          </p>
+          <p class="text-[10px] text-neutral-500 uppercase tracking-wide">
+            Today
+          </p>
+        </div>
+        <ArrowRight
+          class="w-5 h-5 text-primary shrink-0"
+          aria-hidden="true"
+        />
+        <div class="text-center">
+          <p class="font-bold tabular-nums text-primary text-2xl">
+            {content.targetRating}
+          </p>
+          <p class="text-[10px] text-neutral-500 uppercase tracking-wide">
+            With OPED R&D
+          </p>
+        </div>
+      </div>
+    </div>
+    <p class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+      {content.body}
+    </p>
+    <ul class="gap-2 grid sm:grid-cols-3">
+      {
+        content.points.map((point) => (
+          <li class="flex gap-2 bg-white dark:bg-neutral-900 p-3 border border-neutral-200 dark:border-neutral-700 rounded-lg text-neutral-700 dark:text-neutral-300 text-sm">
+            <Check
+              class="mt-0.5 w-4 h-4 text-primary shrink-0"
+              aria-hidden="true"
+            />
+            {point}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>

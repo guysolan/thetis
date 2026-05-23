@@ -1,0 +1,405 @@
+---
+import ColorGradient from "@/components/ColorGradient.astro";
+import { Check, Puzzle } from "lucide-astro";
+import DeckSection from "./DeckSection.astro";
+import DiscomfortBreakdown from "./DiscomfortBreakdown.astro";
+import OpedDesignReviews from "./OpedDesignReviews.astro";
+import OpedGermanyReimbursement from "./OpedGermanyReimbursement.astro";
+import OpedProofCards from "./OpedProofCards.astro";
+import PitchStatGrid from "./PitchStatGrid.astro";
+import TradeAeWaitChart from "@/components/trade/TradeAeWaitChart.astro";
+import OpedDeckSleepSurveyChart from "./OpedDeckSleepSurveyChart";
+import {
+  opedPitchAdoptionPathways,
+  opedPitchClinical,
+  opedPitchDayStack,
+  opedPitchDesignReviews,
+  opedPitchIp,
+  opedPitchNhsEvidence,
+  opedPitchNightGap,
+  opedPitchPartnershipOptions,
+  opedPitchPatientComplaint,
+  opedPitchSalesHistory,
+  opedPitchWhyOped,
+  opedPitchWhyOpedNow,
+} from "@/features/oped-deck/opedDeckPitchContent";
+import { opedPitchGermanyReimbursement } from "@/features/oped-deck/opedDeckGermanyContent";
+
+interface Props {
+  page: number;
+}
+
+const { page } = Astro.props;
+
+const ukPathway = opedPitchAdoptionPathways.pathways[1];
+const maxSalesUnits = Math.max(
+  ...opedPitchSalesHistory.map((entry) => entry.units),
+);
+---
+
+{
+  page === 1 && (
+    <div class="pb-20 w-full min-h-[calc(100vh-57px)]">
+      <div class="[&_.color-gradient]:!pt-6">
+        <ColorGradient>
+          <div class="mx-auto px-6 md:px-12 py-6 md:py-10 max-w-3xl text-center">
+            <p class="mb-3 font-medium text-primary text-sm uppercase tracking-widest">
+              OPED Medical x Thetis Medical
+            </p>
+            <div
+              class="inline-flex justify-center items-center bg-primary/10 mb-4 border border-primary/25 rounded-2xl w-14 h-14"
+              aria-hidden="true"
+            >
+              <Puzzle class="w-7 h-7 text-primary" />
+            </div>
+            <h1 class="mb-4 font-semibold text-neutral-900 text-3xl md:text-4xl lg:text-5xl text-balance leading-[1.1] tracking-tight">
+              The missing piece in the VACOped recovery puzzle.
+            </h1>
+            <p class="mx-auto max-w-xl text-neutral-600 text-lg md:text-xl leading-snug">
+              VACOped protects patients by day. EVENup balances their gait. But
+              at night, patients still face the same choice: sleep badly in the
+              boot, or take it off without a purpose-built ATR device.
+            </p>
+          </div>
+        </ColorGradient>
+      </div>
+    </div>
+  )
+}
+
+{
+  page === 2 && (
+    <DeckSection
+      title={opedPitchDayStack.title}
+      intro={opedPitchDayStack.intro}
+      eyebrow={opedPitchDayStack.eyebrow}
+      gradient
+    >
+      <div class="space-y-6 mx-auto max-w-5xl">
+        <ul class="gap-5 grid md:grid-cols-2">
+          {opedPitchDayStack.products.map((product) => (
+            <li class="bg-white dark:bg-neutral-900 shadow-sm border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden">
+              <div class="bg-white dark:bg-white aspect-[4/3]">
+                <img
+                  src={product.image}
+                  alt={product.imageAlt}
+                  width={640}
+                  height={480}
+                  class="w-full h-full object-contain"
+                  loading="lazy"
+                />
+              </div>
+              <div class="p-5">
+                <p class="mb-1 font-medium text-[10px] text-primary uppercase tracking-widest">
+                  {product.role}
+                </p>
+                <p class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl">
+                  {product.name}
+                </p>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                  {product.detail}
+                </p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </DeckSection>
+  )
+}
+
+{
+  page === 3 && (
+    <DeckSection
+      title={opedPitchPatientComplaint.title}
+      intro={opedPitchPatientComplaint.intro}
+      eyebrow={opedPitchPatientComplaint.eyebrow}
+      gradient
+      compact
+    >
+      <div class="space-y-4 mx-auto max-w-5xl">
+        <div class="items-start gap-6 grid md:grid-cols-2">
+          <ul class="space-y-2.5">
+            {opedPitchPatientComplaint.complaints.map((item) => (
+              <li class="bg-white dark:bg-neutral-900 shadow-sm px-4 py-3 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+                <p class="mb-1 font-medium text-[10px] text-neutral-500 uppercase tracking-widest">
+                  {item.theme}
+                </p>
+                <p class="font-medium text-neutral-800 dark:text-neutral-200 text-sm italic leading-snug">
+                  "{item.quote}"
+                </p>
+              </li>
+            ))}
+          </ul>
+          <OpedDeckSleepSurveyChart client:load />
+        </div>
+
+        <p class="text-neutral-500 text-xs text-center">
+          {opedPitchPatientComplaint.source}
+        </p>
+      </div>
+    </DeckSection>
+  )
+}
+
+{
+  page === 4 && (
+    <DeckSection
+      title={opedPitchDesignReviews.title}
+      intro={opedPitchDesignReviews.intro}
+      eyebrow="Online launch"
+    >
+      <OpedDesignReviews content={opedPitchDesignReviews} />
+    </DeckSection>
+  )
+}
+
+{
+  page === 5 && (
+    <DeckSection
+      title={opedPitchNhsEvidence.title}
+      intro={opedPitchNhsEvidence.intro}
+      eyebrow="NHS evidence"
+      gradient
+    >
+      <div class="space-y-6 mx-auto max-w-5xl">
+        <div class="bg-white dark:bg-neutral-900 shadow-sm p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+          <p class="font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
+            {opedPitchNhsEvidence.headline}
+          </p>
+          <p class="mt-2 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+            {opedPitchNhsEvidence.body}
+          </p>
+          <ul class="flex flex-wrap gap-2 mt-4">
+            {ukPathway.hospitals.map((hospital) => (
+              <li class="bg-primary/5 px-3 py-1 border border-primary/20 rounded-full font-medium text-neutral-800 dark:text-neutral-200 text-xs">
+                {hospital}
+              </li>
+            ))}
+          </ul>
+          <a
+            href={opedPitchNhsEvidence.evidenceHref}
+            class="inline-block mt-4 text-primary text-xs hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {opedPitchNhsEvidence.evidenceLabel}
+          </a>
+        </div>
+
+        <TradeAeWaitChart />
+      </div>
+    </DeckSection>
+  )
+}
+
+{
+  page === 6 && (
+    <DeckSection
+      title="Surgeons say yes"
+      intro="Leading foot & ankle surgeons recommend the splint — the same problem the boot cannot solve at night."
+      eyebrow="Proof"
+      gradient
+    >
+      <OpedProofCards />
+    </DeckSection>
+  )
+}
+
+{
+  page === 7 && (
+    <DeckSection
+      title={opedPitchClinical.title}
+      intro={opedPitchClinical.intro}
+      eyebrow="Safety evidence"
+      gradient
+    >
+      <div class="space-y-6 mx-auto max-w-5xl">
+        <PitchStatGrid stats={opedPitchClinical.stats} columns={3} />
+        <div class="space-y-4 bg-white dark:bg-neutral-900 shadow-sm p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed">
+            {opedPitchClinical.body}
+          </p>
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed">
+            {opedPitchClinical.surveillance}
+          </p>
+        </div>
+        <ul class="gap-2 grid sm:grid-cols-3">
+          {opedPitchClinical.sources.map((source) => (
+            <li class="bg-primary/5 px-3 py-2 border border-primary/20 rounded-lg font-medium text-neutral-700 dark:text-neutral-300 text-xs text-center">
+              {source}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </DeckSection>
+  )
+}
+
+{
+  page === 8 && (
+    <DeckSection
+      title={opedPitchIp.title}
+      intro={opedPitchIp.intro}
+      eyebrow="IP portfolio"
+    >
+      <div class="space-y-6 mx-auto max-w-5xl">
+        <p class="font-medium text-primary text-sm uppercase tracking-widest">
+          {opedPitchIp.portfolioTitle}
+        </p>
+        <ul class="gap-3 grid sm:grid-cols-2">
+          {opedPitchIp.portfolio.map((item) => (
+            <li class="bg-white dark:bg-neutral-900 shadow-sm p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+              <p class="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                {item.label}
+              </p>
+              <p class="mt-1 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                {item.detail}
+              </p>
+            </li>
+          ))}
+        </ul>
+        <div class="bg-primary/5 p-5 border border-primary/30 rounded-xl">
+          <p class="text-neutral-800 dark:text-neutral-200 text-sm leading-relaxed">
+            {opedPitchIp.message}
+          </p>
+          <p class="mt-2 text-neutral-500 text-xs">{opedPitchIp.licenceNote}</p>
+        </div>
+      </div>
+    </DeckSection>
+  )
+}
+
+{
+  page === 9 && (
+    <DeckSection
+      title={opedPitchGermanyReimbursement.title}
+      intro={opedPitchGermanyReimbursement.intro}
+      eyebrow={opedPitchGermanyReimbursement.eyebrow}
+      gradient
+    >
+      <OpedGermanyReimbursement />
+    </DeckSection>
+  )
+}
+
+{
+  page === 10 && (
+    <DeckSection
+      title={opedPitchWhyOpedNow.title}
+      intro={opedPitchWhyOpedNow.intro}
+      eyebrow="Founder context"
+      gradient
+    >
+      <div class="space-y-6 mx-auto max-w-4xl">
+        <p class="font-bold text-primary text-xl md:text-2xl text-center leading-snug">
+          {opedPitchWhyOpedNow.headline}
+        </p>
+        <div class="bg-white dark:bg-neutral-900 shadow-sm p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+          <div class="flex sm:flex-row flex-col sm:justify-between sm:items-end gap-2 mb-5">
+            <div>
+              <h3 class="font-semibold text-neutral-900 dark:text-neutral-100 text-sm uppercase tracking-widest">
+                Splints sold per year
+              </h3>
+              <p class="mt-1 text-neutral-500 text-xs">
+                Growth achieved with ~90% direct-to-customer sales.
+              </p>
+            </div>
+            <p class="font-bold tabular-nums text-primary text-2xl">2,700</p>
+          </div>
+          <ul class="items-end gap-3 grid grid-cols-4 h-52">
+            {opedPitchSalesHistory.map((entry) => (
+              <li class="flex flex-col justify-end items-center gap-2 h-full">
+                <div class="flex items-end bg-primary/10 rounded-t-lg w-full h-full overflow-hidden">
+                  <div
+                    class="bg-primary rounded-t-lg w-full transition-all"
+                    style={`height: ${(entry.units / maxSalesUnits) * 100}%`}
+                    aria-label={`${entry.units} splints sold in ${entry.year}`}
+                  />
+                </div>
+                <div class="text-center">
+                  <p class="font-bold tabular-nums text-neutral-900 dark:text-neutral-100 text-sm">
+                    {entry.units.toLocaleString("en-GB")}
+                  </p>
+                  <p class="text-neutral-500 text-xs">{entry.year}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <ul class="gap-4 grid md:grid-cols-3">
+          {opedPitchWhyOpedNow.growthPoints.map((point) => (
+            <li class="bg-white dark:bg-neutral-900 shadow-sm p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+              <p class="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                {point.label}
+              </p>
+              <p class="mt-2 text-neutral-600 dark:text-neutral-400 text-xs leading-relaxed">
+                {point.value}
+              </p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </DeckSection>
+  )
+}
+
+{
+  page === 11 && (
+    <DeckSection
+      title={opedPitchPartnershipOptions.title}
+      intro={opedPitchPartnershipOptions.intro}
+      eyebrow="Licence or acquire"
+    >
+      <div class="space-y-5 mx-auto max-w-5xl">
+        <p class="text-neutral-600 dark:text-neutral-400 text-sm text-center leading-snug">
+          {opedPitchPartnershipOptions.founderNote}
+        </p>
+
+        <div class="bg-white dark:bg-neutral-900 shadow-sm p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+          <h3 class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-sm uppercase tracking-widest">
+            {opedPitchPartnershipOptions.proposalTitle}
+          </h3>
+          <ul class="gap-1.5 grid sm:grid-cols-2">
+            {opedPitchPartnershipOptions.proposal.map((term) => (
+              <li class="flex gap-2 text-neutral-700 dark:text-neutral-300 text-xs leading-snug">
+                <Check
+                  class="mt-0.5 w-3.5 h-3.5 text-primary shrink-0"
+                  aria-hidden="true"
+                />
+                {term}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <ul class="gap-4 grid md:grid-cols-2">
+          {opedPitchPartnershipOptions.options.map((option) => (
+            <li class="flex flex-col bg-white dark:bg-neutral-900 shadow-sm p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+              <p class="font-medium text-[10px] text-primary uppercase tracking-widest">
+                {option.label}
+              </p>
+              <h3 class="mt-0.5 mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl">
+                {option.title}
+              </h3>
+              <p class="mb-3 text-neutral-600 dark:text-neutral-400 text-xs leading-relaxed">
+                {option.summary}
+              </p>
+              <ul class="space-y-1.5 mt-auto">
+                {option.points.map((point) => (
+                  <li class="flex gap-2 text-neutral-700 dark:text-neutral-300 text-xs">
+                    <Check
+                      class="mt-0.5 w-3.5 h-3.5 text-primary shrink-0"
+                      aria-hidden="true"
+                    />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </DeckSection>
+  )
+}

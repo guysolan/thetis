@@ -1,0 +1,75 @@
+---
+interface Quote {
+  quote: string;
+  name: string;
+  country?: string;
+  role?: string;
+  translation?: string;
+  stars?: number;
+}
+
+interface Props {
+  quotes: readonly Quote[];
+  columns?: 1 | 2;
+  label?: string;
+}
+
+const { quotes, columns = 2, label } = Astro.props;
+---
+
+<ul
+  class:list={["gap-4 grid", columns === 1 ? "grid-cols-1 max-w-2xl mx-auto" : "md:grid-cols-2"]}
+>
+  {
+    quotes.map((item) => (
+      <li>
+        <figure class="flex flex-col bg-white dark:bg-neutral-900 shadow-sm p-6 border border-neutral-200 dark:border-neutral-700 rounded-2xl h-full">
+          {label && (
+            <figcaption class="mb-3 font-medium text-primary text-xs uppercase tracking-wide">
+              {label}
+            </figcaption>
+          )}
+          {item.stars && item.stars > 0 && (
+            <div
+              class="flex gap-0.5 mb-3"
+              aria-label={`${item.stars} out of 5 stars`}
+            >
+              {Array.from({ length: item.stars }, () => (
+                <svg
+                  class="w-4 h-4 text-amber-400 fill-current"
+                  viewBox="0 0 20 20"
+                  aria-hidden="true"
+                >
+                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                </svg>
+              ))}
+            </div>
+          )}
+          <blockquote class="flex-1">
+            <p class="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-base leading-snug">
+              "{item.quote}"
+            </p>
+            {item.translation && (
+              <p class="text-neutral-500 text-xs italic">{item.translation}</p>
+            )}
+          </blockquote>
+          <div class="flex items-center gap-3 mt-5 pt-4 border-neutral-100 dark:border-neutral-800 border-t">
+            <div class="flex justify-center items-center bg-primary/10 border border-primary/20 rounded-full w-9 h-9 font-semibold text-primary text-sm shrink-0">
+              {item.name.charAt(0).toUpperCase()}
+            </div>
+            <div>
+              <p class="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                {item.name}
+              </p>
+              {(item.role || item.country) && (
+                <p class="text-neutral-500 text-xs">
+                  {item.role || item.country}
+                </p>
+              )}
+            </div>
+          </div>
+        </figure>
+      </li>
+    ))
+  }
+</ul>

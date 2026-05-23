@@ -1,0 +1,113 @@
+---
+import ColorGradient from "@/components/ColorGradient.astro";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import type { TradeDeckPartner } from "@/content/trade/decks";
+import { ArrowRight, Award, BadgeCheck, Stethoscope } from "lucide-astro";
+
+export interface Props {
+  partner: TradeDeckPartner;
+}
+
+const { partner } = Astro.props;
+const { landing, ecosystem } = partner;
+
+const badgeIcons = [BadgeCheck, Award, Stethoscope];
+---
+
+<section class="border-neutral-200 border-b">
+  <ColorGradient>
+    <div class="mx-auto px-4 py-8 md:py-16 max-w-[1200px]">
+      <p
+        class="mb-4 font-medium text-primary text-sm text-center uppercase tracking-wide"
+      >
+        {landing.eyebrow}
+      </p>
+
+      <div class="mx-auto mb-10 max-w-3xl text-center">
+        <h1
+          class="mb-4 font-semibold text-neutral-900 dark:text-neutral-100 text-4xl md:text-5xl text-balance leading-[1.1] tracking-tight"
+        >
+          {landing.title}
+        </h1>
+        <p
+          class="text-neutral-600 dark:text-neutral-400 text-xl md:text-2xl leading-snug"
+        >
+          {landing.tagline}
+        </p>
+      </div>
+
+      <ul
+        class="flex sm:flex-row flex-col flex-wrap justify-center gap-2.5 mb-10"
+        aria-label="Product highlights"
+      >
+        {
+          landing.badges.map((label, i) => {
+            const Icon = badgeIcons[i % badgeIcons.length];
+            return (
+              <li class="inline-flex items-center gap-2 bg-white/90 dark:bg-neutral-900/80 shadow-sm px-4 py-2.5 border border-primary/25 rounded-full font-medium text-neutral-800 dark:text-neutral-100 text-sm">
+                <Icon class="w-4 h-4 text-primary shrink-0" aria-hidden />
+                {label}
+              </li>
+            );
+          })
+        }
+      </ul>
+
+      <ul
+        class="gap-4 sm:gap-6 grid sm:grid-cols-3 mx-auto mb-10 max-w-4xl"
+        aria-label="Recovery product line"
+      >
+        {
+          ecosystem.products.map((product) => (
+            <li class="flex flex-col bg-white/90 dark:bg-neutral-900/80 shadow-md border border-neutral-200/80 dark:border-neutral-700 rounded-2xl overflow-hidden">
+              <div class="relative bg-neutral-50 dark:bg-neutral-950 aspect-square">
+                <img
+                  src={product.imageSrc}
+                  alt={product.imageAlt}
+                  width={400}
+                  height={400}
+                  class="p-4 w-full h-full object-contain"
+                  loading="eager"
+                />
+                <span
+                  class={cn(
+                    "top-3 right-3 absolute px-2.5 py-1 rounded-full font-medium text-xs",
+                    product.brand === "partner"
+                      ? "bg-neutral-800 text-white"
+                      : "bg-primary text-white",
+                  )}
+                >
+                  {product.brand === "partner" ? partner.name : "Thetis"}
+                </span>
+              </div>
+              <div class="flex flex-col flex-1 p-4">
+                <p class="font-medium text-primary text-xs uppercase tracking-wide">
+                  {product.role}
+                </p>
+                <h2 class="mt-1 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
+                  {product.name}
+                </h2>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="flex flex-col items-center gap-3">
+        <a
+          href={landing.primaryCtaHref}
+          class={cn(buttonVariants({ size: "lg" }), "gap-2")}
+        >
+          {landing.primaryCta}
+          <ArrowRight class="w-4 h-4" />
+        </a>
+        <p
+          class="max-w-lg text-neutral-500 dark:text-neutral-400 text-sm text-center leading-relaxed"
+        >
+          {landing.note}
+        </p>
+      </div>
+    </div>
+  </ColorGradient>
+</section>

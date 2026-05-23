@@ -909,6 +909,41 @@ export const tradeRoutes: BaseRoute[] = [
   },
 ];
 
+/** Partner-specific B2B decks (noindex). */
+export const deckRoutes: BaseRoute[] = [
+  {
+    slug: "decks/oped",
+    title: {
+      en: "Trade deck — OPED",
+      de: "Handelsdeck — OPED",
+      fr: "Deck commerce — OPED",
+      es: "Deck comercial — OPED",
+      it: "Deck commerciale — OPED",
+    },
+    description: {
+      en:
+        "B2B overview for OPED distributors: VACOped, EVENup, and the Thetis Achilles night splint.",
+      de:
+        "B2B-Übersicht für OPED-Händler: VACOped, EVENup und die Thetis Achilles-Nachtschiene.",
+      fr:
+        "Aperçu B2B pour distributeurs OPED : VACOped, EVENup et l'attelle de nuit Achille Thetis.",
+      es:
+        "Resumen B2B para distribuidores OPED: VACOped, EVENup y la férula nocturna Thetis.",
+      it:
+        "Panoramica B2B per distributori OPED: VACOped, EVENup e la stecca notturna Thetis.",
+    },
+    icon: <Box />,
+    variant: "outline",
+    slugTranslations: {
+      en: "decks/oped",
+      de: "decks/oped",
+      fr: "decks/oped",
+      es: "decks/oped",
+      it: "decks/oped",
+    },
+  },
+];
+
 // Video routes
 export const videoRoutes: BaseRoute[] = [
   {
@@ -1216,6 +1251,7 @@ export const allBaseRoutes: BaseRoute[] = [
   ...partnerRoutes,
   ...contactRoutes,
   ...tradeRoutes,
+  ...deckRoutes,
   ...videoRoutes,
   ...articleRoutes,
   ...legalRoutes,

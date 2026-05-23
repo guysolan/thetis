@@ -6,7 +6,7 @@ export const sleepSurveySegments = [
   {
     key: "didntSleepWell",
     label: "Didn't sleep well",
-    count: 74,
+    count: 78,
     description: "Reported difficulty sleeping while wearing the walking boot",
   },
   {
@@ -30,7 +30,7 @@ export const sleepSurveySegments = [
   {
     key: "sleptFine",
     label: "Slept fine",
-    count: 49,
+    count: 45,
     description: "No reported sleep difficulty in the boot",
   },
 ] as const;

@@ -1,0 +1,74 @@
+---
+interface Props {
+  title: string;
+  eyebrow?: string;
+  intro?: string;
+  class?: string;
+  gradient?: boolean;
+  compact?: boolean;
+}
+
+const {
+  title,
+  eyebrow,
+  intro,
+  class: className = "",
+  gradient = false,
+  compact = false,
+} = Astro.props;
+---
+
+<section class:list={["w-full", className]}>
+  <header
+    class:list={[
+      "w-full px-6 md:px-12",
+      compact ? "pb-4" : "pb-8",
+      gradient
+        ? compact
+          ? "color-gradient pt-8 md:pt-10"
+          : "color-gradient pt-12 md:pt-16"
+        : compact
+          ? "pt-8 md:pt-10 bg-background"
+          : "pt-10 md:pt-12 bg-background",
+    ]}
+  >
+    <div class="mx-auto max-w-3xl text-center">
+      {
+        eyebrow && (
+          <p class="mb-2 font-medium text-primary text-xs uppercase tracking-widest">
+            {eyebrow}
+          </p>
+        )
+      }
+      <h2
+        class:list={[
+          "mb-3 font-semibold text-neutral-900 leading-tight",
+          compact
+            ? "text-xl md:text-2xl lg:text-3xl"
+            : "text-2xl md:text-3xl lg:text-4xl",
+        ]}
+      >
+        {title}
+      </h2>
+      {
+        Astro.slots.intro ? (
+          <div class="mx-auto max-w-2xl text-neutral-600 text-base md:text-lg leading-relaxed">
+            <slot name="intro" />
+          </div>
+        ) : (
+          intro && (
+            <p class="mx-auto max-w-2xl text-neutral-600 text-base md:text-lg leading-relaxed">
+              {intro}
+            </p>
+          )
+        )
+      }
+    </div>
+  </header>
+
+  <div class="bg-background px-6 md:px-12 pb-28">
+    <div class:list={["mx-auto max-w-5xl", compact ? "pt-2" : "pt-6"]}>
+      <slot />
+    </div>
+  </div>
+</section>

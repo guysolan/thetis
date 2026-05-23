@@ -1,0 +1,29 @@
+---
+import { Image } from "astro:assets";
+import prototypeProgression from "@/assets/prototype-progression.png";
+import PitchStatGrid from "./PitchStatGrid.astro";
+import type { opedPitchPrototypeOrigin } from "@/features/oped-deck/opedDeckPitchContent";
+
+interface Props {
+  content: typeof opedPitchPrototypeOrigin;
+}
+
+const { content } = Astro.props;
+---
+
+<div class="space-y-6 mx-auto max-w-5xl">
+  <div
+    class="bg-white border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden"
+  >
+    <Image
+      src={prototypeProgression}
+      alt={content.imageAlt}
+      widths={[1200, 1800, 2400]}
+      sizes="(max-width: 768px) 100vw, 960px"
+      class="block w-full h-auto object-contain"
+      loading="lazy"
+    />
+  </div>
+
+  <PitchStatGrid stats={content.stats} columns={2} />
+</div>

@@ -1,0 +1,214 @@
+---
+interface Props {
+  slideCount: number;
+  initialPage: number;
+}
+
+const { slideCount, initialPage } = Astro.props;
+---
+
+<nav
+  id="oped-deck-nav"
+  class="right-0 bottom-0 left-0 z-50 fixed bg-white/95 shadow-[0_-4px_24px_rgba(0,0,0,0.08)] backdrop-blur-md border-neutral-200 border-t"
+  aria-label="Slide navigation"
+  data-slide-count={slideCount}
+  data-initial-page={initialPage}
+>
+  <div
+    id="oped-deck-progress"
+    class="bg-primary h-0.5 transition-all duration-300"
+    role="progressbar"
+    aria-valuemin="1"
+    aria-valuemax={slideCount}
+    aria-valuenow={initialPage}
+    style={`width: ${Math.round((initialPage / slideCount) * 100)}%`}
+  >
+  </div>
+  <div class="flex justify-center items-center gap-4 px-6 py-3">
+    <button
+      type="button"
+      id="oped-deck-prev"
+      class="inline-flex justify-center items-center gap-1.5 bg-white hover:bg-neutral-50 disabled:opacity-30 px-4 py-2 border border-neutral-200 rounded-lg font-medium text-neutral-700 text-sm transition-colors disabled:pointer-events-none"
+      aria-label="Previous slide"
+      disabled={initialPage <= 1}
+    >
+      <svg
+        class="w-4 h-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="m15 18-6-6 6-6"></path>
+      </svg>
+      Prev
+    </button>
+
+    <span
+      data-oped-counter
+      class="min-w-[4rem] font-medium text-neutral-500 text-sm text-center"
+    >
+      {initialPage} / {slideCount}
+    </span>
+
+    <button
+      type="button"
+      id="oped-deck-next"
+      class="inline-flex justify-center items-center gap-1.5 bg-primary hover:bg-primary/90 disabled:opacity-30 px-4 py-2 rounded-lg font-medium text-white text-sm transition-colors disabled:pointer-events-none"
+      aria-label="Next slide"
+      disabled={initialPage >= slideCount}
+    >
+      Next
+      <svg
+        class="w-4 h-4"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        aria-hidden="true"
+      >
+        <path d="m9 18 6-6-6-6"></path>
+      </svg>
+    </button>
+  </div>
+</nav>
+
+<script>
+  import { OPED_DECK_BASE_PATH } from "@/features/oped-deck/opedDeckContent";
+
+  function clampPage(page, slideCount) {
+    if (!Number.isFinite(page)) return 1;
+    return Math.max(1, Math.min(slideCount, Math.round(page)));
+  }
+
+  function readPageFromPath(pathname, slideCount) {
+    const match = pathname.match(/\/decks\/oped\/(\d+)\/?$/);
+    if (!match) return 1;
+    return clampPage(Number.parseInt(match[1], 10), slideCount);
+  }
+
+  function notifySlideChange(page) {
+    window.dispatchEvent(
+      new CustomEvent("oped-deck-slide-change", { detail: { page } }),
+    );
+    requestAnimationFrame(() => {
+      window.dispatchEvent(new Event("resize"));
+    });
+  }
+
+  function setSlideVisible(page) {
+    document.querySelectorAll("[data-oped-slide]").forEach((panel) => {
+      const slide = Number.parseInt(
+        panel.getAttribute("data-oped-slide") ?? "0",
+        10,
+      );
+      if (slide === page) {
+        panel.removeAttribute("hidden");
+      } else {
+        panel.setAttribute("hidden", "");
+      }
+    });
+  }
+
+  function updateCounters(page, slideCount) {
+    const label = `${page} / ${slideCount}`;
+    document.querySelectorAll("[data-oped-counter]").forEach((node) => {
+      node.textContent = label;
+    });
+  }
+
+  function updateButtons(page, slideCount) {
+    const prev = document.getElementById("oped-deck-prev");
+    const next = document.getElementById("oped-deck-next");
+    if (prev) prev.disabled = page <= 1;
+    if (next) next.disabled = page >= slideCount;
+
+    const progress = document.getElementById("oped-deck-progress");
+    if (progress) {
+      progress.style.width = `${Math.round((page / slideCount) * 100)}%`;
+      progress.setAttribute("aria-valuenow", String(page));
+    }
+  }
+
+  function scrollDeckToTop() {
+    document.querySelector("main")?.scrollTo({ top: 0, behavior: "auto" });
+  }
+
+  function initDeckNav() {
+    const nav = document.getElementById("oped-deck-nav");
+    if (!nav || nav.dataset.initialized === "true") return;
+    nav.dataset.initialized = "true";
+
+    const slideCount = Number.parseInt(
+      nav.getAttribute("data-slide-count") ?? "1",
+      10,
+    );
+    let currentPage = readPageFromPath(window.location.pathname, slideCount);
+
+    const goTo = (nextPage, { replace = false } = {}) => {
+      currentPage = clampPage(nextPage, slideCount);
+      setSlideVisible(currentPage);
+      notifySlideChange(currentPage);
+      updateCounters(currentPage, slideCount);
+      updateButtons(currentPage, slideCount);
+      scrollDeckToTop();
+
+      const url = `${OPED_DECK_BASE_PATH}/${currentPage}`;
+      if (replace) {
+        window.history.replaceState({ slide: currentPage }, "", url);
+      } else {
+        window.history.pushState({ slide: currentPage }, "", url);
+      }
+    };
+
+    goTo(currentPage, { replace: true });
+
+    document.getElementById("oped-deck-prev")?.addEventListener("click", () => {
+      goTo(currentPage - 1);
+    });
+
+    document.getElementById("oped-deck-next")?.addEventListener("click", () => {
+      goTo(currentPage + 1);
+    });
+
+    window.addEventListener("popstate", () => {
+      currentPage = readPageFromPath(window.location.pathname, slideCount);
+      setSlideVisible(currentPage);
+      notifySlideChange(currentPage);
+      updateCounters(currentPage, slideCount);
+      updateButtons(currentPage, slideCount);
+      scrollDeckToTop();
+    });
+
+    window.addEventListener("keydown", (event) => {
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        target.closest("input, textarea, select, [contenteditable=true]")
+      ) {
+        return;
+      }
+
+      if (event.key === "r" || event.key === "R") {
+        event.preventDefault();
+        goTo(1);
+        return;
+      }
+
+      if (event.key === "ArrowRight" || event.key === " ") {
+        event.preventDefault();
+        goTo(currentPage + 1);
+        return;
+      }
+
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goTo(currentPage - 1);
+      }
+    });
+  }
+
+  initDeckNav();
+  document.addEventListener("astro:page-load", initDeckNav);
+</script>

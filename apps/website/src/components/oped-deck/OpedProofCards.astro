@@ -1,0 +1,56 @@
+---
+import { Image } from "astro:assets";
+import { translatedClinicians } from "@/components/reviews/content/professional-opinions";
+
+const proofClinicianNames = [
+  "Dr Robbie Ray",
+  "Mr James Davis",
+  "Mr Andy Roche",
+  "Mr Ian Gill",
+] as const;
+
+const clinicians = proofClinicianNames.map((name) => {
+  const clinician = translatedClinicians.find((entry) => entry.name === name);
+  if (!clinician) {
+    throw new Error(`Missing proof clinician: ${name}`);
+  }
+  return clinician;
+});
+---
+
+<ul class="gap-4 grid md:grid-cols-2 mx-auto max-w-5xl">
+  {
+    clinicians.map((clinician) => {
+      const content = clinician.content.en;
+
+      return (
+        <li>
+          <figure class="flex flex-col bg-white dark:bg-neutral-900 shadow-sm p-5 border border-neutral-200 dark:border-neutral-700 rounded-2xl h-full">
+            <blockquote class="flex-1">
+              <p class="text-neutral-900 dark:text-neutral-100 text-sm italic leading-relaxed">
+                &ldquo;{content.short}&rdquo;
+              </p>
+            </blockquote>
+            <figcaption class="flex items-center gap-3 mt-4 pt-4 border-neutral-200 dark:border-neutral-700 border-t">
+              <Image
+                src={clinician.image}
+                alt={clinician.name}
+                width={48}
+                height={48}
+                class="border border-neutral-200 rounded-full w-12 h-12 object-cover shrink-0"
+              />
+              <div>
+                <p class="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                  {clinician.name}
+                </p>
+                <p class="text-neutral-500 text-xs leading-snug">
+                  {content.description}
+                </p>
+              </div>
+            </figcaption>
+          </figure>
+        </li>
+      );
+    })
+  }
+</ul>

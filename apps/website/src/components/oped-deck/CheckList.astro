@@ -1,0 +1,21 @@
+---
+import { Check } from "lucide-astro";
+
+interface Props {
+  items: string[];
+  class?: string;
+}
+
+const { items, class: className = "" } = Astro.props;
+---
+
+<ul class:list={["gap-3 grid mx-auto max-w-2xl", className]}>
+  {
+    items.map((item) => (
+      <li class="flex gap-3 text-slate-800 text-sm md:text-base">
+        <Check class="mt-0.5 w-5 h-5 text-primary shrink-0" aria-hidden="true" />
+        <span>{item}</span>
+      </li>
+    ))
+  }
+</ul>

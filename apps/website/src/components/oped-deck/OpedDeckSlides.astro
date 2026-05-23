@@ -1,0 +1,25 @@
+---
+import OpedSlide from "./OpedSlide.astro";
+import { OPED_DECK_SLIDE_COUNT } from "@/features/oped-deck/opedDeckPitchContent";
+
+interface Props {
+  initialPage: number;
+}
+
+const { initialPage } = Astro.props;
+---
+
+{
+  Array.from({ length: OPED_DECK_SLIDE_COUNT }, (_, index) => {
+    const page = index + 1;
+    return (
+      <div
+        data-oped-slide={page}
+        class="oped-slide-panel"
+        hidden={page !== initialPage}
+      >
+        <OpedSlide page={page} />
+      </div>
+    );
+  })
+}

@@ -1,0 +1,49 @@
+---
+import OpedDeckLayout from "@/layouts/OpedDeckLayout.astro";
+import DeckSection from "@/components/oped-deck/DeckSection.astro";
+import OpedMarketOpportunitySection from "@/components/oped-deck/OpedMarketOpportunitySection.astro";
+import OpedPossibleImprovements from "@/components/oped-deck/OpedPossibleImprovements.astro";
+import OpedPrototypeStory from "@/components/oped-deck/OpedPrototypeStory.astro";
+import {
+  OPED_DECK_APPENDIX_SLIDE_COUNT,
+  opedPitchMarketOpportunity,
+  opedPitchPossibleImprovements,
+  opedPitchPrototypeOrigin,
+} from "@/features/oped-deck/opedDeckPitchContent";
+import { opedDeck } from "@/content/trade/decks/oped";
+---
+
+<OpedDeckLayout
+  title={`${opedDeck.meta.title} — Appendix`}
+  description="Development story, market sizing, possible product improvements, and supporting material for the OPED × Thetis pitch deck."
+  initialPage={1}
+  slideCount={OPED_DECK_APPENDIX_SLIDE_COUNT}
+  appendix
+>
+  <DeckSection
+    title={opedPitchPrototypeOrigin.title}
+    intro={opedPitchPrototypeOrigin.intro}
+    eyebrow="Development story"
+    gradient
+  >
+    <OpedPrototypeStory content={opedPitchPrototypeOrigin} />
+  </DeckSection>
+
+  <DeckSection
+    title={opedPitchMarketOpportunity.title}
+    intro={opedPitchMarketOpportunity.intro}
+    eyebrow="Commercial gap"
+    gradient
+  >
+    <OpedMarketOpportunitySection content={opedPitchMarketOpportunity} />
+  </DeckSection>
+
+  <DeckSection
+    title={opedPitchPossibleImprovements.title}
+    intro={opedPitchPossibleImprovements.intro}
+    eyebrow={opedPitchPossibleImprovements.eyebrow}
+    gradient
+  >
+    <OpedPossibleImprovements content={opedPitchPossibleImprovements} />
+  </DeckSection>
+</OpedDeckLayout>

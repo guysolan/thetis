@@ -3,7 +3,7 @@ import {
   ChartContainer,
   ChartTooltip,
 } from "@thetis/ui/chart";
-import { Cell, Pie, PieChart, Sector } from "recharts";
+import { Cell, Label, Pie, PieChart, Sector } from "recharts";
 import type { PieSectorDataItem } from "recharts/types/polar/Pie";
 import type { TooltipProps } from "recharts";
 import { AlertTriangle } from "lucide-react";
@@ -12,6 +12,14 @@ import {
   sleepSurveySegments,
   sleepSurveyTotal,
 } from "@/content/trade/sleepSurveyData";
+
+interface SleepSurveyDonutChartProps {
+  centerLabel?: {
+    value: string;
+    subtitle: string;
+  };
+  hideLegend?: boolean;
+}
 
 const segmentFills: Record<SleepSurveySegmentKey, string> = {
   didntSleepWell: "hsl(161, 42%, 72%)",
@@ -117,7 +125,10 @@ function ActiveSlice(props: PieSectorDataItem) {
   return <Sector {...rest} outerRadius={Number(outerRadius) + 6} />;
 }
 
-export default function SleepSurveyDonutChart() {
+export default function SleepSurveyDonutChart({
+  centerLabel,
+  hideLegend = false,
+}: SleepSurveyDonutChartProps = {}) {
   return (
     <div className="flex flex-col justify-center items-center w-full">
       <div className="w-full max-w-[360px]">
@@ -146,11 +157,42 @@ export default function SleepSurveyDonutChart() {
               {chartData.map((entry) => (
                 <Cell key={entry.segment} fill={entry.fill} />
               ))}
+              {centerLabel && (
+                <Label
+                  content={({ viewBox }) => {
+                    if (!viewBox || !("cx" in viewBox) || !("cy" in viewBox)) {
+                      return null;
+                    }
+
+                    const { cx, cy } = viewBox;
+
+                    return (
+                      <text x={cx} y={cy} textAnchor="middle">
+                        <tspan
+                          x={cx}
+                          dy="-0.15em"
+                          className="fill-primary font-bold text-[2rem]"
+                        >
+                          {centerLabel.value}
+                        </tspan>
+                        <tspan
+                          x={cx}
+                          dy="1.35em"
+                          className="fill-neutral-600 dark:fill-neutral-400 text-sm"
+                        >
+                          {centerLabel.subtitle}
+                        </tspan>
+                      </text>
+                    );
+                  }}
+                />
+              )}
             </Pie>
           </PieChart>
         </ChartContainer>
 
-        <ul className="gap-x-4 gap-y-2 grid grid-cols-2 mt-4 px-1 text-xs">
+        {!hideLegend && (
+          <ul className="gap-x-4 gap-y-2 grid grid-cols-2 mt-4 px-1 text-xs">
           {sleepSurveySegments.map((segment) => {
             const isWarn = warnSegmentKeys.has(segment.key);
             return (
@@ -194,6 +236,7 @@ export default function SleepSurveyDonutChart() {
             );
           })}
         </ul>
+        )}
       </div>
     </div>
   );

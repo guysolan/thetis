@@ -1,0 +1,31 @@
+---
+import OpedDeckLayout from "@/layouts/OpedDeckLayout.astro";
+import OpedDeckSlides from "@/components/oped-deck/OpedDeckSlides.astro";
+import { OPED_DECK_BASE_PATH } from "@/features/oped-deck/opedDeckContent";
+import { OPED_DECK_SLIDE_COUNT } from "@/features/oped-deck/opedDeckPitchContent";
+import { opedDeck } from "@/content/trade/decks/oped";
+
+const rawPage = Number.parseInt(Astro.params.page ?? "1", 10);
+
+if (!Number.isFinite(rawPage) || rawPage < 1) {
+  return Astro.redirect(`${OPED_DECK_BASE_PATH}/1`, 301);
+}
+
+if (rawPage > OPED_DECK_SLIDE_COUNT) {
+  return Astro.redirect(
+    `${OPED_DECK_BASE_PATH}/${OPED_DECK_SLIDE_COUNT}`,
+    301,
+  );
+}
+
+const initialPage = rawPage;
+---
+
+<OpedDeckLayout
+  title={opedDeck.meta.title}
+  description={opedDeck.meta.description}
+  initialPage={initialPage}
+  slideCount={OPED_DECK_SLIDE_COUNT}
+>
+  <OpedDeckSlides initialPage={initialPage} />
+</OpedDeckLayout>

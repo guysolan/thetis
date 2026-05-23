@@ -1,0 +1,49 @@
+---
+interface Stat {
+  value: string;
+  label: string;
+  highlight?: boolean;
+}
+
+interface Props {
+  stats: readonly Stat[];
+  columns?: 2 | 3 | 4;
+}
+
+const { stats, columns = 3 } = Astro.props;
+const gridClass =
+  columns === 4
+    ? "grid-cols-2 md:grid-cols-4"
+    : columns === 2
+      ? "grid-cols-2"
+      : "grid-cols-2 md:grid-cols-3";
+---
+
+<ul class:list={["gap-3 grid", gridClass]}>
+  {
+    stats.map((stat) => (
+      <li
+        class:list={[
+          "rounded-xl border text-center px-4 py-5",
+          stat.highlight
+            ? "bg-primary/10 border-primary/30 col-span-2 md:col-span-full"
+            : "bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-700 shadow-sm",
+        ]}
+      >
+        <p
+          class:list={[
+            "font-bold tabular-nums",
+            stat.highlight
+              ? "text-primary text-3xl md:text-4xl"
+              : "text-primary text-2xl md:text-3xl",
+          ]}
+        >
+          {stat.value}
+        </p>
+        <p class="mt-1 text-neutral-500 dark:text-neutral-400 text-xs leading-snug">
+          {stat.label}
+        </p>
+      </li>
+    ))
+  }
+</ul>

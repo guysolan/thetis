@@ -1,0 +1,100 @@
+---
+import type { opedPitchMarketOpportunity } from "@/features/oped-deck/opedDeckPitchContent";
+
+interface Props {
+  content: typeof opedPitchMarketOpportunity;
+}
+
+const { content } = Astro.props;
+---
+
+<div class="space-y-6 mx-auto max-w-5xl">
+  <div class="gap-4 grid grid-cols-3">
+    <div class="bg-white dark:bg-neutral-900 shadow-sm p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl text-center">
+      <p class="font-bold tabular-nums text-neutral-900 dark:text-neutral-100 text-3xl md:text-4xl">
+        145k
+      </p>
+      <p class="mt-1 text-neutral-500 text-xs">Annual ruptures</p>
+    </div>
+    <div class="bg-primary/10 p-5 border border-primary/30 rounded-xl text-center">
+      <p class="font-bold tabular-nums text-primary text-3xl md:text-4xl">
+        ~2k
+      </p>
+      <p class="mt-1 text-neutral-600 text-xs">Splints sold/year</p>
+    </div>
+    <div class="bg-red-50 dark:bg-red-950/20 p-5 border border-red-200 dark:border-red-800 rounded-xl text-center">
+      <p class="font-bold tabular-nums text-red-600 text-3xl md:text-4xl">
+        {content.unreachedPct}%
+      </p>
+      <p class="mt-1 text-neutral-500 text-xs">Patients unreached</p>
+    </div>
+  </div>
+  <div class="bg-white dark:bg-neutral-900 shadow-sm border border-neutral-200 dark:border-neutral-700 rounded-xl overflow-hidden">
+    <table class="w-full text-sm text-left border-collapse">
+      <thead>
+        <tr class="bg-primary/10 border-primary/30 border-b-2">
+          <th class="px-4 py-3 font-semibold text-neutral-800 text-xs uppercase tracking-wide">
+            Market
+          </th>
+          <th class="px-4 py-3 font-semibold text-neutral-800 text-xs text-right uppercase tracking-wide">
+            Annual ruptures
+          </th>
+          <th class="px-4 py-3 font-semibold text-neutral-800 text-xs text-right uppercase tracking-wide">
+            Thetis sales
+          </th>
+          <th class="px-4 py-3 font-semibold text-neutral-800 text-xs text-right uppercase tracking-wide">
+            Penetration
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          content.breakdown.map((row, index) => {
+            const pct =
+              row.sales > 0
+                ? ((row.sales / row.ruptures) * 100).toFixed(1)
+                : "0";
+            return (
+              <tr
+                class:list={[
+                  "border-neutral-100 dark:border-neutral-800 border-b last:border-0",
+                  index % 2 === 0
+                    ? "bg-white dark:bg-neutral-900"
+                    : "bg-neutral-50/60 dark:bg-neutral-800/40",
+                ]}
+              >
+                <td class="px-4 py-3 font-medium text-neutral-900 dark:text-neutral-100">
+                  <span class="mr-2">{row.flag}</span>
+                  {row.market}
+                </td>
+                <td class="px-4 py-3 tabular-nums text-neutral-600 dark:text-neutral-400 text-right">
+                  {row.ruptures.toLocaleString("en-GB")}
+                </td>
+                <td class="px-4 py-3 tabular-nums text-right">
+                  {row.sales === 0 ? (
+                    <span class="bg-red-100 dark:bg-red-900/30 px-2 py-0.5 rounded-full font-semibold text-red-700 dark:text-red-400 text-xs">
+                      None
+                    </span>
+                  ) : (
+                    <span class="text-neutral-600 dark:text-neutral-400">
+                      ~{row.sales.toLocaleString("en-GB")}
+                    </span>
+                  )}
+                </td>
+                <td class="px-4 py-3 tabular-nums text-right">
+                  {row.sales === 0 ? (
+                    <span class="font-bold text-red-600 dark:text-red-400">
+                      0%
+                    </span>
+                  ) : (
+                    <span class="font-semibold text-primary">{pct}%</span>
+                  )}
+                </td>
+              </tr>
+            );
+          })
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -63,7 +63,8 @@ const content: Record<Lang, { title: string; description: string }> = {
                                 .filter(
                                     (route) =>
                                         route.lang === language.code &&
-                                        route.slug !== "trade",
+                                        route.slug !== "trade" &&
+                                        !route.slug.startsWith("decks/"),
                                 )
                                 .map((route) => (
                                     <li>

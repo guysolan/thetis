@@ -1,0 +1,90 @@
+---
+import plantarFasciitisSplint from "@/assets/plantar-fasciitis-splint.png";
+import { opedPitchGermanyReimbursement } from "@/features/oped-deck/opedDeckGermanyContent";
+
+const content = opedPitchGermanyReimbursement;
+---
+
+<div class="space-y-6 mx-auto max-w-5xl">
+  <div class="bg-primary/5 p-4 border border-primary/30 rounded-2xl">
+    <p class="mb-4 font-medium text-primary text-xs uppercase tracking-widest">
+      {content.germanyLabel}
+    </p>
+    <div
+      class="items-start gap-6 grid lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]"
+    >
+      <figure
+        class="bg-white dark:bg-neutral-900 shadow-sm mx-auto lg:mx-0 p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl w-full max-w-[11rem] lg:max-w-none"
+      >
+        <div class="bg-neutral-50 rounded-lg overflow-hidden">
+          <img
+            src={plantarFasciitisSplint.src}
+            width={plantarFasciitisSplint.width}
+            height={plantarFasciitisSplint.height}
+            alt="Typical reimbursed plantar fasciitis night splint with dorsiflexion wedge"
+            class="w-full h-auto max-h-40 object-contain"
+            loading="lazy"
+          />
+        </div>
+        <figcaption
+          class="mt-2 text-[11px] text-neutral-600 dark:text-neutral-400 text-center leading-snug"
+        >
+          {content.imageCaption}
+        </figcaption>
+      </figure>
+
+      <div class="space-y-4">
+        <p
+          class="text-neutral-800 dark:text-neutral-200 text-sm leading-relaxed"
+        >
+          {content.germanyBody}
+        </p>
+
+        <div
+          class="bg-white dark:bg-neutral-900 shadow-sm p-5 border border-primary/30 rounded-xl"
+        >
+          <p
+            class="mb-2 font-medium text-primary text-xs uppercase tracking-widest"
+          >
+            {content.differentiationTitle}
+          </p>
+          <p
+            class="text-neutral-800 dark:text-neutral-200 text-sm leading-relaxed"
+          >
+            {content.differentiationBody}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p
+      class="mb-3 font-medium text-neutral-500 text-xs text-center uppercase tracking-widest"
+    >
+      {content.otherRoutesTitle}
+    </p>
+    <ul class="gap-3 grid md:grid-cols-3">
+      {
+        content.otherRoutes.map((route) => (
+          <li class="bg-white dark:bg-neutral-900 shadow-sm p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-xl leading-none" aria-hidden="true">
+                {route.flag}
+              </span>
+              <div>
+                <p class="font-bold text-neutral-900 dark:text-neutral-100 text-sm leading-tight">
+                  {route.market}
+                </p>
+                <p class="font-medium text-primary text-xs">{route.channel}</p>
+              </div>
+            </div>
+            <p class="text-neutral-600 dark:text-neutral-400 text-xs leading-relaxed">
+              {route.detail}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
