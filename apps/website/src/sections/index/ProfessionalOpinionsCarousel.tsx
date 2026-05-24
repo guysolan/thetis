@@ -5,6 +5,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@thetis/ui/carousel";
+import { getSplintReviewsHref } from "@/content/routes";
 import professionalOpinionsContent, {
   translatedClinicians,
 } from "../../components/reviews/content/professional-opinions.ts";
@@ -70,7 +71,7 @@ function ProfessionalOpinionsCarousel({ lang = "en" }: { lang: Lang }) {
         <div className="inline-flex md:flex-row flex-col justify-center items-center gap-1 mx-auto mt-8 md:mt-12 max-w-screen-lg text-lg text-center">
           <p className="font-medium text-gray-600 text-base md:text-xl">{content.cta.text}</p>
           <a
-            href="/reviews"
+            href={getSplintReviewsHref(lang, "filter=clinician")}
             className={cn("text-primary text-base md:text-xl underline underline-offset-2")}
           >
             {content.cta.link}

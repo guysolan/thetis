@@ -42,6 +42,20 @@ export const AUDIENCE_FILTERS: { id: AudienceFilter; label: string }[] = [
   { id: "athletes", label: "Athletes" },
 ];
 
+export function parseAudienceFromSearch(
+  search: string | URLSearchParams,
+): AudienceFilter {
+  const params = typeof search === "string"
+    ? new URLSearchParams(search.startsWith("?") ? search.slice(1) : search)
+    : search;
+  const audience = params.get("audience");
+  const legacy = params.get("filter");
+  if (audience === "surgeons" || legacy === "clinician") return "surgeons";
+  if (audience === "athletes" || legacy === "athlete") return "athletes";
+  if (audience === "patients" || legacy === "patient") return "patients";
+  return "patients";
+}
+
 export type PatientSourceKey = "amazon" | "reviews";
 
 export function getAudienceKey(review: MasterReview): AudienceFilter {
@@ -142,6 +156,27 @@ export function filterReviews(
   });
 }
 
+export function getSleepReviews(reviews: MasterReview[], limit = 3) {
+  return reviews
+    .filter(
+      (review) =>
+        review.category === "patient" &&
+        review.hasText &&
+        review.body &&
+        review.stars >= 4 &&
+        review.tags.includes("sleep"),
+    )
+    .sort((a, b) => {
+      const score = (review: MasterReview) =>
+        (review.isPinned ? 100 : 0) +
+        (review.featuredOnWebsite ? 50 : 0) +
+        (review.mentionsBoot ? 25 : 0) +
+        review.stars * 10;
+      return score(b) - score(a);
+    })
+    .slice(0, limit);
+}
+
 export function countByAudience(reviews: MasterReview[]) {
   const counts: Record<AudienceFilter, number> = {
     patients: 0,
@@ -184,7 +219,7 @@ export function getDisplayStats(
       ]),
     ) as Record<number, number>;
     return {
-      average: averageRating(filteredReviews),
+      average: averageFromCounts(distribution),
       total: global.totalRatings,
       distribution,
       distributionPercent: Object.fromEntries(

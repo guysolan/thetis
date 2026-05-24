@@ -39,9 +39,9 @@ export const opedPitchWhyOped = {
 
 export const opedPitchDayStack = {
   eyebrow: "Achilles Rupture · OPED",
-  title: "Patients Love VACOped + EVENup",
+  title: "Patients trust VACOped + EVENup",
   intro:
-    "OPED gives patients the best daytime Achilles recovery. VACOped immobilises and protects; EVENup balances gait - together, they are the gold standard.",
+    "OPED already gives patients the best daytime Achilles recovery. VACOped immobilises and protects; EVENup balances gait. Together, they are the gold standard.",
   products: [
     {
       name: "VACOped",
@@ -55,7 +55,7 @@ export const opedPitchDayStack = {
       name: "EVENup",
       role: "Day · gait balance",
       detail:
-        "Shoe leveler for the uninjured foot - patients actively seek this and reps cross-sell it with every boot",
+        "Shoe leveller for the uninjured foot - patients ask for it and reps already sell it with every boot",
       image: "/images/catalogue-products/even-up.png",
       imageAlt: "OPED EVENup shoe leveler worn with a walking boot",
     },
@@ -64,11 +64,10 @@ export const opedPitchDayStack = {
 
 export const opedPitchPatientComplaint = {
   eyebrow: "The night problem",
-  title: "The problem showed up at night",
+  title: "Patients struggle at night",
   intro:
-    "Matthew Solan, foot & ankle surgeon, kept seeing the same recovery problem: Achilles rupture patients were protected in the boot by day, but struggled to sleep in it at night.",
-  surveyLead:
-    "Guy surveyed Achilles rupture patients and found the pattern was widespread: 77% found the boot:",
+    "Matthew Solan, a foot and ankle surgeon, saw the same problem in clinic: patients were protected in the boot by day but could not sleep in it at night.",
+  surveyLead: "We surveyed Achilles rupture patients. 77% said the boot was:",
   complaintThemes: [
     { id: "hot", label: "Hot" },
     { id: "heavy", label: "Heavy" },
@@ -573,7 +572,7 @@ export const opedPitchClinical = {
   body:
     "Recovery-period safety assessment recorded comparable protection to a walking boot with substantially better comfort for sleep (Sleeping safe and sound, BOFAS 2024).",
   surveillance:
-    "EU MDR–compliant post-market surveillance (2022–2025) on 5,000+ splints sold confirms the same safety profile: zero reported re-ruptures, with a 95% confidence-interval upper bound for night-time injury below 0.1%.",
+    "EU MDR post-market surveillance (2022–2025) on 5,000+ splints sold shows the same safety profile: zero reported re-ruptures, with a 95% confidence interval upper bound for night-time injury below 0.1%.",
   sources: [
     "BOFAS 2024 - Sleeping safe and sound",
     "BOFAS 2023 - Mother Knows Best",
@@ -630,11 +629,11 @@ export const opedPitchEconomics = {
 
 export const opedPitchInvitation = {
   title: "Let's complete the stack together",
-  headline: "License or acquire - your structure, our shared goal",
+  headline: "Licence or acquire - your structure, our shared goal",
   fomo:
     "If a boot competitor integrates Thetis first, they own the day/night category. OPED can take it instead - with a device that is already proven, cleared, and loved by patients.",
   ask:
-    "Guy Solan is open to a formal conversation under NDA: clinical evidence, IP, manufacturing, and either a licence or acquisition structure.",
+    "Guy Solan is open to a formal discussion under NDA: clinical evidence, IP, manufacturing, and either a licence or acquisition.",
   cta:
     "Partnership enquiry - we will share the full data room and manufacturing roadmap.",
   partnerHref: "/become-a-partner",
@@ -666,9 +665,9 @@ export const opedPitchPrototypeOrigin = {
 } as const;
 
 export const opedPitchDesignReviews = {
-  title: "The live product listing proves demand",
+  title: "Live sales prove demand",
   intro:
-    "Launched in 2022. Over 5,000 sold to date. Developed through 400+ prototypes into a left/right top-of-leg shell built specifically for ATR sleep protection.",
+    "Launched in 2022. Over 5,000 sold. Refined through 400+ prototypes into a left/right top-of-leg shell built for ATR sleep protection.",
   productListing: {
     badge: "5,000+ Better Rested Patients",
     title: "The Only Splint for Achilles Tendon Rupture",
@@ -696,7 +695,7 @@ export const opedPitchDesignReviews = {
     showing: "Showing 5 of 303 reviews",
   },
   stats: [
-    { value: "4.5", label: "Average rating (global)" },
+    { value: "4.1", label: "Average rating (global)" },
     { value: "89", label: "Reviews mention comfort" },
     { value: "122", label: "Reviews mention sleep vs boot" },
     { value: "60%", label: "Five-star ratings (combined)" },
@@ -811,10 +810,10 @@ export const opedPitchPossibleImprovements = {
 } as const;
 
 export const opedPitchPartnershipOptions = {
-  title: "How Guy wants to work with OPED",
-  intro: "Two structures are on the table - licence or acquire.",
+  title: "Partnership with OPED",
+  intro: "Two options on the table: licence or acquisition.",
   founderNote:
-    "Guy Solan is inventor, only employee, of Thetis Medical. He now has a second company and wants to pass on the product to a company who can get the splint to more people.",
+    "Guy Solan invented the splint and is the sole employee at Thetis Medical. The business is profitable and needs no outside funding. He now runs another company and is looking for a partner that can take the product to more patients.",
   proposalTitle: "Proposal",
   proposal: [
     "Rebrand and industrial redesign under OPED design language",
@@ -828,7 +827,7 @@ export const opedPitchPartnershipOptions = {
       label: "Option 1",
       title: "Licence",
       summary:
-        "OPED licenses Thetis IP and regulatory assets. Thetis supports transition; OPED owns manufacturing, brand, and distribution.",
+        "OPED licences Thetis IP and regulatory assets. Thetis supports the transition; OPED owns manufacturing, brand, and distribution.",
       points: [
         "Royalty or per-unit licence fee",
         "Know-how transfer and clinical support",
@@ -844,7 +843,7 @@ export const opedPitchPartnershipOptions = {
       points: [
         "Full ownership of category and margin",
         "Single integration, no ongoing royalty",
-        "Guy transitions out; assets fold into OPED",
+        "Guy steps back after handover; assets fold into OPED",
       ],
     },
   ],
@@ -852,7 +851,7 @@ export const opedPitchPartnershipOptions = {
 
 export const opedPitchSalesChart = {
   title: "Splints sold per year",
-  subtitle: "Growth achieved with ~90% direct-to-customer sales.",
+  subtitle: "Growth achieved with ~90% of sales direct to patients.",
   history: [
     { year: "2022", units: 350 },
     { year: "2023", units: 900 },
@@ -904,15 +903,16 @@ export const opedPitchSalesProof = {
 export const opedPitchWhyOpedNow = {
   title: "Why now",
   intro:
-    "Thetis is profitable and growing without external funding. Guy Solan is inventor, only employee, of Thetis Medical. He now has a second company and wants to pass on the product to a company who can get the splint to more people.",
+    "Thetis is profitable and growing without outside funding. Guy Solan invented the splint and is the sole employee. He now runs another company and wants to hand the product to a partner that can reach more patients.",
   growthPoints: [
     {
       label: "Steady unit growth",
       value: "350 → 2,600 units (2022–2026), before OPED distribution",
     },
     {
-      label: "90% direct-to-customer",
-      value: "~90% DTC today - OPED can unlock clinical and wholesale channels",
+      label: "90% direct to patient",
+      value:
+        "~90% sold direct to patients today - OPED can unlock clinical and wholesale channels",
     },
     {
       label: "Proven pull-through",

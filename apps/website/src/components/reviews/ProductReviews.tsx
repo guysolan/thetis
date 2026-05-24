@@ -8,6 +8,10 @@ import VerifiedBadge from "@/components/reviews/VerifiedBadge";
 import { Badge } from "@thetis/ui/badge";
 import { Button } from "@thetis/ui/button";
 import { Progress } from "@thetis/ui/progress";
+import {
+  formatGlobalRatingsLabel,
+  GLOBAL_REVIEW_AVERAGE,
+} from "@/features/reviews/productReviewStats";
 import masterReviewsData from "@/data/master-reviews.json";
 import {
   AUDIENCE_FILTERS,
@@ -17,6 +21,7 @@ import {
   formatReviewMeta,
   getDisplayStats,
   getSourceLabel,
+  parseAudienceFromSearch,
   type MasterReview,
 } from "@/features/reviews/productReviews";
 
@@ -196,7 +201,10 @@ export default function ProductReviews({
 
   const allReviews = masterReviewsData.reviews as MasterReview[];
   const [audienceFilter, setAudienceFilter] = React.useState<AudienceFilter>(
-    "patients",
+    () =>
+      typeof window !== "undefined"
+        ? parseAudienceFromSearch(window.location.search)
+        : "patients",
   );
   const [starFilter, setStarFilter] = React.useState(0);
   const [visibleCount, setVisibleCount] = React.useState(pageSize);
@@ -222,7 +230,7 @@ export default function ProductReviews({
   );
 
   const visibleReviews = sortedReviews.slice(0, visibleCount);
-  const { average, total, distribution, distributionPercent } = getDisplayStats(
+  const { total, distribution, distributionPercent } = getDisplayStats(
     audienceFilter,
     filteredReviews,
     masterReviewsData.ratings,
@@ -237,16 +245,16 @@ export default function ProductReviews({
     <div>
       <div className="flex items-end gap-3 mb-2">
         <span className="font-bold text-neutral-900 dark:text-neutral-100 text-4xl leading-none">
-          {average.toFixed(1)}
+          {GLOBAL_REVIEW_AVERAGE.toFixed(1)}
         </span>
         <div>
           <PartialStarRating
-            rating={average}
+            rating={GLOBAL_REVIEW_AVERAGE}
             size="md"
             idPrefix="summary"
           />
           <p className="mt-1 text-neutral-600 dark:text-neutral-400 text-sm">
-            {total.toLocaleString()} global rating{total === 1 ? "" : "s"}
+            {formatGlobalRatingsLabel()}
           </p>
         </div>
       </div>
@@ -367,16 +375,16 @@ export default function ProductReviews({
       <div className="w-full">
         <div className="flex items-end gap-3 mb-5">
           <span className="font-bold text-neutral-900 dark:text-neutral-100 text-5xl leading-none">
-            {average.toFixed(1)}
+            {GLOBAL_REVIEW_AVERAGE.toFixed(1)}
           </span>
           <div>
             <PartialStarRating
-              rating={average}
+              rating={GLOBAL_REVIEW_AVERAGE}
               size="sm"
               idPrefix="deck-header"
             />
             <p className="mt-1 text-neutral-600 dark:text-neutral-400 text-sm">
-              {total.toLocaleString()} global ratings
+              {formatGlobalRatingsLabel()}
             </p>
           </div>
         </div>
@@ -389,7 +397,7 @@ export default function ProductReviews({
   }
 
   return (
-    <div id="customer-reviews" className="w-full">
+    <div className="w-full">
       <div className="gap-8 grid lg:grid-cols-[280px_minmax(0,1fr)]">
         <aside className="space-y-6">
           {summaryBlock}

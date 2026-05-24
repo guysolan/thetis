@@ -15,7 +15,7 @@ import AthletesCarousel from "@/components/AthletesCarousel";
 import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
 import StickyAddToCart from "@/components/StickyAddToCart.tsx";
 import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
-import { getRouteBySlugAndLanguage } from "@/content/routes";
+import { getRouteBySlugAndLanguage, getSplintReviewsHref } from "@/content/routes";
 import { Check, AlertTriangle, Droplets, Wind, ThermometerSun, Footprints } from "lucide-react";
 import ProductIntroduction from "@/sections/shared/ProductIntroduction.astro";
 import { Image } from "astro:assets";
@@ -23,6 +23,7 @@ import bathroomSafetyImage from "@/assets/bathroom-safety-achilles-crutches.png"
 
 const { lang = "en" } = Astro.props as { lang?: Lang };
 const splintRoute = getRouteBySlugAndLanguage("splint", lang);
+const reviewsHref = getSplintReviewsHref(lang);
 
 const content = {
     en: {
@@ -609,7 +610,7 @@ const currentHygieneContent = hygieneContent[lang as keyof typeof hygieneContent
                 <EnhancedReviewCarousel client:load />
                 <div class="mt-8 text-center">
                     <a
-                        href="/reviews"
+                        href={reviewsHref}
                         class="inline-flex items-center gap-2 hover:bg-primary px-6 py-3 border-2 border-primary rounded-lg font-semibold text-primary hover:text-white transition-colors"
                     >
                         View All Reviews

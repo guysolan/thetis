@@ -1,8 +1,10 @@
 ---
 import type { Lang } from "@/config/languages.ts";
+import { getSplintReviewsHref } from "@/content/routes";
 import { Users, Stethoscope, Heart, Code } from "lucide-react";
 
 const { lang = "en" } = Astro.props as { lang: Lang };
+const reviewsHref = getSplintReviewsHref(lang);
 
 const content = {
     en: {
@@ -253,7 +255,7 @@ const getIcon = (iconName: string) => {
                 Our Courses
             </a>
             <span class="text-neutral-400">•</span>
-            <a href="/reviews" class="font-medium text-primary hover:underline">
+            <a href={reviewsHref} class="font-medium text-primary hover:underline">
                 Patient Stories
             </a>
         </div>

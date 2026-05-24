@@ -3,13 +3,16 @@ import { ArrowRight } from "lucide-react";
 import { cn } from "../lib/utils";
 import { content } from "./products/night-splint/content.ts";
 import type { Lang } from "../config/languages.ts";
+import PartialStarRating from "@/components/reviews/PartialStarRating";
+import { getSplintReviewsHref } from "@/content/routes";
+import { GLOBAL_REVIEW_AVERAGE } from "@/features/reviews/productReviewStats";
 
 type ReviewsLinkProps = {
   variant?: "default" | "background";
   size?: "sm" | "md" | "lg";
   className?: string;
   lang: Lang;
-  /** Defaults to `/reviews` (EN). Pass localized reviews path on translated pages. */
+  /** Defaults to splint product page #reviews (lang-aware). */
   href?: string;
   ariaLabel?: string;
 };
@@ -19,7 +22,7 @@ const ReviewsLink = ({
   size = "sm",
   className,
   lang = "en",
-  href = "/reviews",
+  href = getSplintReviewsHref(lang),
   ariaLabel = "View all reviews",
 }: ReviewsLinkProps) => {
   const iconSize = {
@@ -28,9 +31,7 @@ const ReviewsLink = ({
     lg: 24,
   }[size];
 
-  const clipUid = React.useId().replace(/:/g, "");
-  const yellowClipId = `${clipUid}-yellowPart`;
-  const greyClipId = `${clipUid}-greyPart`;
+  const starSize = size === "lg" ? "lg" : size === "md" ? "md" : "sm";
 
   const t = content[lang]?.reviewsLink || content.en.reviewsLink;
 
@@ -48,110 +49,11 @@ const ReviewsLink = ({
       aria-label={ariaLabel}
     >
       <div className="flex mr-2 transition-all duration-200">
-        {/* Full Star 1 */}
-        <svg
-          width={iconSize}
-          height={iconSize}
-          viewBox="0 0 24 24"
-          className="group-hover:rotate-12 transition-transform duration-300"
-        >
-          <path
-            d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-            fill="#facc15"
-            stroke="#f59e0b"
-            strokeWidth="1.5"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-          />
-        </svg>
-
-        {/* Full Star 2 */}
-        <svg
-          width={iconSize}
-          height={iconSize}
-          viewBox="0 0 24 24"
-          className="group-hover:-rotate-12 transition-transform duration-300"
-        >
-          <path
-            d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-            fill="#facc15"
-            stroke="#f59e0b"
-            strokeWidth="1.5"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-          />
-        </svg>
-
-        {/* Full Star 3 */}
-        <svg
-          width={iconSize}
-          height={iconSize}
-          viewBox="0 0 24 24"
-          className="group-hover:rotate-12 transition-transform duration-300"
-        >
-          <path
-            d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-            fill="#facc15"
-            stroke="#f59e0b"
-            strokeWidth="1.5"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-          />
-        </svg>
-
-        {/* Full Star 4 */}
-        <svg
-          width={iconSize}
-          height={iconSize}
-          viewBox="0 0 24 24"
-          className="group-hover:-rotate-12 transition-transform duration-300"
-        >
-          <path
-            d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-            fill="#facc15"
-            stroke="#f59e0b"
-            strokeWidth="1.5"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-          />
-        </svg>
-
-        {/* Partial Star (5/8 yellow, 3/8 grey) */}
-        <svg
-          width={iconSize}
-          height={iconSize}
-          viewBox="0 0 24 24"
-          className="group-hover:rotate-12 transition-transform duration-300"
-        >
-          <defs>
-            <clipPath id={yellowClipId}>
-              <rect x="0" y="0" width="15" height="24" />
-            </clipPath>
-            <clipPath id={greyClipId}>
-              <rect x="15" y="0" width="9" height="24" />
-            </clipPath>
-          </defs>
-          {/* Yellow part (first 5/8) */}
-          <path
-            d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-            fill="#facc15"
-            stroke="#f59e0b"
-            strokeWidth="1.5"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-            clipPath={`url(#${yellowClipId})`}
-          />
-          {/* Grey part (last 3/8) */}
-          <path
-            d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-            fill="#d1d5db"
-            stroke="#9ca3af"
-            strokeWidth="1.5"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-            clipPath={`url(#${greyClipId})`}
-          />
-        </svg>
+        <PartialStarRating
+          rating={GLOBAL_REVIEW_AVERAGE}
+          size={starSize}
+          idPrefix="reviews-link"
+        />
       </div>
       <span
         className={cn(

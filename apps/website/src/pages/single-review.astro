@@ -3,6 +3,7 @@ import ColorGradient from "../components/ColorGradient.astro";
 import Layout from "../layouts/Layout.astro";
 import { cn } from "../lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import { getSplintReviewsHref } from "@/content/routes";
 import { reviews } from "@/components/reviews/content/all";
 import NightSplintClinicianAdvert from "../components/products/night-splint/NightSplintClinicianAdvert.astro";
 import { ReviewCard } from "@/components/reviews/ReviewCard.tsx";
@@ -57,7 +58,7 @@ const renderStars = (count: number) => {
                 <!-- More Reviews button -->
                 <div class="flex justify-center">
                     <a
-                        href="/reviews"
+                        href={getSplintReviewsHref("en")}
                         class={cn(
                             buttonVariants({ size: "lg", variant: "default" }),
                         )}

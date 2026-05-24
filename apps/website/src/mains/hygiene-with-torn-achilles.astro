@@ -14,11 +14,12 @@ import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
 import StickyAddToCart from "@/components/StickyAddToCart.tsx";
 import ExitIntentPopup from "@/components/ExitIntentPopup.tsx";
 import ProductIntroduction from "@/sections/shared/ProductIntroduction.astro";
-import { getRouteBySlugAndLanguage } from "@/content/routes";
+import { getRouteBySlugAndLanguage, getSplintReviewsHref } from "@/content/routes";
 import { Check, AlertTriangle, Bed, Sparkles, Shirt, RefreshCw } from "lucide-react";
 
 const { lang = "en" } = Astro.props as { lang?: Lang };
 const splintRoute = getRouteBySlugAndLanguage("splint", lang);
+const reviewsHref = getSplintReviewsHref(lang);
 
 const content = {
     en: {
@@ -427,7 +428,7 @@ const currentEducation = hygieneEducation[lang as keyof typeof hygieneEducation]
                 <EnhancedReviewCarousel client:load />
                 <div class="mt-8 text-center">
                     <a
-                        href="/reviews"
+                        href={reviewsHref}
                         class="inline-flex items-center gap-2 hover:bg-primary px-6 py-3 border-2 border-primary rounded-lg font-semibold text-primary hover:text-white transition-colors"
                     >
                         View All Reviews

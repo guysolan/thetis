@@ -3,7 +3,7 @@ const STAR_PATH =
 
 interface PartialStarRatingProps {
   rating: number;
-  size?: "sm" | "md";
+  size?: "sm" | "md" | "lg";
   idPrefix?: string;
 }
 
@@ -12,7 +12,8 @@ export default function PartialStarRating({
   size = "sm",
   idPrefix = "rating",
 }: PartialStarRatingProps) {
-  const iconClass = size === "md" ? "w-5 h-5" : "w-4 h-4";
+  const iconClass =
+    size === "lg" ? "w-6 h-6" : size === "md" ? "w-5 h-5" : "w-4 h-4";
 
   return (
     <div
@@ -36,7 +37,10 @@ export default function PartialStarRating({
         }
 
         if (rating > index && rating < starValue) {
-          const partialFill = Math.max(rating - index, 0.1);
+          const partialFill = rating - index;
+          // Star path is centred in the viewBox; ensure at least ~25% clip width so
+          // the left tip shows yellow for small fractions (e.g. 4.1 → fifth star).
+          const clipWidth = 20 * Math.max(partialFill, 0.25);
           const clipId = `${idPrefix}-star-${index}`;
 
           return (
@@ -48,15 +52,12 @@ export default function PartialStarRating({
             >
               <defs>
                 <clipPath id={clipId}>
-                  <rect x="0" y="0" width={20 * partialFill} height="20" />
+                  <rect x="0" y="0" width={clipWidth} height="20" />
                 </clipPath>
               </defs>
+              <path fill="#e5e7eb" d={STAR_PATH} />
               <path
-                className="fill-current text-neutral-200"
-                d={STAR_PATH}
-              />
-              <path
-                className="fill-current text-amber-400"
+                fill="#fbbf24"
                 clipPath={`url(#${clipId})`}
                 d={STAR_PATH}
               />

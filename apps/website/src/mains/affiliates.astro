@@ -8,19 +8,11 @@ import AffiliatesHowItWorks from "../sections/affiliates/AffiliatesHowItWorks.as
 import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
 import SurgeonsCarousel from "@/components/SurgeonsCarousel";
 import type { Lang } from "@/config/languages.ts";
+import { getSplintReviewsHref } from "@/content/routes";
 
 const { lang = "en" } = Astro.props as { lang: Lang };
 
-const reviewsUrl =
-    lang === "en"
-        ? "/reviews"
-        : lang === "de"
-          ? "/de/bewertungen"
-          : lang === "fr"
-            ? "/fr/avis"
-            : lang === "es"
-              ? "/es/resenas"
-              : "/it/recensioni";
+const reviewsUrl = getSplintReviewsHref(lang);
 
 const content = {
     en: {

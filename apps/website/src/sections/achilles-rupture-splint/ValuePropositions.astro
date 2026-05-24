@@ -4,8 +4,10 @@ import { ExternalLink } from "lucide-astro";
 
 import type { Lang } from "@/config/languages.ts";
 import type { HighlightedParagraphProps } from "@/components/HighlightedParagraph.tsx";
+import { getSplintReviewsHref } from "@/content/routes";
 
 const { lang = "en" } = Astro.props as { lang?: Lang };
+const surgeonReviewsHref = getSplintReviewsHref(lang, "filter=clinician");
 
 const content: Record<
     Lang,
@@ -293,7 +295,11 @@ const currentContent = content[lang as keyof typeof content];
                         </p>
                         {card.link && (
                             <a
-                                href={card.link.href}
+                                href={
+                                    card.link.href.includes("/reviews")
+                                        ? surgeonReviewsHref
+                                        : card.link.href
+                                }
                                 class="inline-flex items-center gap-1 mt-2 text-primary hover:text-primary/80 underline underline-offset-2 transition-colors"
                             >
                                 <span>{card.link.text}</span>

@@ -1,3 +1,5 @@
+import { getSplintReviewsHref } from "./routes";
+
 export const products = [
   {
     href: "/splint",
@@ -6,7 +8,7 @@ export const products = [
       "An Achilles rupture splint to make sleeping more pleasant and bearable and increase the speed of patients being seen by a specialist.",
   },
   {
-    href: "/reviews",
+    href: getSplintReviewsHref("en"),
     title: "Reviews",
     description:
       "Reviews from Athletes, Surgeons and patients who have used the Achilles Rupture Splint.",

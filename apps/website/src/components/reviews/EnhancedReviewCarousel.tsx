@@ -13,6 +13,11 @@ import {
   CarouselPrevious,
 } from "@thetis/ui/carousel";
 import { Badge } from "@thetis/ui/badge";
+import PartialStarRating from "@/components/reviews/PartialStarRating";
+import {
+  formatGlobalRatingsLabel,
+  GLOBAL_REVIEW_AVERAGE,
+} from "@/features/reviews/productReviewStats";
 
 import { patients } from "./content/patients";
 
@@ -33,51 +38,7 @@ function CountryFlag({ code }: { code: string }) {
   );
 }
 
-// Star component for full stars
-const FullStar = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24">
-    <path
-      d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-      fill="#facc15"
-      stroke="#f59e0b"
-      strokeWidth="1.5"
-      strokeLinejoin="round"
-      strokeLinecap="round"
-    />
-  </svg>
-);
-
-// Partial star (60% filled for 4.6 rating)
-const PartialStar = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 24 24">
-    <defs>
-      <clipPath id="yellowPartCarousel">
-        <rect x="0" y="0" width="14.4" height="24" />
-      </clipPath>
-      <clipPath id="greyPartCarousel">
-        <rect x="14.4" y="0" width="9.6" height="24" />
-      </clipPath>
-    </defs>
-    <path
-      d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-      fill="#facc15"
-      stroke="#f59e0b"
-      strokeWidth="1.5"
-      strokeLinejoin="round"
-      strokeLinecap="round"
-      clipPath="url(#yellowPartCarousel)"
-    />
-    <path
-      d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-      fill="#d1d5db"
-      stroke="#9ca3af"
-      strokeWidth="1.5"
-      strokeLinejoin="round"
-      strokeLinecap="round"
-      clipPath="url(#greyPartCarousel)"
-    />
-  </svg>
-);
+// Star component removed — review cards use lucide Star icons
 
 export default function EnhancedReviewCarousel() {
   return (
@@ -86,18 +47,20 @@ export default function EnhancedReviewCarousel() {
       <div className="mb-8 text-center">
         <div className="inline-flex items-center gap-3 bg-primary/10 mb-3 px-6 py-3 rounded-full">
           <div className="flex items-center gap-1.5">
-            <div className="flex">
-              <FullStar size={20} />
-              <FullStar size={20} />
-              <FullStar size={20} />
-              <FullStar size={20} />
-              <PartialStar size={20} />
-            </div>
-            <span className="font-bold text-neutral-900 text-2xl">4.6</span>
+            <PartialStarRating
+              rating={GLOBAL_REVIEW_AVERAGE}
+              size="md"
+              idPrefix="carousel-summary"
+            />
+            <span className="font-bold text-neutral-900 text-2xl">
+              {GLOBAL_REVIEW_AVERAGE.toFixed(1)}
+            </span>
           </div>
           <div className="bg-neutral-300 w-px h-6" />
           <div className="text-left">
-            <div className="font-semibold text-neutral-900 text-sm">Based on 200+ reviews</div>
+            <div className="font-semibold text-neutral-900 text-sm">
+              {formatGlobalRatingsLabel()}
+            </div>
           </div>
         </div>
       </div>
@@ -124,10 +87,16 @@ export default function EnhancedReviewCarousel() {
                         {Array(5)
                           .fill(null)
                           .map((_, i) => (
-                            <Star key={i} className="fill-yellow-400 w-4 h-4 text-yellow-400" />
+                            <Star
+                              key={i}
+                              className="fill-yellow-400 w-4 h-4 text-yellow-400"
+                            />
                           ))}
                       </div>
-                      <Badge variant="outline" className="border-primary/30 text-primary text-xs">
+                      <Badge
+                        variant="outline"
+                        className="border-primary/30 text-primary text-xs"
+                      >
                         <CheckCircle2 className="mr-1 w-3 h-3" />
                         Verified
                       </Badge>
@@ -150,15 +119,18 @@ export default function EnhancedReviewCarousel() {
                         {review.name}
                       </div>
                       <div className="flex items-center gap-2 mt-0.5">
-                        {review.country && (
-                          <CountryFlag code={review.country} />
-                        )}
+                        {review.country && <CountryFlag
+                          code={review.country}
+                        />}
                         <span className="text-neutral-500 text-xs">
                           {review.date
-                            ? new Date(review.date).toLocaleDateString("en-US", {
+                            ? new Date(review.date).toLocaleDateString(
+                              "en-US",
+                              {
                                 month: "short",
                                 year: "numeric",
-                              })
+                              },
+                            )
                             : "Verified Patient"}
                         </span>
                       </div>

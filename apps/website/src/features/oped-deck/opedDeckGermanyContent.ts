@@ -1,13 +1,13 @@
 export const opedPitchGermanyReimbursement = {
   eyebrow: "Routes to market",
-  title: "Germany already reimburses ATR night splints",
+  title: "Germany already reimburses night splints for ATR",
   intro:
-    "The reimbursement pathway exists today. The gap is product fit: reimbursed devices are usually plantar-fasciitis splints, not ATR-specific protection.",
+    "The reimbursement route is already open. Most listed devices are plantar fasciitis splints, not built for Achilles rupture.",
   germanyLabel: "🇩🇪 Germany · reimbursed",
   imageCaption:
     "Typical reimbursed PF splint - a workaround, not an ATR-specific device.",
   germanyBody:
-    "That gives OPED a clear route: use the existing reimbursement pathway with a purpose-built Thetis ATR splint - ~30° plantarflexion, light, breathable, and designed for rupture recovery.",
+    "OPED can use the same route with a purpose-built Thetis splint: ~30° plantarflexion, light, breathable, and designed for rupture recovery.",
   otherRoutesTitle: "Already live elsewhere",
   otherRoutes: [
     {
@@ -22,14 +22,14 @@ export const opedPitchGermanyReimbursement = {
       market: "United States",
       channel: "Online · direct to patient",
       detail:
-        "~$15k/month in US online sales already - patients find us when the boot stops them sleeping.",
+        "~$15k/month in US online sales - patients find us when the boot stops them sleeping.",
     },
     {
       flag: "🇨🇦",
       market: "Canada",
       channel: "Orthopaedic distributors",
       detail:
-        "Already sold through orthopaedic distributors - bundled alongside boot and recovery products.",
+        "Sold through orthopaedic distributors - bundled with boot and recovery products.",
     },
   ],
 } as const;

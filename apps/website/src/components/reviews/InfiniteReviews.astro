@@ -1,8 +1,11 @@
 ---
 import { InfiniteMovingCards } from "@thetis/ui/infinite-moving-cards";
+import { getSplintReviewsHref } from "@/content/routes";
 
 import { patients } from "./content/patients";
 import ReviewCarousel from "./ReviewCarousel";
+
+const reviewsHref = getSplintReviewsHref("en");
 ---
 
 <div
@@ -28,7 +31,7 @@ import ReviewCarousel from "./ReviewCarousel";
 
 <div class="flex justify-center items-center">
   <a
-    href="/reviews"
+    href={reviewsHref}
     class="flex mx-auto px-4 pb-8 text-primary text-xl text-center hover:underline underline-offset-4"
     >View all reviews</a
   >

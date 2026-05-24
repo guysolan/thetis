@@ -1,5 +1,8 @@
 ---
-import ReviewsMain from "../../mains/reviews.astro";
----
+import { getSplintReviewsHref } from "@/content/routes";
 
-<ReviewsMain lang="fr" />
+return Astro.redirect(
+  getSplintReviewsHref("fr", Astro.url.searchParams),
+  308,
+);
+---

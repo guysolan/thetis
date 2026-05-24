@@ -6,7 +6,7 @@ import {
   getCatalogueProductsForCondition,
   orderedShopProductsForDisplay,
 } from "@thetis/catalogue";
-import { getRouteBySlugAndLanguage } from "@/content/routes";
+import { getRouteBySlugAndLanguage, getSplintReviewsHref } from "@/content/routes";
 import { conditionHubChooseConditionLabel } from "@/content/condition-hub-select-labels";
 import ConditionHubSelect from "@/components/condition/ConditionHubSelect.astro";
 import {
@@ -355,8 +355,7 @@ const fromThetisLinks = [
 ];
 
 const splintRoute = getRouteBySlugAndLanguage("achilles-rupture-splint", lang);
-const reviewsRoute = getRouteBySlugAndLanguage("reviews", lang);
-const reviewsPageHref = reviewsRoute?.href ?? "/reviews";
+const reviewsPageHref = getSplintReviewsHref(lang);
 const isAchillesShop = conditionId === "achilles-rupture";
 
 /** Short EN URL; other locales use translated splint PDP. */
@@ -847,10 +846,9 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
           <div class="mb-8">
             <EnhancedReviewCarousel client:load />
           </div>
-          {reviewsRoute ? (
-            <div class="text-center">
-              <a
-                href={reviewsRoute.href}
+          <div class="text-center">
+            <a
+              href={reviewsPageHref}
                 class="inline-flex items-center gap-2 hover:bg-primary px-6 py-3 border-2 border-primary rounded-lg font-semibold text-primary hover:text-white transition-colors"
               >
                 {at.reviewsViewAll}
@@ -870,7 +868,6 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
                 </svg>
               </a>
             </div>
-          ) : null}
         </div>
       </section>
     ) : null

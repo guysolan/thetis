@@ -1,4 +1,5 @@
 import React from "react";
+import { getSplintReviewsHref } from "@/content/routes";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import NightSplintBedImage from "@/assets/night-splint/achilles_rupture_night_splint_bed_thetis_medical.jpg";
@@ -82,7 +83,7 @@ export default function CantSleepSection() {
           <div className="pt-6 border-neutral-200 border-t">
             <p className="mb-2 text-neutral-600 text-sm">Related resources:</p>
             <div className="flex flex-wrap gap-2">
-              <a href="/reviews" className="text-primary text-sm hover:underline">
+              <a href={getSplintReviewsHref("en")} className="text-primary text-sm hover:underline">
                 Read Reviews
               </a>
               <span className="text-neutral-300">•</span>

@@ -23,6 +23,7 @@ import SurgeonsCarousel from "@/components/SurgeonsCarousel";
 import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
 import { conditions } from "@/content/conditions/registry";
 import type { Lang } from "@/config/languages";
+import { getSplintReviewsHref } from "@/content/routes";
 
 interface Props {
     lang?: Lang;
@@ -763,16 +764,7 @@ const splintUrl =
               ? "/es/bota-ortopedica-tendon-aquiles"
               : "/it/tutore-rottura-tendine-achille";
 
-const reviewsUrl =
-    lang === "en"
-        ? "/reviews"
-        : lang === "de"
-          ? "/de/bewertungen"
-          : lang === "fr"
-            ? "/fr/avis"
-            : lang === "es"
-              ? "/es/resenas"
-              : "/it/recensioni";
+const reviewsUrl = getSplintReviewsHref(lang);
 ---
 
 <ThetisSchema slot="head" />

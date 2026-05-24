@@ -590,6 +590,7 @@ export const productRoutes: BaseRoute[] = [
 
 /** Product pages that stay routable but are omitted from the site footer. */
 export const productRouteSlugsExcludedFromFooter: readonly string[] = [
+  "reviews",
   "sleeping-with-torn-achilles",
   "washing-with-torn-achilles",
   "swimming-with-torn-achilles",
@@ -1636,6 +1637,26 @@ export function getTranslatedUrlForLanguage(
   if (!language) return `/${slug}`;
 
   return generateRouteForLanguage(baseRoute, language).href;
+}
+
+/** Product page URL with #reviews anchor (lang-aware). */
+export function getSplintReviewsHref(
+  lang: string = "en",
+  searchParams?: string | URLSearchParams,
+): string {
+  const splintRoute = getRouteBySlugAndLanguage("achilles-rupture-splint", lang);
+  const base = splintRoute?.href ?? "/achilles-rupture-splint";
+  const search =
+    typeof searchParams === "string"
+      ? searchParams
+        ? searchParams.startsWith("?")
+          ? searchParams
+          : `?${searchParams}`
+        : ""
+      : searchParams?.toString()
+        ? `?${searchParams.toString()}`
+        : "";
+  return `${base}${search}#reviews`;
 }
 
 // Backward compatibility exports

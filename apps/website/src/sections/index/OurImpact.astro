@@ -1,7 +1,9 @@
 ---
 import type { Lang } from "@/config/languages.ts";
+import { getSplintReviewsHref } from "@/content/routes";
 
 const { lang = "en" } = Astro.props as { lang: Lang };
+const reviewsHref = getSplintReviewsHref(lang);
 
 const content = {
     en: {
@@ -90,7 +92,7 @@ const t = content[lang as keyof typeof content];
         </a>
         <div class="flex flex-wrap justify-center gap-4 mt-8">
             <a
-                href="/reviews"
+                href={reviewsHref}
                 class="font-medium text-primary text-sm hover:underline"
             >
                 Read Reviews
