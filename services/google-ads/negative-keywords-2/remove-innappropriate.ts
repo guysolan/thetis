@@ -7,11 +7,14 @@
  *    an Achilles rupture splint/boot (leaving them as negatives would block
  *    potential customers from seeing the ad).
  *
- * 2. CONVERT to EXACT match — keywords that are currently PHRASE match but
- *    are the product's own category terms (e.g. "night splint"). As a phrase
- *    negative they block every search containing those words, including
- *    "night splint for achilles rupture". Converting to exact limits the block
- *    to the bare two-word query only.
+ * 2. CONVERT to EXACT match — dangerous single-word PHRASE negatives (e.g.
+ *    "tendon") that block every search containing the word. Converting to
+ *    exact limits the block to the bare query only.
+ *
+ * All negatives containing splint/splints, night/nite/nights, aircast, wedges,
+ * achilles (incl. typos), plantarflexion, rupture/torn/tear, thompson, boot,
+ * surgery/operation, conservative treatment, orthosis/ortesis, or brace/braces
+ * are removed entirely.
  *
  * Run:  npx ts-node remove-innappropriate.ts
  */
@@ -52,79 +55,55 @@ const REMOVE_PATTERNS: RegExp[] = [
     /\boped\s?vacotalus/i,
     /\boped\s?medical/i,
 
-    // ── Achilles + splint/ferula (direct product searches) ────────────────────
-    /achilles.{0,40}splint/i,
-    /splint.{0,40}achilles/i,
-    /ferula.{0,40}(aquiles|tendon)/i,
-    /(aquiles|tendon).{0,40}ferula/i,
+    // ── Aircast — competitor walking boot brand ───────────────────────────────
+    /\baircast/i,
+    /\bair\s?cast/i,
 
-    // ── Achilles + boot (product searches — walking boot for ATR) ─────────────
-    /achilles.{0,40}boot/i,
-    /boot.{0,40}achilles/i,
-    /\bboot for (torn|ruptured|broken) (achilles|tendon)\b/i,
+    // ── Any splint/splints or night/nite/nights — product category terms ─────
+    /\bsplint/i, // splint, splints, splinting, etc.
+    /\bnights?\b/i,
+    /\bnite\b/i,
+    /\bnight/i, // nightsock, nighttime, etc.
 
-    // ── Spanish/French: orthopedic boot for Achilles / tendon ─────────────────
-    /bota\b.{0,40}(aquiles|tendon)/i,
-    /(aquiles|tendon).{0,40}\bbota\b/i,
-    /botte\b.{0,40}(achille|tendon)/i,
-    /(achille|tendon).{0,40}\bbotte\b/i,
+    // ── Achilles spellings (incl. common typos) + French achille ─────────────
+    /\bachill/i,
+    /\bacilles/i,
+    /\baquiles/i,
+    /\bachikes/i,
 
-    // ── Night splint specifically for Achilles ────────────────────────────────
-    /night\s+splint.{0,40}achilles/i,
-    /achilles.{0,40}night\s+splint/i,
+    // ── Injury / treatment terms — high-intent ATR buyer searches ─────────────
+    /wedge/i,
+    /\bplantar\s?flex/i,
+    /ruptur/i, // rupture, ruptured, ruptura — not \r (carriage return in JS)
+    /\brotura/i,
+    /\brompimiento/i,
+    /\bdesgarro/i,
+    /\btorn\b/i,
+    /\btore\b/i,
+    /\btearing\b/i,
+    /\btear/i, // tear, tears, tearing; incl. compound spellings
+    /\bthompson/i,
+    /boot/i, // boot, boots, legboot, walking boot
+    /\bbota\b/i,
+    /\bbotte/i,
+    /\bsurg/i, // surgery, surgical, surgeon
+    /\bcirug/i, // cirugía, cirugia
+    /\boperat/i, // operation, operacion, operative
+    /\bconservativ/i,
 
-    // ── Achilles rupture protocol / non-surgical treatment products ───────────
-    /berlin\s+protocol\s+achilles/i,
-    /achilles\s+protocol\s+non.?surgical/i,
-    /non.?surgical\s+achilles.{0,30}recovery/i,
+    // ── VACOped alternatives / protocol (buyer intent) ────────────────────────
+    /berlin\s+protocol/i,
+    /non.?surgical.{0,30}achill/i,
     /alternative\s+to\s+walking\s+boot/i,
     /vacoped\s+alternative/i,
 
-    // ── Achilles wedge insole (accessory for the boot) ────────────────────────
-    /achilles\s+wedge\s+insole/i,
+    // ── Ferula (Spanish splint) + tendon ────────────────────────────────────
+    /\bferula/i,
 
-    // ── Post-op / surgery Achilles — patient who just had surgery needs the product
-    /achilles.{0,40}post.?op/i,
-    /post.?op.{0,40}achilles/i,
-    /post.{0,10}(operacion|operação|cirugia|cirurgia).{0,40}(aquiles|achilles|tendon)/i,
-    /rehabilitaci[oó]n.{0,20}(cirug|post).{0,30}(aquiles|tendon)/i,
-    /operaci[oó]n.{0,20}(tendon|aquiles)/i,
-
-    // ── "achilles pop recovery" — person who just felt the rupture pop ─────────
-    /achilles\s+pop\s+recovery/i,
-
-    // ── Achilles + rupture / ruptured / ruptures ──────────────────────────────
-    /achilles.{0,60}ruptur/i,
-    /ruptur.{0,60}achilles/i,
-    // Spanish/French: rotura, ruptura, rompimiento
-    /rotura.{0,60}(aquiles|tendon|talon)/i,
-    /(aquiles|tendon|talon).{0,60}rotura/i,
-    /ruptura.{0,60}(aquiles|tendon)/i,
-    /(aquiles|tendon).{0,60}ruptura/i,
-    /rompimiento.{0,60}(aquiles|tendon)/i,
-    /rupture\s+(partielle|du\s+tendon)/i,
-
-    // ── Achilles + torn / tearing ─────────────────────────────────────────────
-    /achilles.{0,60}torn/i,
-    /torn.{0,60}achilles/i,
-    /tearing.{0,60}achilles/i,
-    /achilles.{0,60}tearing/i,
-    // "tore achilles", "tore his/my/their achilles"
-    /\btore\b.{0,40}achilles/i,
-    /achilles.{0,40}\btore\b/i,
-    // Spanish: roto (torn), desgarro (tear/rupture)
-    /tendon\s+de\s+aquiles\s+roto/i,
-    /desgarro.{0,40}(aquiles|tendon)/i,
-    /(aquiles|tendon).{0,40}desgarro/i,
-
-    // ── Achilles + tear / tears ───────────────────────────────────────────────
-    /achilles.{0,60}\btears?\b/i,
-    /\btears?\b.{0,60}achilles/i,
-    // "tear achilles tendon", "tear in achilles", "longitudinal tear achilles" etc.
-    /\btear\b.{0,60}achilles/i,
-    /achilles.{0,60}\btear\b/i,
-    // compound spelling e.g. "achillestear"
-    /achillestear/i,
+    // ── Orthosis / brace — product category terms ─────────────────────────────
+    /orthosis/i,
+    /ortesis/i,
+    /brace/i, // brace, braces, footbrace, anklebraces, etc.
 ];
 
 // ---------------------------------------------------------------------------
@@ -136,86 +115,18 @@ const REMOVE_PATTERNS: RegExp[] = [
 // ---------------------------------------------------------------------------
 
 const CONVERT_TO_EXACT_PATTERNS: RegExp[] = [
-    // Generic "night splint" — the product category itself
-    /^a?\s*night\s+splints?$/i,
-    /^night\s+splint\s+pillow$/i,
-    /^night\s+splint\s+socks?$/i,
-    /^night\s+splint\s+boots?$/i,
-    /^night\s+sock\s+splint$/i,
-    /^night\s+resting\s+splint$/i,
-    /^night\s+leg\s+splint$/i,
-    /^night\s+heel\s+splints?$/i,
-    /^night\s+time\s+splints?$/i,
-    /^night\s+fighter\s+splint$/i,
-    /^night\s+afo$/i,
-    /^foot\s+night\s+splint$/i,
-    /^calf\s+night\s+splint$/i,
-    /^heel\s+night\s+splint$/i,
-    /^sleep\s+splint$/i,
-    /^resting\s+splint$/i,
-    /^resting\s+afo$/i,
-    /^splint\s+worn\s+at\s+night$/i,
-    /^wearing\s+a\s+night\s+splint$/i,
-    /^wear\s+night\s+splints?$/i,
-    /^adjustable\s+night\s+splint$/i,
-    /^posterior\s+night\s+splint/i,
-    /^dorsal\s+night\s+splint$/i,
-    /^dorsiflexion\s+night\s+(sock|splint)$/i,
-    /^dorsal\s+spur\s+treatment$/i,
-
-    // Night splint with pharmacy / retailer — likely a buyer comparing options
-    /^night\s+splint\s+(nhs|uk|walgreens|walmart|near\s+me)$/i,
-    /^pharmacy\s+night\s+splint$/i,
-    /^cvs\s+night\s+splint$/i,
-    /^where\s+(can\s+i\s+buy|to\s+buy)\s+(a\s+)?night\s+splint/i,
-    /^night\s+splints\s+near\s+me$/i,
-
-    // Night splint brand names (buyer searches — exact block is safer than phrase)
-    /^azmed\s+night\s+splint$/i,
-    /^powerstep\s+night\s+splint$/i,
-    /^deroyal\s+night\s+splint$/i,
-    /^vive\s+hard\s+night\s+splint$/i,
-    /^mars\s+wellness\s+night\s+splint$/i,
-    /^darco\s+night\s+splint$/i,
-    /^alphabrace\s+night\s+splint$/i,
-    /^cascade\s+night\s+splints?$/i,
-    /^coreline\s+posterior\s+adjustable\s+night\s+splint$/i,
-    /^exoform\s+night\s+splint$/i,
-    /^dorsiwedge\s+night\s+splint$/i,
-    /^l4397\s+night\s+splint$/i,
-    /^l1930\s+night\s+splint$/i,
-    /^pfs\s+night\s+splint$/i,
-    /^quanquer\s+night\s+splint$/i,
-    /^ovation\s+hybrid\s+night\s+splint/i,
-    /^kafo\s+night\s+splint$/i,
-    /^nite\s+splint$/i,
-    /^night\s+splinter$/i,
-
-    // "How does a night splint work" / "are night splints effective"
-    // — buyer research queries; phrase match incorrectly blocks Achilles variations
-    /^how\s+(does\s+(a\s+)?night\s+splint|do\s+night\s+splints)\s+work$/i,
-    /^are\s+night\s+splints\s+effective$/i,
-    /^what\s+are\s+night\s+splints\s+used\s+for$/i,
-
-    // Strassburg sock — another night-splint brand (used for plantar fasciitis,
-    // not Achilles rupture, so exact block is appropriate)
-    /^strassburg\s+(sock|socks|splint|night\s+sock)$/i,
+    // Strassburg sock — plantar fasciitis brand, not Achilles rupture
+    /^strassburg\s+(sock|socks)$/i,
     /^(where\s+(can\s+i\s+)?buy|where\s+to\s+buy)\s+strassburg\s+sock$/i,
     /^strassburg\s+sock\s+(regular|where\s+to\s+buy)$/i,
 
     // ── Dangerous single-word phrase negatives ────────────────────────────────
     // As phrase match these block ANY search containing the word, e.g.
-    // "splint" blocks "achilles rupture splint", "tendon" blocks
-    // "achilles tendon splint recovery", etc.
-    /^splint$/i,
+    // "tendon" blocks "achilles tendon splint recovery", etc.
     /^tendons?$/i,
-    /^orthosis$/i,
     /^orthotics?$/i,
     /^equinus$/i,
     /^calcaneus$/i,
-
-    // ── "adjustable splints" — phrase blocks "adjustable achilles splints" ─────
-    /^adjustable splints$/i,
 ];
 
 // ---------------------------------------------------------------------------
@@ -314,7 +225,7 @@ const logLines: string[] = [
     `═══════════════════════════════════════════════════════`,
     `CONVERTED TO EXACT (${converted.length} keywords changed PHRASE → EXACT)`,
     `These are product-category terms. As phrase negatives they blocked all`,
-    `searches containing the phrase (e.g. "night splint for achilles rupture").`,
+    `searches containing the phrase (e.g. "achilles tendon recovery").`,
     `Exact match limits the block to the bare phrase only.`,
     `═══════════════════════════════════════════════════════`,
     ...converted.map((k) => `  ~ "${k.keyword_text}"  PHRASE → EXACT`),

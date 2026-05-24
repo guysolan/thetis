@@ -13,7 +13,7 @@ import { tradePatentPortfolio } from "@/content/trade/tradePatentTimeline";
 import { splintRegulatorySections } from "@/content/trade/splintRegulatoryProfile";
 import { aeWaitComparison } from "@/content/evidence/evidenceStudies";
 
-export const OPED_DECK_SLIDE_COUNT = 12;
+export const OPED_DECK_SLIDE_COUNT = 11;
 export const OPED_DECK_APPENDIX_SLIDE_COUNT = 1;
 
 const t = tradePageContent.en;
@@ -64,11 +64,11 @@ export const opedPitchDayStack = {
 
 export const opedPitchPatientComplaint = {
   eyebrow: "The night problem",
-  title: "The solution started with a surgeon",
+  title: "The problem showed up at night",
   intro:
-    "Guy's dad, a foot and ankle surgeon, saw it in clinic - his Achilles rupture patients struggle to sleep in their boot.",
+    "Matthew Solan, foot & ankle surgeon, kept seeing the same recovery problem: Achilles rupture patients were protected in the boot by day, but struggled to sleep in it at night.",
   surveyLead:
-    "Guy surveyed the Facebook group and found he was right: 77% found the boot:",
+    "Guy surveyed Achilles rupture patients and found the pattern was widespread: 77% found the boot:",
   complaintThemes: [
     { id: "hot", label: "Hot" },
     { id: "heavy", label: "Heavy" },
@@ -641,9 +641,9 @@ export const opedPitchInvitation = {
 } as const;
 
 export const opedPitchPrototypeOrigin = {
-  title: "From clinic problem to purpose-built splint",
+  title: "Many prototypes. One purpose-built answer.",
   intro:
-    "Matthew Solan, foot & ankle surgeon, saw the same problem in clinic every week: Achilles rupture patients hate sleeping in their boot. Guy built the first prototypes at university, iterating from borrowed 3D printer parts and hand-sewn straps into a purpose-built night splint.",
+    "Guy tried lots of designs at university, moving from borrowed 3D printer parts and hand-sewn straps to the form that worked best: a left/right top-of-leg splint with an organic plastic shell, locked around ~30° plantarflexion for sleep.",
   headline: "From clinical problem to finished device",
   clinicianQuote: {
     quote:
@@ -656,9 +656,9 @@ export const opedPitchPrototypeOrigin = {
     { value: "100+", label: "People tested in development" },
   ],
   story: [
-    "Matthew Solan's clinic supplied the clinical brief",
-    "400+ prototypes hand-finished on a borrowed 3D printer",
-    "Straps sewn at home on Grannie's sewing machine",
+    "Clinical brief: protect plantarflexion when the boot comes off at night",
+    "400+ prototypes across different shapes, straps, and shell geometries",
+    "Best form: left/right top-of-leg splint with an organic plastic shell",
     "Seven generations refined with feedback from 100+ rupture patients",
   ],
   imageAlt:
@@ -668,7 +668,7 @@ export const opedPitchPrototypeOrigin = {
 export const opedPitchDesignReviews = {
   title: "The live product listing proves demand",
   intro:
-    "Launched in 2022. Over 5,000 sold to date. Patients buy the splint after searching for a comfortable alternative to sleeping in their boot.",
+    "Launched in 2022. Over 5,000 sold to date. Developed through 400+ prototypes into a left/right top-of-leg shell built specifically for ATR sleep protection.",
   productListing: {
     badge: "5,000+ Better Rested Patients",
     title: "The Only Splint for Achilles Tendon Rupture",

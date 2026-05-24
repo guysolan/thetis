@@ -2,7 +2,6 @@
 import ColorGradient from "@/components/ColorGradient.astro";
 import { Check } from "lucide-astro";
 import DeckSection from "./DeckSection.astro";
-import OpedPrototypeStory from "./OpedPrototypeStory.astro";
 import OpedDesignReviews from "./OpedDesignReviews.astro";
 import OpedGermanyReimbursement from "./OpedGermanyReimbursement.astro";
 import OpedPatientComplaintSurveyResults from "./OpedPatientComplaintSurveyResults";
@@ -18,7 +17,6 @@ import {
   opedPitchRegulatory,
   opedPitchPartnershipOptions,
   opedPitchPatientComplaint,
-  opedPitchPrototypeOrigin,
   opedPitchSalesChart,
   opedPitchWhyOpedNow,
 } from "@/features/oped-deck/opedDeckPitchContent";
@@ -130,19 +128,6 @@ const { page } = Astro.props;
 {
   page === 4 && (
     <DeckSection
-      title={opedPitchPrototypeOrigin.title}
-      intro={opedPitchPrototypeOrigin.intro}
-      eyebrow="Product development"
-      gradient
-    >
-      <OpedPrototypeStory content={opedPitchPrototypeOrigin} />
-    </DeckSection>
-  )
-}
-
-{
-  page === 5 && (
-    <DeckSection
       title={opedPitchDesignReviews.title}
       intro={opedPitchDesignReviews.intro}
       eyebrow="Online launch"
@@ -154,7 +139,7 @@ const { page } = Astro.props;
 }
 
 {
-  page === 6 && (
+  page === 5 && (
     <DeckSection
       title="Surgeons say yes"
       intro="Leading foot & ankle surgeons recommend the splint - the same problem the boot cannot solve at night."
@@ -167,7 +152,7 @@ const { page } = Astro.props;
 }
 
 {
-  page === 7 && (
+  page === 6 && (
     <DeckSection
       title={opedPitchClinical.title}
       intro={opedPitchClinical.intro}
@@ -197,7 +182,7 @@ const { page } = Astro.props;
 }
 
 {
-  page === 8 && (
+  page === 7 && (
     <DeckSection
       title={opedPitchIp.title}
       intro={opedPitchIp.intro}
@@ -232,7 +217,7 @@ const { page } = Astro.props;
 }
 
 {
-  page === 9 && (
+  page === 8 && (
     <DeckSection
       title={opedPitchRegulatory.title}
       intro={opedPitchRegulatory.intro}
@@ -268,7 +253,7 @@ const { page } = Astro.props;
 }
 
 {
-  page === 10 && (
+  page === 9 && (
     <DeckSection
       title={opedPitchGermanyReimbursement.title}
       intro={opedPitchGermanyReimbursement.intro}
@@ -281,7 +266,7 @@ const { page } = Astro.props;
 }
 
 {
-  page === 11 && (
+  page === 10 && (
     <DeckSection
       title={opedPitchWhyOpedNow.title}
       intro={opedPitchWhyOpedNow.intro}
@@ -308,7 +293,7 @@ const { page } = Astro.props;
 }
 
 {
-  page === 12 && (
+  page === 11 && (
     <DeckSection
       title={opedPitchPartnershipOptions.title}
       intro={opedPitchPartnershipOptions.intro}
