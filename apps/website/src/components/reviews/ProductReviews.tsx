@@ -10,6 +10,7 @@ import { Button } from "@thetis/ui/button";
 import { Progress } from "@thetis/ui/progress";
 import {
   formatGlobalRatingsLabel,
+  formatGlobalReviewAverage,
   GLOBAL_REVIEW_AVERAGE,
 } from "@/features/reviews/productReviewStats";
 import masterReviewsData from "@/data/master-reviews.json";
@@ -21,8 +22,8 @@ import {
   formatReviewMeta,
   getDisplayStats,
   getSourceLabel,
-  parseAudienceFromSearch,
   type MasterReview,
+  parseAudienceFromSearch,
 } from "@/features/reviews/productReviews";
 
 const PAGE_SIZE = 10;
@@ -67,11 +68,16 @@ function SourceBadge({ review }: { review: MasterReview }) {
 function ReviewCard({
   review,
   compact = false,
+  isExpanded = false,
+  isDimmed = false,
+  onToggle,
 }: {
   review: MasterReview;
   compact?: boolean;
+  isExpanded?: boolean;
+  isDimmed?: boolean;
+  onToggle?: () => void;
 }) {
-  const [expanded, setExpanded] = React.useState(false);
   const displayName = review.name ?? "Customer";
   const body = review.body ?? "";
   const canExpand = body.length > (compact ? 180 : 320);
@@ -85,16 +91,20 @@ function ReviewCard({
 
   const toggleExpanded = () => {
     if (!review.hasText || !body) return;
-    setExpanded((value) => !value);
+    onToggle?.();
   };
 
   return (
     <article
-      className={`border-neutral-200 border-b last:border-b-0 transition-colors ${
-        review.hasText && body
-          ? "hover:bg-neutral-50/80 dark:hover:bg-neutral-800/30 cursor-pointer"
-          : ""
-      } ${compact ? "py-4" : "py-6"}`}
+      className={`border-neutral-200 border-b last:border-b-0 rounded-lg transition-all duration-200 ${
+        review.hasText && body ? "cursor-pointer" : ""
+      } ${
+        isExpanded
+          ? "bg-primary/5 ring-1 ring-primary/25 shadow-sm"
+          : isDimmed
+          ? "opacity-40 hover:opacity-70"
+          : "hover:bg-neutral-50/80 dark:hover:bg-neutral-800/30"
+      } ${compact ? "py-4 px-2" : "py-6 px-3"}`}
       onClick={toggleExpanded}
       onKeyDown={(event) => {
         if (event.key === "Enter" || event.key === " ") {
@@ -104,7 +114,7 @@ function ReviewCard({
       }}
       role={review.hasText && body ? "button" : undefined}
       tabIndex={review.hasText && body ? 0 : undefined}
-      aria-expanded={review.hasText && body ? expanded : undefined}
+      aria-expanded={review.hasText && body ? isExpanded : undefined}
     >
       <div className="flex flex-wrap items-start gap-2 mb-2">
         <PartialStarRating
@@ -142,7 +152,7 @@ function ReviewCard({
         <div className="mb-2">
           <p
             className={`text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed whitespace-pre-line ${
-              expanded ? "" : compact ? "line-clamp-2" : "line-clamp-4"
+              isExpanded ? "" : compact ? "line-clamp-2" : "line-clamp-4"
             }`}
           >
             {body}
@@ -152,11 +162,11 @@ function ReviewCard({
               type="button"
               onClick={(event) => {
                 event.stopPropagation();
-                setExpanded((value) => !value);
+                onToggle?.();
               }}
               className="mt-2 font-medium text-primary text-sm hover:underline"
             >
-              {expanded ? "Show less" : "Read more"}
+              {isExpanded ? "Show less" : "Read more"}
             </button>
           )}
         </div>
@@ -206,7 +216,7 @@ export default function ProductReviews({
         ? parseAudienceFromSearch(window.location.search)
         : "patients",
   );
-  const [starFilter, setStarFilter] = React.useState(0);
+  const [starFilter, setStarFilter] = React.useState(5);
   const [visibleCount, setVisibleCount] = React.useState(pageSize);
 
   const audienceCounts = React.useMemo(
@@ -217,6 +227,11 @@ export default function ProductReviews({
   const filteredReviews = React.useMemo(
     () => filterReviews(allReviews, audienceFilter, starFilter),
     [allReviews, audienceFilter, starFilter],
+  );
+
+  const audienceReviews = React.useMemo(
+    () => filterReviews(allReviews, audienceFilter, 0),
+    [allReviews, audienceFilter],
   );
 
   const sortedReviews = React.useMemo(
@@ -230,12 +245,28 @@ export default function ProductReviews({
   );
 
   const visibleReviews = sortedReviews.slice(0, visibleCount);
-  const { total, distribution, distributionPercent } = getDisplayStats(
+  const listStats = getDisplayStats(
     audienceFilter,
     filteredReviews,
     masterReviewsData.ratings,
     starFilter,
   );
+  const distributionStats = getDisplayStats(
+    audienceFilter,
+    audienceReviews,
+    masterReviewsData.ratings,
+    0,
+  );
+  const { total } = listStats;
+  const { distributionPercent } = distributionStats;
+
+  const [expandedReviewId, setExpandedReviewId] = React.useState<
+    string | null
+  >(null);
+
+  React.useEffect(() => {
+    setExpandedReviewId(null);
+  }, [audienceFilter, starFilter]);
 
   React.useEffect(() => {
     setVisibleCount(pageSize);
@@ -244,8 +275,8 @@ export default function ProductReviews({
   const summaryBlock = (
     <div>
       <div className="flex items-end gap-3 mb-2">
-        <span className="font-bold text-neutral-900 dark:text-neutral-100 text-4xl leading-none">
-          {GLOBAL_REVIEW_AVERAGE.toFixed(1)}
+        <span className="font-bold tabular-nums text-neutral-900 dark:text-neutral-100 text-4xl leading-tight">
+          {formatGlobalReviewAverage()}
         </span>
         <div>
           <PartialStarRating
@@ -266,21 +297,38 @@ export default function ProductReviews({
       {[5, 4, 3, 2, 1].map((stars) => {
         const percent = distributionPercent[stars] ?? 0;
         const active = starFilter === stars;
+        const dimmed = starFilter > 0 && !active;
         return (
           <button
             key={stars}
             type="button"
             onClick={() =>
               setStarFilter((current) => (current === stars ? 0 : stars))}
-            className={`flex items-center gap-3 w-full text-left rounded-md px-1 py-0.5 transition-colors hover:bg-neutral-50 dark:hover:bg-neutral-800/40 ${
-              starFilter > 0 && !active ? "opacity-45 hover:opacity-100" : ""
+            className={`flex items-center gap-3 w-full text-left rounded-md px-2 py-1 transition-all ${
+              active
+                ? "bg-primary/10 ring-1 ring-primary/30"
+                : dimmed
+                ? "opacity-40 hover:opacity-70"
+                : "hover:bg-neutral-50 dark:hover:bg-neutral-800/40"
             }`}
           >
-            <span className="min-w-[52px] font-medium text-primary text-xs hover:underline">
+            <span
+              className={`min-w-[52px] font-medium text-xs ${
+                active
+                  ? "text-primary font-semibold"
+                  : "text-primary hover:underline"
+              }`}
+            >
               {stars} star
             </span>
             <Progress value={percent} className="flex-1 h-2" />
-            <span className="min-w-[40px] text-neutral-600 dark:text-neutral-400 text-xs text-right">
+            <span
+              className={`min-w-[40px] text-xs text-right ${
+                active
+                  ? "font-semibold text-neutral-900 dark:text-neutral-100"
+                  : "text-neutral-600 dark:text-neutral-400"
+              }`}
+            >
               {Math.round(percent)}%
             </span>
           </button>
@@ -346,7 +394,18 @@ export default function ProductReviews({
 
       <div>
         {visibleReviews.map((review) => (
-          <ReviewCard key={review.id} review={review} compact={isDeck} />
+          <ReviewCard
+            key={review.id}
+            review={review}
+            compact={isDeck}
+            isExpanded={expandedReviewId === review.id}
+            isDimmed={expandedReviewId !== null &&
+              expandedReviewId !== review.id}
+            onToggle={() =>
+              setExpandedReviewId((current) =>
+                current === review.id ? null : review.id
+              )}
+          />
         ))}
       </div>
 
@@ -374,8 +433,8 @@ export default function ProductReviews({
     return (
       <div className="w-full">
         <div className="flex items-end gap-3 mb-5">
-          <span className="font-bold text-neutral-900 dark:text-neutral-100 text-5xl leading-none">
-            {GLOBAL_REVIEW_AVERAGE.toFixed(1)}
+          <span className="font-bold tabular-nums text-neutral-900 dark:text-neutral-100 text-5xl leading-tight">
+            {formatGlobalReviewAverage()}
           </span>
           <div>
             <PartialStarRating

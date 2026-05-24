@@ -8,8 +8,12 @@ export function formatGlobalRatingsLabel(
   return `${count.toLocaleString("en-GB")} Global Ratings`;
 }
 
+export function formatGlobalReviewAverage(): string {
+  return GLOBAL_REVIEW_AVERAGE.toFixed(1);
+}
+
 export function formatReviewSummary(): string {
-  return `${GLOBAL_REVIEW_AVERAGE.toFixed(1)} (${formatGlobalRatingsLabel()})`;
+  return `${formatGlobalReviewAverage()} (${formatGlobalRatingsLabel()})`;
 }
 
 /** Width of the yellow clip on a 24px star for the fractional part of a rating. */

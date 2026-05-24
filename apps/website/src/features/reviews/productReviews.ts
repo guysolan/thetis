@@ -1,3 +1,8 @@
+import {
+  GLOBAL_REVIEW_AVERAGE,
+  GLOBAL_REVIEW_COUNT,
+} from "./productReviewStats";
+
 export type MasterReview = {
   id: string;
   source: "amazon" | "direct";
@@ -219,8 +224,8 @@ export function getDisplayStats(
       ]),
     ) as Record<number, number>;
     return {
-      average: averageFromCounts(distribution),
-      total: global.totalRatings,
+      average: GLOBAL_REVIEW_AVERAGE,
+      total: GLOBAL_REVIEW_COUNT,
       distribution,
       distributionPercent: Object.fromEntries(
         [5, 4, 3, 2, 1].map((star) => [
@@ -232,8 +237,12 @@ export function getDisplayStats(
   }
 
   const distribution = starDistribution(filteredReviews);
+  const useGlobalAverage = audienceFilter === "patients";
+
   return {
-    average: averageRating(filteredReviews),
+    average: useGlobalAverage
+      ? GLOBAL_REVIEW_AVERAGE
+      : averageRating(filteredReviews),
     total: filteredReviews.length,
     distribution,
     distributionPercent: Object.fromEntries(
