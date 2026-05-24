@@ -1,0 +1,133 @@
+---
+import type { opedPitchSalesChart } from "@/features/oped-deck/opedDeckPitchContent";
+
+interface Props {
+  chart: typeof opedPitchSalesChart;
+}
+
+const { chart } = Astro.props;
+
+const points = [
+  ...chart.history.map((entry) => ({
+    ...entry,
+    projected: false as const,
+    yearLabel: entry.year,
+  })),
+  {
+    year: chart.projection.year,
+    yearLabel: chart.projection.yearLabel,
+    units: chart.projection.units,
+    projected: true as const,
+  },
+];
+
+const width = 640;
+const height = 280;
+const pad = { top: 28, right: 24, bottom: 56, left: 44 };
+const plotW = width - pad.left - pad.right;
+const plotH = height - pad.top - pad.bottom;
+const yAxisMax = 5000;
+const yTicks = [0, 1000, 2000, 3000, 4000, 5000];
+
+function xAt(index: number) {
+  return pad.left + (index / (points.length - 1)) * plotW;
+}
+
+function yAt(units: number) {
+  return pad.top + plotH - (units / yAxisMax) * plotH;
+}
+
+const solidPath = points
+  .slice(0, -1)
+  .map(
+    (point, index) =>
+      `${index === 0 ? "M" : "L"} ${xAt(index)} ${yAt(point.units)}`,
+  )
+  .join(" ");
+
+const projectionPath = `M ${xAt(points.length - 2)} ${yAt(points[points.length - 2].units)} L ${xAt(points.length - 1)} ${yAt(points[points.length - 1].units)}`;
+---
+
+<div
+  class="bg-white dark:bg-neutral-900 shadow-sm p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl"
+>
+  <div class="mb-5">
+    <h3
+      class="font-semibold text-neutral-900 dark:text-neutral-100 text-sm uppercase tracking-widest"
+    >
+      {chart.title}
+    </h3>
+    <p class="mt-1 text-neutral-500 text-xs">
+      {chart.subtitle}
+    </p>
+  </div>
+
+  <svg
+    viewBox={`0 0 ${width} ${height}`}
+    class="w-full h-auto"
+    role="img"
+    aria-label={`${chart.title}. ${points.map((point) => `${point.yearLabel}: ${point.units.toLocaleString("en-GB")}`).join(". ")}`}
+  >
+    {
+      yTicks.map((value) => {
+        const y = yAt(value);
+        return (
+          <g>
+            <line
+              x1={pad.left}
+              y1={y}
+              x2={width - pad.right}
+              y2={y}
+              class="stroke-neutral-100 dark:stroke-neutral-800"
+              stroke-width="1"
+            />
+            <text
+              x={pad.left - 8}
+              y={y + 4}
+              text-anchor="end"
+              class="fill-neutral-400 text-[10px]"
+            >
+              {value.toLocaleString("en-GB")}
+            </text>
+          </g>
+        );
+      })
+    }
+
+    <path
+      d={solidPath}
+      fill="none"
+      class="stroke-primary"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"></path>
+
+    <path
+      d={projectionPath}
+      fill="none"
+      class="stroke-primary"
+      stroke-width="2.5"
+      stroke-linecap="round"
+      stroke-dasharray="6 5"></path>
+
+    {
+      points.map((point, index) => (
+        <text
+          x={xAt(index)}
+          y={height - 18}
+          text-anchor="middle"
+          class:list={[
+            "text-[10px]",
+            point.projected ? "fill-primary font-semibold" : "fill-neutral-500",
+          ]}
+        >
+          {point.yearLabel}
+        </text>
+      ))
+    }
+  </svg>
+
+  <p class="mt-3 text-[11px] text-neutral-500 text-center">
+    Dotted line = projected volume with OPED distribution
+  </p>
+</div>

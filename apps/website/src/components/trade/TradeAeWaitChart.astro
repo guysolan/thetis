@@ -6,6 +6,7 @@ export interface Props {
   averageLabel?: string;
   maximumLabel?: string;
   daysLabel?: string;
+  embedded?: boolean;
 }
 
 const {
@@ -13,13 +14,18 @@ const {
   averageLabel = "Average wait time",
   maximumLabel = "Maximum wait time",
   daysLabel = "days",
+  embedded = false,
 } = Astro.props;
 
 const { labels, meanDays, maxDays, chartMaxDays } = aeWaitComparison;
 ---
 
 <div
-  class="bg-white dark:bg-neutral-900 p-5 sm:p-6 border border-neutral-200 dark:border-neutral-700 rounded-xl"
+  class:list={[
+    embedded
+      ? ""
+      : "bg-white dark:bg-neutral-900 p-5 sm:p-6 border border-neutral-200 dark:border-neutral-700 rounded-xl",
+  ]}
 >
   <h4
     class="mb-6 font-medium text-neutral-900 dark:text-neutral-100 text-base text-center"

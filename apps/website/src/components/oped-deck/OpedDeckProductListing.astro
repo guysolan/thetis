@@ -26,12 +26,12 @@ const { rating, price, partnerHref = "/become-a-partner" } = Astro.props;
           }
 
           if (rating > index && rating < starValue) {
-            const fillPercent = (rating - index) * 100;
+            const partialFill = Math.max(rating - index, 0.25);
             return (
-              <svg class="fill-current w-4 h-4" viewBox="0 0 20 20">
+              <svg class="w-4 h-4" viewBox="0 0 20 20" aria-hidden="true">
                 <defs>
                   <clipPath id={`oped-star-partial-${index}`}>
-                    <rect x="0" y="0" width={`${fillPercent}%`} height="20" />
+                    <rect x="0" y="0" width={20 * partialFill} height="20" />
                   </clipPath>
                 </defs>
                 <path
@@ -39,7 +39,7 @@ const { rating, price, partnerHref = "/become-a-partner" } = Astro.props;
                   d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                 />
                 <path
-                  class="text-amber-400"
+                  class="fill-current text-amber-400"
                   clip-path={`url(#oped-star-partial-${index})`}
                   d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                 />
@@ -89,7 +89,9 @@ const { rating, price, partnerHref = "/become-a-partner" } = Astro.props;
         class="hidden flex-col space-y-4 bg-neutral-50 p-4 rounded-lg"
       >
         <div class="flex flex-col space-y-2">
-          <label class="font-medium text-sm" for="oped-size-region">Region:</label>
+          <label class="font-medium text-sm" for="oped-size-region"
+            >Region:</label
+          >
           <select
             id="oped-size-region"
             data-oped-size-region
@@ -122,9 +124,7 @@ const { rating, price, partnerHref = "/become-a-partner" } = Astro.props;
         >
           <p class="font-semibold text-center">
             Recommended Size:
-            <span
-              data-oped-size-result-value
-              class="text-primary text-lg"
+            <span data-oped-size-result-value class="text-primary text-lg"
             ></span>
           </p>
         </div>
@@ -142,7 +142,7 @@ const { rating, price, partnerHref = "/become-a-partner" } = Astro.props;
         data-oped-variant="size"
         data-value="large"
         aria-pressed="true"
-        class="inline-flex justify-center items-center bg-primary shadow-sm px-3 py-1 rounded-sm font-medium text-white text-md transition-all"
+        class="inline-flex justify-center items-center bg-primary shadow-sm px-3 py-1 rounded-sm font-medium text-md text-white transition-all"
       >
         Large
       </button>
@@ -151,7 +151,7 @@ const { rating, price, partnerHref = "/become-a-partner" } = Astro.props;
         data-oped-variant="size"
         data-value="small"
         aria-pressed="false"
-        class="inline-flex justify-center items-center hover:text-neutral-700 dark:hover:text-neutral-300 px-3 py-1 rounded-sm font-medium text-neutral-500 dark:text-neutral-400 text-md transition-all"
+        class="inline-flex justify-center items-center px-3 py-1 rounded-sm font-medium text-md text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 dark:text-neutral-400 transition-all"
       >
         Small
       </button>
@@ -166,7 +166,7 @@ const { rating, price, partnerHref = "/become-a-partner" } = Astro.props;
         data-oped-variant="side"
         data-value="left"
         aria-pressed="true"
-        class="inline-flex justify-center items-center bg-primary shadow-sm px-3 py-1 rounded-sm font-medium text-white text-md transition-all"
+        class="inline-flex justify-center items-center bg-primary shadow-sm px-3 py-1 rounded-sm font-medium text-md text-white transition-all"
       >
         Left
       </button>
@@ -175,7 +175,7 @@ const { rating, price, partnerHref = "/become-a-partner" } = Astro.props;
         data-oped-variant="side"
         data-value="right"
         aria-pressed="false"
-        class="inline-flex justify-center items-center hover:text-neutral-700 dark:hover:text-neutral-300 px-3 py-1 rounded-sm font-medium text-neutral-500 dark:text-neutral-400 text-md transition-all"
+        class="inline-flex justify-center items-center px-3 py-1 rounded-sm font-medium text-md text-neutral-500 hover:text-neutral-700 dark:hover:text-neutral-300 dark:text-neutral-400 transition-all"
       >
         Right
       </button>
@@ -184,7 +184,7 @@ const { rating, price, partnerHref = "/become-a-partner" } = Astro.props;
 
   <dialog
     data-oped-partnership-dialog
-    class="backdrop:bg-black/50 open:flex bg-white dark:bg-neutral-900 shadow-xl p-0 border-0 rounded-xl w-[min(100%-2rem,28rem)] max-w-md"
+    class="open:flex bg-white dark:bg-neutral-900 backdrop:bg-black/50 shadow-xl p-0 border-0 rounded-xl w-[min(100%-2rem,28rem)] max-w-md"
   >
     <div class="p-6">
       <h2
@@ -196,8 +196,8 @@ const { rating, price, partnerHref = "/become-a-partner" } = Astro.props;
         class="mb-4 text-neutral-600 dark:text-neutral-400 text-sm text-center leading-relaxed"
       >
         This listing shows real patient demand for the Thetis Achilles splint.
-        Guy Solan is open to a formal partnership conversation — licence or
-        acquisition — to put this SKU in every VACOped recovery pathway.
+        Guy Solan is open to a formal partnership conversation - licence or
+        acquisition - to put this SKU in every VACOped recovery pathway.
       </p>
       <p
         class="mb-4 text-neutral-700 dark:text-neutral-300 text-sm text-center leading-relaxed"
@@ -276,8 +276,7 @@ const { rating, price, partnerHref = "/become-a-partner" } = Astro.props;
       }
 
       const size = Number.parseFloat(shoeSizeInput.value);
-      const threshold =
-        sizeThresholds[regionSelect.value] ?? sizeThresholds.UK;
+      const threshold = sizeThresholds[regionSelect.value] ?? sizeThresholds.UK;
 
       if (!Number.isFinite(size)) {
         sizeResult.classList.add("hidden");

@@ -3,6 +3,12 @@ import plantarFasciitisSplint from "@/assets/plantar-fasciitis-splint.png";
 import { opedPitchGermanyReimbursement } from "@/features/oped-deck/opedDeckGermanyContent";
 
 const content = opedPitchGermanyReimbursement;
+
+const detailHighlightPattern = /(VACOped|~\$15k\/month)/;
+
+function isDetailHighlight(part: string) {
+  return part === "VACOped" || part === "~$15k/month";
+}
 ---
 
 <div class="space-y-6 mx-auto max-w-5xl">
@@ -39,21 +45,6 @@ const content = opedPitchGermanyReimbursement;
         >
           {content.germanyBody}
         </p>
-
-        <div
-          class="bg-white dark:bg-neutral-900 shadow-sm p-5 border border-primary/30 rounded-xl"
-        >
-          <p
-            class="mb-2 font-medium text-primary text-xs uppercase tracking-widest"
-          >
-            {content.differentiationTitle}
-          </p>
-          <p
-            class="text-neutral-800 dark:text-neutral-200 text-sm leading-relaxed"
-          >
-            {content.differentiationBody}
-          </p>
-        </div>
       </div>
     </div>
   </div>
@@ -80,7 +71,17 @@ const content = opedPitchGermanyReimbursement;
               </div>
             </div>
             <p class="text-neutral-600 dark:text-neutral-400 text-xs leading-relaxed">
-              {route.detail}
+              {route.detail
+                .split(detailHighlightPattern)
+                .map((part) =>
+                  isDetailHighlight(part) ? (
+                    <strong class="font-semibold text-neutral-800 dark:text-neutral-200">
+                      {part}
+                    </strong>
+                  ) : (
+                    part
+                  ),
+                )}
             </p>
           </li>
         ))

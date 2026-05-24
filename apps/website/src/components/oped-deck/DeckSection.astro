@@ -21,7 +21,7 @@ const {
 <section class:list={["w-full", className]}>
   <header
     class:list={[
-      "w-full px-6 md:px-12",
+      "w-full px-6 md:px-12 lg:px-24",
       compact ? "pb-4" : "pb-8",
       gradient
         ? compact
@@ -32,7 +32,7 @@ const {
           : "pt-10 md:pt-12 bg-background",
     ]}
   >
-    <div class="mx-auto max-w-3xl text-center">
+    <div class="mx-auto w-full max-w-6xl text-center">
       {
         eyebrow && (
           <p class="mb-2 font-medium text-primary text-xs uppercase tracking-widest">
@@ -42,7 +42,7 @@ const {
       }
       <h2
         class:list={[
-          "mb-3 font-semibold text-neutral-900 leading-tight",
+          "mx-auto mb-3 w-full max-w-6xl font-semibold text-neutral-900 leading-tight",
           compact
             ? "text-xl md:text-2xl lg:text-3xl"
             : "text-2xl md:text-3xl lg:text-4xl",
@@ -52,12 +52,12 @@ const {
       </h2>
       {
         Astro.slots.intro ? (
-          <div class="mx-auto max-w-2xl text-neutral-600 text-base md:text-lg leading-relaxed">
+          <div class="mx-auto w-full max-w-5xl text-neutral-600 text-base md:text-lg leading-relaxed">
             <slot name="intro" />
           </div>
         ) : (
           intro && (
-            <p class="mx-auto max-w-2xl text-neutral-600 text-base md:text-lg leading-relaxed">
+            <p class="mx-auto w-full max-w-5xl text-neutral-600 text-base md:text-lg leading-relaxed">
               {intro}
             </p>
           )
@@ -66,7 +66,7 @@ const {
     </div>
   </header>
 
-  <div class="bg-background px-6 md:px-12 pb-28">
+  <div class="bg-background px-6 md:px-12 lg:px-24 pb-28">
     <div class:list={["mx-auto max-w-5xl", compact ? "pt-2" : "pt-6"]}>
       <slot />
     </div>

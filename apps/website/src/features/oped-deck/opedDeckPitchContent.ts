@@ -1,5 +1,4 @@
 import {
-  opedAnnualRuptures,
   opedAnnualRupturesTotal,
   opedMarketBreakdown,
   opedSplintSales,
@@ -11,9 +10,10 @@ import {
 } from "@/content/trade/sleepSurveyData";
 import { tradePageContent } from "@/content/trade/tradePageContent";
 import { tradePatentPortfolio } from "@/content/trade/tradePatentTimeline";
+import { splintRegulatorySections } from "@/content/trade/splintRegulatoryProfile";
 import { aeWaitComparison } from "@/content/evidence/evidenceStudies";
 
-export const OPED_DECK_SLIDE_COUNT = 11;
+export const OPED_DECK_SLIDE_COUNT = 12;
 export const OPED_DECK_APPENDIX_SLIDE_COUNT = 1;
 
 const t = tradePageContent.en;
@@ -29,7 +29,7 @@ export const opedPitchWhyOped = {
   title: "Why OPED should care",
   headline: "You already own the day",
   intro:
-    "VACOped is the gold standard for daytime Achilles rehabilitation. The missing piece is not another boot — it is what happens when patients take the boot off at night.",
+    "VACOped is the gold standard for daytime Achilles rehabilitation. The missing piece is not another boot - it is what happens when patients take the boot off at night.",
   bullets: [
     "Thetis does not compete with VACOped or EVENup",
     "It completes the stack your reps already sell",
@@ -38,16 +38,16 @@ export const opedPitchWhyOped = {
 } as const;
 
 export const opedPitchDayStack = {
-  eyebrow: "The day stack",
-  title: "VACOped + EVENup is an amazing daytime combo",
+  eyebrow: "Achilles Rupture · OPED",
+  title: "Patients Love VACOped + EVENup",
   intro:
-    "OPED already owns daytime Achilles recovery. VACOped immobilises and protects; EVENup balances gait — together they are the gold standard patients and clinicians trust.",
+    "OPED gives patients the best daytime Achilles recovery. VACOped immobilises and protects; EVENup balances gait - together, they are the gold standard.",
   products: [
     {
       name: "VACOped",
       role: "Day · immobilisation",
       detail:
-        "Protected weight-bearing and angle control — the foundation every ATR patient needs",
+        "Protected weight-bearing and angle control - the foundation every ATR patient needs",
       image: "/images/catalogue-products/vacoped-angle-changing.png",
       imageAlt: "OPED VACOped walking boot with adjustable angle",
     },
@@ -55,7 +55,7 @@ export const opedPitchDayStack = {
       name: "EVENup",
       role: "Day · gait balance",
       detail:
-        "Shoe leveler for the uninjured foot — patients actively seek this and reps cross-sell it with every boot",
+        "Shoe leveler for the uninjured foot - patients actively seek this and reps cross-sell it with every boot",
       image: "/images/catalogue-products/even-up.png",
       imageAlt: "OPED EVENup shoe leveler worn with a walking boot",
     },
@@ -64,31 +64,17 @@ export const opedPitchDayStack = {
 
 export const opedPitchPatientComplaint = {
   eyebrow: "The night problem",
-  title: "Common complaints",
+  title: "The solution started with a surgeon",
   intro:
-    `What ${sleepSurveyTotal} Achilles rupture patients said about sleeping in a walking boot — in their own words.`,
-  complaints: [
-    {
-      theme: "Hot",
-      quote:
-        "So hot in the boot — things you don't notice in the day become impossible to ignore.",
-    },
-    {
-      theme: "Heavy",
-      quote: "Sleeping in the boot is even harder than walking in it.",
-    },
-    {
-      theme: "Dirty",
-      quote: "Deep cleaning the boot every night before bed got so old.",
-    },
-    {
-      theme: "Can't sleep",
-      quote:
-        "I couldn't sleep with that walking boot at night — it felt like a torture chamber.",
-    },
+    "Guy's dad, a foot and ankle surgeon, saw it in clinic - his Achilles rupture patients struggle to sleep in their boot.",
+  surveyLead:
+    "Guy surveyed the Facebook group and found he was right: 77% found the boot:",
+  complaintThemes: [
+    { id: "hot", label: "Hot" },
+    { id: "heavy", label: "Heavy" },
+    { id: "uncomfortable", label: "Uncomfortable" },
+    { id: "unhygienic", label: "Unhygienic" },
   ],
-  source:
-    `Thetis Medical patient survey (n=${sleepSurveyTotal}, Achilles tendon rupture).`,
 } as const;
 
 export const opedPitchNightGap = {
@@ -132,9 +118,9 @@ export const opedPitchProtocol = {
   title: "The complete OPED recovery stack",
   headline: "Boot + EVENup. The splint is the obvious third.",
   intro:
-    "Patients already ask for EVENup — it solves gait and back pain while booted, and OPED reps sell it every day. But the problem that keeps them awake is the boot at night. Once a patient is on VACOped and EVENup, the Thetis splint is not a hard sell — it is the missing piece they are already searching for.",
+    "Patients already ask for EVENup - it solves gait and back pain while booted, and OPED reps sell it every day. But the problem that keeps them awake is the boot at night. Once a patient is on VACOped and EVENup, the Thetis splint is not a hard sell - it is the missing piece they are already searching for.",
   punchline:
-    "OPED already owns the first two products. Patients want EVENup — but they need the splint more. Bundle all three and the value proposition sells itself.",
+    "OPED already owns the first two products. Patients want EVENup - but they need the splint more. Bundle all three and the value proposition sells itself.",
   dayStackLabel: "Day · OPED already owns this",
   nightLabel: "Night · what patients need most",
   cards: [
@@ -142,7 +128,7 @@ export const opedPitchProtocol = {
       role: "Day · immobilisation",
       product: "VACOped",
       detail:
-        "Protected weight-bearing and angle control — the foundation every ATR patient needs",
+        "Protected weight-bearing and angle control - the foundation every ATR patient needs",
       patientNote: "Prescribed at rupture",
       image: "/images/catalogue-products/vacoped-angle-changing.png",
       imageAlt: "OPED VACOped walking boot with adjustable angle",
@@ -152,7 +138,7 @@ export const opedPitchProtocol = {
       role: "Day · gait balance",
       product: "EVENup",
       detail:
-        "Shoe leveler for the uninjured foot — patients actively seek this and reps already cross-sell it with every boot",
+        "Shoe leveler for the uninjured foot - patients actively seek this and reps already cross-sell it with every boot",
       patientNote: "Patients want this",
       image: "/images/catalogue-products/even-up.png",
       imageAlt: "OPED EVENup shoe leveler worn with a walking boot",
@@ -162,7 +148,7 @@ export const opedPitchProtocol = {
       role: "Night · the obvious add-on",
       product: "Achilles Splint",
       detail:
-        "~200 g, breathable, locked at ~30° plantarflexion — the product patients care about most once they hit the sleep problem",
+        "~200 g, breathable, locked at ~30° plantarflexion - the product patients care about most once they hit the sleep problem",
       patientNote: "Patients need this most",
       image: "/images/night_splint_bed_top_square.jpg",
       imageAlt: "Thetis Achilles rupture night splint in bed",
@@ -171,7 +157,7 @@ export const opedPitchProtocol = {
   ],
   pullQuote: {
     quote:
-      "I would also suggest searching for the Evenup Shoe Balancer on Amazon: another helpful product but one that makes walking with a CAM boot a bit easier. This splint is exactly what the boot cannot do — let you sleep.",
+      "I would also suggest searching for the Evenup Shoe Balancer on Amazon: another helpful product but one that makes walking with a CAM boot a bit easier. This splint is exactly what the boot cannot do - let you sleep.",
     name: "M. D. Taylor",
     country: "US",
     stars: 5,
@@ -210,7 +196,7 @@ export const opedPitchDifferentiation = {
 export const opedPitchAdoptionPathways = {
   title: "Proven adoption pathways",
   intro:
-    "Thetis is already live through reimbursement, NHS acute pathways, Canadian distributor bundles, and low-cost hospital outreach — each replicable through OPED's existing accounts.",
+    "Thetis is already live through reimbursement, NHS acute pathways, Canadian distributor bundles, and low-cost hospital outreach - each replicable through OPED's existing accounts.",
   pathways: [
     {
       id: "germany",
@@ -218,11 +204,11 @@ export const opedPitchAdoptionPathways = {
       region: "Germany · reimbursement",
       headline: "The channel already exists",
       body:
-        "German statutory insurers already reimburse night splints prescribed alongside a walking boot — but listed devices are usually plantar fasciitis splints with dorsiflexion and a rigid wedge around the back of the calf.",
+        "German statutory insurers already reimburse night splints prescribed alongside a walking boot - but listed devices are usually plantar fasciitis splints with dorsiflexion and a rigid wedge around the back of the calf.",
       highlight:
-        "Thetis maintains ~30° plantarflexion — the clinically correct direction for ATR. With a national partner, we can pursue Hilfsmittel listing for the right device through the same reimbursement channel.",
+        "Thetis maintains ~30° plantarflexion - the clinically correct direction for ATR. With a national partner, we can pursue Hilfsmittel listing for the right device through the same reimbursement channel.",
       imageCaption:
-        "Typical reimbursed plantar fasciitis night splint — dorsiflexion wedge at the back of the leg, not designed for ATR",
+        "Typical reimbursed plantar fasciitis night splint - dorsiflexion wedge at the back of the leg, not designed for ATR",
     },
     {
       id: "uk-nhs",
@@ -230,7 +216,7 @@ export const opedPitchAdoptionPathways = {
       region: "United Kingdom · NHS acute pathway",
       headline: "Splint instead of plaster in A&E",
       body:
-        "Royal Surrey NHS Trust and Epsom & St Helier University Hospitals use the Thetis splint in place of plaster casts on the acute pathway — faster specialist review and a better patient experience. The same model is live at St John & St Elizabeth Hospital.",
+        "Royal Surrey NHS Trust and Epsom & St Helier University Hospitals use the Thetis splint in place of plaster casts on the acute pathway - faster specialist review and a better patient experience. The same model is live at St John & St Elizabeth Hospital.",
       hospitals: [
         "Royal Surrey NHS Trust",
         "Epsom & St Helier University Hospitals",
@@ -259,7 +245,7 @@ export const opedPitchAdoptionPathways = {
       region: "Canada · distributor channels",
       headline: "Bundled through orthopaedic supply",
       body:
-        "Canadian patients access the splint through established orthopaedic distributors — bundled alongside boot and recovery products rather than as a standalone DTC purchase.",
+        "Canadian patients access the splint through established orthopaedic distributors - bundled alongside boot and recovery products rather than as a standalone DTC purchase.",
       channels: [
         {
           name: "Ortho Active",
@@ -281,7 +267,7 @@ export const opedPitchAdoptionPathways = {
       region: "Hospital outreach · low-cost growth",
       headline: "Fliers & clinician visits drive local spikes",
       body:
-        "Patient flyers in fracture clinics and A&E — paired with in-person hospital visits — have produced measurable sales spikes at those sites in the UK. We already visit hospitals; OPED reps can run the same play alongside VACOped accounts.",
+        "Patient flyers in fracture clinics and A&E - paired with in-person hospital visits - have produced measurable sales spikes at those sites in the UK. We already visit hospitals; OPED reps can run the same play alongside VACOped accounts.",
       tactics: [
         "Patient flyers in fracture clinic waiting areas",
         "Clinician leave-behinds at foot & ankle MDTs",
@@ -294,7 +280,7 @@ export const opedPitchAdoptionPathways = {
 export const opedPitchBundle = {
   title: "The VACOped 24/7 bundle",
   intro:
-    "VACOped by day. EVENup for gait. Thetis splint at night. One stack — with demand already proven across four routes to market.",
+    "VACOped by day. EVENup for gait. Thetis splint at night. One stack - with demand already proven across four routes to market.",
   bundleName: "VACOped 24/7 Premium Recovery Pack",
   bundleItems: ["VACOped boot", "EVENup shoe leveler", "Thetis ATR splint"],
   salesChannels: [
@@ -303,28 +289,28 @@ export const opedPitchBundle = {
       market: "Germany",
       channel: "Reimbursed",
       detail:
-        "Statutory insurers already reimburse night splints with a walking boot — list the right ATR device through existing Hilfsmittel channels.",
+        "Statutory insurers already reimburse night splints with a walking boot - list the right ATR device through existing Hilfsmittel channels.",
     },
     {
       flag: "🇨🇦🇦🇺",
       market: "Canada & Australia",
       channel: "Physios, shops & distributors",
       detail:
-        "Already resold through physio clinics, orthopaedic retailers, and distributor partners — ready to formalise inside the bundle.",
+        "Already resold through physio clinics, orthopaedic retailers, and distributor partners - ready to formalise inside the bundle.",
     },
     {
       flag: "🇺🇸",
       market: "United States",
       channel: "Online · direct to patient",
       detail:
-        "~$15k/month in US online sales already — patients find us when the boot stops them sleeping.",
+        "~$15k/month in US online sales already - patients find us when the boot stops them sleeping.",
     },
     {
       flag: "🇬🇧",
       market: "United Kingdom",
       channel: "NHS fracture clinics",
       detail:
-        "Live on NHS acute pathways — fracture clinic teams and foot & ankle surgeons are already asking for it.",
+        "Live on NHS acute pathways - fracture clinic teams and foot & ankle surgeons are already asking for it.",
     },
   ],
 } as const;
@@ -333,7 +319,7 @@ export const opedPitchCommercial = {
   title: "Bundle revenue opportunity",
   headline: "Every VACOped + EVENup sale is a missed splint sale",
   intro:
-    "OPED reps already cross-sell EVENup with every VACOped. Adding the Thetis splint to that same conversation is the obvious third product — no new sales motion required.",
+    "OPED reps already cross-sell EVENup with every VACOped. Adding the Thetis splint to that same conversation is the obvious third product - no new sales motion required.",
   bundleName: "VACOped 24/7 Premium Recovery Pack",
   bundleItems: ["VACOped boot", "EVENup shoe leveler", "Thetis ATR splint"],
   revenueStats: [
@@ -342,11 +328,11 @@ export const opedPitchCommercial = {
     { value: "~€11.6M", label: "Annual revenue potential at full penetration" },
     {
       value: "<1.5%",
-      label: "Current market penetration — the upside is enormous",
+      label: "Current market penetration - the upside is enormous",
     },
   ],
   bundleNote:
-    "At even 10% penetration of the addressable market, a bundled offer generates ~€1.2M additional splint revenue annually — before accounting for premium bundle pricing or reimbursement uplift.",
+    "At even 10% penetration of the addressable market, a bundled offer generates ~€1.2M additional splint revenue annually - before accounting for premium bundle pricing or reimbursement uplift.",
 } as const;
 
 export const opedPitchDistributorProof = {
@@ -493,7 +479,7 @@ export const opedPitchPatientQuotes = [
     name: "Sven",
     country: "DE",
     translation:
-      "Should be on every medical supply store shelf and recommended — good sleep contributes enormously to recovery.",
+      "Should be on every medical supply store shelf and recommended - good sleep contributes enormously to recovery.",
     stars: 5,
   },
 ] as const;
@@ -508,7 +494,7 @@ export const opedPitchAthleteQuotes = [
   },
   {
     quote:
-      "Prior to this injury I was very active with decent balance and leg strength. The splint combined with the iWalk let me cook, clean, and carry things — a little less of an imposition on my spouse.",
+      "Prior to this injury I was very active with decent balance and leg strength. The splint combined with the iWalk let me cook, clean, and carry things - a little less of an imposition on my spouse.",
     name: "Dennis Kitch",
     country: "US",
     stars: 5,
@@ -561,7 +547,7 @@ export const opedPitchPullQuotes = {
   },
   behaviourRisk: {
     quote:
-      "I completely ruptured my Achilles. The boot was making sleep impossible — it felt like a torture chamber at night.",
+      "I completely ruptured my Achilles. The boot was making sleep impossible - it felt like a torture chamber at night.",
     name: "Afantee",
     country: "US",
     stars: 5,
@@ -578,7 +564,7 @@ export const opedPitchPullQuotes = {
 export const opedPitchClinical = {
   title: "Clinically proven safety",
   intro:
-    "Over 5,000 splints in use — zero reported re-ruptures in post-market surveillance, with a 95% confidence-interval upper bound for night-time injury below 0.1%.",
+    "Over 5,000 splints in use - zero reported re-ruptures. Post-market surveillance confirms night-time injury risk below 0.1% (95% CI).",
   stats: [
     { value: "5,000+", label: "Splints sold & tracked" },
     { value: "0", label: "Reported re-ruptures" },
@@ -589,9 +575,9 @@ export const opedPitchClinical = {
   surveillance:
     "EU MDR–compliant post-market surveillance (2022–2025) on 5,000+ splints sold confirms the same safety profile: zero reported re-ruptures, with a 95% confidence-interval upper bound for night-time injury below 0.1%.",
   sources: [
-    "BOFAS 2024 — Sleeping safe and sound",
-    "BOFAS 2023 — Mother Knows Best",
-    "Post-market surveillance — EU MDR vigilance (2022–2025)",
+    "BOFAS 2024 - Sleeping safe and sound",
+    "BOFAS 2023 - Mother Knows Best",
+    "Post-market surveillance - EU MDR vigilance (2022–2025)",
   ],
 } as const;
 
@@ -601,19 +587,18 @@ export const opedPitchIp = {
   portfolioTitle: t.ip.portfolioTitle,
   portfolio: tradePatentPortfolio,
   message:
-    "Design and utility protection supports distribution, white-label, and in-region manufacturing under licence — without starting from a blank IP slate.",
+    "Design and utility protection supports distribution, white-label, and in-region manufacturing under licence - without starting from a blank IP slate.",
   licenceNote:
     "Full portfolio schedule and filing status available to qualified partners under NDA.",
 } as const;
 
 export const opedPitchRegulatory = {
-  title: "Protected, registered, ready",
-  headline: "Turn-key asset for OPED",
-  ip: t.ip.intro,
-  regulatory: t.regulatory.items.slice(0, 4),
-  footnote: t.regulatory.footnote,
-  message:
-    "No 3-year R&D wait. No regulatory gamble. A protected, cleared device ready for global scale.",
+  title: "Regulatory & quality",
+  intro:
+    "Class I device - cleared, documented, and registered across OPED's core markets.",
+  sections: splintRegulatorySections,
+  footnote:
+    "Full technical file and registration certificates available to qualified partners under NDA.",
 } as const;
 
 export const opedPitchSkus = {
@@ -645,21 +630,20 @@ export const opedPitchEconomics = {
 
 export const opedPitchInvitation = {
   title: "Let's complete the stack together",
-  headline: "License or acquire — your structure, our shared goal",
+  headline: "License or acquire - your structure, our shared goal",
   fomo:
-    "If a boot competitor integrates Thetis first, they own the day/night category. OPED can take it instead — with a device that is already proven, cleared, and loved by patients.",
+    "If a boot competitor integrates Thetis first, they own the day/night category. OPED can take it instead - with a device that is already proven, cleared, and loved by patients.",
   ask:
     "Guy Solan is open to a formal conversation under NDA: clinical evidence, IP, manufacturing, and either a licence or acquisition structure.",
   cta:
-    "Partnership enquiry — we will share the full data room and manufacturing roadmap.",
+    "Partnership enquiry - we will share the full data room and manufacturing roadmap.",
   partnerHref: "/become-a-partner",
 } as const;
 
 export const opedPitchPrototypeOrigin = {
-  title:
-    "Designed from first principles: engineer, borrowed 3D printer, Grannie's sewing machine",
+  title: "From clinic problem to purpose-built splint",
   intro:
-    'Guy Solan started building the splint at university after Matthew Solan, foot & ankle surgeon, saw the same problem in clinic every week: patients hate sleeping in their boot. As he put it, "Every foot and ankle surgeon knows patients don\'t like sleeping in their boot. My colleague even built his own splint."',
+    "Matthew Solan, foot & ankle surgeon, saw the same problem in clinic every week: Achilles rupture patients hate sleeping in their boot. Guy built the first prototypes at university, iterating from borrowed 3D printer parts and hand-sewn straps into a purpose-built night splint.",
   headline: "From clinical problem to finished device",
   clinicianQuote: {
     quote:
@@ -684,7 +668,7 @@ export const opedPitchPrototypeOrigin = {
 export const opedPitchDesignReviews = {
   title: "The live product listing proves demand",
   intro:
-    "Launched in 2022. Over 5,000 sold to date — 90% online. Patients buy the splint after searching for a comfortable alternative to sleeping in their boot.",
+    "Launched in 2022. Over 5,000 sold to date. Patients buy the splint after searching for a comfortable alternative to sleeping in their boot.",
   productListing: {
     badge: "5,000+ Better Rested Patients",
     title: "The Only Splint for Achilles Tendon Rupture",
@@ -717,12 +701,12 @@ export const opedPitchDesignReviews = {
     { value: "122", label: "Reviews mention sleep vs boot" },
     { value: "60%", label: "Five-star ratings (combined)" },
   ],
-  strengthsTitle: "What works — keep this",
+  strengthsTitle: "What works - keep this",
   strengths: [
     {
       label: "Lightweight vs the boot",
       detail:
-        "Patients consistently choose it over sleeping in a CAM boot — lighter, cooler, and easier to tolerate for 6–8 hours.",
+        "Patients consistently choose it over sleeping in a CAM boot - lighter, cooler, and easier to tolerate for 6–8 hours.",
     },
     {
       label: "Maintains plantarflexion",
@@ -731,7 +715,7 @@ export const opedPitchDesignReviews = {
     },
     {
       label: "Quick to apply",
-      detail: "Seconds to put on and remove — important at 2am bathroom trips.",
+      detail: "Seconds to put on and remove - important at 2am bathroom trips.",
     },
     {
       label: "Stays secure when adjusted",
@@ -739,7 +723,7 @@ export const opedPitchDesignReviews = {
         "Many reviewers sleep through the night once strap tension and a sock layer are dialled in.",
     },
   ],
-  improvementsTitle: "What to improve — OPED redesign brief",
+  improvementsTitle: "What to improve - OPED redesign brief",
   improvements: [
     {
       label: "Shin & forefoot padding",
@@ -749,17 +733,17 @@ export const opedPitchDesignReviews = {
     {
       label: "Strap & edge finishing",
       detail:
-        "Occasional reports of Velcro edges or stiff front lip — solvable with OPED materials and moulding QA.",
+        "Occasional reports of Velcro edges or stiff front lip - solvable with OPED materials and moulding QA.",
     },
     {
       label: "Heel cup retention",
       detail:
-        "Some users want a more locked-in heel — a minor geometry change in a v2 tool.",
+        "Some users want a more locked-in heel - a minor geometry change in a v2 tool.",
     },
     {
       label: "COGS at volume",
       detail:
-        "Price sensitivity in reviews reflects small-batch manufacturing today — not the product concept.",
+        "Price sensitivity in reviews reflects small-batch manufacturing today - not the product concept.",
     },
   ],
   featuredReviews: [
@@ -776,7 +760,7 @@ export const opedPitchDesignReviews = {
       stars: 4,
       title: "Helpful but can use some design tweaks",
       quote:
-        "Very helpful for wearing during sleep. Sometimes the heel cup would slip out — could use a better design for that. The front piece can be a bit hard on the front of the foot.",
+        "Very helpful for wearing during sleep. Sometimes the heel cup would slip out - could use a better design for that. The front piece can be a bit hard on the front of the foot.",
       name: "Amazon reviewer",
       country: "US",
       theme: "improve",
@@ -792,7 +776,7 @@ export const opedPitchDesignReviews = {
     },
     {
       stars: 3,
-      title: "Excellent idea — comfort can improve",
+      title: "Excellent idea - comfort can improve",
       quote:
         "Excellent idea but the splint isn't wide enough and doesn't have enough cushioning. It could be so much better if redesigned and comfort improved.",
       name: "Amazon reviewer",
@@ -801,13 +785,13 @@ export const opedPitchDesignReviews = {
     },
   ],
   opedOpportunity:
-    "An OPED-branded v2 — retooled padding, strap hardware, and injection-moulding at scale — turns honest 4-star design feedback into a 5-star bundled offer.",
+    "An OPED-branded v2 - retooled padding, strap hardware, and injection-moulding at scale - turns honest 4-star design feedback into a 5-star bundled offer.",
 } as const;
 
 export const opedPitchDesignImprovements = {
   title: "How OPED can make it better",
   intro:
-    "The reviews validate the category. The criticism is mostly execution detail — exactly where OPED's design, materials, tooling, and manufacturing scale can improve the product.",
+    "The reviews validate the category. The criticism is mostly execution detail - exactly where OPED's design, materials, tooling, and manufacturing scale can improve the product.",
 } as const;
 
 export const opedPitchPossibleImprovements = {
@@ -818,7 +802,7 @@ export const opedPitchPossibleImprovements = {
   currentRating: "4.1",
   targetRating: "4.9",
   body:
-    "The reviews validate the category. The criticism is mostly execution detail — padding, strap hardware, heel retention — exactly where OPED's materials, tooling, and injection-moulding scale can close the gap.",
+    "The reviews validate the category. The criticism is mostly execution detail - padding, strap hardware, heel retention - exactly where OPED's materials, tooling, and injection-moulding scale can close the gap.",
   points: [
     "Structured themes from patient, surgeon, and Amazon review analysis",
     "Prioritised redesign brief ready for OPED industrial design",
@@ -828,15 +812,15 @@ export const opedPitchPossibleImprovements = {
 
 export const opedPitchPartnershipOptions = {
   title: "How Guy wants to work with OPED",
-  intro: "Two structures are on the table — licence or acquire.",
+  intro: "Two structures are on the table - licence or acquire.",
   founderNote:
-    "Guy now runs another company full-time — Thetis no longer needs to fund a founder salary.",
+    "Guy Solan is inventor, only employee, of Thetis Medical. He now has a second company and wants to pass on the product to a company who can get the splint to more people.",
   proposalTitle: "Proposal",
   proposal: [
     "Rebrand and industrial redesign under OPED design language",
     "Manufacturing cost target of €7–8 per unit at OPED scale",
     "Launch in Germany and through OPED's global partner network",
-    "Complete the VACOped + EVENup + splint bundle in every market",
+    "Launch the VACOped 24/7 Premium Recovery Pack (boot + EVENup + splint) in every market",
   ],
   options: [
     {
@@ -856,7 +840,7 @@ export const opedPitchPartnershipOptions = {
       label: "Option 2",
       title: "Acquire",
       summary:
-        "OPED acquires the splint business outright — IP, regulatory files, customer base, and manufacturing.",
+        "OPED acquires the splint business outright - IP, regulatory files, customer base, and manufacturing.",
       points: [
         "Full ownership of category and margin",
         "Single integration, no ongoing royalty",
@@ -866,28 +850,36 @@ export const opedPitchPartnershipOptions = {
   ],
 } as const;
 
-export const opedPitchSalesHistory = [
-  { year: "2022", units: 400 },
-  { year: "2023", units: 1400 },
-  { year: "2024", units: 2000 },
-  { year: "2025", units: 2700 },
-] as const;
+export const opedPitchSalesChart = {
+  title: "Splints sold per year",
+  subtitle: "Growth achieved with ~90% direct-to-customer sales.",
+  history: [
+    { year: "2022", units: 350 },
+    { year: "2023", units: 900 },
+    { year: "2024", units: 1650 },
+    { year: "2025", units: 2100 },
+    { year: "2026", units: 2600 },
+  ],
+  projection: {
+    year: "2027",
+    yearLabel: "2027 (OPED)",
+    units: 5000,
+  },
+} as const;
 
 export const opedPitchNhsEvidence = {
   title: "How it works in the NHS",
   intro:
-    "NHS trusts use the splint instead of a plaster cast on the acute pathway — replacing plaster in A&E and getting patients to specialist review faster.",
+    "NHS trusts use the splint instead of a plaster cast on the acute pathway - replacing plaster in A&E and getting patients to specialist review faster.",
   headline: "Splint instead of plaster in A&E",
   body:
-    "Royal Surrey NHS Trust, Epsom & St Helier University Hospitals, and St John & St Elizabeth Hospital use the Thetis splint on the acute pathway — replacing plaster casts and getting patients to specialist review faster.",
-  evidenceHref: "/evidence#trauma-splint-qip",
-  evidenceLabel: "Full evidence at thetismedical.com/evidence",
+    "NHS trusts use the Thetis splint on the acute pathway - replacing plaster casts and getting patients to specialist review faster.",
 } as const;
 
 export const opedPitchSalesProof = {
-  title: "Launched online — and into NHS hospitals",
+  title: "Launched online - and into NHS hospitals",
   intro:
-    "Over 90% of units sell direct-to-consumer: patients find us at night when the boot stops them sleeping. We also supply NHS hospitals that use the splint instead of plaster cast on the acute pathway — cutting days off time to specialist review.",
+    "Over 90% of units sell direct-to-consumer: patients find us at night when the boot stops them sleeping. We also supply NHS hospitals that use the splint instead of plaster cast on the acute pathway - cutting days off time to specialist review.",
   channels: [
     {
       value: "90%+",
@@ -903,7 +895,7 @@ export const opedPitchSalesProof = {
   nhs: {
     headline: "Splint instead of plaster in A&E",
     body:
-      "Royal Surrey NHS Trust, Epsom & St Helier University Hospitals, and St John & St Elizabeth Hospital use the Thetis splint on the acute pathway — replacing plaster casts and getting patients to specialist review faster.",
+      "Royal Surrey NHS Trust, Epsom & St Helier University Hospitals, and St John & St Elizabeth Hospital use the Thetis splint on the acute pathway - replacing plaster casts and getting patients to specialist review faster.",
     evidenceHref: "/evidence#trauma-splint-qip",
     evidenceLabel: "Full evidence at thetismedical.com/evidence",
   },
@@ -911,23 +903,21 @@ export const opedPitchSalesProof = {
 
 export const opedPitchWhyOpedNow = {
   title: "Why now",
-  headline: "Steady growth — ready for OPED scale",
   intro:
-    "Thetis is profitable and growing without external funding. Guy Solan now runs another company full-time and no longer needs Thetis to pay his salary — which changes what he optimises for.",
+    "Thetis is profitable and growing without external funding. Guy Solan is inventor, only employee, of Thetis Medical. He now has a second company and wants to pass on the product to a company who can get the splint to more people.",
   growthPoints: [
     {
       label: "Steady unit growth",
-      value: "400 units in 2022 to 2,700 in 2025 — before OPED distribution",
+      value: "350 → 2,600 units (2022–2026), before OPED distribution",
     },
     {
       label: "90% direct-to-customer",
-      value:
-        "Most sales happen without hospital stocking or rep-led education — patients find the product themselves",
+      value: "~90% DTC today - OPED can unlock clinical and wholesale channels",
     },
     {
       label: "Proven pull-through",
       value:
-        "Patients find the product online when clinicians don't stock it — OPED distribution removes that friction",
+        "Patients search online when clinics don't stock it - OPED removes that friction",
     },
   ],
 } as const;

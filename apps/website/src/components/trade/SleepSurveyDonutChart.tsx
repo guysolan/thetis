@@ -19,6 +19,8 @@ interface SleepSurveyDonutChartProps {
     subtitle: string;
   };
   hideLegend?: boolean;
+  legendVariant?: "default" | "prominent";
+  legendPosition?: "below" | "side";
 }
 
 const segmentFills: Record<SleepSurveySegmentKey, string> = {
@@ -128,114 +130,179 @@ function ActiveSlice(props: PieSectorDataItem) {
 export default function SleepSurveyDonutChart({
   centerLabel,
   hideLegend = false,
+  legendVariant = "default",
+  legendPosition = "below",
 }: SleepSurveyDonutChartProps = {}) {
+  const isProminentLegend = legendVariant === "prominent";
+  const isSideLegend = isProminentLegend && legendPosition === "side";
+
+  const prominentLegend = (
+    <div className={isSideLegend ? "flex-1 min-w-0 w-full" : "mt-5 w-full"}>
+      <p className="mb-3 font-semibold text-neutral-900 dark:text-neutral-100 text-sm text-left uppercase tracking-widest">
+        Survey responses · n={sleepSurveyTotal}
+      </p>
+      <ul className="space-y-2.5">
+        {sleepSurveySegments.map((segment) => {
+          const isWarn = warnSegmentKeys.has(segment.key);
+          const percent = pct(segment.count);
+
+          return (
+            <li
+              key={segment.key}
+              className="flex items-center gap-3 bg-white dark:bg-neutral-900 px-3 py-2 border border-neutral-200 dark:border-neutral-700 rounded-lg"
+            >
+              <span
+                className="rounded-md w-4 h-4 shrink-0"
+                style={{ backgroundColor: segmentFills[segment.key] }}
+                aria-hidden
+              />
+              <span className="flex-1 min-w-0 font-semibold text-neutral-900 dark:text-neutral-100 text-sm leading-snug">
+                {segment.label}
+              </span>
+              <span
+                className={`shrink-0 font-bold tabular-nums text-base ${
+                  isWarn ? "text-amber-700 dark:text-amber-400" : "text-primary"
+                }`}
+              >
+                {percent}%
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+
+  const chartMarkup = (
+    <ChartContainer
+      config={chartConfig}
+      className={isSideLegend
+        ? "mx-auto w-[253px] h-[253px] [&_.recharts-responsive-container]:!h-[253px]"
+        : "mx-auto w-full h-[240px] [&_.recharts-responsive-container]:!h-[240px]"}
+    >
+      <PieChart>
+        <ChartTooltip content={<SleepSurveyTooltip />} cursor={false} />
+        <Pie
+          data={chartData}
+          dataKey="count"
+          nameKey="segment"
+          cx="50%"
+          cy="50%"
+          innerRadius={isSideLegend ? 67 : 68}
+          outerRadius={isSideLegend ? 97 : 96}
+          paddingAngle={2}
+          strokeWidth={2}
+          stroke="#ffffff"
+          activeShape={ActiveSlice}
+        >
+          {chartData.map((entry) => (
+            <Cell key={entry.segment} fill={entry.fill} />
+          ))}
+          {centerLabel && (
+            <Label
+              content={({ viewBox }) => {
+                if (!viewBox || !("cx" in viewBox) || !("cy" in viewBox)) {
+                  return null;
+                }
+
+                const { cx, cy } = viewBox;
+
+                return (
+                  <text x={cx} y={cy} textAnchor="middle">
+                    <tspan
+                      x={cx}
+                      dy="-0.15em"
+                      className={`fill-primary font-bold ${
+                        isSideLegend ? "text-[1.9rem]" : "text-[2rem]"
+                      }`}
+                    >
+                      {centerLabel.value}
+                    </tspan>
+                    <tspan
+                      x={cx}
+                      dy="1.35em"
+                      className="fill-neutral-600 dark:fill-neutral-400 text-sm"
+                    >
+                      {centerLabel.subtitle}
+                    </tspan>
+                  </text>
+                );
+              }}
+            />
+          )}
+        </Pie>
+      </PieChart>
+    </ChartContainer>
+  );
+
   return (
     <div className="flex flex-col justify-center items-center w-full">
-      <div className="w-full max-w-[360px]">
-        <ChartContainer
-          config={chartConfig}
-          className="mx-auto w-full h-[240px] [&_.recharts-responsive-container]:!h-[240px]"
-        >
-          <PieChart>
-            <ChartTooltip
-              content={<SleepSurveyTooltip />}
-              cursor={false}
-            />
-            <Pie
-              data={chartData}
-              dataKey="count"
-              nameKey="segment"
-              cx="50%"
-              cy="50%"
-              innerRadius={68}
-              outerRadius={96}
-              paddingAngle={2}
-              strokeWidth={2}
-              stroke="#ffffff"
-              activeShape={ActiveSlice}
-            >
-              {chartData.map((entry) => (
-                <Cell key={entry.segment} fill={entry.fill} />
-              ))}
-              {centerLabel && (
-                <Label
-                  content={({ viewBox }) => {
-                    if (!viewBox || !("cx" in viewBox) || !("cy" in viewBox)) {
-                      return null;
-                    }
+      <div
+        className={isSideLegend
+          ? "w-full max-w-3xl"
+          : isProminentLegend
+          ? "w-full max-w-[400px]"
+          : "w-full max-w-[360px]"}
+      >
+        {isSideLegend
+          ? (
+            <div className="flex sm:flex-row flex-col items-center sm:items-start gap-5 w-full">
+              <div className="shrink-0">{chartMarkup}</div>
+              {!hideLegend && prominentLegend}
+            </div>
+          )
+          : (
+            <>
+              {chartMarkup}
+              {!hideLegend && isProminentLegend && prominentLegend}
+            </>
+          )}
 
-                    const { cx, cy } = viewBox;
-
-                    return (
-                      <text x={cx} y={cy} textAnchor="middle">
-                        <tspan
-                          x={cx}
-                          dy="-0.15em"
-                          className="fill-primary font-bold text-[2rem]"
-                        >
-                          {centerLabel.value}
-                        </tspan>
-                        <tspan
-                          x={cx}
-                          dy="1.35em"
-                          className="fill-neutral-600 dark:fill-neutral-400 text-sm"
-                        >
-                          {centerLabel.subtitle}
-                        </tspan>
-                      </text>
-                    );
-                  }}
-                />
-              )}
-            </Pie>
-          </PieChart>
-        </ChartContainer>
-
-        {!hideLegend && (
+        {!hideLegend && !isProminentLegend && (
           <ul className="gap-x-4 gap-y-2 grid grid-cols-2 mt-4 px-1 text-xs">
-          {sleepSurveySegments.map((segment) => {
-            const isWarn = warnSegmentKeys.has(segment.key);
-            return (
-              <li key={segment.key} className="flex items-start gap-2">
-                {isWarn
-                  ? (
-                    <AlertTriangle
-                      className="mt-0.5 w-3.5 h-3.5 text-amber-600 dark:text-amber-500 shrink-0"
-                      aria-hidden
-                    />
-                  )
-                  : (
+            {sleepSurveySegments.map((segment) => {
+              const isWarn = warnSegmentKeys.has(segment.key);
+              return (
+                <li key={segment.key} className="flex items-start gap-2">
+                  {isWarn
+                    ? (
+                      <AlertTriangle
+                        className="mt-0.5 w-3.5 h-3.5 text-amber-600 dark:text-amber-500 shrink-0"
+                        aria-hidden
+                      />
+                    )
+                    : (
+                      <span
+                        className="mt-1 rounded-sm w-2.5 h-2.5 shrink-0"
+                        style={{ backgroundColor: segmentFills[segment.key] }}
+                        aria-hidden
+                      />
+                    )}
+                  <span
+                    className={isWarn
+                      ? "text-amber-900/90 dark:text-amber-100/90 leading-snug"
+                      : "text-neutral-700 dark:text-neutral-300 leading-snug"}
+                  >
                     <span
-                      className="mt-1 rounded-sm w-2.5 h-2.5 shrink-0"
-                      style={{ backgroundColor: segmentFills[segment.key] }}
-                      aria-hidden
-                    />
-                  )}
-                <span
-                  className={isWarn
-                    ? "text-amber-900/90 dark:text-amber-100/90 leading-snug"
-                    : "text-neutral-700 dark:text-neutral-300 leading-snug"}
-                >
-                  <span
-                    className={isWarn
-                      ? "font-medium text-amber-800 dark:text-amber-300"
-                      : "font-medium text-neutral-900 dark:text-neutral-100"}
-                  >
-                    {segment.label}
+                      className={isWarn
+                        ? "font-medium text-amber-800 dark:text-amber-300"
+                        : "font-medium text-neutral-900 dark:text-neutral-100"}
+                    >
+                      {segment.label}
+                    </span>
+                    <span
+                      className={isWarn
+                        ? "text-amber-700/80 dark:text-amber-400/80"
+                        : "text-neutral-500"}
+                    >
+                      {" "}
+                      · {segment.count} ({pct(segment.count)}%)
+                    </span>
                   </span>
-                  <span
-                    className={isWarn
-                      ? "text-amber-700/80 dark:text-amber-400/80"
-                      : "text-neutral-500"}
-                  >
-                    {" "}
-                    · {segment.count} ({pct(segment.count)}%)
-                  </span>
-                </span>
-              </li>
-            );
-          })}
-        </ul>
+                </li>
+              );
+            })}
+          </ul>
         )}
       </div>
     </div>

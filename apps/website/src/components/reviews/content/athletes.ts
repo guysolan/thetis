@@ -8,20 +8,6 @@ import type { Review } from "../types";
 
 export const athletes: Review[] = [
   {
-    name: "Holger Rune",
-    description: "Professional Tennis Player",
-    image: HolgerRune,
-    title: "Recovery felt more normal while keeping the tendon safe",
-    short: "Lighter at home than the boot — even used it in the pool",
-    body:
-      "After my Achilles rupture, I used the Thetis splint when I was home instead of wearing the heavy boot all the time. It made recovery easier, feeling a little more normal, while keeping the tendon safe. Also later I used it while swimming as it's light and easy in the water.",
-    country: "DK",
-    link: "",
-    clinics: [],
-    clinicImages: [],
-    date: "2026-05-01",
-  },
-  {
     name: "Andrew Lawrence",
     description: "Team GB Basketball",
     image: AndrewLawrence,
@@ -33,7 +19,7 @@ export const athletes: Review[] = [
     link: "",
     clinics: [],
     clinicImages: [],
-    date: "2024-01-01",
+    date: "2022-02-01",
   },
   {
     name: "Olivia Blatch",
@@ -49,21 +35,7 @@ export const athletes: Review[] = [
     link: "",
     clinics: [],
     clinicImages: [],
-    date: "2024-01-01",
-  },
-  {
-    name: "Kim Daybell",
-    description: "Team GB Table Tennis and Doctor",
-    image: KimDaybell,
-    short: "Simple design that allows better sleep and wound breathing",
-    title: "Simple design that allows better sleep and wound breathing",
-    body:
-      "The Thetis Splint has a simple design that is perfectly fit for purpose. It has allowed me to get the sleep that is so vital as I recovered from achilles tendon rupture and surgery whilst also feeling secure and protected. Apart from being less bulky than the orthopaedic boot, it also gives the surgical wounds a chance to breath and has made the recovery period a lot more bearable. I would highly recommend this product!",
-    country: "GB",
-    link: "",
-    clinics: [],
-    clinicImages: [],
-    date: "2024-01-01",
+    date: "2023-06-01",
   },
   {
     name: "Steff Evans",
@@ -77,7 +49,21 @@ export const athletes: Review[] = [
     link: "",
     clinics: [],
     clinicImages: [],
-    date: "2024-01-01",
+    date: "2024-12-01",
+  },
+  {
+    name: "Kim Daybell",
+    description: "Team GB Table Tennis and Doctor",
+    image: KimDaybell,
+    short: "Simple design that allows better sleep and wound breathing",
+    title: "Simple design that allows better sleep and wound breathing",
+    body:
+      "The Thetis Splint has a simple design that is perfectly fit for purpose. It has allowed me to get the sleep that is so vital as I recovered from achilles tendon rupture and surgery whilst also feeling secure and protected. Apart from being less bulky than the orthopaedic boot, it also gives the surgical wounds a chance to breath and has made the recovery period a lot more bearable. I would highly recommend this product!",
+    country: "GB",
+    link: "",
+    clinics: [],
+    clinicImages: [],
+    date: "2025-01-15",
   },
   {
     name: "Ollie Lawrence",
@@ -91,6 +77,20 @@ export const athletes: Review[] = [
     link: "",
     clinics: [],
     clinicImages: [],
-    date: "2024-01-01",
+    date: "2025-04-15",
+  },
+  {
+    name: "Holger Rune",
+    description: "Professional Tennis Player",
+    image: HolgerRune,
+    title: "Recovery felt more normal while keeping the tendon safe",
+    short: "Lighter at home than the boot — even used it in the pool",
+    body:
+      "After my Achilles rupture, I used the Thetis splint when I was home instead of wearing the heavy boot all the time. It made recovery easier, feeling a little more normal, while keeping the tendon safe. Also later I used it while swimming as it's light and easy in the water.",
+    country: "DK",
+    link: "",
+    clinics: [],
+    clinicImages: [],
+    date: "2025-08-01",
   },
 ];

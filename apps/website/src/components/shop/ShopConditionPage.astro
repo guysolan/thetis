@@ -59,8 +59,6 @@ const courseImageAlt =
   conditionId === "plantar-fasciitis"
     ? "Plantar fasciitis course lesson preview"
     : "Achilles rupture recovery course illustration with a clinician explaining foot position";
-const achillesCourseImage =
-  "/images/catalogue-products/achilles-rupture-recovery-course-aircast-mike-professional-square-v5-.png";
 
 const courseComingSoon =
   conditionId === "achilles-tendinitis" ||
@@ -338,6 +336,13 @@ const at = achillesFromThetisCopy[lang];
 
 let catalogue = getCatalogueProductsForCondition(conditionId);
 
+const achillesCourseProduct = catalogue.find(
+  (p) => p.id === "thetis-course-achilles-rupture",
+);
+const achillesCourseImage =
+  achillesCourseProduct?.imagePath ??
+  "/images/catalogue-products/achilles-rupture-recovery-course-aircast-mike-professional-square-v5-.png";
+
 const shopProducts = orderedShopProductsForDisplay(catalogue);
 
 const productLinks = (c.productRouteSlugs ?? [])
@@ -589,13 +594,13 @@ const chooseConditionLabel = conditionHubChooseConditionLabel[lang];
             </article>
             {courseRoute ? (
               <article class="flex flex-col bg-neutral-50 dark:bg-neutral-900/50 shadow-sm p-6 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl">
-                <div class="mr-auto mb-5 border border-primary/15 rounded-xl w-full max-w-[320px] overflow-hidden">
+                <div class="mr-auto mb-5 border border-primary/15 rounded-xl w-full max-w-[320px] aspect-square overflow-hidden">
                   <img
                     src={achillesCourseImage}
                     alt={courseImageAlt}
                     width={1024}
                     height={1024}
-                    class="w-full h-auto object-cover"
+                    class="w-full h-full object-cover"
                     loading="lazy"
                   />
                 </div>

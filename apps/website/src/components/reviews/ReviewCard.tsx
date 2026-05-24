@@ -1,6 +1,8 @@
 import { useState } from "react";
 import type { Review } from "./types";
 import { Badge } from "../ui/badge";
+import VerifiedBadge from "@/components/reviews/VerifiedBadge";
+import TestimonialRoleBadge from "@/components/reviews/TestimonialRoleBadge";
 
 const renderStars = (count: number) => {
   return Array(count)
@@ -22,7 +24,11 @@ const truncateText = (text: string, maxLength: number) => {
   return `${text.slice(0, maxLength)}...`;
 };
 
-export function ReviewCard({ review }: { review: Review }) {
+export function ReviewCard({
+  review,
+}: {
+  review: Review & { type?: "patient" | "clinician" | "athlete" };
+}) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   // Extract image source
@@ -42,10 +48,17 @@ export function ReviewCard({ review }: { review: Review }) {
     >
       <blockquote>
         <div className="flex justify-between items-center gap-2">
-          <div className="flex gap-1 mb-2">{renderStars(5)}</div>
-          <Badge className="capitalize" variant={review.type === "patient" ? "outline" : "default"}>
-            {review.type}
-          </Badge>
+          <div className="flex flex-wrap items-center gap-2 mb-2">
+            <div className="flex gap-1">{renderStars(5)}</div>
+            {(review.type === "clinician" || review.type === "athlete") && (
+              <TestimonialRoleBadge role={review.type} />
+            )}
+          </div>
+          {review.type !== "clinician" && review.type !== "athlete" && (
+            <Badge className="capitalize" variant={review.type === "patient" ? "outline" : "default"}>
+              {review.type}
+            </Badge>
+          )}
         </div>
         <p className="my-2 font-semibold text-neutral-800 text-lg">{review.title}</p>
         <div className="z-20 relative">
@@ -74,7 +87,14 @@ export function ReviewCard({ review }: { review: Review }) {
             />
           )}
           <div className="z-20 relative flex flex-col">
-            <span className="font-medium text-neutral-800 text-lg">{review.name}</span>
+            <span className="inline-flex items-center gap-1.5 font-medium text-neutral-800 text-lg">
+              {review.name}
+              {(review.type === "clinician" || review.type === "athlete") && (
+                <>
+                  <VerifiedBadge label="Verified testimonial" />
+                </>
+              )}
+            </span>
             <span className="mt-1 font-semibold text-neutral-500 text-base">
               {review.description ?? "Happy Customer"}
             </span>

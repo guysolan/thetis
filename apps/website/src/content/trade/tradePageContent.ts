@@ -347,7 +347,7 @@ const en: TradePageContent = {
   ip: {
     title: "Intellectual property",
     intro:
-      "Thetis Medical owns a growing patent and design portfolio covering the Achilles rupture night splint — relevant for distribution, white-label, and in-region manufacturing under licence. UK and US design protection is in place; US and European utility patents are in late-stage examination.",
+      "Thetis Medical owns a growing patent and design portfolio covering the Achilles rupture night splint - relevant for distribution, white-label, and in-region manufacturing under licence. UK and US design protection is in place; US and European utility patents are in late-stage examination.",
     portfolioTitle: "Portfolio at a glance",
   },
   partnership: {

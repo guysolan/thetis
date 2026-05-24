@@ -25,7 +25,10 @@ export default function AthletesCarousel() {
         className="w-full"
       >
         <CarouselContent className="-mt-4 h-[600px] md:h-[700px]">
-          {athletes.slice(0, 9).map((athlete, index) => {
+          {[...athletes]
+            .sort((a, b) => b.date.localeCompare(a.date))
+            .slice(0, 9)
+            .map((athlete) => {
             const athleteReview = {
               ...athlete,
               type: "athlete" as const,

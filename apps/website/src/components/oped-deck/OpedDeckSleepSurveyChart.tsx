@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import SleepSurveyDonutChart from "@/components/trade/SleepSurveyDonutChart";
 import { opedCannotSleepPct } from "@/features/oped-deck/opedDeckContent";
-import { sleepSurveyTotal } from "@/content/trade/sleepSurveyData";
 
 function isPanelVisible(element: HTMLElement | null) {
   const panel = element?.closest("[data-oped-slide]");
@@ -31,26 +30,26 @@ export default function OpedDeckSleepSurveyChart() {
   }, []);
 
   return (
-    <div ref={hostRef} className="flex justify-center w-full min-h-[280px]">
-      {ready ? (
-        <div className="flex flex-col items-center w-full">
-          <SleepSurveyDonutChart
-            centerLabel={{
-              value: `${opedCannotSleepPct}%`,
-              subtitle: "can't sleep",
-            }}
-            hideLegend
+    <div ref={hostRef} className="flex justify-center w-full min-h-[320px]">
+      {ready
+        ? (
+          <div className="flex flex-col items-center w-full">
+            <SleepSurveyDonutChart
+              centerLabel={{
+                value: `${opedCannotSleepPct}%`,
+                subtitle: "can't sleep",
+              }}
+              legendVariant="prominent"
+              legendPosition="side"
+            />
+          </div>
+        )
+        : (
+          <div
+            className="bg-neutral-100/80 dark:bg-neutral-800/40 rounded-xl w-full max-w-3xl h-[320px] animate-pulse"
+            aria-hidden="true"
           />
-          <p className="mt-2 text-neutral-500 text-xs text-center">
-            Patient survey · n={sleepSurveyTotal}
-          </p>
-        </div>
-      ) : (
-        <div
-          className="w-full max-w-[360px] h-[280px] bg-neutral-100/80 dark:bg-neutral-800/40 rounded-xl animate-pulse"
-          aria-hidden="true"
-        />
-      )}
+        )}
     </div>
   );
 }

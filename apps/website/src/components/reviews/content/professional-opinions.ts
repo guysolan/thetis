@@ -110,7 +110,7 @@ export const translatedClinicians: TranslatedReview[] = [
     country: "GB",
     clinics: ["London Foot and Ankle Centre"],
     clinicImages: [HJE.src],
-    date: "2024-01-15",
+    date: "2023-10-15",
     content: {
       en: {
         description: "Past President of the British Orthopaedic Foot and Ankle Society",
@@ -156,7 +156,7 @@ export const translatedClinicians: TranslatedReview[] = [
     country: "GB",
     clinics: ["Kings College Hospital"],
     clinicImages: [KingsCollege.src],
-    date: "2024-02-01",
+    date: "2024-08-01",
     content: {
       en: {
         description: "Foot and Ankle Surgeon",
@@ -202,7 +202,7 @@ export const translatedClinicians: TranslatedReview[] = [
     country: "GB",
     clinics: ["Royal National Orthopaedic Hospital"],
     clinicImages: [RNOH.src],
-    date: "2024-01-20",
+    date: "2024-03-01",
     content: {
       en: {
         description: "Foot and Ankle Surgeon",
@@ -248,7 +248,7 @@ export const translatedClinicians: TranslatedReview[] = [
     country: "GB",
     clinics: ["Kingston and Richmond Hospital", "New Victoria Hospital"],
     clinicImages: [KingstonRichmond.src, NewVictoria.src],
-    date: "2024-01-10",
+    date: "2023-06-01",
     content: {
       en: {
         description: "Foot and Ankle Surgeon",
@@ -294,7 +294,7 @@ export const translatedClinicians: TranslatedReview[] = [
     country: "GB",
     clinics: ["Epsom and St Helier Hospitals"],
     clinicImages: [EpsomStHelier.src],
-    date: "2024-01-25",
+    date: "2025-02-01",
     content: {
       en: {
         description: "Foot and Ankle Surgeon",
@@ -340,7 +340,7 @@ export const translatedClinicians: TranslatedReview[] = [
     country: "GB",
     clinics: ["Fortius Clinic", "Chelsea and Westminster Hospital"],
     clinicImages: [Fortius.src, ChelseaWestminster.src],
-    date: "2024-02-05",
+    date: "2025-08-01",
     content: {
       en: {
         description: "Foot and Ankle Surgeon",

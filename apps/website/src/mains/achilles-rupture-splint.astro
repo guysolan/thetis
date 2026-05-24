@@ -10,7 +10,7 @@ import NightSplintHero from "@/sections/achilles-rupture-splint/NightSplintHero.
 import ValuePropositions from "@/sections/achilles-rupture-splint/ValuePropositions.astro";
 import KeyFeatures from "@/sections/achilles-rupture-splint/KeyFeatures.astro";
 import Reviews from "@/components/reviews/InfiniteReviews.astro";
-import EnhancedReviewCarousel from "@/components/reviews/EnhancedReviewCarousel";
+import ProductReviews from "@/components/reviews/ProductReviews";
 import OrderYourSplint from "@/sections/achilles-rupture-splint/OrderYourSplint.astro";
 import SplintDownloads from "@/sections/achilles-rupture-splint/SplintDownloads.astro";
 import SplintGetCoveredUS from "@/sections/achilles-rupture-splint/SplintGetCoveredUS.astro";
@@ -50,10 +50,10 @@ const content = {
         quoteAuthor: "— Verified Patient, USA",
         // Reviews section
         trustedByThousands: "TRUSTED BY THOUSANDS",
-        joinPatients: "Join 5,000+ Patients Who've Found Relief",
+        joinPatients: "Customer Reviews",
         realReviews:
-            "Real reviews from real patients recovering from Achilles rupture",
-        viewAllReviews: "View All Reviews",
+            "Filter by source and star rating — Amazon, reviews, and testimonials",
+        viewAllReviews: "Browse all reviews",
         // Who this is for
         whoThisIsFor: "Who This Is For",
         whoThisIsForDesc:
@@ -608,9 +608,7 @@ const currentContent = content[lang as keyof typeof content] || content.en;
                         {currentContent.realReviews}
                     </p>
                 </div>
-                <div class="mb-8">
-                    <EnhancedReviewCarousel client:load />
-                </div>
+                <ProductReviews client:load />
                 <div class="mt-8 text-center">
                     <a
                         href="/reviews"
@@ -1178,7 +1176,9 @@ const currentContent = content[lang as keyof typeof content] || content.en;
                 </div>
                 <div class="hidden md:block masonry-grid">
                     {
-                        translatedClinicians.map((clinician) => {
+                        [...translatedClinicians]
+                            .sort((a, b) => b.date.localeCompare(a.date))
+                            .map((clinician) => {
                             const content =
                                 clinician.content[lang] || clinician.content.en;
                             const clinicianReview = {
@@ -1385,7 +1385,8 @@ const currentContent = content[lang as keyof typeof content] || content.en;
                     value: 49.99, // Default price, actual price varies by region
                     items: [
                         {
-                            item_id: "gid://shopify/ProductVariant/47494539673928",
+                            item_id:
+                                "gid://shopify/ProductVariant/47494539673928",
                             item_name: "Achilles Tendon Rupture Splint",
                             price: 49.99,
                             quantity: 1,
@@ -1397,7 +1398,8 @@ const currentContent = content[lang as keyof typeof content] || content.en;
 
         // Lazy load YouTube iframe when user clicks the preview
         document.addEventListener("DOMContentLoaded", () => {
-            const youtubeLazyMount = document.getElementById("youtube-lazy-mount");
+            const youtubeLazyMount =
+                document.getElementById("youtube-lazy-mount");
             if (youtubeLazyMount) {
                 youtubeLazyMount.addEventListener("click", () => {
                     const youtubeId =
@@ -1411,7 +1413,10 @@ const currentContent = content[lang as keyof typeof content] || content.en;
                         "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
                     iframe.allowFullscreen = true;
 
-                    youtubeLazyMount.parentNode?.replaceChild(iframe, youtubeLazyMount);
+                    youtubeLazyMount.parentNode?.replaceChild(
+                        iframe,
+                        youtubeLazyMount,
+                    );
                 });
             }
         });

@@ -7,13 +7,17 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@thetis/ui/carousel";
+import TestimonialRoleBadge from "@/components/reviews/TestimonialRoleBadge";
+import VerifiedBadge from "@/components/reviews/VerifiedBadge";
 import { translatedClinicians } from "./reviews/content/professional-opinions";
 
 const navButtonBase =
   "static flex justify-center items-center rounded-full border-2 border-primary bg-white text-primary shadow-md hover:bg-primary hover:text-white hover:border-primary transition-all duration-200 disabled:opacity-40 disabled:pointer-events-none translate-x-0 translate-y-0 h-11 w-11 md:h-12 md:w-12 [&>svg]:w-5 [&>svg]:h-5";
 
 export default function SurgeonsCarousel() {
-  const clinicians = translatedClinicians;
+  const clinicians = [...translatedClinicians].sort((a, b) =>
+    b.date.localeCompare(a.date),
+  );
 
   return (
     <>
@@ -42,12 +46,16 @@ export default function SurgeonsCarousel() {
                         height={48}
                       />
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-neutral-900 text-base md:text-lg">
+                        <p className="inline-flex flex-wrap items-center gap-1.5 font-semibold text-neutral-900 text-base md:text-lg">
                           {clinician.name}
+                          <VerifiedBadge label="Verified surgeon testimonial" />
                         </p>
-                        <p className="text-neutral-600 text-sm md:text-base">
-                          {content.description}
-                        </p>
+                        <div className="flex flex-wrap items-center gap-2 mt-1">
+                          <TestimonialRoleBadge role="clinician" compact />
+                          <p className="text-neutral-600 text-sm md:text-base">
+                            {content.description}
+                          </p>
+                        </div>
                       </div>
                     </div>
                     <p className="mb-2 font-semibold text-neutral-900 text-base md:text-lg">
@@ -100,8 +108,14 @@ export default function SurgeonsCarousel() {
                         height={56}
                       />
                       <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-neutral-900 text-lg">{clinician.name}</p>
-                        <p className="text-neutral-600 text-base">{content.description}</p>
+                        <p className="inline-flex flex-wrap items-center gap-1.5 font-semibold text-neutral-900 text-lg">
+                          {clinician.name}
+                          <VerifiedBadge label="Verified surgeon testimonial" />
+                        </p>
+                        <div className="flex flex-wrap items-center gap-2 mt-1">
+                          <TestimonialRoleBadge role="clinician" compact />
+                          <p className="text-neutral-600 text-base">{content.description}</p>
+                        </div>
                       </div>
                     </div>
                     <p className="mb-3 font-semibold text-neutral-900 text-lg">{content.title}</p>
