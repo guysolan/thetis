@@ -7,10 +7,10 @@
   "url": "https://thetismedical.com/",
   "address": {
     "@type": "PostalAddress",
-    "addressLocality": "Birmingham",
+    "addressLocality": "London",
     "addressCountry": "UK",
-    "postalCode": "B12 0UP",
-    "streetAddress": "15 Leopold Street"
+    "postalCode": "E14 9NN",
+    "streetAddress": "C/O The Accountancy Partnership, Suite 5, 5th Floor, City Reach, 5 Greenwich View Place"
   },
   "logo": "https://thetismedical.com/images/dotty-logo.svg",
   "sameAs": [

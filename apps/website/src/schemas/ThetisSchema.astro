@@ -1,28 +1,29 @@
 ---
-import { Schema } from 'astro-seo-schema'
+import { Schema } from "astro-seo-schema";
+import { THETIS_COMPANY_ADDRESS } from "@/content/companyAddress";
 ---
 
 <Schema
   item={{
-    '@context': 'https://schema.org',
-    '@type': 'Corporation',
-    name: 'Thetis Medical Ltd',
-    alternateName: 'Thetis Medical',
+    "@context": "https://schema.org",
+    "@type": "Corporation",
+    name: "Thetis Medical Ltd",
+    alternateName: "Thetis Medical",
     description:
-      'Thetis Medical produce medical splints for Achilles Tendon Rupture.',
-    url: 'https://thetismedical.com/',
+      "Thetis Medical produce medical splints for Achilles Tendon Rupture.",
+    url: "https://thetismedical.com/",
     address: {
-      '@type': 'PostalAddress',
-      addressLocality: 'Birmingham',
-      addressCountry: 'UK',
-      postalCode: 'B12 0UP',
-      streetAddress: '15 Leopold Street',
+      "@type": "PostalAddress",
+      addressLocality: THETIS_COMPANY_ADDRESS.locality,
+      addressCountry: "UK",
+      postalCode: THETIS_COMPANY_ADDRESS.postalCode,
+      streetAddress: THETIS_COMPANY_ADDRESS.streetAddress,
     },
-    logo: 'https://thetismedical.com/images/dotty-logo.svg',
+    logo: "https://thetismedical.com/images/dotty-logo.svg",
     sameAs: [
-      'https://www.linkedin.com/company/thetis-medical-ltd',
-      'https://www.instagram.com/thetismedical',
-      'https://www.facebook.com/thetismedical',
+      "https://www.linkedin.com/company/thetis-medical-ltd",
+      "https://www.instagram.com/thetismedical",
+      "https://www.facebook.com/thetismedical",
     ],
   }}
 />

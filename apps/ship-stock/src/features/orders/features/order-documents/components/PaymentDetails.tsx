@@ -17,8 +17,12 @@ export const getPaymentMethodDisplayName = (key: PaymentMethodKey): string => {
 };
 
 // Helper function to get URL-safe key from display name
-export const getPaymentMethodKey = (displayName: string): PaymentMethodKey | null => {
-  const entry = Object.entries(PAYMENT_METHODS).find(([_, value]) => value === displayName);
+export const getPaymentMethodKey = (
+  displayName: string,
+): PaymentMethodKey | null => {
+  const entry = Object.entries(PAYMENT_METHODS).find(([_, value]) =>
+    value === displayName
+  );
   return entry ? (entry[0] as PaymentMethodKey) : null;
 };
 
@@ -65,7 +69,7 @@ const sections: Record<PaymentMethodKey, Section> = {
       "IBAN: GB33REVO00996957095509",
       "BIC: REVOGB21",
       "Intermediary BIC: CHASGB2L",
-      "Beneficiary address: 15 Leopold Street, B12 0UP, Birmingham, United Kingdom",
+      "Beneficiary address: C/O The Accountancy Partnership, Suite 5, 5th Floor, City Reach, 5 Greenwich View Place, London, E14 9NN, United Kingdom",
       "Bank/Payment institution: Revolut Ltd",
       "Bank/Payment institution address: 7 Westferry Circus, E14 4HD, London, United Kingdom",
     ],
@@ -77,7 +81,7 @@ const sections: Record<PaymentMethodKey, Section> = {
       "Account number: 253018127559",
       "ACH routing number: 026013356",
       "Wire routing number: 026013356",
-      "Beneficiary address: 15 Leopold Street, B12 0UP, Birmingham, United Kingdom",
+      "Beneficiary address: C/O The Accountancy Partnership, Suite 5, 5th Floor, City Reach, 5 Greenwich View Place, London, E14 9NN, United Kingdom",
       "Bank/Payment institution: Metropolitan Commercial Bank",
       "Bank/Payment institution address: 99 Park Ave, 10016, New York, United States",
     ],
@@ -88,7 +92,7 @@ const sections: Record<PaymentMethodKey, Section> = {
       "Beneficiary: THETIS MEDICAL LTD",
       "Account number: 82556598",
       "Sort code: 04-00-75",
-      "Beneficiary address: 15 Leopold Street, B12 0UP, Birmingham, United Kingdom",
+      "Beneficiary address: C/O The Accountancy Partnership, Suite 5, 5th Floor, City Reach, 5 Greenwich View Place, London, E14 9NN, United Kingdom",
       "Bank/Payment institution: Revolut Ltd",
       "Bank/Payment institution address: 7 Westferry Circus, E14 4HD, London, United Kingdom",
     ],
@@ -102,7 +106,9 @@ interface PaymentDetailsProps {
 }
 
 // Helper: available methods per currency (for toggles visibility)
-export const getAvailablePaymentMethods = (currency: string): PaymentMethodKey[] => {
+export const getAvailablePaymentMethods = (
+  currency: string,
+): PaymentMethodKey[] => {
   const c = (currency || "GBP").toUpperCase();
   const map: Record<string, PaymentMethodKey[]> = {
     CAD: ["canada_wise", "international"],
@@ -116,24 +122,28 @@ export const getAvailablePaymentMethods = (currency: string): PaymentMethodKey[]
 const SectionBlock = ({ title, lines }: Section) => (
   <div>
     <h4>{title}</h4>
-    {lines.map((line) => (
-      <p key={line}>{line}</p>
-    ))}
+    {lines.map((line) => <p key={line}>{line}</p>)}
   </div>
 );
 
-const PaymentDetails = ({ orderId, currency, enabledPaymentMethods }: PaymentDetailsProps) => {
+const PaymentDetails = (
+  { orderId, currency, enabledPaymentMethods }: PaymentDetailsProps,
+) => {
   const isEnabled = (k: PaymentMethodKey) =>
     !enabledPaymentMethods || enabledPaymentMethods[k] !== false;
 
   return (
     <section>
-      <h2 className="mb-1 font-medium text-neutral-900 text-lg">Payment Information</h2>
+      <h2 className="mb-1 font-medium text-neutral-900 text-lg">
+        Payment Information
+      </h2>
       <h4>Payment Reference: #{orderId?.toString().padStart(4, "0")}</h4>
       <section>
         {isEnabled("eu_wise") && <SectionBlock {...sections.eu_wise} />}
         {isEnabled("canada_wise") && <SectionBlock {...sections.canada_wise} />}
-        {isEnabled("international") && <SectionBlock {...sections.international} />}
+        {isEnabled("international") && (
+          <SectionBlock {...sections.international} />
+        )}
         {isEnabled("us") && <SectionBlock {...sections.us} />}
         {isEnabled("uk") && <SectionBlock {...sections.uk} />}
       </section>
