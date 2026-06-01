@@ -66,7 +66,7 @@ export const opedPitchPatientComplaint = {
   eyebrow: "The night problem",
   title: "Patients struggle at night",
   intro:
-    "Matthew Solan, a foot and ankle surgeon, saw the same problem in clinic: patients were protected in the boot by day but could not sleep in it at night.",
+    "In Achilles clinics, the same pattern appears repeatedly: patients are protected in a walking boot by day but struggle to sleep in it at night.",
   surveyLead: "We surveyed Achilles rupture patients. 77% said the boot was:",
   complaintThemes: [
     { id: "hot", label: "Hot" },
@@ -629,11 +629,11 @@ export const opedPitchEconomics = {
 
 export const opedPitchInvitation = {
   title: "Let's complete the stack together",
-  headline: "Licence or acquire - your structure, our shared goal",
+  headline: "Partnership structure - built around shared growth",
   fomo:
     "If a boot competitor integrates Thetis first, they own the day/night category. OPED can take it instead - with a device that is already proven, cleared, and loved by patients.",
   ask:
-    "Guy Solan is open to a formal discussion under NDA: clinical evidence, IP, manufacturing, and either a licence or acquisition.",
+    "Guy Solan is open to a formal discussion under NDA: clinical evidence, IP, manufacturing, and the right partnership structure for scaling the category.",
   cta:
     "Partnership enquiry - we will share the full data room and manufacturing roadmap.",
   partnerHref: "/become-a-partner",
@@ -811,15 +811,14 @@ export const opedPitchPossibleImprovements = {
 
 export const opedPitchPartnershipOptions = {
   title: "Partnership with OPED",
-  intro: "Two options on the table: licence or acquisition.",
-  founderNote:
-    "Guy Solan invented the splint and is the sole employee at Thetis Medical. The business is profitable and needs no outside funding. He now runs another company and is looking for a partner that can take the product to more patients.",
+  intro:
+    "Thetis Medical is looking to partner with a boot manufacturer to scale the Achilles night splint. OPED is our preferred partner because VACOped is the only boot purpose-built for Achilles tendon rupture.",
   proposalTitle: "Proposal",
   proposal: [
     "Rebrand and industrial redesign under OPED design language",
     "Manufacturing cost target of €7–8 per unit at OPED scale",
     "Launch in Germany and through OPED's global partner network",
-    "Launch the VACOped 24/7 Premium Recovery Pack (boot + EVENup + splint) in every market",
+    "Launch the VACOped 24/7 Premium Recovery Pack (boot + splint)",
   ],
   options: [
     {
@@ -839,11 +838,11 @@ export const opedPitchPartnershipOptions = {
       label: "Option 2",
       title: "Acquire",
       summary:
-        "OPED acquires the splint business outright - IP, regulatory files, customer base, and manufacturing.",
+        "OPED acquires the splint business as a strategic portfolio extension - IP, regulatory files, customer base, and manufacturing know-how.",
       points: [
         "Full ownership of category and margin",
         "Single integration, no ongoing royalty",
-        "Guy steps back after handover; assets fold into OPED",
+        "Founder support through handover, redesign, and launch",
       ],
     },
   ],
@@ -903,7 +902,7 @@ export const opedPitchSalesProof = {
 export const opedPitchWhyOpedNow = {
   title: "Why now",
   intro:
-    "Thetis is profitable and growing without outside funding. Guy Solan invented the splint and is the sole employee. He now runs another company and wants to hand the product to a partner that can reach more patients.",
+    "Thetis is profitable and growing without outside funding. The next stage is best accelerated with a reliable boot-manufacturer partner already operating in Achilles recovery.",
   growthPoints: [
     {
       label: "Steady unit growth",
@@ -917,7 +916,7 @@ export const opedPitchWhyOpedNow = {
     {
       label: "Proven pull-through",
       value:
-        "Patients search online when clinics don't stock it - OPED removes that friction",
+        "Patients search online when clinics don't stock it: 1.6m annual impressions, 24k clicks, and traffic growing ~2x per year",
     },
   ],
 } as const;
