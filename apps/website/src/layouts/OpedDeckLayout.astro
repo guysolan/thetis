@@ -8,10 +8,19 @@ interface Props {
   initialPage: number;
   slideCount: number;
   appendix?: boolean;
+  basePath?: string;
+  partnerName?: string;
 }
 
-const { title, description = "", initialPage, slideCount, appendix = false } =
-  Astro.props;
+const {
+  title,
+  description = "",
+  initialPage,
+  slideCount,
+  appendix = false,
+  basePath = "/decks/oped",
+  partnerName = "OPED Medical",
+} = Astro.props;
 ---
 
 <!doctype html>
@@ -24,7 +33,9 @@ const { title, description = "", initialPage, slideCount, appendix = false } =
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href="/images/dotty-logo.svg" />
   </head>
-  <body class="bg-background w-full min-h-screen overflow-x-hidden text-foreground">
+  <body
+    class="bg-background w-full min-h-screen overflow-x-hidden text-foreground"
+  >
     <div class="flex flex-col w-full min-h-screen">
       <header
         class="z-20 relative flex flex-shrink-0 justify-between items-center bg-white shadow-sm px-6 py-3 border-neutral-200 border-b"
@@ -37,23 +48,28 @@ const { title, description = "", initialPage, slideCount, appendix = false } =
             height="28"
             class="shrink-0"
           />
-          <div class="bg-neutral-200 w-px h-5 shrink-0" aria-hidden="true"></div>
+          <div class="bg-neutral-200 w-px h-5 shrink-0" aria-hidden="true">
+          </div>
           <span class="font-bold text-neutral-800 text-sm tracking-tight">
-            OPED Medical
+            {partnerName}
           </span>
-          <span class="font-light text-neutral-300 text-sm" aria-hidden="true">×</span>
+          <span class="font-light text-neutral-300 text-sm" aria-hidden="true"
+            >×</span
+          >
           <span class="font-semibold text-primary text-sm">
             Thetis Medical
           </span>
         </div>
         <div class="flex items-center gap-3 shrink-0">
-          <span class="hidden sm:inline font-medium text-neutral-400 text-xs uppercase tracking-widest">
+          <span
+            class="hidden sm:inline font-medium text-neutral-400 text-xs uppercase tracking-widest"
+          >
             {appendix ? "Appendix" : "Confidential"}
           </span>
           {
             appendix ? (
               <a
-                href="/decks/oped/1"
+                href={`${basePath}/1`}
                 class="bg-primary/10 hover:bg-primary/15 px-3 py-1 border border-primary/20 rounded-full font-semibold text-primary text-xs transition-colors"
               >
                 ← Back to deck
@@ -74,9 +90,15 @@ const { title, description = "", initialPage, slideCount, appendix = false } =
         <slot />
       </main>
 
-      {!appendix && (
-        <OpedDeckNavigator slideCount={slideCount} initialPage={initialPage} />
-      )}
+      {
+        !appendix && (
+          <OpedDeckNavigator
+            slideCount={slideCount}
+            initialPage={initialPage}
+            basePath={basePath}
+          />
+        )
+      }
     </div>
   </body>
 </html>

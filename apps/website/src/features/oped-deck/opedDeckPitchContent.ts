@@ -862,6 +862,7 @@ export const opedPitchSalesChart = {
     year: "2027",
     yearLabel: "2027 (OPED)",
     units: 5000,
+    partnerLabel: "OPED",
   },
 } as const;
 

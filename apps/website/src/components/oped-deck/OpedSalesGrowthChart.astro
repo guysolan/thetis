@@ -1,8 +1,16 @@
 ---
-import type { opedPitchSalesChart } from "@/features/oped-deck/opedDeckPitchContent";
-
 interface Props {
-  chart: typeof opedPitchSalesChart;
+  chart: {
+    title: string;
+    subtitle: string;
+    history: readonly { year: string; units: number }[];
+    projection: {
+      year: string;
+      yearLabel: string;
+      units: number;
+      partnerLabel: string;
+    };
+  };
 }
 
 const { chart } = Astro.props;
@@ -128,6 +136,6 @@ const projectionPath = `M ${xAt(points.length - 2)} ${yAt(points[points.length -
   </svg>
 
   <p class="mt-3 text-[11px] text-neutral-500 text-center">
-    Dotted line = projected volume with OPED distribution
+    Dotted line = projected volume with {chart.projection.partnerLabel} distribution
   </p>
 </div>

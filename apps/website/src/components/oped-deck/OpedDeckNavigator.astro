@@ -2,9 +2,10 @@
 interface Props {
   slideCount: number;
   initialPage: number;
+  basePath?: string;
 }
 
-const { slideCount, initialPage } = Astro.props;
+const { slideCount, initialPage, basePath = "/decks/oped" } = Astro.props;
 ---
 
 <nav
@@ -13,6 +14,7 @@ const { slideCount, initialPage } = Astro.props;
   aria-label="Slide navigation"
   data-slide-count={slideCount}
   data-initial-page={initialPage}
+  data-base-path={basePath}
 >
   <div
     id="oped-deck-progress"
@@ -75,20 +77,23 @@ const { slideCount, initialPage } = Astro.props;
 </nav>
 
 <script>
-  import { OPED_DECK_BASE_PATH } from "@/features/oped-deck/opedDeckContent";
-
-  function clampPage(page, slideCount) {
+  function clampPage(page: number, slideCount: number) {
     if (!Number.isFinite(page)) return 1;
     return Math.max(1, Math.min(slideCount, Math.round(page)));
   }
 
-  function readPageFromPath(pathname, slideCount) {
-    const match = pathname.match(/\/decks\/oped\/(\d+)\/?$/);
+  function readPageFromPath(
+    pathname: string,
+    slideCount: number,
+    basePath: string,
+  ) {
+    const escapedBasePath = basePath.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const match = pathname.match(new RegExp(`${escapedBasePath}/(\\d+)/?$`));
     if (!match) return 1;
     return clampPage(Number.parseInt(match[1], 10), slideCount);
   }
 
-  function notifySlideChange(page) {
+  function notifySlideChange(page: number) {
     window.dispatchEvent(
       new CustomEvent("oped-deck-slide-change", { detail: { page } }),
     );
@@ -97,7 +102,7 @@ const { slideCount, initialPage } = Astro.props;
     });
   }
 
-  function setSlideVisible(page) {
+  function setSlideVisible(page: number) {
     document.querySelectorAll("[data-oped-slide]").forEach((panel) => {
       const slide = Number.parseInt(
         panel.getAttribute("data-oped-slide") ?? "0",
@@ -111,18 +116,18 @@ const { slideCount, initialPage } = Astro.props;
     });
   }
 
-  function updateCounters(page, slideCount) {
+  function updateCounters(page: number, slideCount: number) {
     const label = `${page} / ${slideCount}`;
     document.querySelectorAll("[data-oped-counter]").forEach((node) => {
       node.textContent = label;
     });
   }
 
-  function updateButtons(page, slideCount) {
+  function updateButtons(page: number, slideCount: number) {
     const prev = document.getElementById("oped-deck-prev");
     const next = document.getElementById("oped-deck-next");
-    if (prev) prev.disabled = page <= 1;
-    if (next) next.disabled = page >= slideCount;
+    if (prev instanceof HTMLButtonElement) prev.disabled = page <= 1;
+    if (next instanceof HTMLButtonElement) next.disabled = page >= slideCount;
 
     const progress = document.getElementById("oped-deck-progress");
     if (progress) {
@@ -144,9 +149,17 @@ const { slideCount, initialPage } = Astro.props;
       nav.getAttribute("data-slide-count") ?? "1",
       10,
     );
-    let currentPage = readPageFromPath(window.location.pathname, slideCount);
+    const basePath = nav.getAttribute("data-base-path") ?? "/decks/oped";
+    let currentPage = readPageFromPath(
+      window.location.pathname,
+      slideCount,
+      basePath,
+    );
 
-    const goTo = (nextPage, { replace = false } = {}) => {
+    const goTo = (
+      nextPage: number,
+      { replace = false }: { replace?: boolean } = {},
+    ) => {
       currentPage = clampPage(nextPage, slideCount);
       setSlideVisible(currentPage);
       notifySlideChange(currentPage);
@@ -154,7 +167,7 @@ const { slideCount, initialPage } = Astro.props;
       updateButtons(currentPage, slideCount);
       scrollDeckToTop();
 
-      const url = `${OPED_DECK_BASE_PATH}/${currentPage}`;
+      const url = `${basePath}/${currentPage}`;
       if (replace) {
         window.history.replaceState({ slide: currentPage }, "", url);
       } else {
@@ -173,7 +186,11 @@ const { slideCount, initialPage } = Astro.props;
     });
 
     window.addEventListener("popstate", () => {
-      currentPage = readPageFromPath(window.location.pathname, slideCount);
+      currentPage = readPageFromPath(
+        window.location.pathname,
+        slideCount,
+        basePath,
+      );
       setSlideVisible(currentPage);
       notifySlideChange(currentPage);
       updateCounters(currentPage, slideCount);
