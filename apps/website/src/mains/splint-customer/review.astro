@@ -1,0 +1,97 @@
+---
+import type { Lang } from "@/config/languages";
+import Layout from "@/layouts/Layout.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import SplintCustomerBackLink from "@/components/splint-customer/SplintCustomerBackLink.astro";
+import SplintCustomerChoiceCards from "@/components/splint-customer/SplintCustomerChoiceCards.astro";
+import LocationPrice from "@/components/splint-customer/LocationPrice";
+import { getSplintCustomerPath } from "@/lib/splint-customer-paths";
+import { getSplintCustomerCopy } from "@/features/splint-customer/splintCustomerCopy";
+import { Check } from "lucide-react";
+import { VideoReviewForm } from "@/components/VideoReviewForm";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+const t = getSplintCustomerCopy(lang);
+const discountCode = "SPLINT20";
+const claimHref = getSplintCustomerPath("claim-cashback", lang);
+---
+
+<Layout
+  title={t.meta.review.title}
+  description={t.meta.review.description}
+  image="https://thetismedical.com/images/night-splint.png"
+  lang={lang}
+>
+  <main>
+    <ColorGradient>
+      <div class="mx-auto px-4 py-8 md:py-10 max-w-3xl text-center">
+        <SplintCustomerBackLink lang={lang} />
+        <p
+          class="mb-2 font-medium text-primary text-sm uppercase tracking-widest"
+        >
+          {t.review.eyebrow}
+        </p>
+        <h1
+          class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
+        >
+          {t.review.title}{" "}
+          <LocationPrice gbp={20} eur={20} usd={25} client:load />
+        </h1>
+        <p class="text-neutral-600 dark:text-neutral-400 text-sm md:text-base">
+          {t.review.intro}
+        </p>
+      </div>
+    </ColorGradient>
+
+    <section class="pt-2 pb-10 md:pb-12">
+      <div class="mx-auto px-4 max-w-xl">
+        <ul
+          class="gap-3 grid mb-6 text-neutral-700 dark:text-neutral-300 text-sm"
+        >
+          {
+            t.review.guidelines.map((item) => (
+              <li class="flex items-start gap-2">
+                <Check className="mt-0.5 w-4 h-4 text-primary shrink-0" />
+                <span>{item}</span>
+              </li>
+            ))
+          }
+        </ul>
+
+        <div
+          class="bg-white dark:bg-neutral-800 shadow-lg p-6 md:p-8 border border-neutral-200 dark:border-neutral-700 rounded-2xl"
+        >
+          <VideoReviewForm lang={lang} client:load />
+        </div>
+
+        <p class="mt-6 text-neutral-500 text-sm text-center">
+          {t.review.approvedPrompt}
+          <a
+            href={claimHref}
+            class="font-medium text-primary hover:text-primary/80"
+          >
+            {t.review.approvedLink}
+          </a>
+        </p>
+      </div>
+
+      <div class="mx-auto px-4 pt-10 max-w-3xl">
+        <p
+          class="mb-4 font-semibold text-neutral-900 dark:text-neutral-100 text-center"
+        >
+          {t.review.orBoth}
+        </p>
+        <SplintCustomerChoiceCards
+          lang={lang}
+          highlight="review"
+          discountCode={discountCode}
+          compact
+        />
+      </div>
+    </section>
+  </main>
+</Layout>

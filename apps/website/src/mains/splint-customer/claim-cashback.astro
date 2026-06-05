@@ -1,0 +1,60 @@
+---
+import type { Lang } from "@/config/languages";
+import Layout from "@/layouts/Layout.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import HighlightedWord from "@/components/HighlightedWord";
+import SplintCustomerBackLink from "@/components/splint-customer/SplintCustomerBackLink.astro";
+import LocationPrice from "@/components/splint-customer/LocationPrice";
+import { getSplintCustomerCopy } from "@/features/splint-customer/splintCustomerCopy";
+import { Banknote } from "lucide-react";
+import { CashbackClaimForm } from "@/components/CashbackClaimForm";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+const t = getSplintCustomerCopy(lang);
+---
+
+<Layout
+  title={t.meta.claim.title}
+  description={t.meta.claim.description}
+  image="https://thetismedical.com/images/night-splint.png"
+  lang={lang}
+>
+  <main>
+    <ColorGradient>
+      <div class="mx-auto px-4 py-8 md:py-10 max-w-3xl text-center">
+        <SplintCustomerBackLink lang={lang} />
+        <div
+          class="inline-flex items-center gap-2 bg-primary/10 dark:bg-primary/20 mb-3 px-3 py-1.5 rounded-full font-semibold text-primary text-sm"
+        >
+          <Banknote className="w-4 h-4" />
+          {t.claim.badge}
+        </div>
+        <h1
+          class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
+        >
+          {t.claim.title}{" "}
+          <HighlightedWord>{t.claim.titleHighlight}</HighlightedWord>
+        </h1>
+        <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+          {t.claim.introBefore}{" "}
+          <LocationPrice gbp={20} eur={20} usd={25} client:load />.
+          {t.claim.introAfter}
+        </p>
+      </div>
+    </ColorGradient>
+
+    <section class="pt-2 pb-10 md:pb-12">
+      <div class="mx-auto px-4 max-w-xl">
+        <div
+          class="bg-white dark:bg-neutral-800 shadow-lg p-6 border border-neutral-200 dark:border-neutral-700 rounded-2xl"
+        >
+          <CashbackClaimForm client:load />
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

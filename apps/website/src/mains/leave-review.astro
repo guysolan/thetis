@@ -5,6 +5,7 @@ import HighlightedWord from "@/components/HighlightedWord";
 import { Star, Banknote, Check, Video } from "lucide-react";
 import { LeaveReviewForm } from "@/components/LeaveReviewForm";
 import type { Lang } from "@/config/languages";
+import { getSplintCustomerPath } from "@/lib/splint-customer-paths";
 
 interface Props {
     lang?: Lang;
@@ -14,26 +15,28 @@ const { lang = "en" } = Astro.props;
 
 // Default currency (will be updated client-side based on location)
 let currency = "£";
-let amount = "10";
+let amount = "20";
 
 const translations = {
     en: {
         meta: {
             title: "Leave a Review - Earn Cashback | Thetis Medical",
-            description: "Share your experience with our Night Splint or Recovery Course and earn £10/$15 cashback. Help others on their recovery journey.",
+            description:
+                "Share your experience with our Night Splint or Recovery Course and earn £20/$25 cashback. Help others on their recovery journey.",
         },
         badge: "Share Your Experience",
         title: "Leave a",
         titleHighlight: "Review",
-        subtitle: "Your feedback helps others on their recovery journey. Share your experience with our products with photos or videos.",
+        subtitle:
+            "Your feedback helps others on their recovery journey. Share your experience with our products with a video.",
         earnCashback: "Earn",
         cashbackSuffix: "cashback",
         forApproved: "for approved",
         videoReviews: "video reviews with spoken content (minimum 10 seconds)",
-        perSecondTagline: "That's £1 per second!",
+        perSecondTagline: "That's £2 per second!",
         cashbackTitle: "Earn Cashback for Video Reviews with Spoken Content",
         cashbackIntro: "You can submit",
-        photosOrVideos: "photos or videos",
+        photosOrVideos: "a video",
         submitA: "Submit a",
         videoReviewSpoken: "video review with spoken content",
         minimum10: "(minimum 10 seconds of speaking) and receive",
@@ -44,7 +47,8 @@ const translations = {
             "Your review may be featured on our website (with permission)",
         ],
         noteLabel: "Note:",
-        noteText: "Photos are welcome but do not qualify for cashback. Only videos with spoken reviews are eligible for cashback.",
+        noteText:
+            "Cashback requires a video with a spoken review. Photos do not qualify for cashback.",
         whatHappensNext: "What Happens Next?",
         steps: [
             "We'll review your submission (usually within 3-5 business days)",
@@ -59,20 +63,23 @@ const translations = {
     de: {
         meta: {
             title: "Bewertung abgeben - Cashback verdienen | Thetis Medical",
-            description: "Teilen Sie Ihre Erfahrung mit unserer Nachtschiene oder dem Genesungskurs und verdienen Sie 10€/15$ Cashback. Helfen Sie anderen auf ihrem Genesungsweg.",
+            description:
+                "Teilen Sie Ihre Erfahrung mit unserer Nachtschiene oder dem Genesungskurs und verdienen Sie £20/$25 Cashback. Helfen Sie anderen auf ihrem Genesungsweg.",
         },
         badge: "Teilen Sie Ihre Erfahrung",
         title: "Hinterlassen Sie eine",
         titleHighlight: "Bewertung",
-        subtitle: "Ihr Feedback hilft anderen auf ihrem Genesungsweg. Teilen Sie Ihre Erfahrung mit unseren Produkten mit Fotos oder Videos.",
+        subtitle:
+            "Ihr Feedback hilft anderen auf ihrem Genesungsweg. Teilen Sie Ihre Erfahrung mit unseren Produkten mit einem Video.",
         earnCashback: "Verdienen Sie",
         cashbackSuffix: "Cashback",
         forApproved: "für genehmigte",
-        videoReviews: "Video-Bewertungen mit gesprochenem Inhalt (mind. 10 Sek.)",
-        perSecondTagline: "Das sind 1 € pro Sekunde!",
+        videoReviews:
+            "Video-Bewertungen mit gesprochenem Inhalt (mind. 10 Sek.)",
+        perSecondTagline: "Das sind £2 pro Sekunde!",
         cashbackTitle: "Cashback für Video-Bewertungen mit gesprochenem Inhalt",
         cashbackIntro: "Sie können",
-        photosOrVideos: "Fotos oder Videos",
+        photosOrVideos: "ein Video",
         submitA: "einreichen. Reichen Sie eine",
         videoReviewSpoken: "Video-Bewertung mit gesprochenem Inhalt",
         minimum10: "(mindestens 10 Sekunden Sprechen) ein und erhalten Sie",
@@ -83,7 +90,8 @@ const translations = {
             "Ihre Bewertung kann auf unserer Website veröffentlicht werden (mit Erlaubnis)",
         ],
         noteLabel: "Hinweis:",
-        noteText: "Fotos sind willkommen, qualifizieren aber nicht für Cashback. Nur Videos mit gesprochenen Bewertungen sind für Cashback berechtigt.",
+        noteText:
+            "Cashback erfordert ein Video mit gesprochener Bewertung. Fotos qualifizieren nicht für Cashback.",
         whatHappensNext: "Was passiert als Nächstes?",
         steps: [
             "Wir prüfen Ihre Einreichung (normalerweise innerhalb von 3-5 Werktagen)",
@@ -98,20 +106,23 @@ const translations = {
     fr: {
         meta: {
             title: "Laisser un avis - Gagnez du Cashback | Thetis Medical",
-            description: "Partagez votre expérience avec notre attelle de nuit ou notre cours de récupération et gagnez 10€/15$ de cashback. Aidez les autres dans leur parcours de récupération.",
+            description:
+                "Partagez votre expérience avec notre attelle de nuit ou notre cours de récupération et gagnez £20/$25 de cashback. Aidez les autres dans leur parcours de récupération.",
         },
         badge: "Partagez votre expérience",
         title: "Laissez un",
         titleHighlight: "Avis",
-        subtitle: "Vos commentaires aident les autres dans leur parcours de récupération. Partagez votre expérience avec nos produits avec des photos ou des vidéos.",
+        subtitle:
+            "Vos commentaires aident les autres dans leur parcours de récupération. Partagez votre expérience avec nos produits avec une vidéo.",
         earnCashback: "Gagnez",
         cashbackSuffix: "de cashback",
         forApproved: "pour les",
         videoReviews: "avis vidéo approuvés avec contenu parlé (min. 10 s)",
-        perSecondTagline: "Soit 1 € par seconde !",
-        cashbackTitle: "Gagnez du Cashback pour les Avis Vidéo avec Contenu Parlé",
+        perSecondTagline: "Soit £2 par seconde !",
+        cashbackTitle:
+            "Gagnez du Cashback pour les Avis Vidéo avec Contenu Parlé",
         cashbackIntro: "Vous pouvez soumettre des",
-        photosOrVideos: "photos ou des vidéos",
+        photosOrVideos: "une vidéo",
         submitA: "Soumettez un",
         videoReviewSpoken: "avis vidéo avec contenu parlé",
         minimum10: "(minimum 10 secondes de parole) et recevez",
@@ -122,7 +133,8 @@ const translations = {
             "Votre avis peut être présenté sur notre site web (avec permission)",
         ],
         noteLabel: "Note :",
-        noteText: "Les photos sont les bienvenues mais ne donnent pas droit au cashback. Seules les vidéos avec des avis parlés sont éligibles au cashback.",
+        noteText:
+            "Le cashback nécessite une vidéo avec un avis parlé. Les photos ne donnent pas droit au cashback.",
         whatHappensNext: "Que se passe-t-il ensuite ?",
         steps: [
             "Nous examinerons votre soumission (généralement dans les 3 à 5 jours ouvrables)",
@@ -137,20 +149,24 @@ const translations = {
     es: {
         meta: {
             title: "Dejar una reseña - Gana Cashback | Thetis Medical",
-            description: "Comparte tu experiencia con nuestra férula nocturna o curso de recuperación y gana 10€/15$ de cashback. Ayuda a otros en su camino de recuperación.",
+            description:
+                "Comparte tu experiencia con nuestra férula nocturna o curso de recuperación y gana £20/$25 de cashback. Ayuda a otros en su camino de recuperación.",
         },
         badge: "Comparte tu experiencia",
         title: "Deja una",
         titleHighlight: "Reseña",
-        subtitle: "Tus comentarios ayudan a otros en su camino de recuperación. Comparte tu experiencia con nuestros productos con fotos o videos.",
+        subtitle:
+            "Tus comentarios ayudan a otros en su camino de recuperación. Comparte tu experiencia con nuestros productos con un video.",
         earnCashback: "Gana",
         cashbackSuffix: "de cashback",
         forApproved: "por",
-        videoReviews: "reseñas en video aprobadas con contenido hablado (mín. 10 s)",
-        perSecondTagline: "¡Eso es 1 € por segundo!",
-        cashbackTitle: "Gana Cashback por Reseñas en Video con Contenido Hablado",
+        videoReviews:
+            "reseñas en video aprobadas con contenido hablado (mín. 10 s)",
+        perSecondTagline: "¡Eso es £2 por segundo!",
+        cashbackTitle:
+            "Gana Cashback por Reseñas en Video con Contenido Hablado",
         cashbackIntro: "Puedes enviar",
-        photosOrVideos: "fotos o videos",
+        photosOrVideos: "un video",
         submitA: "Envía una",
         videoReviewSpoken: "reseña en video con contenido hablado",
         minimum10: "(mínimo 10 segundos hablando) y recibe",
@@ -161,7 +177,8 @@ const translations = {
             "Tu reseña puede aparecer en nuestro sitio web (con permiso)",
         ],
         noteLabel: "Nota:",
-        noteText: "Las fotos son bienvenidas pero no califican para cashback. Solo los videos con reseñas habladas son elegibles para cashback.",
+        noteText:
+            "El cashback requiere un video con una reseña hablada. Las fotos no califican para cashback.",
         whatHappensNext: "¿Qué sucede después?",
         steps: [
             "Revisaremos tu envío (generalmente dentro de 3-5 días hábiles)",
@@ -176,20 +193,24 @@ const translations = {
     it: {
         meta: {
             title: "Lascia una recensione - Guadagna Cashback | Thetis Medical",
-            description: "Condividi la tua esperienza con il nostro tutore notturno o corso di recupero e guadagna 10€/15$ di cashback. Aiuta gli altri nel loro percorso di recupero.",
+            description:
+                "Condividi la tua esperienza con il nostro tutore notturno o corso di recupero e guadagna £20/$25 di cashback. Aiuta gli altri nel loro percorso di recupero.",
         },
         badge: "Condividi la tua esperienza",
         title: "Lascia una",
         titleHighlight: "Recensione",
-        subtitle: "Il tuo feedback aiuta gli altri nel loro percorso di recupero. Condividi la tua esperienza con i nostri prodotti con foto o video.",
+        subtitle:
+            "Il tuo feedback aiuta gli altri nel loro percorso di recupero. Condividi la tua esperienza con i nostri prodotti con un video.",
         earnCashback: "Guadagna",
         cashbackSuffix: "di cashback",
         forApproved: "per le",
-        videoReviews: "recensioni video approvate con contenuto parlato (min. 10 s)",
-        perSecondTagline: "È 1 € al secondo!",
-        cashbackTitle: "Guadagna Cashback per le Recensioni Video con Contenuto Parlato",
+        videoReviews:
+            "recensioni video approvate con contenuto parlato (min. 10 s)",
+        perSecondTagline: "È £2 al secondo!",
+        cashbackTitle:
+            "Guadagna Cashback per le Recensioni Video con Contenuto Parlato",
         cashbackIntro: "Puoi inviare",
-        photosOrVideos: "foto o video",
+        photosOrVideos: "un video",
         submitA: "Invia una",
         videoReviewSpoken: "recensione video con contenuto parlato",
         minimum10: "(minimo 10 secondi di parlato) e ricevi",
@@ -200,7 +221,8 @@ const translations = {
             "La tua recensione potrebbe essere pubblicata sul nostro sito web (con permesso)",
         ],
         noteLabel: "Nota:",
-        noteText: "Le foto sono benvenute ma non danno diritto al cashback. Solo i video con recensioni parlate sono idonei per il cashback.",
+        noteText:
+            "Il cashback richiede un video con una recensione parlata. Le foto non danno diritto al cashback.",
         whatHappensNext: "Cosa succede dopo?",
         steps: [
             "Esamineremo il tuo invio (di solito entro 3-5 giorni lavorativi)",
@@ -215,17 +237,7 @@ const translations = {
 };
 
 const t = translations[lang] || translations.en;
-
-// Localized cashback claim paths
-const claimPaths: Record<Lang, string> = {
-    en: "/splint-customer/claim-cashback",
-    de: "/de/schienen-kunde/cashback-anfordern",
-    fr: "/fr/client-attelle/reclamer-cashback",
-    es: "/es/cliente-ferula/reclamar-cashback",
-    it: "/it/cliente-tutore/richiedi-cashback",
-};
-
-const claimPath = claimPaths[lang] || claimPaths.en;
+const claimPath = getSplintCustomerPath("claim-cashback", lang);
 ---
 
 <Layout
@@ -246,16 +258,22 @@ const claimPath = claimPaths[lang] || claimPaths.en;
                 <h1
                     class="mb-6 font-bold text-neutral-900 dark:text-neutral-100 text-4xl md:text-5xl"
                 >
-                    {t.title} <HighlightedWord>{t.titleHighlight}</HighlightedWord>
+                    {t.title}
+                    <HighlightedWord>{t.titleHighlight}</HighlightedWord>
                 </h1>
                 <p
                     class="mx-auto mb-8 max-w-2xl text-neutral-600 dark:text-neutral-400 text-lg md:text-xl"
                 >
-                    {t.subtitle} <strong id="cashback-amount"
-                        >{t.earnCashback} <span id="currency">{currency}</span><span
-                            id="amount">{amount}</span
-                        > {t.cashbackSuffix}</strong
-                    > {t.forApproved} <strong>{t.videoReviews}</strong>.
+                    {t.subtitle}
+                    <strong id="cashback-amount"
+                        >{t.earnCashback}
+                        <span id="currency">{currency}</span><span id="amount"
+                            >{amount}</span
+                        >
+                        {t.cashbackSuffix}</strong
+                    >
+                    {t.forApproved}
+                    <strong>{t.videoReviews}</strong>.
                 </p>
                 <p
                     class="mx-auto max-w-2xl font-semibold text-primary text-lg md:text-xl"
@@ -280,29 +298,34 @@ const claimPath = claimPaths[lang] || claimPaths.en;
                         </h2>
                     </div>
                     <p class="mb-4 text-neutral-600 dark:text-neutral-400">
-                        {t.cashbackIntro} <strong>{t.photosOrVideos}</strong>. {t.submitA}
+                        {t.cashbackIntro}
+                        <strong>{t.photosOrVideos}</strong>. {t.submitA}
                         <strong>{t.videoReviewSpoken}</strong>
-                        {t.minimum10} <strong id="cashback-amount-2"
+                        {t.minimum10}
+                        <strong id="cashback-amount-2"
                             ><span id="currency-2">{currency}</span><span
                                 id="amount-2">{amount}</span
-                            > {t.cashbackSuffix}</strong
-                        > {t.onceApproved}
+                            >
+                            {t.cashbackSuffix}</strong
+                        >
+                        {t.onceApproved}
                     </p>
                     <ul
                         class="space-y-2 text-neutral-700 dark:text-neutral-300 text-sm"
                     >
-                        {t.requirements.map((req) => (
-                            <li class="flex items-start gap-2">
-                                <Check
-                                    className="mt-0.5 w-4 h-4 text-primary shrink-0"
-                                />
-                                <span>{req}</span>
-                            </li>
-                        ))}
+                        {
+                            t.requirements.map((req) => (
+                                <li class="flex items-start gap-2">
+                                    <Check className="mt-0.5 w-4 h-4 text-primary shrink-0" />
+                                    <span>{req}</span>
+                                </li>
+                            ))
+                        }
                         <li class="flex items-start gap-2">
                             <span class="mt-0.5 text-primary shrink-0">ℹ️</span>
                             <span
-                                ><strong>{t.noteLabel}</strong> {t.noteText}</span
+                                ><strong>{t.noteLabel}</strong>
+                                {t.noteText}</span
                             >
                         </li>
                     </ul>
@@ -327,12 +350,13 @@ const claimPath = claimPaths[lang] || claimPaths.en;
                     <ol
                         class="space-y-3 text-neutral-600 dark:text-neutral-400 text-sm list-decimal list-inside"
                     >
-                        {t.steps.map((step) => (
-                            <li>{step}</li>
-                        ))}
+                        {t.steps.map((step) => <li>{step}</li>)}
                         <li>
-                            {t.stepReceive} <span id="currency-3">{currency}</span
-                            ><span id="amount-3">{amount}</span> {t.stepReceiveSuffix}
+                            {t.stepReceive}
+                            <span id="currency-3">{currency}</span><span
+                                id="amount-3">{amount}</span
+                            >
+                            {t.stepReceiveSuffix}
                         </li>
                     </ol>
                 </div>
@@ -366,11 +390,11 @@ const claimPath = claimPaths[lang] || claimPaths.en;
                     const country = geoData.country_code || "GB";
 
                     let currencySymbol = "£";
-                    let cashbackAmount = "10";
+                    let cashbackAmount = "20";
 
                     if (country === "US") {
                         currencySymbol = "$";
-                        cashbackAmount = "15";
+                        cashbackAmount = "25";
                     }
 
                     // Update all currency displays

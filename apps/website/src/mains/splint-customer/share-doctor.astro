@@ -1,0 +1,129 @@
+---
+import type { Lang } from "@/config/languages";
+import Layout from "@/layouts/Layout.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import SplintCustomerBackLink from "@/components/splint-customer/SplintCustomerBackLink.astro";
+import LocationPrice from "@/components/splint-customer/LocationPrice";
+import WhatHappensNextAccordion from "@/components/splint-customer/WhatHappensNextAccordion";
+import { getSplintCustomerCopy } from "@/features/splint-customer/splintCustomerCopy";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import { Mail } from "lucide-react";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+const t = getSplintCustomerCopy(lang);
+
+const mailtoHref = `mailto:?body=${encodeURIComponent(t.share.emailBody)}`;
+const emailBodyBase64 = Buffer.from(t.share.emailBody, "utf-8").toString(
+  "base64",
+);
+---
+
+<Layout
+  title={t.meta.share.title}
+  description={t.meta.share.description}
+  image="https://thetismedical.com/images/night-splint.png"
+  lang={lang}
+>
+  <main>
+    <ColorGradient>
+      <div class="mx-auto px-4 py-8 md:py-10 max-w-3xl text-center">
+        <SplintCustomerBackLink lang={lang} />
+        <p
+          class="mb-2 font-medium text-primary text-sm uppercase tracking-widest"
+        >
+          {t.share.eyebrow}
+        </p>
+        <h1
+          class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
+        >
+          {t.share.title}
+        </h1>
+        <p class="text-neutral-600 dark:text-neutral-400 text-sm">
+          {t.share.introBefore}{" "}
+          <LocationPrice gbp={40} eur={40} usd={50} client:load />{" "}
+          {t.share.introAfter}
+        </p>
+      </div>
+    </ColorGradient>
+
+    <section class="pt-2 pb-10 md:pb-12">
+      <div class="mx-auto px-4 max-w-md">
+        <div
+          class="bg-white dark:bg-neutral-800 shadow-lg p-5 border border-neutral-200 dark:border-neutral-700 rounded-2xl"
+        >
+          <div class="flex flex-col gap-3">
+            <a
+              href={mailtoHref}
+              class={cn(
+                buttonVariants({ variant: "default", size: "lg" }),
+                "justify-center w-full gap-2",
+              )}
+            >
+              <Mail className="w-4 h-4" />
+              {t.share.openEmail}
+            </a>
+            <button
+              type="button"
+              id="copy-email-message-btn"
+              data-email-body-base64={emailBodyBase64}
+              data-copy-label={t.share.copyEmail}
+              data-copied-label={t.share.copyDone}
+              class={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "justify-center w-full gap-2",
+              )}
+            >
+              {t.share.copyEmail}
+            </button>
+          </div>
+        </div>
+
+        <WhatHappensNextAccordion
+          variant="share-doctor"
+          lang={lang}
+          client:load
+        />
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    (function () {
+      function initCopyButton() {
+        var btn = document.getElementById("copy-email-message-btn");
+        if (!btn) return;
+        var base64 = btn.getAttribute("data-email-body-base64");
+        var copyLabel = btn.getAttribute("data-copy-label") || "Copy message";
+        var copiedLabel = btn.getAttribute("data-copied-label") || "Copied!";
+        if (!base64) return;
+        btn.addEventListener("click", function () {
+          try {
+            var binary = atob(base64);
+            var bytes = new Uint8Array(binary.length);
+            for (var i = 0; i < binary.length; i++)
+              bytes[i] = binary.charCodeAt(i);
+            var text = new TextDecoder().decode(bytes);
+            navigator.clipboard.writeText(text).then(function () {
+              btn.textContent = copiedLabel;
+              setTimeout(function () {
+                btn.textContent = copyLabel;
+              }, 2000);
+            });
+          } catch (e) {
+            console.error("Copy failed", e);
+          }
+        });
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initCopyButton);
+      } else {
+        initCopyButton();
+      }
+    })();
+  </script>
+</Layout>

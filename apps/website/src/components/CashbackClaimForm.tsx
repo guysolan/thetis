@@ -1,43 +1,57 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AlertCircle, Banknote, Check, Loader2 } from "lucide-react";
+import { useLocationCurrency } from "@/hooks/use-location-currency";
 
 type PaymentMethod = "paypal" | "bank";
-type Currency = "GBP" | "USD";
+type Currency = "GBP" | "USD" | "EUR";
 
 const AMOUNTS = {
-  GBP: { doctor: 40, review: 10 },
-  USD: { doctor: 50, review: 15 },
+  GBP: { doctor: 40, review: 20 },
+  USD: { doctor: 50, review: 25 },
+  EUR: { doctor: 40, review: 20 },
 } as const;
 
 function formatAmount(currency: Currency, value: number) {
-  return currency === "GBP" ? `£${value}` : `$${value}`;
+  return currency === "USD"
+    ? `$${value}`
+    : currency === "EUR"
+    ? `€${value}`
+    : `£${value}`;
 }
 
 export function CashbackClaimForm() {
+  const detectedCurrency = useLocationCurrency();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [claimDoctorSignUp, setClaimDoctorSignUp] = useState(false);
   const [claimVideoReview, setClaimVideoReview] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("paypal");
-  const [currency, setCurrency] = useState<Currency>("GBP");
+  const [currency, setCurrency] = useState<Currency>(detectedCurrency);
   const [paypalEmail, setPaypalEmail] = useState("");
   const [bankDetails, setBankDetails] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
 
+  useEffect(() => {
+    setCurrency(detectedCurrency);
+  }, [detectedCurrency]);
+
   const amounts = AMOUNTS[currency];
-  const total = (claimDoctorSignUp ? amounts.doctor : 0) + (claimVideoReview ? amounts.review : 0);
+  const total = (claimDoctorSignUp ? amounts.doctor : 0) +
+    (claimVideoReview ? amounts.review : 0);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
 
     if (!claimDoctorSignUp && !claimVideoReview) {
-      setError("Please select at least one: doctor sign-up and/or video review");
+      setError(
+        "Please select at least one: doctor sign-up and/or video review",
+      );
       return;
     }
 
@@ -86,7 +100,11 @@ export function CashbackClaimForm() {
 
       setIsSubmitted(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again.",
+      );
       console.error("Error submitting claim:", err);
     } finally {
       setIsSubmitting(false);
@@ -101,11 +119,12 @@ export function CashbackClaimForm() {
           Claim Submitted!
         </p>
         <p className="mb-4 text-neutral-700 dark:text-neutral-300">
-          Your cashback claim has been received. We'll process your payment within 7-10 business
-          days.
+          Your cashback claim has been received. We'll process your payment
+          within 7-10 business days.
         </p>
         <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-          You'll receive a confirmation email at <strong>{email}</strong> once payment is sent.
+          You'll receive a confirmation email at <strong>{email}</strong>{" "}
+          once payment is sent.
         </p>
       </div>
     );
@@ -136,7 +155,8 @@ export function CashbackClaimForm() {
           htmlFor="email"
           className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100"
         >
-          Email (from your review submission) <span className="text-red-500">*</span>
+          Email (from your review submission){" "}
+          <span className="text-red-500">*</span>
         </label>
         <input
           id="email"
@@ -158,23 +178,23 @@ export function CashbackClaimForm() {
           What are you claiming for? <span className="text-red-500">*</span>
         </label>
         <div className="space-y-3">
-          <label className="flex items-center gap-3 cursor-pointer p-3 border border-neutral-200 dark:border-neutral-700 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800/50">
+          <label className="flex items-center gap-3 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 p-3 border border-neutral-200 dark:border-neutral-700 rounded-lg cursor-pointer">
             <input
               type="checkbox"
               checked={claimDoctorSignUp}
               onChange={(e) => setClaimDoctorSignUp(e.target.checked)}
-              className="focus:ring-primary w-4 h-4 rounded text-primary"
+              className="rounded focus:ring-primary w-4 h-4 text-primary"
             />
             <span className="text-neutral-700 dark:text-neutral-300">
               Doctor/physio sign-up — {formatAmount(currency, amounts.doctor)}
             </span>
           </label>
-          <label className="flex items-center gap-3 cursor-pointer p-3 border border-neutral-200 dark:border-neutral-700 rounded-lg hover:bg-neutral-50 dark:hover:bg-neutral-800/50">
+          <label className="flex items-center gap-3 hover:bg-neutral-50 dark:hover:bg-neutral-800/50 p-3 border border-neutral-200 dark:border-neutral-700 rounded-lg cursor-pointer">
             <input
               type="checkbox"
               checked={claimVideoReview}
               onChange={(e) => setClaimVideoReview(e.target.checked)}
-              className="focus:ring-primary w-4 h-4 rounded text-primary"
+              className="rounded focus:ring-primary w-4 h-4 text-primary"
             />
             <span className="text-neutral-700 dark:text-neutral-300">
               Video review — {formatAmount(currency, amounts.review)}
@@ -202,7 +222,9 @@ export function CashbackClaimForm() {
               onChange={() => setCurrency("GBP")}
               className="focus:ring-primary w-4 h-4 text-primary"
             />
-            <span className="text-neutral-700 dark:text-neutral-300">GBP (£)</span>
+            <span className="text-neutral-700 dark:text-neutral-300">
+              GBP (£)
+            </span>
           </label>
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -213,7 +235,22 @@ export function CashbackClaimForm() {
               onChange={() => setCurrency("USD")}
               className="focus:ring-primary w-4 h-4 text-primary"
             />
-            <span className="text-neutral-700 dark:text-neutral-300">USD ($)</span>
+            <span className="text-neutral-700 dark:text-neutral-300">
+              USD ($)
+            </span>
+          </label>
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              name="currency"
+              value="EUR"
+              checked={currency === "EUR"}
+              onChange={() => setCurrency("EUR")}
+              className="focus:ring-primary w-4 h-4 text-primary"
+            />
+            <span className="text-neutral-700 dark:text-neutral-300">
+              EUR (€)
+            </span>
           </label>
         </div>
       </div>
@@ -232,7 +269,9 @@ export function CashbackClaimForm() {
               onChange={() => setPaymentMethod("paypal")}
               className="focus:ring-primary w-4 h-4 text-primary"
             />
-            <span className="text-neutral-700 dark:text-neutral-300">PayPal</span>
+            <span className="text-neutral-700 dark:text-neutral-300">
+              PayPal
+            </span>
           </label>
           <label className="flex items-center gap-2 cursor-pointer">
             <input
@@ -243,7 +282,9 @@ export function CashbackClaimForm() {
               onChange={() => setPaymentMethod("bank")}
               className="focus:ring-primary w-4 h-4 text-primary"
             />
-            <span className="text-neutral-700 dark:text-neutral-300">Bank Transfer</span>
+            <span className="text-neutral-700 dark:text-neutral-300">
+              Bank Transfer
+            </span>
           </label>
         </div>
       </div>
@@ -286,7 +327,8 @@ export function CashbackClaimForm() {
             placeholder="Account name:&#10;Sort code:&#10;Account number:&#10;(or IBAN for international transfers)"
           />
           <p className="mt-1 text-neutral-500 dark:text-neutral-400 text-sm">
-            Your bank details are securely transmitted and only used for this payment
+            Your bank details are securely transmitted and only used for this
+            payment
           </p>
         </div>
       )}
@@ -304,22 +346,24 @@ export function CashbackClaimForm() {
         className="gap-2 w-full"
         disabled={isSubmitting || total === 0}
       >
-        {isSubmitting ? (
-          <>
-            <Loader2 className="w-4 h-4 animate-spin" />
-            Submitting...
-          </>
-        ) : (
-          <>
-            <Banknote className="w-4 h-4" />
-            Claim {formatAmount(currency, total)} Cashback
-          </>
-        )}
+        {isSubmitting
+          ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              Submitting...
+            </>
+          )
+          : (
+            <>
+              <Banknote className="w-4 h-4" />
+              Claim {formatAmount(currency, total)} Cashback
+            </>
+          )}
       </Button>
 
       <p className="text-neutral-500 dark:text-neutral-400 text-xs text-center">
-        Select what you're claiming for above. Doctor sign-up and video review can be combined.
-        Payment is sent once we've verified your claim.
+        Select what you're claiming for above. Doctor sign-up and video review
+        can be combined. Payment is sent once we've verified your claim.
       </p>
     </form>
   );

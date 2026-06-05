@@ -2,9 +2,32 @@
 
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
-import { AlertCircle, Check, Image, Loader2, Star, Upload, Video } from "lucide-react";
+import { AlertCircle, Check, Loader2, Star, Video } from "lucide-react";
 
 type Lang = "en" | "de" | "fr" | "es" | "it";
+
+const EURO_COUNTRIES = new Set([
+  "AT",
+  "BE",
+  "CY",
+  "DE",
+  "EE",
+  "ES",
+  "FI",
+  "FR",
+  "GR",
+  "HR",
+  "IE",
+  "IT",
+  "LT",
+  "LU",
+  "LV",
+  "MT",
+  "NL",
+  "PT",
+  "SI",
+  "SK",
+]);
 
 // Currency detection
 const getCurrency = async () => {
@@ -14,13 +37,16 @@ const getCurrency = async () => {
       const geoData = await geoResponse.json();
       const country = geoData.country_code || "GB";
       if (country === "US") {
-        return { symbol: "$", amount: "15" };
+        return { symbol: "$", amount: "25" };
+      }
+      if (EURO_COUNTRIES.has(country)) {
+        return { symbol: "€", amount: "20" };
       }
     }
   } catch (error) {
     console.error("Failed to detect location:", error);
   }
-  return { symbol: "£", amount: "10" };
+  return { symbol: "£", amount: "20" };
 };
 
 type ProductType = "splint" | "course";
@@ -49,17 +75,20 @@ const translations = {
     rating: "Rating",
     yourReview: "Your Review",
     reviewPromptPrefix: "Share your experience with the",
-    photosVideos: "Photos or Videos",
-    cashbackLabel: "(cashback for videos with spoken review only)",
+    photosVideos: "Video",
+    cashbackLabel: "(required for cashback)",
     uploadHelp: "You can upload",
-    photosOrVideos: "photos or videos",
-    cashbackOnlyFor: "Cashback is only available for video reviews with spoken content",
-    min10sec: "(minimum 10 seconds of speaking). Photo-only reviews do not qualify for cashback.",
+    photosOrVideos: "a video",
+    cashbackOnlyFor:
+      "Cashback is only available for video reviews with spoken content",
+    min10sec:
+      "(minimum 10 seconds of speaking). Photos do not qualify for cashback.",
     filesSelected: "file(s) selected",
-    videoEligible: "✓ Video may be eligible for cashback (if it includes spoken review)",
+    videoEligible:
+      "✓ Video may be eligible for cashback (if it includes spoken review)",
     photosNoQualify: "⚠️ Photos do not qualify for cashback",
-    clickUpload: "Click to upload photos or videos",
-    uploadFormats: "Photos: JPG, PNG • Videos: MP4, MOV (10+ sec for cashback) • Max 100MB each",
+    clickUpload: "Click to upload a video",
+    uploadFormats: "Videos: MP4, MOV (10+ sec for cashback) • Max 100MB each",
     cashbackOnlyVideos: "Cashback only for videos with spoken review",
     submitReview: "Submit Review",
     submitting: "Submitting...",
@@ -78,7 +107,7 @@ const translations = {
     disclaimerEnd:
       "is only available for approved video reviews with spoken content and will be processed within 7-10 business days.",
     errorReview: "Please write a review",
-    errorPhotoVideo: "Please upload only photos or videos",
+    errorPhotoVideo: "Please upload a video file",
     errorFileSize: "Each file must be less than 100MB",
     errorGeneric: "Something went wrong. Please try again.",
   },
@@ -101,22 +130,24 @@ const translations = {
     nameHint: "Ihr Name",
     email: "E-Mail",
     emailHint: "ihre@email.com",
-    emailHelp: "Wir verwenden diese, um Sie bezüglich Ihres Cashbacks zu kontaktieren",
+    emailHelp:
+      "Wir verwenden diese, um Sie bezüglich Ihres Cashbacks zu kontaktieren",
     rating: "Bewertung",
     yourReview: "Ihre Bewertung",
     reviewPromptPrefix: "Teilen Sie Ihre Erfahrung mit",
-    photosVideos: "Fotos oder Videos",
-    cashbackLabel: "(Cashback nur für Videos mit gesprochenem Inhalt)",
+    photosVideos: "Video",
+    cashbackLabel: "(für Cashback erforderlich)",
     uploadHelp: "Sie können",
-    photosOrVideos: "Fotos oder Videos",
-    cashbackOnlyFor: "Cashback ist nur für Video-Bewertungen mit gesprochenem Inhalt verfügbar",
+    photosOrVideos: "ein Video",
+    cashbackOnlyFor:
+      "Cashback ist nur für Video-Bewertungen mit gesprochenem Inhalt verfügbar",
     min10sec:
       "(mindestens 10 Sekunden Sprechen). Nur-Foto-Bewertungen qualifizieren nicht für Cashback.",
     filesSelected: "Datei(en) ausgewählt",
     videoEligible:
       "✓ Video kann für Cashback berechtigt sein (wenn es gesprochene Bewertung enthält)",
     photosNoQualify: "⚠️ Fotos qualifizieren nicht für Cashback",
-    clickUpload: "Klicken Sie, um Fotos oder Videos hochzuladen",
+    clickUpload: "Klicken Sie, um ein Video hochzuladen",
     uploadFormats:
       "Fotos: JPG, PNG • Videos: MP4, MOV (10+ Sek. für Cashback) • Max 100MB pro Datei",
     cashbackOnlyVideos: "Cashback nur für Videos mit gesprochener Bewertung",
@@ -137,7 +168,7 @@ const translations = {
     disclaimerEnd:
       "ist nur für genehmigte Video-Bewertungen mit gesprochenem Inhalt verfügbar und wird innerhalb von 7-10 Werktagen bearbeitet.",
     errorReview: "Bitte schreiben Sie eine Bewertung",
-    errorPhotoVideo: "Bitte laden Sie nur Fotos oder Videos hoch",
+    errorPhotoVideo: "Bitte laden Sie eine Videodatei hoch",
     errorFileSize: "Jede Datei muss kleiner als 100MB sein",
     errorGeneric: "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut.",
   },
@@ -160,23 +191,26 @@ const translations = {
     nameHint: "Votre nom",
     email: "Email",
     emailHint: "votre@email.com",
-    emailHelp: "Nous utiliserons ceci pour vous contacter concernant votre cashback",
+    emailHelp:
+      "Nous utiliserons ceci pour vous contacter concernant votre cashback",
     rating: "Note",
     yourReview: "Votre avis",
     reviewPromptPrefix: "Partagez votre expérience avec",
-    photosVideos: "Photos ou vidéos",
-    cashbackLabel: "(cashback uniquement pour les vidéos avec contenu parlé)",
+    photosVideos: "Vidéo",
+    cashbackLabel: "(requise pour le cashback)",
     uploadHelp: "Vous pouvez télécharger des",
-    photosOrVideos: "photos ou vidéos",
-    cashbackOnlyFor: "Le cashback n'est disponible que pour les avis vidéo avec contenu parlé",
+    photosOrVideos: "une vidéo",
+    cashbackOnlyFor:
+      "Le cashback n'est disponible que pour les avis vidéo avec contenu parlé",
     min10sec:
       "(minimum 10 secondes de parole). Les avis avec photos uniquement ne donnent pas droit au cashback.",
     filesSelected: "fichier(s) sélectionné(s)",
-    videoEligible: "✓ La vidéo peut être éligible au cashback (si elle contient un avis parlé)",
+    videoEligible:
+      "✓ La vidéo peut être éligible au cashback (si elle contient un avis parlé)",
     photosNoQualify: "⚠️ Les photos ne donnent pas droit au cashback",
-    clickUpload: "Cliquez pour télécharger des photos ou vidéos",
+    clickUpload: "Cliquez pour télécharger une vidéo",
     uploadFormats:
-      "Photos : JPG, PNG • Vidéos : MP4, MOV (10+ sec pour cashback) • Max 100Mo chacun",
+      "Vidéos : MP4, MOV (10+ sec pour cashback) • Max 100Mo chacune",
     cashbackOnlyVideos: "Cashback uniquement pour les vidéos avec avis parlé",
     submitReview: "Soumettre l'avis",
     submitting: "Envoi en cours...",
@@ -195,7 +229,7 @@ const translations = {
     disclaimerEnd:
       "n'est disponible que pour les avis vidéo approuvés avec contenu parlé et sera traité dans les 7 à 10 jours ouvrables.",
     errorReview: "Veuillez écrire un avis",
-    errorPhotoVideo: "Veuillez télécharger uniquement des photos ou vidéos",
+    errorPhotoVideo: "Veuillez télécharger une vidéo",
     errorFileSize: "Chaque fichier doit faire moins de 100Mo",
     errorGeneric: "Une erreur s'est produite. Veuillez réessayer.",
   },
@@ -222,17 +256,19 @@ const translations = {
     rating: "Calificación",
     yourReview: "Tu reseña",
     reviewPromptPrefix: "Comparte tu experiencia con",
-    photosVideos: "Fotos o videos",
-    cashbackLabel: "(cashback solo para videos con contenido hablado)",
+    photosVideos: "Video",
+    cashbackLabel: "(obligatorio para cashback)",
     uploadHelp: "Puedes subir",
-    photosOrVideos: "fotos o videos",
-    cashbackOnlyFor: "El cashback solo está disponible para reseñas en video con contenido hablado",
+    photosOrVideos: "un video",
+    cashbackOnlyFor:
+      "El cashback solo está disponible para reseñas en video con contenido hablado",
     min10sec:
       "(mínimo 10 segundos hablando). Las reseñas solo con fotos no califican para cashback.",
     filesSelected: "archivo(s) seleccionado(s)",
-    videoEligible: "✓ El video puede ser elegible para cashback (si incluye reseña hablada)",
+    videoEligible:
+      "✓ El video puede ser elegible para cashback (si incluye reseña hablada)",
     photosNoQualify: "⚠️ Las fotos no califican para cashback",
-    clickUpload: "Haz clic para subir fotos o videos",
+    clickUpload: "Haz clic para subir un video",
     uploadFormats:
       "Fotos: JPG, PNG • Videos: MP4, MOV (10+ seg para cashback) • Máx 100MB cada uno",
     cashbackOnlyVideos: "Cashback solo para videos con reseña hablada",
@@ -253,7 +289,7 @@ const translations = {
     disclaimerEnd:
       "solo está disponible para reseñas en video aprobadas con contenido hablado y se procesará dentro de 7-10 días hábiles.",
     errorReview: "Por favor escribe una reseña",
-    errorPhotoVideo: "Por favor sube solo fotos o videos",
+    errorPhotoVideo: "Por favor sube un archivo de video",
     errorFileSize: "Cada archivo debe ser menor de 100MB",
     errorGeneric: "Algo salió mal. Por favor intenta de nuevo.",
   },
@@ -280,19 +316,21 @@ const translations = {
     rating: "Valutazione",
     yourReview: "La tua recensione",
     reviewPromptPrefix: "Condividi la tua esperienza con",
-    photosVideos: "Foto o video",
-    cashbackLabel: "(cashback solo per video con contenuto parlato)",
+    photosVideos: "Video",
+    cashbackLabel: "(richiesto per cashback)",
     uploadHelp: "Puoi caricare",
-    photosOrVideos: "foto o video",
-    cashbackOnlyFor: "Il cashback è disponibile solo per le recensioni video con contenuto parlato",
+    photosOrVideos: "un video",
+    cashbackOnlyFor:
+      "Il cashback è disponibile solo per le recensioni video con contenuto parlato",
     min10sec:
       "(minimo 10 secondi di parlato). Le recensioni solo con foto non danno diritto al cashback.",
     filesSelected: "file selezionato/i",
     videoEligible:
       "✓ Il video potrebbe essere idoneo per il cashback (se include una recensione parlata)",
     photosNoQualify: "⚠️ Le foto non danno diritto al cashback",
-    clickUpload: "Clicca per caricare foto o video",
-    uploadFormats: "Foto: JPG, PNG • Video: MP4, MOV (10+ sec per cashback) • Max 100MB ciascuno",
+    clickUpload: "Clicca per caricare un video",
+    uploadFormats:
+      "Video: MP4, MOV (10+ sec per cashback) • Max 100MB ciascuno",
     cashbackOnlyVideos: "Cashback solo per video con recensione parlata",
     submitReview: "Invia recensione",
     submitting: "Invio in corso...",
@@ -311,7 +349,7 @@ const translations = {
     disclaimerEnd:
       "è disponibile solo per le recensioni video approvate con contenuto parlato e sarà elaborato entro 7-10 giorni lavorativi.",
     errorReview: "Per favore scrivi una recensione",
-    errorPhotoVideo: "Per favore carica solo foto o video",
+    errorPhotoVideo: "Per favore carica un file video",
     errorFileSize: "Ogni file deve essere inferiore a 100MB",
     errorGeneric: "Qualcosa è andato storto. Per favore riprova.",
   },
@@ -332,7 +370,7 @@ export function LeaveReviewForm({ lang = "en" }: LeaveReviewFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [error, setError] = useState("");
-  const [currency, setCurrency] = useState({ symbol: "£", amount: "10" });
+  const [currency, setCurrency] = useState({ symbol: "£", amount: "20" });
 
   // Check URL params for product selection and detect currency
   useEffect(() => {
@@ -352,12 +390,11 @@ export function LeaveReviewForm({ lang = "en" }: LeaveReviewFormProps) {
     const selectedFiles = Array.from(e.target.files || []);
     if (selectedFiles.length === 0) return;
 
-    // Validate files - accept both photos and videos
+    // Cashback requires video; photos are not accepted here.
     for (const file of selectedFiles) {
       const isVideo = file.type.startsWith("video/");
-      const isImage = file.type.startsWith("image/");
 
-      if (!isVideo && !isImage) {
+      if (!isVideo) {
         setError(t.errorPhotoVideo);
         return;
       }
@@ -385,23 +422,21 @@ export function LeaveReviewForm({ lang = "en" }: LeaveReviewFormProps) {
 
     try {
       const formData = new FormData();
-      formData.append("_subject", `New ${t.products[product].name} Review from ${name}`);
+      formData.append(
+        "_subject",
+        `New ${t.products[product].name} Review from ${name}`,
+      );
       formData.append("product", t.products[product].name);
       formData.append("name", name);
       formData.append("email", email);
       formData.append("rating", rating.toString());
       formData.append("review", reviewText);
 
-      // Determine media type and cashback eligibility
+      // Determine cashback eligibility
       const hasVideos = files.some((f) => f.type.startsWith("video/"));
-      const hasPhotos = files.some((f) => f.type.startsWith("image/"));
       let mediaStatus = "No media";
-      if (hasVideos && hasPhotos) {
-        mediaStatus = "Videos and photos - cashback eligible if video has spoken review";
-      } else if (hasVideos) {
-        mediaStatus = "Videos only - cashback eligible if video has spoken review";
-      } else if (hasPhotos) {
-        mediaStatus = "Photos only - not eligible for cashback";
+      if (hasVideos) {
+        mediaStatus = "Video - cashback eligible if video has spoken review";
       }
       formData.append("has_media", mediaStatus);
 
@@ -438,21 +473,31 @@ export function LeaveReviewForm({ lang = "en" }: LeaveReviewFormProps) {
         <p className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
           {t.thankYou}
         </p>
-        <p className="mb-4 text-neutral-700 dark:text-neutral-300">{t.reviewSubmitted}</p>
-        {files.some((f) => f.type.startsWith("video/")) ? (
-          <p className="text-neutral-600 dark:text-neutral-400 text-sm">
-            {t.videoApprovalMsg}{" "}
-            <strong>
-              {currency.symbol}
-              {currency.amount} {t.cashback}
-            </strong>{" "}
-            {t.onceApproved}
-          </p>
-        ) : files.length > 0 ? (
-          <p className="text-neutral-600 dark:text-neutral-400 text-sm">{t.photoThankYou}</p>
-        ) : (
-          <p className="text-neutral-600 dark:text-neutral-400 text-sm">{t.noMediaThankYou}</p>
-        )}
+        <p className="mb-4 text-neutral-700 dark:text-neutral-300">
+          {t.reviewSubmitted}
+        </p>
+        {files.some((f) => f.type.startsWith("video/"))
+          ? (
+            <p className="text-neutral-600 dark:text-neutral-400 text-sm">
+              {t.videoApprovalMsg}{" "}
+              <strong>
+                {currency.symbol}
+                {currency.amount} {t.cashback}
+              </strong>{" "}
+              {t.onceApproved}
+            </p>
+          )
+          : files.length > 0
+          ? (
+            <p className="text-neutral-600 dark:text-neutral-400 text-sm">
+              {t.photoThankYou}
+            </p>
+          )
+          : (
+            <p className="text-neutral-600 dark:text-neutral-400 text-sm">
+              {t.noMediaThankYou}
+            </p>
+          )}
       </div>
     );
   }
@@ -537,7 +582,9 @@ export function LeaveReviewForm({ lang = "en" }: LeaveReviewFormProps) {
           className="bg-white dark:bg-neutral-800 px-4 py-2 border border-neutral-300 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100"
           placeholder={t.emailHint}
         />
-        <p className="mt-1 text-neutral-500 dark:text-neutral-400 text-sm">{t.emailHelp}</p>
+        <p className="mt-1 text-neutral-500 dark:text-neutral-400 text-sm">
+          {t.emailHelp}
+        </p>
       </div>
 
       {/* Rating */}
@@ -590,58 +637,64 @@ export function LeaveReviewForm({ lang = "en" }: LeaveReviewFormProps) {
           htmlFor="files"
           className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100"
         >
-          {t.photosVideos} <span className="font-normal text-primary">{t.cashbackLabel}</span>
+          {t.photosVideos}{" "}
+          <span className="font-normal text-primary">{t.cashbackLabel}</span>
         </label>
         <p className="mb-2 text-neutral-500 dark:text-neutral-400 text-sm">
-          {t.uploadHelp} <strong>{t.photosOrVideos}</strong>. <strong>{t.cashbackOnlyFor}</strong>{" "}
-          {t.min10sec}
+          {t.uploadHelp} <strong>{t.photosOrVideos}</strong>.{" "}
+          <strong>{t.cashbackOnlyFor}</strong> {t.min10sec}
         </p>
         <div className="relative">
           <input
             id="files"
             type="file"
-            accept="image/*,video/*"
+            accept="video/*"
             onChange={handleFileChange}
             multiple
             className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
           />
           <div className="flex justify-center items-center bg-white hover:bg-neutral-50 dark:bg-neutral-800 dark:hover:bg-neutral-700 px-4 py-8 border-2 border-neutral-300 focus-within:border-primary dark:border-neutral-700 border-dashed rounded-lg focus-within:ring-2 focus-within:ring-primary transition-colors">
-            {files.length > 0 ? (
-              <div className="text-center">
-                <div className="flex justify-center mb-2">
-                  {files.some((f) => f.type.startsWith("video/")) ? (
+            {files.length > 0
+              ? (
+                <div className="text-center">
+                  <div className="flex justify-center mb-2">
                     <Video className="w-6 h-6 text-primary" />
-                  ) : (
-                    <Image className="w-6 h-6 text-primary" />
-                  )}
-                </div>
-                <p className="font-medium text-neutral-900 dark:text-neutral-100">
-                  {files.length} {t.filesSelected}
-                </p>
-                <p className="text-neutral-500 dark:text-neutral-400 text-sm">
-                  {files.map((f) => f.name).join(", ")}
-                </p>
-                {files.some((f) => f.type.startsWith("video/")) ? (
-                  <p className="mt-2 font-medium text-primary text-xs">{t.videoEligible}</p>
-                ) : (
-                  <p className="mt-2 font-medium text-neutral-500 dark:text-neutral-400 text-xs">
-                    {t.photosNoQualify}
+                  </div>
+                  <p className="font-medium text-neutral-900 dark:text-neutral-100">
+                    {files.length} {t.filesSelected}
                   </p>
-                )}
-              </div>
-            ) : (
-              <div className="text-center">
-                <div className="flex justify-center gap-3 mb-2">
-                  <Image className="w-8 h-8 text-neutral-400" />
-                  <Video className="w-8 h-8 text-neutral-400" />
+                  <p className="text-neutral-500 dark:text-neutral-400 text-sm">
+                    {files.map((f) => f.name).join(", ")}
+                  </p>
+                  {files.some((f) => f.type.startsWith("video/"))
+                    ? (
+                      <p className="mt-2 font-medium text-primary text-xs">
+                        {t.videoEligible}
+                      </p>
+                    )
+                    : (
+                      <p className="mt-2 font-medium text-neutral-500 dark:text-neutral-400 text-xs">
+                        {t.photosNoQualify}
+                      </p>
+                    )}
                 </div>
-                <p className="font-medium text-neutral-900 dark:text-neutral-100">
-                  {t.clickUpload}
-                </p>
-                <p className="text-neutral-500 dark:text-neutral-400 text-sm">{t.uploadFormats}</p>
-                <p className="mt-2 font-medium text-primary text-xs">{t.cashbackOnlyVideos}</p>
-              </div>
-            )}
+              )
+              : (
+                <div className="text-center">
+                  <div className="flex justify-center gap-3 mb-2">
+                    <Video className="w-8 h-8 text-neutral-400" />
+                  </div>
+                  <p className="font-medium text-neutral-900 dark:text-neutral-100">
+                    {t.clickUpload}
+                  </p>
+                  <p className="text-neutral-500 dark:text-neutral-400 text-sm">
+                    {t.uploadFormats}
+                  </p>
+                  <p className="mt-2 font-medium text-primary text-xs">
+                    {t.cashbackOnlyVideos}
+                  </p>
+                </div>
+              )}
           </div>
         </div>
       </div>
@@ -653,18 +706,25 @@ export function LeaveReviewForm({ lang = "en" }: LeaveReviewFormProps) {
         </div>
       )}
 
-      <Button type="submit" size="lg" className="gap-2 w-full" disabled={isSubmitting}>
-        {isSubmitting ? (
-          <>
-            <Loader2 className="w-4 h-4 animate-spin" />
-            {t.submitting}
-          </>
-        ) : (
-          <>
-            <Star className="w-4 h-4" />
-            {t.submitReview}
-          </>
-        )}
+      <Button
+        type="submit"
+        size="lg"
+        className="gap-2 w-full"
+        disabled={isSubmitting}
+      >
+        {isSubmitting
+          ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              {t.submitting}
+            </>
+          )
+          : (
+            <>
+              <Star className="w-4 h-4" />
+              {t.submitReview}
+            </>
+          )}
       </Button>
 
       <p className="text-neutral-500 dark:text-neutral-400 text-xs text-center">

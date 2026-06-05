@@ -8,7 +8,7 @@ import { supabase } from "@/lib/supabase";
 import { markEmailAsSubscribed } from "@/lib/subscription-storage";
 import { trackEmailSignup } from "@/lib/analytics";
 
-const REDIRECT_URL = "/splint-customer/course";
+import { getSplintCustomerPath } from "@/lib/splint-customer-paths";
 
 export default function SplintCustomerEmailForm() {
   const [email, setEmail] = useState("");
@@ -45,22 +45,31 @@ export default function SplintCustomerEmailForm() {
         .select();
 
       if (supabaseError) {
-        throw new Error(supabaseError.message || "Failed to save your information");
+        throw new Error(
+          supabaseError.message || "Failed to save your information",
+        );
       }
 
       markEmailAsSubscribed(normalizedEmail);
       trackEmailSignup("splint_customer");
 
-      window.location.href = REDIRECT_URL;
+      window.location.href = getSplintCustomerPath("index", "en");
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong. Please try again.",
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-3 mx-auto w-full max-w-md">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col gap-3 mx-auto w-full max-w-md"
+    >
       <div className="flex sm:flex-row flex-col gap-3">
         <div className="relative flex-1">
           <Mail className="top-1/2 left-3 absolute w-4 h-4 text-neutral-400 -translate-y-1/2 pointer-events-none" />
@@ -83,10 +92,14 @@ export default function SplintCustomerEmailForm() {
             "gap-2 shrink-0 disabled:opacity-50",
           )}
         >
-          {isSubmitting ? <Loader2 className="w-4 h-4 animate-spin" /> : "Continue"}
+          {isSubmitting
+            ? <Loader2 className="w-4 h-4 animate-spin" />
+            : "Continue"}
         </button>
       </div>
-      {error && <p className="text-red-600 dark:text-red-400 text-sm">{error}</p>}
+      {error && (
+        <p className="text-red-600 dark:text-red-400 text-sm">{error}</p>
+      )}
     </form>
   );
 }

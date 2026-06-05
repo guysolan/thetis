@@ -1,21 +1,36 @@
 "use client";
 
-import { useLocationCurrency } from "@/hooks/use-location-currency";
 import { cn } from "@thetis/ui/cn";
+import {
+  shoppingCountryToCurrencyBucket,
+  useShoppingCountryCode,
+} from "@/hooks/use-shopping-country-code";
 
 interface LocationPriceProps {
   gbp: number;
   usd: number;
+  eur?: number;
   className?: string;
 }
 
 /**
- * Renders a cashback/claim amount in £ (GBP) or $ (USD) based on visitor location.
- * Used on splint-customer pages (share-doctor, review, claim-cashback).
+ * Cashback/claim amount in £, $, or € based on the shop region switcher
+ * (stored shopping country, with geo-detect on first visit).
  */
-export default function LocationPrice({ gbp, usd, className }: LocationPriceProps) {
-  const currency = useLocationCurrency();
-  const amount = currency === "GBP" ? gbp : usd;
-  const formatted = currency === "GBP" ? `£${amount}` : `$${amount}`;
+export default function LocationPrice({
+  gbp,
+  usd,
+  eur = gbp,
+  className,
+}: LocationPriceProps) {
+  const countryCode = useShoppingCountryCode();
+  const bucket = shoppingCountryToCurrencyBucket(countryCode);
+  const amount = bucket === "USD" ? usd : bucket === "EUR" ? eur : gbp;
+  const formatted = bucket === "USD"
+    ? `$${amount}`
+    : bucket === "EUR"
+    ? `€${amount}`
+    : `£${amount}`;
+
   return <span className={cn(className, "font-bold")}>{formatted}</span>;
 }

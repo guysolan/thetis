@@ -1,0 +1,115 @@
+---
+import type { Lang } from "@/config/languages";
+import Layout from "@/layouts/Layout.astro";
+import ColorGradient from "@/components/ColorGradient.astro";
+import SplintCustomerBackLink from "@/components/splint-customer/SplintCustomerBackLink.astro";
+import SplintCustomerChoiceCards from "@/components/splint-customer/SplintCustomerChoiceCards.astro";
+import SplintCustomerCoursePrice from "@/components/splint-customer/SplintCustomerCoursePrice";
+import {
+  getSplintCustomerCopy,
+  formatCopy,
+} from "@/features/splint-customer/splintCustomerCopy";
+import { Check } from "lucide-react";
+import CourseBuyButton from "@/components/CourseBuyButton";
+import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+const t = getSplintCustomerCopy(lang);
+const PRODUCT_ID = SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE;
+const discountCode = "SPLINT20";
+const codePrompt = formatCopy(t.course.codePrompt, { code: discountCode });
+---
+
+<Layout
+  title={t.meta.course.title}
+  description={t.meta.course.description}
+  image="https://thetismedical.com/images/night-splint.png"
+  lang={lang}
+>
+  <main>
+    <ColorGradient>
+      <div class="mx-auto px-4 py-8 md:py-10 max-w-3xl text-center">
+        <SplintCustomerBackLink lang={lang} />
+        <p
+          class="mb-2 font-medium text-primary text-sm uppercase tracking-widest"
+        >
+          {t.course.eyebrow}
+        </p>
+        <h1
+          class="mb-3 font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl"
+        >
+          {t.course.title}
+        </h1>
+        <p class="text-neutral-600 dark:text-neutral-400 text-sm md:text-base">
+          {codePrompt}
+        </p>
+      </div>
+    </ColorGradient>
+
+    <section class="pt-2 pb-10 md:pb-12">
+      <div class="mx-auto px-4 max-w-lg">
+        <div
+          class="bg-white dark:bg-neutral-800 shadow-lg p-6 border-2 border-primary/30 dark:border-primary/50 rounded-2xl"
+        >
+          <img
+            src="/images/catalogue-products/achilles-rupture-recovery-course-aircast-mike-professional-square-v5-.png"
+            alt={t.course.imageAlt}
+            width="640"
+            height="640"
+            class="mb-5 rounded-xl w-full object-cover aspect-square"
+            loading="lazy"
+          />
+
+          <SplintCustomerCoursePrice size="lg" className="mb-4" client:load />
+
+          <ul
+            class="space-y-2 mb-6 text-neutral-600 dark:text-neutral-400 text-sm"
+          >
+            {
+              t.course.features.map((item) => (
+                <li class="flex items-center gap-2">
+                  <Check className="w-4 h-4 text-primary shrink-0" />
+                  {item}
+                </li>
+              ))
+            }
+          </ul>
+
+          <CourseBuyButton
+            productId={PRODUCT_ID}
+            variant="default"
+            size="lg"
+            className="justify-center w-full"
+            client:load
+          >
+            {t.course.addToCart}
+          </CourseBuyButton>
+        </div>
+      </div>
+
+      <div class="mx-auto px-4 pt-10 max-w-3xl">
+        <p
+          class="mb-4 font-semibold text-neutral-900 dark:text-neutral-100 text-center"
+        >
+          {t.course.orBoth}
+        </p>
+        <SplintCustomerChoiceCards
+          lang={lang}
+          highlight="course"
+          discountCode={discountCode}
+          compact
+        />
+      </div>
+    </section>
+  </main>
+
+  <script define:vars={{ discountCode }}>
+    if (typeof window !== "undefined") {
+      sessionStorage.setItem("splintDiscountCode", discountCode);
+    }
+  </script>
+</Layout>

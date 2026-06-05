@@ -1,15 +1,29 @@
 "use client";
 
 import { useState } from "react";
+import type { Lang } from "@/config/languages";
+import { getSplintCustomerPath } from "@/lib/splint-customer-paths";
+import {
+  formatCopy,
+  getSplintCustomerCopy,
+} from "@/features/splint-customer/splintCustomerCopy";
 import { Button } from "@/components/ui/button";
-import { AlertCircle, Check, Image, Loader2, Star, Upload, Video } from "lucide-react";
+import { useLocationCurrency } from "@/hooks/use-location-currency";
+import { AlertCircle, Check, Loader2, Star, Upload, Video } from "lucide-react";
 
-// Formspree form for splint-customer review (same pattern as LeaveReviewForm – no server code)
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mnjpalkk";
+const MAX_FILE_MB = 10;
 
-const MAX_FILE_MB = 10; // Formspree-friendly limit
+const REVIEW_CASHBACK = {
+  GBP: "£20",
+  EUR: "€20",
+  USD: "$25",
+} as const;
 
-export function VideoReviewForm() {
+export function VideoReviewForm({ lang = "en" }: { lang?: Lang }) {
+  const t = getSplintCustomerCopy(lang).form;
+  const currency = useLocationCurrency();
+  const cashbackAmount = REVIEW_CASHBACK[currency];
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [starRating, setStarRating] = useState<number | null>(null);
@@ -25,13 +39,12 @@ export function VideoReviewForm() {
 
     for (const file of selectedFiles) {
       const isVideo = file.type.startsWith("video/");
-      const isImage = file.type.startsWith("image/");
-      if (!isVideo && !isImage) {
-        setError("Please upload video or image files only");
+      if (!isVideo) {
+        setError(t.errors.videoOnly);
         return;
       }
       if (file.size > MAX_FILE_MB * 1024 * 1024) {
-        setError(`Each file must be less than ${MAX_FILE_MB}MB`);
+        setError(formatCopy(t.errors.fileSize, { max: MAX_FILE_MB }));
         return;
       }
     }
@@ -45,7 +58,7 @@ export function VideoReviewForm() {
     setError("");
 
     if (starRating == null || starRating < 1) {
-      setError("Please select a star rating");
+      setError(t.errors.rating);
       return;
     }
 
@@ -59,7 +72,8 @@ export function VideoReviewForm() {
       formData.set("rating", String(starRating));
       formData.set(
         "review",
-        `[Rating: ${starRating}/5]${reviewText ? `\n\n${reviewText}` : ""}`.trim(),
+        `[Rating: ${starRating}/5]${reviewText ? `\n\n${reviewText}` : ""}`
+          .trim(),
       );
       files.forEach((file, i) => formData.set(`file_${i + 1}`, file));
 
@@ -70,12 +84,14 @@ export function VideoReviewForm() {
       });
 
       if (!res.ok) {
-        throw new Error("Failed to submit review. Please try again.");
+        throw new Error(t.errors.submitFailed);
       }
 
       setIsSubmitted(true);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
+      setError(
+        err instanceof Error ? err.message : t.errors.generic,
+      );
       console.error("Error submitting review:", err);
     } finally {
       setIsSubmitting(false);
@@ -87,25 +103,23 @@ export function VideoReviewForm() {
       <div className="bg-primary/10 dark:bg-primary/20 p-8 border border-primary/20 dark:border-primary/30 rounded-lg text-center">
         <Check className="mx-auto mb-4 w-12 h-12 text-primary" />
         <p className="mb-2 font-semibold text-neutral-900 dark:text-neutral-100 text-lg">
-          Thank You!
+          {t.thankYou}
         </p>
         <p className="mb-4 text-neutral-700 dark:text-neutral-300">
-          Your review has been submitted successfully.
+          {t.submitted}
         </p>
         <p className="mb-6 text-neutral-600 dark:text-neutral-400 text-sm">
-          If you included a video or photos, we'll review within 3-5 business days and, once
-          approved, you'll receive an email to claim your cashback (£10 / $15). If you didn't add a
-          video or photos, add one later via the same form to be eligible for cashback.
+          {formatCopy(t.submittedDetail, { amount: cashbackAmount })}
         </p>
-        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
+        <div className="flex sm:flex-row flex-col justify-center items-center gap-3">
           <Button asChild size="lg" className="gap-2 w-full sm:w-auto">
-            <a href="/splint-customer/claim-cashback">Claim Your Cashback →</a>
+            <a href={getSplintCustomerPath("course", lang)}>{t.courseCta}</a>
           </Button>
           <a
-            href="/splint-customer/share-doctor"
+            href={getSplintCustomerPath("index", lang)}
             className="inline-flex items-center gap-2 font-medium text-primary hover:text-primary/80 text-sm"
           >
-            ← Back to Special Offers
+            {t.backToOffers}
           </a>
         </div>
       </div>
@@ -119,7 +133,7 @@ export function VideoReviewForm() {
           htmlFor="name"
           className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100"
         >
-          Name <span className="text-red-500">*</span>
+          {t.name} <span className="text-red-500">*</span>
         </label>
         <input
           id="name"
@@ -128,7 +142,7 @@ export function VideoReviewForm() {
           onChange={(e) => setName(e.target.value)}
           required
           className="bg-white dark:bg-neutral-800 px-4 py-2 border border-neutral-300 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100"
-          placeholder="Your name"
+          placeholder={t.namePlaceholder}
         />
       </div>
 
@@ -137,7 +151,7 @@ export function VideoReviewForm() {
           htmlFor="email"
           className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100"
         >
-          Email <span className="text-red-500">*</span>
+          {t.email} <span className="text-red-500">*</span>
         </label>
         <input
           id="email"
@@ -147,16 +161,16 @@ export function VideoReviewForm() {
           required
           autoComplete="email"
           className="bg-white dark:bg-neutral-800 px-4 py-2 border border-neutral-300 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100"
-          placeholder="your@email.com"
+          placeholder={t.emailPlaceholder}
         />
         <p className="mt-1 text-neutral-500 dark:text-neutral-400 text-sm">
-          We'll use this to contact you about your cashback
+          {t.emailHint}
         </p>
       </div>
 
       <div>
         <label className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100">
-          Star rating <span className="text-red-500">*</span>
+          {t.starRating} <span className="text-red-500">*</span>
         </label>
         <div className="flex gap-1">
           {[1, 2, 3, 4, 5].map((n) => (
@@ -164,7 +178,7 @@ export function VideoReviewForm() {
               key={n}
               type="button"
               onClick={() => setStarRating(n)}
-              className="p-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+              className="p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 transition-colors"
               aria-label={`${n} star${n === 1 ? "" : "s"}`}
             >
               <Star
@@ -178,7 +192,7 @@ export function VideoReviewForm() {
           ))}
         </div>
         <p className="mt-1 text-neutral-500 dark:text-neutral-400 text-sm">
-          1 = poor, 5 = excellent
+          {t.starHint}
         </p>
       </div>
 
@@ -187,7 +201,7 @@ export function VideoReviewForm() {
           htmlFor="review"
           className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100"
         >
-          Your Review <span className="text-neutral-500">(optional)</span>
+          {t.reviewOptional}
         </label>
         <textarea
           id="review"
@@ -195,7 +209,7 @@ export function VideoReviewForm() {
           onChange={(e) => setReviewText(e.target.value)}
           rows={4}
           className="bg-white dark:bg-neutral-800 px-4 py-2 border border-neutral-300 dark:border-neutral-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full text-neutral-900 dark:text-neutral-100"
-          placeholder="Share any additional feedback about your experience with the night splint..."
+          placeholder={t.reviewPlaceholder}
         />
       </div>
 
@@ -204,49 +218,51 @@ export function VideoReviewForm() {
           htmlFor="files"
           className="block mb-2 font-medium text-neutral-900 dark:text-neutral-100"
         >
-          Video or photos <span className="text-neutral-500">(optional)</span>
+          {t.videoOptional}
         </label>
-        <p className="mb-2 text-amber-700 dark:text-amber-400 text-sm font-medium">
-          Required for cashback — we need a video (or photos) to approve your review and send
-          £10/$15. You can submit your rating now and add a video later.
+        <p className="mb-2 font-medium text-amber-700 dark:text-amber-400 text-sm">
+          {formatCopy(t.videoRequired, { amount: cashbackAmount })}
         </p>
         <div className="relative">
           <input
             id="files"
             type="file"
-            accept="video/*,image/*"
+            accept="video/*"
             onChange={handleFileChange}
             multiple
             className="absolute inset-0 opacity-0 w-full h-full cursor-pointer"
           />
           <div className="flex justify-center items-center bg-white hover:bg-neutral-50 dark:bg-neutral-800 dark:hover:bg-neutral-700 px-4 py-8 border-2 border-neutral-300 focus-within:border-primary dark:border-neutral-700 border-dashed rounded-lg focus-within:ring-2 focus-within:ring-primary transition-colors">
-            {files.length > 0 ? (
-              <div className="text-center">
-                <div className="flex justify-center gap-2 mb-2">
-                  <Video className="w-6 h-6 text-primary" />
-                  <Image className="w-6 h-6 text-primary" />
+            {files.length > 0
+              ? (
+                <div className="text-center">
+                  <div className="flex justify-center gap-2 mb-2">
+                    <Video className="w-6 h-6 text-primary" />
+                  </div>
+                  <p className="font-medium text-neutral-900 dark:text-neutral-100">
+                    {formatCopy(t.filesSelected, { count: files.length })}
+                  </p>
+                  <p className="text-neutral-500 dark:text-neutral-400 text-sm">
+                    {files.map((f) => f.name).join(", ")}
+                  </p>
+                  <p className="mt-1 text-neutral-500 dark:text-neutral-400 text-xs">
+                    {t.total}{" "}
+                    {(files.reduce((sum, f) => sum + f.size, 0) / (1024 * 1024))
+                      .toFixed(2)} MB
+                  </p>
                 </div>
-                <p className="font-medium text-neutral-900 dark:text-neutral-100">
-                  {files.length} file{files.length > 1 ? "s" : ""} selected
-                </p>
-                <p className="text-neutral-500 dark:text-neutral-400 text-sm">
-                  {files.map((f) => f.name).join(", ")}
-                </p>
-                <p className="mt-1 text-neutral-500 dark:text-neutral-400 text-xs">
-                  Total: {(files.reduce((sum, f) => sum + f.size, 0) / (1024 * 1024)).toFixed(2)} MB
-                </p>
-              </div>
-            ) : (
-              <div className="text-center">
-                <Upload className="mx-auto mb-2 w-8 h-8 text-neutral-400" />
-                <p className="font-medium text-neutral-900 dark:text-neutral-100">
-                  Click to upload video or photos
-                </p>
-                <p className="text-neutral-500 dark:text-neutral-400 text-sm">
-                  Max {MAX_FILE_MB}MB per file • MP4, MOV, JPG, PNG, etc.
-                </p>
-              </div>
-            )}
+              )
+              : (
+                <div className="text-center">
+                  <Upload className="mx-auto mb-2 w-8 h-8 text-neutral-400" />
+                  <p className="font-medium text-neutral-900 dark:text-neutral-100">
+                    {t.uploadVideo}
+                  </p>
+                  <p className="text-neutral-500 dark:text-neutral-400 text-sm">
+                    {formatCopy(t.uploadHint, { max: MAX_FILE_MB })}
+                  </p>
+                </div>
+              )}
           </div>
         </div>
       </div>
@@ -264,23 +280,23 @@ export function VideoReviewForm() {
         className="gap-2 w-full"
         disabled={isSubmitting || starRating == null}
       >
-        {isSubmitting ? (
-          <>
-            <Loader2 className="w-4 h-4 animate-spin" />
-            Submitting...
-          </>
-        ) : (
-          <>
-            <Upload className="w-4 h-4" />
-            Submit Review
-          </>
-        )}
+        {isSubmitting
+          ? (
+            <>
+              <Loader2 className="w-4 h-4 animate-spin" />
+              {t.submitting}
+            </>
+          )
+          : (
+            <>
+              <Upload className="w-4 h-4" />
+              {t.submit}
+            </>
+          )}
       </Button>
 
       <p className="text-neutral-500 dark:text-neutral-400 text-xs text-center">
-        By submitting, you agree that your review may be featured on our website (with your
-        permission). Cashback (£10 / $15) will be processed within 7-10 business days after
-        approval.
+        {formatCopy(t.footer, { amount: cashbackAmount })}
       </p>
     </form>
   );

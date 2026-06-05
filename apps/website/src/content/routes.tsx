@@ -1,10 +1,13 @@
+import { translateSplintCustomerPath } from "@/lib/splint-customer-paths";
 import { type Language, languages } from "../config/languages";
+import type { Lang } from "@/config/languages";
 import { type ConditionId, conditions } from "./conditions/registry";
 import { CONDITION_SHOP_HUB_DESCRIPTION } from "./condition-hub-copy";
 import {
   BookOpen,
   Box,
   ClipboardCheck,
+  Gift,
   GraduationCap,
   Handshake,
   HeartHandshake,
@@ -794,6 +797,32 @@ export const contactRoutes: BaseRoute[] = [
       fr: "laisser-avis",
       es: "dejar-resena",
       it: "lascia-recensione",
+    },
+  },
+  {
+    slug: "splint-customer",
+    title: {
+      en: "Splint Customer Offers",
+      de: "Schienen-Kunden-Angebote",
+      fr: "Offres clients attelle",
+      es: "Ofertas para clientes de férula",
+      it: "Offerte clienti tutore",
+    },
+    description: {
+      en: "Video review cashback and course discount for splint customers.",
+      de: "Video-Bewertung Cashback und Kursrabatt für Schienen-Kunden.",
+      fr: "Cashback avis vidéo et remise cours pour clients attelle.",
+      es: "Cashback por reseña en vídeo y descuento en curso para clientes.",
+      it: "Cashback recensione video e sconto corso per clienti tutore.",
+    },
+    icon: <Gift />,
+    variant: "default",
+    slugTranslations: {
+      en: "splint-customer",
+      de: "schienen-kunde",
+      fr: "client-attelle",
+      es: "cliente-ferula",
+      it: "cliente-tutore",
     },
   },
   {
@@ -1624,6 +1653,14 @@ export function getTranslatedUrlForLanguage(
   });
 
   if (!baseRoute) {
+    const translatedSplintCustomer = translateSplintCustomerPath(
+      `/${slug}`,
+      targetLangCode as Lang,
+    );
+    if (translatedSplintCustomer) {
+      return translatedSplintCustomer;
+    }
+
     // For other routes, just add language prefix as fallback
     const language = languages.find((lang) => lang.code === targetLangCode);
     if (language && language.code !== "en") {
@@ -1644,18 +1681,18 @@ export function getSplintReviewsHref(
   lang: string = "en",
   searchParams?: string | URLSearchParams,
 ): string {
-  const splintRoute = getRouteBySlugAndLanguage("achilles-rupture-splint", lang);
+  const splintRoute = getRouteBySlugAndLanguage(
+    "achilles-rupture-splint",
+    lang,
+  );
   const base = splintRoute?.href ?? "/achilles-rupture-splint";
-  const search =
-    typeof searchParams === "string"
-      ? searchParams
-        ? searchParams.startsWith("?")
-          ? searchParams
-          : `?${searchParams}`
-        : ""
-      : searchParams?.toString()
-        ? `?${searchParams.toString()}`
-        : "";
+  const search = typeof searchParams === "string"
+    ? searchParams
+      ? searchParams.startsWith("?") ? searchParams : `?${searchParams}`
+      : ""
+    : searchParams?.toString()
+    ? `?${searchParams.toString()}`
+    : "";
   return `${base}${search}#reviews`;
 }
 

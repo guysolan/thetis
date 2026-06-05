@@ -1,0 +1,25 @@
+---
+import OrlimanSlide from "./OrlimanSlide.astro";
+import { ORLIMAN_DECK_SLIDE_COUNT } from "@/features/oped-deck/orlimanDeckPitchContent";
+
+interface Props {
+  initialPage: number;
+}
+
+const { initialPage } = Astro.props;
+---
+
+{
+  Array.from({ length: ORLIMAN_DECK_SLIDE_COUNT }, (_, index) => {
+    const page = index + 1;
+    return (
+      <div
+        data-oped-slide={page}
+        class="oped-slide-panel"
+        hidden={page !== initialPage}
+      >
+        <OrlimanSlide page={page} />
+      </div>
+    );
+  })
+}

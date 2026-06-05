@@ -1,0 +1,19 @@
+---
+import type { Lang } from "@/config/languages";
+import { getSplintCustomerPath } from "@/lib/splint-customer-paths";
+import { getSplintCustomerCopy } from "@/features/splint-customer/splintCustomerCopy";
+
+interface Props {
+  lang?: Lang;
+}
+
+const { lang = "en" } = Astro.props as Props;
+const href = getSplintCustomerPath("index", lang);
+const label = getSplintCustomerCopy(lang).backLink;
+---
+
+<p class="mb-6 text-center">
+  <a href={href} class="font-medium text-primary hover:text-primary/80 text-sm">
+    {label}
+  </a>
+</p>
