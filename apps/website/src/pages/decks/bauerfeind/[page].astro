@@ -1,0 +1,34 @@
+---
+import BauerfeindDeckSlides from "@/components/oped-deck/BauerfeindDeckSlides.astro";
+import OpedDeckLayout from "@/layouts/OpedDeckLayout.astro";
+import {
+  BAUERFEIND_DECK_BASE_PATH,
+  BAUERFEIND_DECK_SLIDE_COUNT,
+} from "@/features/oped-deck/bauerfeindDeckPitchContent";
+
+const rawPage = Number.parseInt(Astro.params.page ?? "1", 10);
+
+if (!Number.isFinite(rawPage) || rawPage < 1) {
+  return Astro.redirect(`${BAUERFEIND_DECK_BASE_PATH}/1`, 301);
+}
+
+if (rawPage > BAUERFEIND_DECK_SLIDE_COUNT) {
+  return Astro.redirect(
+    `${BAUERFEIND_DECK_BASE_PATH}/${BAUERFEIND_DECK_SLIDE_COUNT}`,
+    301,
+  );
+}
+
+const initialPage = rawPage;
+---
+
+<OpedDeckLayout
+  title="Achilles Recovery - Bauerfeind x Thetis"
+  description="Confidential partnership overview for Bauerfeind and Thetis Medical."
+  initialPage={initialPage}
+  slideCount={BAUERFEIND_DECK_SLIDE_COUNT}
+  basePath={BAUERFEIND_DECK_BASE_PATH}
+  partnerName="Bauerfeind"
+>
+  <BauerfeindDeckSlides initialPage={initialPage} />
+</OpedDeckLayout>

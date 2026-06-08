@@ -1,0 +1,82 @@
+---
+import { bauerfeindPitchRoutes } from "@/features/oped-deck/bauerfeindDeckPitchContent";
+
+const content = bauerfeindPitchRoutes;
+const detailHighlightPattern =
+  /(OrthoPrax Air Walker Pro|Bauerfeind|Thetis|manufacture|distribute)/;
+
+function isDetailHighlight(part: string) {
+  return (
+    part === "OrthoPrax Air Walker Pro" ||
+    part === "Bauerfeind" ||
+    part === "Thetis" ||
+    part === "manufacture" ||
+    part === "distribute"
+  );
+}
+---
+
+<div class="space-y-6 mx-auto max-w-5xl">
+  <div class="bg-primary/5 p-5 border border-primary/30 rounded-2xl">
+    <p class="mb-4 font-medium text-primary text-sm uppercase tracking-widest">
+      {content.leadLabel}
+    </p>
+    <p
+      class="text-neutral-800 dark:text-neutral-200 text-base md:text-lg leading-relaxed"
+    >
+      {
+        content.leadBody
+          .split(detailHighlightPattern)
+          .map((part) =>
+            isDetailHighlight(part) ? (
+              <strong class="font-semibold text-neutral-900 dark:text-neutral-100">
+                {part}
+              </strong>
+            ) : (
+              part
+            ),
+          )
+      }
+    </p>
+  </div>
+
+  <div>
+    <p
+      class="mb-3 font-medium text-neutral-500 text-sm text-center uppercase tracking-widest"
+    >
+      {content.otherRoutesTitle}
+    </p>
+    <ul class="gap-3 grid md:grid-cols-3">
+      {
+        content.otherRoutes.map((route) => (
+          <li class="bg-white dark:bg-neutral-900 shadow-sm p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-2xl leading-none" aria-hidden="true">
+                {route.flag}
+              </span>
+              <div>
+                <p class="font-bold text-neutral-900 dark:text-neutral-100 text-base leading-tight">
+                  {route.market}
+                </p>
+                <p class="font-medium text-primary text-sm">{route.channel}</p>
+              </div>
+            </div>
+            <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+              {route.detail
+                .split(detailHighlightPattern)
+                .map((part) =>
+                  isDetailHighlight(part) ? (
+                    <strong class="font-semibold text-neutral-800 dark:text-neutral-200">
+                      {part}
+                    </strong>
+                  ) : (
+                    part
+                  ),
+                )}
+            </p>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>

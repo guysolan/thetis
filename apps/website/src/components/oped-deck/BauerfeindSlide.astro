@@ -1,0 +1,370 @@
+---
+import ColorGradient from "@/components/ColorGradient.astro";
+import { Check } from "lucide-astro";
+import BauerfeindRoutes from "./BauerfeindRoutes.astro";
+import DeckSection from "./DeckSection.astro";
+import OpedDesignReviews from "./OpedDesignReviews.astro";
+import OpedDeckSleepSurveyChart from "./OpedDeckSleepSurveyChart";
+import OpedPatientComplaintSurveyResults from "./OpedPatientComplaintSurveyResults";
+import OpedProofCards from "./OpedProofCards.astro";
+import OpedSalesGrowthChart from "./OpedSalesGrowthChart.astro";
+import PitchStatGrid from "./PitchStatGrid.astro";
+import {
+  bauerfeindPitchDayStack,
+  bauerfeindPitchPartnershipOptions,
+  bauerfeindPitchRoutes,
+  bauerfeindPitchSalesChart,
+  bauerfeindPitchWhyNow,
+} from "@/features/oped-deck/bauerfeindDeckPitchContent";
+import {
+  opedPitchClinical,
+  opedPitchDesignReviews,
+  opedPitchIp,
+  opedPitchPatientComplaint,
+  opedPitchRegulatory,
+} from "@/features/oped-deck/opedDeckPitchContent";
+
+interface Props {
+  page: number;
+}
+
+const { page } = Astro.props;
+---
+
+{
+  page === 1 && (
+    <div class="pb-20 w-full min-h-[calc(100vh-57px)]">
+      <div class="[&_.color-gradient]:!pt-6">
+        <ColorGradient>
+          <div class="mx-auto px-6 md:px-12 lg:px-24 py-6 md:py-10 w-full max-w-6xl text-center">
+            <p class="mb-6 font-medium text-primary text-sm uppercase tracking-widest">
+              Bauerfeind x Thetis Medical
+            </p>
+            <div class="relative mx-auto mb-6 w-full max-w-[11rem] md:max-w-48">
+              <div
+                class="absolute -inset-3 bg-primary/10 blur-2xl rounded-3xl"
+                aria-hidden="true"
+              />
+              <img
+                src="/images/night_splint_bed_top_square.jpg"
+                alt="Thetis Achilles rupture night splint"
+                width="640"
+                height="640"
+                class="relative shadow-md border border-white/70 rounded-2xl w-full object-cover aspect-square"
+              />
+            </div>
+            <h1 class="mx-auto mb-4 w-full max-w-6xl font-semibold text-neutral-900 text-3xl md:text-4xl lg:text-5xl text-balance leading-[1.1] tracking-tight">
+              One partner to manufacture and distribute the Achilles night
+              splint.
+            </h1>
+            <p class="mx-auto w-full max-w-5xl text-neutral-600 text-lg md:text-xl leading-snug">
+              Bauerfeind already sells the OrthoPrax Air Walker Pro into
+              Achilles recovery. Thetis has the proven night splint. Together
+              they complete the day/night pathway.
+            </p>
+          </div>
+        </ColorGradient>
+      </div>
+    </div>
+  )
+}
+
+{
+  page === 2 && (
+    <DeckSection
+      title={bauerfeindPitchDayStack.title}
+      intro={bauerfeindPitchDayStack.intro}
+      eyebrow={bauerfeindPitchDayStack.eyebrow}
+      gradient
+    >
+      <div class="space-y-6 mx-auto max-w-5xl">
+        <ul class="gap-5 grid md:grid-cols-2 mx-auto max-w-3xl">
+          {bauerfeindPitchDayStack.products.map((product) => (
+            <li class="bg-white dark:bg-neutral-900 shadow-sm border border-neutral-200 dark:border-neutral-700 rounded-2xl overflow-hidden">
+              {"image" in product && product.image ? (
+                <div class="flex justify-center items-center bg-white dark:bg-white aspect-[4/3]">
+                  <img
+                    src={product.image}
+                    alt={product.imageAlt}
+                    width={640}
+                    height={480}
+                    class="w-[75%] h-[75%] object-contain"
+                    loading="lazy"
+                  />
+                </div>
+              ) : null}
+              <div class="p-5">
+                <p class="mb-1 font-medium text-[10px] text-primary uppercase tracking-widest">
+                  {product.role}
+                </p>
+                <p class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-xl">
+                  {product.name}
+                </p>
+                <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                  {product.detail}
+                </p>
+                {"productUrl" in product && product.productUrl ? (
+                  <a
+                    href={product.productUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-block mt-3 font-medium text-primary text-sm hover:underline"
+                  >
+                    View product
+                  </a>
+                ) : null}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </DeckSection>
+  )
+}
+
+{
+  page === 3 && (
+    <DeckSection
+      title={opedPitchPatientComplaint.title}
+      intro={opedPitchPatientComplaint.intro}
+      eyebrow={opedPitchPatientComplaint.eyebrow}
+      gradient
+      compact
+    >
+      <div>
+        <OpedPatientComplaintSurveyResults client:visible />
+        <OpedDeckSleepSurveyChart client:load />
+      </div>
+    </DeckSection>
+  )
+}
+
+{
+  page === 4 && (
+    <DeckSection
+      title={opedPitchDesignReviews.title}
+      intro={opedPitchDesignReviews.intro}
+      eyebrow="Online launch"
+      gradient
+    >
+      <OpedDesignReviews content={opedPitchDesignReviews} />
+    </DeckSection>
+  )
+}
+
+{
+  page === 5 && (
+    <DeckSection
+      title="Surgeons say yes"
+      intro="Leading foot and ankle surgeons recommend the splint for night-time use - the problem the walking boot cannot solve."
+      eyebrow="Proof"
+      gradient
+    >
+      <OpedProofCards />
+    </DeckSection>
+  )
+}
+
+{
+  page === 6 && (
+    <DeckSection
+      title={opedPitchClinical.title}
+      intro={opedPitchClinical.intro}
+      eyebrow="Safety evidence"
+      gradient
+    >
+      <div class="space-y-6 mx-auto max-w-5xl">
+        <PitchStatGrid stats={opedPitchClinical.stats} columns={3} />
+        <div class="space-y-4 bg-white dark:bg-neutral-900 shadow-sm p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed">
+            {opedPitchClinical.body}
+          </p>
+          <p class="text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed">
+            {opedPitchClinical.surveillance}
+          </p>
+        </div>
+        <ul class="gap-2 grid sm:grid-cols-3">
+          {opedPitchClinical.sources.map((source) => (
+            <li class="bg-primary/5 px-3 py-2 border border-primary/20 rounded-lg font-medium text-neutral-700 dark:text-neutral-300 text-xs text-center">
+              {source}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </DeckSection>
+  )
+}
+
+{
+  page === 7 && (
+    <DeckSection
+      title={opedPitchIp.title}
+      intro={opedPitchIp.intro}
+      eyebrow="IP portfolio"
+      gradient
+    >
+      <div class="space-y-6 mx-auto max-w-5xl">
+        <p class="font-medium text-primary text-sm uppercase tracking-widest">
+          {opedPitchIp.portfolioTitle}
+        </p>
+        <ul class="gap-3 grid sm:grid-cols-2">
+          {opedPitchIp.portfolio.map((item) => (
+            <li class="bg-white dark:bg-neutral-900 shadow-sm p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+              <p class="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                {item.label}
+              </p>
+              <p class="mt-1 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                {item.detail}
+              </p>
+            </li>
+          ))}
+        </ul>
+        <div class="bg-primary/5 p-5 border border-primary/30 rounded-xl">
+          <p class="text-neutral-800 dark:text-neutral-200 text-sm leading-relaxed">
+            {opedPitchIp.message}
+          </p>
+          <p class="mt-2 text-neutral-500 text-xs">{opedPitchIp.licenceNote}</p>
+        </div>
+      </div>
+    </DeckSection>
+  )
+}
+
+{
+  page === 8 && (
+    <DeckSection
+      title={opedPitchRegulatory.title}
+      intro={opedPitchRegulatory.intro}
+      eyebrow="Regulatory & quality"
+      gradient
+    >
+      <div class="space-y-7 mx-auto max-w-5xl">
+        {opedPitchRegulatory.sections.map((section) => (
+          <div>
+            <p class="mb-3 font-medium text-primary text-sm uppercase tracking-widest">
+              {section.title}
+            </p>
+            <ul class="gap-3 grid sm:grid-cols-2 lg:grid-cols-3">
+              {section.items.map((item) => (
+                <li class="bg-white dark:bg-neutral-900 shadow-sm p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+                  <p class="font-semibold text-neutral-900 dark:text-neutral-100 text-sm">
+                    {item.label}
+                  </p>
+                  <p class="mt-1 text-neutral-600 dark:text-neutral-400 text-sm leading-snug">
+                    {item.detail}
+                  </p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+        <p class="text-neutral-500 text-xs text-center">
+          {opedPitchRegulatory.footnote}
+        </p>
+      </div>
+    </DeckSection>
+  )
+}
+
+{
+  page === 9 && (
+    <DeckSection
+      title={bauerfeindPitchWhyNow.title}
+      intro={bauerfeindPitchWhyNow.intro}
+      eyebrow="Partnership context"
+      gradient
+    >
+      <div class="space-y-6 mx-auto max-w-4xl">
+        <ul class="gap-4 grid md:grid-cols-3">
+          {bauerfeindPitchWhyNow.growthPoints.map((point) => (
+            <li class="bg-white dark:bg-neutral-900 shadow-sm p-6 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+              <p class="font-bold text-neutral-900 dark:text-neutral-100 text-base md:text-lg leading-snug">
+                {point.label}
+              </p>
+              <p class="mt-2 text-neutral-600 dark:text-neutral-400 text-sm md:text-base leading-snug">
+                {point.value}
+              </p>
+            </li>
+          ))}
+        </ul>
+        <OpedSalesGrowthChart chart={bauerfeindPitchSalesChart} />
+      </div>
+    </DeckSection>
+  )
+}
+
+{
+  page === 10 && (
+    <DeckSection
+      title={bauerfeindPitchRoutes.title}
+      intro={bauerfeindPitchRoutes.intro}
+      eyebrow={bauerfeindPitchRoutes.eyebrow}
+      gradient
+    >
+      <BauerfeindRoutes />
+    </DeckSection>
+  )
+}
+
+{
+  page === 11 && (
+    <DeckSection
+      title={bauerfeindPitchPartnershipOptions.title}
+      intro={bauerfeindPitchPartnershipOptions.intro}
+      eyebrow="The ask"
+      gradient
+    >
+      <div class="space-y-5 mx-auto max-w-5xl">
+        <div class="bg-primary/5 p-6 md:p-8 border border-primary/30 rounded-2xl text-center">
+          <p class="font-bold text-neutral-900 dark:text-neutral-100 text-2xl md:text-3xl text-balance leading-tight">
+            {bauerfeindPitchPartnershipOptions.headline}
+          </p>
+        </div>
+
+        <div class="bg-white dark:bg-neutral-900 shadow-sm p-5 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+          <h3 class="mb-3 font-semibold text-neutral-900 dark:text-neutral-100 text-base uppercase tracking-widest">
+            {bauerfeindPitchPartnershipOptions.proposalTitle}
+          </h3>
+          <ul class="gap-2 grid sm:grid-cols-2">
+            {bauerfeindPitchPartnershipOptions.proposal.map((term) => (
+              <li class="flex gap-2 text-neutral-700 dark:text-neutral-300 text-sm leading-snug">
+                <Check
+                  class="mt-0.5 w-4 h-4 text-primary shrink-0"
+                  aria-hidden="true"
+                />
+                {term}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <ul class="gap-4 grid md:grid-cols-2">
+          {bauerfeindPitchPartnershipOptions.options.map((option) => (
+            <li class="flex flex-col bg-white dark:bg-neutral-900 shadow-sm p-6 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+              <p class="font-medium text-primary text-xs uppercase tracking-widest">
+                {option.label}
+              </p>
+              <h3 class="mt-0.5 mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-2xl">
+                {option.title}
+              </h3>
+              <p class="mb-3 text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                {option.summary}
+              </p>
+              <ul class="space-y-2 mt-auto">
+                {option.points.map((point) => (
+                  <li class="flex gap-2 text-neutral-700 dark:text-neutral-300 text-sm">
+                    <Check
+                      class="mt-0.5 w-4 h-4 text-primary shrink-0"
+                      aria-hidden="true"
+                    />
+                    {point}
+                  </li>
+                ))}
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </DeckSection>
+  )
+}
