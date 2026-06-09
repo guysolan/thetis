@@ -1,0 +1,37 @@
+---
+import type { Lang } from "@/config/languages";
+import { Schema } from "astro-seo-schema";
+import {
+  buildPageGraphSchema,
+  buildSimplePageBreadcrumbItems,
+  toAbsoluteThetisUrl,
+  type PageGraphBreadcrumbItem,
+} from "./thetis-graph";
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+  image?: string;
+  mainEntityId?: string;
+  breadcrumbItems?: PageGraphBreadcrumbItem[];
+}
+
+const { lang, title, description, image, mainEntityId, breadcrumbItems } =
+  Astro.props;
+const pageUrl = toAbsoluteThetisUrl(Astro.url.pathname);
+---
+
+<Schema
+  item={buildPageGraphSchema({
+    lang,
+    title,
+    description,
+    pageUrl,
+    primaryImageUrl: image,
+    mainEntityId,
+    breadcrumbItems:
+      breadcrumbItems ??
+      buildSimplePageBreadcrumbItems(lang, title, pageUrl),
+  })}
+/>

@@ -1,18 +1,56 @@
 {
   "@context": "https://schema.org",
-  "@type": "Corporation",
-  "name": "Thetis Medical Ltd",
-  "alternateName": "Thetis Medical",
-  "description": "Thetis Medical produce medical splints for Achilles Tendon Rupture.",
-  "url": "https://thetismedical.com/",
+  "@type": "Organization",
+  "@id": "https://thetismedical.com#organization",
+  "name": "Thetis Medical",
+  "legalName": "Thetis Medical Ltd",
+  "alternateName": ["Thetis Medical Ltd"],
+  "url": "https://thetismedical.com",
+  "description": "UK medical device company making the patented Achilles Rupture Night Splint and publishing evidence-based recovery guides, courses, and FAQs for Achilles tendon rupture and related foot conditions. Trusted by 5,000+ patients and recommended by foot and ankle surgeons.",
+  "slogan": "Sleep Better. Recover Better.",
+  "logo": {
+    "@type": "ImageObject",
+    "@id": "https://thetismedical.com#logo",
+    "url": "https://thetismedical.com/images/dotty-logo.svg",
+    "contentUrl": "https://thetismedical.com/images/dotty-logo.svg",
+    "caption": "Thetis Medical logo"
+  },
+  "image": {
+    "@type": "ImageObject",
+    "url": "https://thetismedical.com/images/night-splint.png",
+    "contentUrl": "https://thetismedical.com/images/night-splint.png",
+    "caption": "Achilles Rupture Night Splint by Thetis Medical"
+  },
   "address": {
     "@type": "PostalAddress",
+    "streetAddress": "C/O The Accountancy Partnership, Suite 5, 5th Floor, City Reach, 5 Greenwich View Place",
     "addressLocality": "London",
-    "addressCountry": "UK",
     "postalCode": "E14 9NN",
-    "streetAddress": "C/O The Accountancy Partnership, Suite 5, 5th Floor, City Reach, 5 Greenwich View Place"
+    "addressCountry": "GB"
   },
-  "logo": "https://thetismedical.com/images/dotty-logo.svg",
+  "areaServed": {
+    "@type": "Place",
+    "name": "Worldwide"
+  },
+  "knowsAbout": [
+    "Achilles tendon rupture",
+    "Achilles rupture recovery",
+    "Achilles rupture night splint",
+    "Walking boot",
+    "Plantar fasciitis",
+    "Achilles tendinitis",
+    "Foot and ankle rehabilitation"
+  ],
+  "brand": {
+    "@type": "Brand",
+    "name": "Thetis Medical"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "url": "https://thetismedical.com/contact",
+    "availableLanguage": ["English", "German", "French", "Spanish", "Italian"]
+  },
   "sameAs": [
     "https://www.linkedin.com/company/thetis-medical-ltd",
     "https://www.instagram.com/thetismedical",

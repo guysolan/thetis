@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import PageGraphSchema from "@/schemas/PageGraphSchema.astro";
 import ColorGradient from "@/components/ColorGradient.astro";
 import HighlightedWord from "@/components/HighlightedWord";
 import { buttonVariants } from "@/components/ui/button";
@@ -66,6 +67,15 @@ const whatYoullLearn = [
     },
 ];
 ---
+
+<Fragment slot="head">
+    <PageGraphSchema
+        lang="en"
+        title="Recovery Essentials - Complete Recovery Guide | Thetis Medical"
+        description="31 lessons covering every stage of Achilles rupture recovery. Expert guidance, physio exercises, and practical tips. Start your journey with confidence."
+        image="https://thetismedical.com/images/night-splint.png"
+    />
+</Fragment>
 
 <Layout
     title="Recovery Essentials - Complete Recovery Guide | Thetis Medical"

@@ -20,10 +20,16 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const {
     title,
     description,
-    image = `${Astro.site}/images/night_splint_bed_top_square.jpg`,
+    image = "/images/night_splint_bed_top_square.jpg",
     lang = "en",
     alternateLanguages = [],
 } = Astro.props;
+
+const siteOrigin =
+    Astro.site?.href?.replace(/\/$/, "") ?? "https://thetismedical.com";
+const absoluteImageUrl = image.startsWith("http")
+    ? image
+    : `${siteOrigin}${image.startsWith("/") ? image : `/${image}`}`;
 ---
 
 <!-- Global Metadata -->
@@ -90,16 +96,20 @@ const {
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={absoluteImageUrl} />
+<meta property="og:image:alt" content={title} />
 
-<!-- Twitter -->
-<meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
-<meta property="twitter:title" content={title} />
-<meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@ThetisMedical" />
+<meta name="twitter:creator" content="@ThetisMedical" />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={absoluteImageUrl} />
+<meta name="twitter:image:alt" content={title} />
 
 <Analytics />

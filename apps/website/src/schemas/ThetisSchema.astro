@@ -1,29 +1,6 @@
 ---
-import { Schema } from "astro-seo-schema";
-import { THETIS_COMPANY_ADDRESS } from "@/content/companyAddress";
+/** @deprecated Use SiteGraphSchema in Layout and HomePageGraphSchema on the homepage. */
+import SiteGraphSchema from "./SiteGraphSchema.astro";
 ---
 
-<Schema
-  item={{
-    "@context": "https://schema.org",
-    "@type": "Corporation",
-    name: "Thetis Medical Ltd",
-    alternateName: "Thetis Medical",
-    description:
-      "Thetis Medical produce medical splints for Achilles Tendon Rupture.",
-    url: "https://thetismedical.com/",
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: THETIS_COMPANY_ADDRESS.locality,
-      addressCountry: "UK",
-      postalCode: THETIS_COMPANY_ADDRESS.postalCode,
-      streetAddress: THETIS_COMPANY_ADDRESS.streetAddress,
-    },
-    logo: "https://thetismedical.com/images/dotty-logo.svg",
-    sameAs: [
-      "https://www.linkedin.com/company/thetis-medical-ltd",
-      "https://www.instagram.com/thetismedical",
-      "https://www.facebook.com/thetismedical",
-    ],
-  }}
-/>
+<SiteGraphSchema />

@@ -35,6 +35,7 @@ import InstantlyPixel from "./InstantlyPixel.astro";
 import GoogleTagHead from "./GoogleTagHead.astro";
 import GoogleTagBody from "./GoogleTagBody.astro";
 import BaseHead from "./BaseHead.astro";
+import SiteGraphSchema from "@/schemas/SiteGraphSchema.astro";
 import Nav from "./Nav.astro";
 import Footer from "@/features/footer/Footer.astro";
 import { CartSheet } from "../components/cart/CartSheet";
@@ -54,6 +55,7 @@ import WelcomePopup from "../components/WelcomePopup";
       lang={lang}
       alternateLanguages={alternateLanguages}
     />
+    <SiteGraphSchema />
     <slot name="head" />
   </head>
 

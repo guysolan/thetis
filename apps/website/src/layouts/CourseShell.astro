@@ -1,5 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
+import PageGraphSchema from "@/schemas/PageGraphSchema.astro";
 import ColorGradientInOut from "@/components/ColorGradientInOut.astro";
 import HighlightedWord from "@/components/HighlightedWord";
 import { buttonVariants } from "@/components/ui/button";
@@ -37,6 +38,15 @@ export interface Props {
 const { lang = "en", t, lessonPreviews } = Astro.props;
 ---
 
+
+<Fragment slot="head">
+    <PageGraphSchema
+        {lang}
+        title={t.meta.title}
+        description={t.meta.description}
+        image="https://thetismedical.com/images/night-splint.png"
+    />
+</Fragment>
 
 <Layout
     title={t.meta.title}

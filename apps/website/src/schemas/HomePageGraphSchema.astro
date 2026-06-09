@@ -1,0 +1,21 @@
+---
+import type { Lang } from "@/config/languages";
+import { Schema } from "astro-seo-schema";
+import { buildHomePageGraphSchema } from "./thetis-graph";
+
+interface Props {
+  lang: Lang;
+  title: string;
+  description: string;
+}
+
+const { lang, title, description } = Astro.props;
+---
+
+<Schema
+  item={buildHomePageGraphSchema({
+    lang,
+    title,
+    description,
+  })}
+/>

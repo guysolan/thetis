@@ -65,6 +65,55 @@ export function sitemapLanguageFilter(pageUrl: string): boolean {
   }
 }
 
+interface SitemapItem {
+  url: string;
+  changefreq?: string;
+  lastmod?: string;
+  priority?: number;
+  links?: unknown[];
+}
+
+/** Single lastmod for the whole build — regenerated on every deploy. */
+const SITEMAP_LASTMOD = new Date().toISOString();
+
+/**
+ * Adds lastmod, changefreq and priority to each sitemap entry.
+ * Priority is a simple depth heuristic (home > sections > leaf pages);
+ * language prefixes are ignored so localized pages rank like their
+ * English equivalents.
+ */
+export function serializeSitemapItem(item: SitemapItem): SitemapItem {
+  const pathname = new URL(item.url).pathname;
+  const normalizedPath = pathname.replace(/\/$/, "") || "/";
+  let segments = normalizedPath.split("/").filter(Boolean);
+
+  if (segments[0] && LANGUAGE_CODES.includes(segments[0])) {
+    segments = segments.slice(1);
+  }
+
+  let priority = 0.5;
+  let changefreq = "monthly";
+
+  if (segments.length === 0) {
+    priority = 1.0;
+    changefreq = "weekly";
+  } else if (segments[0] === "blog") {
+    priority = segments.length === 1 ? 0.7 : 0.6;
+    changefreq = segments.length === 1 ? "weekly" : "monthly";
+  } else if (segments.length === 1) {
+    priority = 0.8;
+  } else if (segments.length === 2) {
+    priority = 0.6;
+  }
+
+  return {
+    ...item,
+    lastmod: SITEMAP_LASTMOD,
+    changefreq,
+    priority,
+  };
+}
+
 /**
  * Filters out utility/legacy pages that should not appear in the XML sitemap.
  * Astro already discovers static routes for us, so this filter is safer than

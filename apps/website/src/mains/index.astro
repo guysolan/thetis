@@ -1,6 +1,6 @@
 ---
 import Layout from "@/layouts/Layout.astro";
-import ThetisSchema from "@/schemas/ThetisSchema.astro";
+import HomePageGraphSchema from "@/schemas/HomePageGraphSchema.astro";
 import Image from "astro/components/Image.astro";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -767,7 +767,12 @@ const splintUrl =
 const reviewsUrl = getSplintReviewsHref(lang);
 ---
 
-<ThetisSchema slot="head" />
+<HomePageGraphSchema
+    slot="head"
+    lang={lang}
+    title={t.meta.title}
+    description={t.meta.description}
+/>
 
 <Layout
     title={t.meta.title}

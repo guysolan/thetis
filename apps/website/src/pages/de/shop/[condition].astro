@@ -3,6 +3,7 @@ export const prerender = true;
 
 import Layout from "@/layouts/Layout.astro";
 import ShopConditionPage from "@/components/shop/ShopConditionPage.astro";
+import ShopConditionGraphSchema from "@/schemas/ShopConditionGraphSchema.astro";
 import { conditions, type ConditionId } from "@/content/conditions/registry";
 import { getShopLayoutSeo } from "@/content/learn-seo";
 import type { Lang } from "@/config/languages";
@@ -21,6 +22,15 @@ if (!conditions.some((c) => c.id === id)) {
 
 const { title, description } = getShopLayoutSeo(id, lang);
 ---
+
+<Fragment slot="head">
+  <ShopConditionGraphSchema
+    conditionId={id}
+    {lang}
+    {title}
+    {description}
+  />
+</Fragment>
 
 <Layout {title} {description} {lang}>
   <ShopConditionPage conditionId={id} {lang} />

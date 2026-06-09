@@ -1,5 +1,9 @@
 ---
 import { Schema } from "astro-seo-schema";
+import {
+  NIGHT_SPLINT_PRODUCT_ID,
+  THETIS_ORG_ID,
+} from "./thetis-graph";
 import nightSplintPresentationVideo from "./night-splint-presentation-video.json";
 import nightSplintInstructionsVideo from "./night-splint-instructions-video.json";
 ---
@@ -8,6 +12,7 @@ import nightSplintInstructionsVideo from "./night-splint-instructions-video.json
   item={{
     "@context": "https://schema.org",
     "@type": "Product",
+    "@id": NIGHT_SPLINT_PRODUCT_ID,
     name: "Achilles Rupture Splint",
     image: [
       "https://thetismedical.com/images/night-splint/Achilles%20Rupture%20Night%20Splint%20Product%20Render.png",
@@ -26,6 +31,8 @@ import nightSplintInstructionsVideo from "./night-splint-instructions-video.json
       "@type": "Brand",
       name: "Thetis Medical",
     },
+    manufacturer: { "@id": THETIS_ORG_ID },
+    url: "https://thetismedical.com/achilles-rupture-splint",
     aggregateRating: {
       "@type": "AggregateRating",
       reviewCount: "303",

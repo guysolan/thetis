@@ -1,0 +1,98 @@
+# Thetis Medical
+
+> Thetis Medical makes the patented Achilles Rupture Night Splint and publishes evidence-based Achilles tendon rupture recovery guides, courses, and FAQs — trusted by 5,000+ patients and recommended by foot and ankle surgeons.
+
+Thetis Medical Ltd is a UK family medical device company focused on Achilles tendon rupture and related foot and ankle conditions. Founded by foot and ankle surgeon Matt Solan and designer Guy Solan, we help patients sleep safely without the heavy walking boot, and guide week-by-week recovery from injury to return to sport. Content is written by medical professionals, reviewed by surgeons, and grounded in 100+ research papers. Zero re-ruptures have been reported in 5,000+ patients using our night splint.
+
+Languages: English (default at /), German (/de), French (/fr), Spanish (/es), Italian (/it). Most pages have equivalent translated URLs.
+
+Structured data: https://thetismedical.com/schemas/thetis.json and https://thetismedical.com/schemas/night-splint.json
+
+## Products
+
+- [Achilles Rupture Night Splint](https://thetismedical.com/achilles-rupture-splint): Patented night splint that replaces the walking boot at bedtime while keeping the tendon protected in plantarflexion. Free worldwide shipping, 30-day money-back guarantee, 4.6/5 rating from 75+ reviews.
+- [Sleeping with Achilles Rupture](https://thetismedical.com/sleeping-with-torn-achilles): How to sleep safely during recovery — why the boot fails at night and when to use a night splint instead.
+- [Washing and Hygiene with Achilles Rupture](https://thetismedical.com/washing-with-torn-achilles): Showering and hygiene tips during boot recovery, including splint use in the bathroom.
+- [Swimming with Achilles Rupture](https://thetismedical.com/swimming-with-torn-achilles): Safe aquatic exercise and water therapy during recovery.
+- [Achilles Rupture Shop](https://thetismedical.com/shop/achilles-rupture): Night splint plus curated recovery gear — VACOped, Aircast boots, EVENup, wedges, and comfort picks from our guides.
+
+## Recovery Courses
+
+- [Essentials Recovery Course](https://thetismedical.com/course): 31 structured lessons covering every stage of Achilles rupture recovery, from emergency care to return to sport. Expert guidance for £29.
+- [Pro Course](https://thetismedical.com/course/professionals): Premium course with expert video lessons and personalised guidance from specialist surgeons. £99.
+- [Plantar Fasciitis Course](https://thetismedical.com/course/plantar-fasciitis): Staged recovery course for plantar heel pain — stretching, footwear, and when to escalate treatment.
+
+## Week-by-Week Recovery Guides
+
+- [Achilles Rupture Learn Hub](https://thetismedical.com/learn/achilles-rupture): Central hub for timeline, FAQs, course, boot and splint guidance, and shop links.
+- [Week 0–1: First Week After Rupture](https://thetismedical.com/guide/weeks-0-1): Emergency care, A&E expectations, blood clot prevention, and essential first-week survival tips.
+- [Weeks 1–3: Treatment Decision](https://thetismedical.com/guide/weeks-1-3): Surgery vs conservative treatment, choosing your walking boot, and setting up for recovery.
+- [Weeks 4–6: Progressive Recovery](https://thetismedical.com/guide/weeks-4-6): Weight-bearing progression, early exercises, and managing daily life in the boot.
+- [Weeks 7–9: Final Boot Phase](https://thetismedical.com/guide/weeks-7-9): Preparing to transition out of the boot and building confidence.
+- [Weeks 10–12: Boot Transition](https://thetismedical.com/guide/weeks-10-12): Moving from boot to shoes, building strength, and returning to normal walking.
+- [Weeks 13–25: Progressive Strengthening](https://thetismedical.com/guide/weeks-13-25): Building strength and endurance, returning to activities, preventing re-injury.
+- [Week 26+: Return to Sport](https://thetismedical.com/guide/week-26-plus): Full recovery assessment, return to running and sport, and long-term outlook.
+
+## Patient FAQs
+
+- [Is My Achilles Ruptured?](https://thetismedical.com/FAQs/is-my-achilles-ruptured): How to tell if you have ruptured your Achilles tendon — causes, symptoms, and injury severity.
+- [What Happens If My Achilles Is Ruptured?](https://thetismedical.com/FAQs/what-happens-if-my-achilles-is-ruptured): What to expect in A&E, specialist appointments, physio timing, and blood thinners.
+- [Torn Achilles Treatment Pathway](https://thetismedical.com/FAQs/achilles-tear-treatment): Surgery vs non-surgical treatment, pain management, and the path to recovery.
+- [Achilles Rupture Timeline](https://thetismedical.com/FAQs/achilles-rupture-timeline): Complete treatment and recovery timeline from injury to unrestricted activity.
+- [Torn Achilles Recovery](https://thetismedical.com/FAQs/torn-achilles-recovery): Boot vs cast, best walking boot, how to sleep, and how long healing takes.
+- [Life After Achilles Rupture](https://thetismedical.com/FAQs/life-after-achilles-rupture): When to walk, work, and return to sport after rupture.
+
+## Clinical Blog Articles
+
+- [First 24 Hours After Achilles Rupture](https://thetismedical.com/blog/first-24-hours-after-achilles-rupture-protection-not-progress): Protection not progress — what to do immediately after rupture.
+- [Aircast vs VACOped](https://thetismedical.com/blog/aircast-vs-vacoped): Which walking boot for Achilles rupture — comparison of the two most common boots.
+- [Achilles Surgery vs Non-Surgical Outcomes](https://thetismedical.com/blog/achilles-surgery-vs-non-surgical-outcomes): What the evidence shows on operative vs conservative treatment.
+- [Blood Clot Risk After Achilles Rupture](https://thetismedical.com/blog/achilles-rupture-blood-clot-risk): DVT and PE risk, warning signs, and blood thinner guidance.
+- [Walking Boot Removal Timing](https://thetismedical.com/blog/achilles-walking-boot-removal-timing): Strength criteria matter more than the calendar date for leaving the boot.
+- [Post-Boot Transition](https://thetismedical.com/blog/post-boot-achilles-transition-hidden-risk-phase): How to wean safely — the hidden risk phase after boot removal.
+- [Re-Rupture vs Tendon Elongation](https://thetismedical.com/blog/achilles-re-rupture-vs-tendon-elongation): Two different complications and how to avoid both.
+- [Single-Leg Heel Raise Progression](https://thetismedical.com/blog/achilles-single-leg-heel-raises-progression): The gold-standard strength test — 25+ reps for return-to-sport clearance.
+- [When Can I Drive After Achilles Rupture?](https://thetismedical.com/blog/driving-after-achilles-rupture): Driving guidelines for left vs right leg injuries.
+- [Returning to Work After Achilles Rupture](https://thetismedical.com/blog/returning-to-work-after-achilles-rupture): Desk vs physical work timelines and practical advice.
+- [Foot Position After Achilles Rupture](https://thetismedical.com/blog/foot-position-achilles-rupture-recovery): Why toes-down (plantarflexion) protects the healing tendon.
+- [Boot Wedge Removal Protocol](https://thetismedical.com/blog/achilles-boot-wedge-removal-protocol): Why wedge progression must be gradual — never accelerate.
+- [Achilles Boot Comparison Tool](https://thetismedical.com/blog/achilles-boot-comparison-tool): Interactive walking boot finder for rupture recovery.
+
+## Evidence and Clinical Authority
+
+- [Evidence-Based Recovery](https://thetismedical.com/evidence-based-recovery): Scientific approach to Achilles tendon recovery grounded in published research.
+- [Our Research](https://thetismedical.com/research): Thetis analysis of Achilles rupture recovery evidence and outcomes.
+- [Clinical Evidence](https://thetismedical.com/evidence): Royal Surrey QIP and evidence that our products shorten time to care and improve patient experience.
+- [For Healthcare Professionals](https://thetismedical.com/professionals): Resources for clinicians managing Achilles rupture patients — wholesale ordering and clinical support.
+- [Recovery Pathway Overview](https://thetismedical.com/recovery-pathway): Guided path from injury to full recovery.
+
+## Other Conditions
+
+- [Plantar Fasciitis Learn Hub](https://thetismedical.com/learn/plantar-fasciitis): Staged guides, FAQs, course, and fascia-friendly shop picks for heel pain.
+- [Achilles Tendinitis Learn Hub](https://thetismedical.com/learn/achilles-tendinitis): Mid-Achilles tendinopathy FAQs, loading guides, and progressive rehab resources.
+- [Insertional Achilles Tendonitis Learn Hub](https://thetismedical.com/learn/insertional-achilles-tendonitis): Insertional heel pain guides, offload-and-load protocols, and equipment.
+
+## Related Properties
+
+- [Achilles Rupture.com](https://achilles-rupture.com): Sister site with in-depth Achilles rupture articles and patient resources.
+- [Thetis Course Platform](https://course.thetismedical.com): Hosted recovery courses with structured lesson delivery.
+- [Patient Recovery Guide (external)](https://guide.thetismedical.com/standard): Week-by-week patient guide hosted on guide.thetismedical.com.
+
+## Optional
+
+- [Home](https://thetismedical.com/): Company overview, product highlights, and patient social proof.
+- [Customer Reviews](https://thetismedical.com/reviews): Real patient reviews of the night splint and recovery experience.
+- [Contact](https://thetismedical.com/contact): Customer support and clinical enquiries.
+- [Trauma Splint](https://thetismedical.com/trauma-splint): Emergency splint for acute Achilles injuries.
+- [Night Splint Instructions Video](https://thetismedical.com/video/night-splint-instructions): How to fit and use the night splint correctly.
+- [Affiliate Program](https://thetismedical.com/affiliates): Clinician referral programme with patient discounts.
+- [Order Wholesale](https://thetismedical.com/order-wholesale): Clinic and hospital bulk ordering.
+- [Returns Policy](https://thetismedical.com/return-policy): 30-day money-back guarantee terms.
+- [Sitemap](https://thetismedical.com/sitemap): Full site navigation and page listing.
+- [Sitemap XML](https://thetismedical.com/sitemap-index.xml): Machine-readable sitemap for crawlers.
+- [Blog Index](https://thetismedical.com/blog): All clinical articles on Achilles rupture recovery.
+- [Plantar Fasciitis Shop](https://thetismedical.com/shop/plantar-fasciitis): Night splints, slant boards, footwear, and recovery tools for PF.
+- [Achilles Tendinitis Shop](https://thetismedical.com/shop/achilles-tendinitis): Resistance bands, heel lifts, and eccentric-loading tools.
+- [Insertional Tendonitis Shop](https://thetismedical.com/shop/insertional-achilles-tendonitis): Heel lifts, offload footwear, and insertional pain equipment.
+- [Partners](https://thetismedical.com/partners): Clinical and commercial partners.
+- [Leave a Review](https://thetismedical.com/leave-review): Share your recovery experience and earn cashback.

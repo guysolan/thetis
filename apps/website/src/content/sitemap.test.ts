@@ -100,10 +100,10 @@ describe("Sitemap accuracy", () => {
 
   it("localized sitemap counts stay aligned with the localized page tree", () => {
     expect(getLocalizedSitemapCounts()).toEqual({
-      de: 36,
-      fr: 35,
-      es: 35,
-      it: 35,
+      de: 46,
+      fr: 45,
+      es: 45,
+      it: 45,
     });
   });
 });

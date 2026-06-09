@@ -2,6 +2,8 @@
 import Layout from "@/layouts/Layout.astro";
 import Slide from "@/components/Slide.astro";
 import NightSplintSchema from "@/schemas/NightSplintSchema.astro";
+import PageGraphSchema from "@/schemas/PageGraphSchema.astro";
+import { NIGHT_SPLINT_PRODUCT_ID } from "@/schemas/thetis-graph";
 import SizeChart from "@/components/SizeChart.jsx";
 import NightSplintFAQs from "@/sections/achilles-rupture-splint/SplintFAQs.tsx";
 import NightSplintUsage from "@/sections/achilles-rupture-splint/NightSplintUsage.astro";
@@ -556,6 +558,13 @@ const currentContent = content[lang as keyof typeof content] || content.en;
 ---
 
 <Fragment slot="head">
+    <PageGraphSchema
+        lang={lang}
+        title={currentContent.title}
+        description={currentContent.description}
+        image={currentContent.image}
+        mainEntityId={NIGHT_SPLINT_PRODUCT_ID}
+    />
     <NightSplintSchema />
     <slot name="head" />
 </Fragment>

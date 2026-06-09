@@ -1,0 +1,30 @@
+---
+import type { ConditionId } from "@/content/conditions/registry";
+import type { Lang } from "@/config/languages";
+import { getLocalizedShopHubHref } from "@/lib/condition-nav";
+import { Schema } from "astro-seo-schema";
+import {
+  buildShopConditionPageGraphSchema,
+  toAbsoluteThetisUrl,
+} from "./thetis-graph";
+
+interface Props {
+  lang: Lang;
+  conditionId: ConditionId;
+  title: string;
+  description: string;
+}
+
+const { lang, conditionId, title, description } = Astro.props;
+const pageUrl = toAbsoluteThetisUrl(getLocalizedShopHubHref(lang, conditionId));
+---
+
+<Schema
+  item={buildShopConditionPageGraphSchema({
+    lang,
+    conditionId,
+    title,
+    description,
+    pageUrl,
+  })}
+/>

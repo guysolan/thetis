@@ -8,7 +8,10 @@ import tailwind from "@astrojs/tailwind";
 // Performance
 import partytown from "@astrojs/partytown";
 // Content
-import { sitemapPageFilter } from "./src/content/sitemap-utils";
+import {
+  serializeSitemapItem,
+  sitemapPageFilter,
+} from "./src/content/sitemap-utils";
 // Services
 import sitemap from "@astrojs/sitemap";
 
@@ -21,6 +24,7 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: sitemapPageFilter,
+      serialize: serializeSitemapItem,
     }),
     partytown(),
     react(),

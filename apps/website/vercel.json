@@ -6,6 +6,11 @@
   "redirects": [
     { "source": "/index.html", "destination": "/", "permanent": true },
     {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap-index.xml",
+      "permanent": true
+    },
+    {
       "source": "/achilles-ruptures/FAQs/:path*",
       "destination": "/FAQs/:path*",
       "permanent": true

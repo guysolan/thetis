@@ -32,6 +32,7 @@ const copy: Record<
     ctaAddToCart: string;
     ctaLearnMore: string;
     ctaShop: string;
+    splintImageAlt: string;
   }
 > = {
   en: {
@@ -46,6 +47,7 @@ const copy: Record<
     ctaAddToCart: "Order night splint",
     ctaLearnMore: "Full product details",
     ctaShop: "Shop all picks",
+    splintImageAlt: "Thetis night splint for Achilles recovery",
   },
   de: {
     kicker: "Thetis-Produkt",
@@ -59,6 +61,7 @@ const copy: Record<
     ctaAddToCart: "Nachtschiene bestellen",
     ctaLearnMore: "Alle Produktdetails",
     ctaShop: "Alle Artikel",
+    splintImageAlt: "Thetis Nachtschiene für die Achilles-Genesung",
   },
   fr: {
     kicker: "Produit Thetis",
@@ -72,6 +75,7 @@ const copy: Record<
     ctaAddToCart: "Commander l'attelle de nuit",
     ctaLearnMore: "Détails du produit",
     ctaShop: "Toute la boutique",
+    splintImageAlt: "Attelle de nuit Thetis pour la récupération d’Achille",
   },
   es: {
     kicker: "Producto Thetis",
@@ -85,6 +89,7 @@ const copy: Record<
     ctaAddToCart: "Pedir la férula nocturna",
     ctaLearnMore: "Detalles del producto",
     ctaShop: "Ver tienda",
+    splintImageAlt: "Férula nocturna Thetis para la recuperación de Aquiles",
   },
   it: {
     kicker: "Prodotto Thetis",
@@ -98,6 +103,7 @@ const copy: Record<
     ctaAddToCart: "Ordina il tutore notturno",
     ctaLearnMore: "Dettagli sul prodotto",
     ctaShop: "Vai allo shop",
+    splintImageAlt: "Tutore notturno Thetis per il recupero di Achille",
   },
 };
 
@@ -118,7 +124,7 @@ const t = copy[lang];
           >
             <img
               src="/images/night_splint_bed_top_square.jpg"
-              alt=""
+              alt={t.splintImageAlt}
               width={600}
               height={600}
               class="w-full object-cover aspect-square"
@@ -129,7 +135,7 @@ const t = copy[lang];
           <div class="border border-primary/25 rounded-2xl w-full max-w-[280px] overflow-hidden shrink-0">
             <img
               src="/images/night_splint_bed_top_square.jpg"
-              alt=""
+              alt={t.splintImageAlt}
               width={600}
               height={600}
               class="w-full object-cover aspect-square"

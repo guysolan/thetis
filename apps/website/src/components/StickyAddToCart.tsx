@@ -121,7 +121,7 @@ const StickyAddToCart: React.FC<StickyAddToCartProps> = ({
               <>
                 <img
                   src="/images/night_splint_square_small.jpg"
-                  alt=""
+                  alt={productTitle || t.splintTitle}
                   className="rounded-lg w-10 h-10 object-cover shrink-0"
                 />
                 <div className="min-w-0">

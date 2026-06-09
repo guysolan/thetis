@@ -1,5 +1,6 @@
 ---
 import Layout from "./Layout.astro";
+import PageGraphSchema from "@/schemas/PageGraphSchema.astro";
 import type { Lang } from "@/config/languages";
 import { getAlternateRoutesForSlug } from "@/content/routes";
 import { Image } from "astro:assets";
@@ -63,6 +64,15 @@ const nextPhase =
         ? guidePhases[currentIndex + 1]
         : null;
 ---
+
+<Fragment slot="head">
+    <PageGraphSchema
+        {lang}
+        title={titleWithYear}
+        {description}
+        image="https://thetismedical.com/images/achilles-drawing-image.png"
+    />
+</Fragment>
 
 <Layout
     title={titleWithYear}
