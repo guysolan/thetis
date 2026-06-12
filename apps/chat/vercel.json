@@ -1,0 +1,19 @@
+{
+  "framework": "vite",
+  "buildCommand": "pnpm --filter @thetis/chat build",
+  "outputDirectory": "apps/chat/dist",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "master": true,
+      "dev": false,
+      "preview": false
+    }
+  },
+  "env": {
+    "NODE_ENV": "production",
+    "NODE_OPTIONS": "--max-old-space-size=4096"
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}
