@@ -10,11 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as CarouselIdeasRouteImport } from './routes/carousel-ideas'
+import { Route as CarouselContentRouteImport } from './routes/carousel-content'
 import { Route as IndexRouteImport } from './routes/index'
 
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarouselIdeasRoute = CarouselIdeasRouteImport.update({
+  id: '/carousel-ideas',
+  path: '/carousel-ideas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CarouselContentRoute = CarouselContentRouteImport.update({
+  id: '/carousel-content',
+  path: '/carousel-content',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -25,27 +37,35 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/carousel-content': typeof CarouselContentRoute
+  '/carousel-ideas': typeof CarouselIdeasRoute
   '/login': typeof LoginRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/carousel-content': typeof CarouselContentRoute
+  '/carousel-ideas': typeof CarouselIdeasRoute
   '/login': typeof LoginRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/carousel-content': typeof CarouselContentRoute
+  '/carousel-ideas': typeof CarouselIdeasRoute
   '/login': typeof LoginRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login'
+  fullPaths: '/' | '/carousel-content' | '/carousel-ideas' | '/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login'
-  id: '__root__' | '/' | '/login'
+  to: '/' | '/carousel-content' | '/carousel-ideas' | '/login'
+  id: '__root__' | '/' | '/carousel-content' | '/carousel-ideas' | '/login'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CarouselContentRoute: typeof CarouselContentRoute
+  CarouselIdeasRoute: typeof CarouselIdeasRoute
   LoginRoute: typeof LoginRoute
 }
 
@@ -56,6 +76,20 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carousel-ideas': {
+      id: '/carousel-ideas'
+      path: '/carousel-ideas'
+      fullPath: '/carousel-ideas'
+      preLoaderRoute: typeof CarouselIdeasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/carousel-content': {
+      id: '/carousel-content'
+      path: '/carousel-content'
+      fullPath: '/carousel-content'
+      preLoaderRoute: typeof CarouselContentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -70,6 +104,8 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CarouselContentRoute: CarouselContentRoute,
+  CarouselIdeasRoute: CarouselIdeasRoute,
   LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport

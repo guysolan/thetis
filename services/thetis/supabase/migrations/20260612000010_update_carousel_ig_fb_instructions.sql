@@ -1,19 +1,7 @@
--- Saved settings: Instagram / Facebook ATR recovery carousel posts (~5 slides).
-INSERT INTO public.assistant_instruction_sets(
-  name,
-  platforms,
-  post_type,
-  mode,
-  instructions,
-  is_default
-)
-VALUES
-  (
-    'ATR Recovery Carousel — IG/FB',
-    ARRAY['instagram', 'facebook']::text[],
-    'patient_education',
-    'both',
-    $instructions$System Instructions: ATR Recovery Carousel (Instagram / Facebook)
+-- Sharpen ATR Recovery Carousel instructions: hook → one clear answer (1–3 points).
+UPDATE public.assistant_instruction_sets
+SET
+  instructions = $instructions$System Instructions: ATR Recovery Carousel (Instagram / Facebook)
 
 Audience: Patients recovering from Achilles tendon rupture (ATR). Instagram and Facebook only.
 
@@ -111,13 +99,5 @@ One sentence: the hook and the 1–3 point answer delivered.
 7. Reference Style
 
 ATR Recovery Series look: neutral whites and greys, soft teal accents, professional lifestyle photography, left-aligned text, Thetis Medical branding at bottom of slides. Bold sans-serif headlines; clean body text.$instructions$,
-    FALSE
-  )
-ON CONFLICT (name)
-  DO UPDATE SET
-    platforms = EXCLUDED.platforms,
-    post_type = EXCLUDED.post_type,
-    mode = EXCLUDED.mode,
-    instructions = EXCLUDED.instructions,
-    is_default = EXCLUDED.is_default,
-    updated_at = now();
+  updated_at = now()
+WHERE name = 'ATR Recovery Carousel — IG/FB';

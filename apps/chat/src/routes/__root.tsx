@@ -3,6 +3,7 @@ import {
   Link,
   Outlet,
   useNavigate,
+  useRouterState,
 } from "@tanstack/react-router";
 import { Toaster } from "@thetis/ui/sonner";
 import type { QueryClient } from "@tanstack/react-query";
@@ -11,6 +12,13 @@ import { LogOut } from "lucide-react";
 import { useEffect } from "react";
 import { useAuth } from "@/features/auth/useAuth";
 import { supabase } from "@/lib/supabase";
+import { cn } from "@/lib/utils";
+
+const NAV_LINKS = [
+  { to: "/carousel-ideas" as const, label: "Carousel ideas" },
+  { to: "/carousel-content" as const, label: "Carousel content" },
+  { to: "/" as const, label: "Social" },
+];
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
@@ -29,6 +37,7 @@ export const Route = createRootRouteWithContext<{
 function RootComponent() {
   const { data: user, isLoading } = useAuth();
   const navigate = useNavigate();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
     if (!isLoading && !user && window.location.pathname !== "/login") {
@@ -37,13 +46,27 @@ function RootComponent() {
   }, [isLoading, user, navigate]);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col h-svh overflow-hidden">
       {user && (
-        <header className="bg-background/80 backdrop-blur border-border border-b">
-          <nav className="flex items-center gap-1 mx-auto px-4 py-2 max-w-5xl">
-            <span className="mr-4 font-semibold text-foreground text-sm">
-              Thetis Assistants
+        <header className="z-10 bg-background/80 backdrop-blur border-border border-b shrink-0">
+          <nav className="flex items-center gap-1 mx-auto px-4 py-2 max-w-3xl">
+            <span className="mr-2 font-semibold text-foreground text-sm shrink-0">
+              Thetis
             </span>
+            {NAV_LINKS.map(({ to, label }) => (
+              <Link
+                key={to}
+                to={to}
+                className={cn(
+                  "px-2.5 py-1 rounded-md text-sm transition-colors",
+                  pathname === to
+                    ? "bg-muted font-medium text-foreground"
+                    : "text-muted-foreground hover:text-foreground",
+                )}
+              >
+                {label}
+              </Link>
+            ))}
             <div className="flex-1" />
             <Button
               variant="ghost"
@@ -59,7 +82,7 @@ function RootComponent() {
           </nav>
         </header>
       )}
-      <main className="flex-1 mx-auto px-4 py-6 w-full max-w-5xl">
+      <main className="flex flex-col flex-1 mx-auto px-4 py-3 w-full max-w-3xl min-h-0 overflow-hidden">
         <Outlet />
       </main>
       <Toaster position="top-right" />

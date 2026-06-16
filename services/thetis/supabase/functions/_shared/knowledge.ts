@@ -96,11 +96,17 @@ export interface ChatImage {
   data: string;
 }
 
+export interface ChatTurn {
+  role: "user" | "assistant";
+  content: string;
+}
+
 export async function callOpenAI(
   system: string,
   user: string,
   maxTokens = 4096,
   images: ChatImage[] = [],
+  history: ChatTurn[] = [],
 ): Promise<string> {
   const userContent: Array<
     { type: "text"; text: string } | {
@@ -116,6 +122,18 @@ export async function callOpenAI(
   }));
   userContent.push({ type: "text", text: user });
 
+  const messages: Array<{ role: string; content: unknown }> = [
+    { role: "system", content: system },
+  ];
+
+  for (const turn of history.slice(-24)) {
+    if (turn.content.trim()) {
+      messages.push({ role: turn.role, content: turn.content });
+    }
+  }
+
+  messages.push({ role: "user", content: userContent });
+
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
     headers: {
@@ -126,10 +144,7 @@ export async function callOpenAI(
       model: Deno.env.get("OPENAI_CHAT_MODEL") ?? "gpt-4o",
       max_tokens: maxTokens,
       response_format: { type: "json_object" },
-      messages: [
-        { role: "system", content: system },
-        { role: "user", content: userContent },
-      ],
+      messages,
     }),
   });
   if (!res.ok) {
@@ -166,4 +181,36 @@ export function jsonResponse(body: unknown, status = 200): Response {
 
 export function errorResponse(message: string, status = 400): Response {
   return jsonResponse({ error: message }, status);
+}
+
+export type ProgressSender = (event: Record<string, unknown>) => void;
+
+export function ndjsonStream(
+  handler: (send: ProgressSender) => Promise<void>,
+): Response {
+  const encoder = new TextEncoder();
+  const stream = new ReadableStream({
+    async start(controller) {
+      const send: ProgressSender = (event) => {
+        controller.enqueue(encoder.encode(`${JSON.stringify(event)}\n`));
+      };
+      try {
+        await handler(send);
+      } catch (err) {
+        console.error("ndjson stream error:", err);
+        send({
+          type: "error",
+          message: err instanceof Error ? err.message : "Internal error",
+        });
+      } finally {
+        controller.close();
+      }
+    },
+  });
+  return new Response(stream, {
+    headers: {
+      ...corsHeaders,
+      "Content-Type": "application/x-ndjson",
+    },
+  });
 }

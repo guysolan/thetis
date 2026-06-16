@@ -15,6 +15,6 @@
   }
 
   body {
-    @apply bg-gradient-to-br from-background to-muted/30 text-foreground;
+    @apply bg-background text-foreground;
   }
 }

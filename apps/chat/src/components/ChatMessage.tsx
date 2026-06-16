@@ -9,7 +9,7 @@ interface UserMessageProps {
 export function UserMessage({ text, images = [] }: UserMessageProps) {
   return (
     <div className="flex justify-end">
-      <div className="bg-muted px-4 py-3 rounded-2xl rounded-tr-sm max-w-[85%]">
+      <div className="bg-muted/80 px-4 py-3 rounded-[1.25rem] rounded-tr-md max-w-[85%]">
         {images.length > 0 && (
           <div className="flex flex-wrap gap-2 mb-2">
             {images.map((img) => (
@@ -22,7 +22,7 @@ export function UserMessage({ text, images = [] }: UserMessageProps) {
             ))}
           </div>
         )}
-        <p className="whitespace-pre-wrap text-sm">{text}</p>
+        <p className="text-sm leading-relaxed whitespace-pre-wrap">{text}</p>
       </div>
     </div>
   );
@@ -36,13 +36,8 @@ export function AssistantMessage({
   className?: string;
 }) {
   return (
-    <div className="flex justify-start">
-      <div
-        className={cn(
-          "bg-background px-4 py-3 border border-border rounded-2xl rounded-tl-sm max-w-[95%] w-full",
-          className,
-        )}
-      >
+    <div className="flex justify-start w-full">
+      <div className={cn("py-1 w-full max-w-full text-foreground", className)}>
         {children}
       </div>
     </div>

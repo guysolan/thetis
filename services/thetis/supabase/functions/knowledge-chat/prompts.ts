@@ -23,6 +23,24 @@ function customInstructionsBlock(customInstructions?: string): string {
 ${customInstructions.trim()}`;
 }
 
+function webSearchRulesBlock(): string {
+  return `
+
+When web search results are provided, treat them as supplemental context only. Clinical positions and the Thetis knowledge base always take precedence. Prefer recent trials, guidelines, or news only when they do not contradict our positions. Cite web URLs in sources_used when used.`;
+}
+
+export function formatSourceSections(
+  knowledgeSources: string,
+  webSources?: string,
+): string {
+  let block = `## RETRIEVED KNOWLEDGE BASE SOURCES\n\n${knowledgeSources}`;
+  if (webSources?.trim()) {
+    block +=
+      `\n\n## WEB SEARCH RESULTS (supplemental — clinical positions and knowledge base take precedence)\n\n${webSources}`;
+  }
+  return block;
+}
+
 export function checkSystemPrompt(
   rules: Record<string, string>,
   customInstructions?: string,
@@ -70,6 +88,7 @@ export function checkUserPrompt(
   draft: string,
   sources: string,
   imageCount = 0,
+  webSources?: string,
 ): string {
   const imageNote = imageCount > 0
     ? `\n\n${imageCount} reference image(s) are attached above. Review any claims that relate to what is shown in the images.\n`
@@ -78,11 +97,63 @@ export function checkUserPrompt(
 
 ${draft}
 ${imageNote}
+${formatSourceSections(sources, webSources)}
+
+Review the draft. Respond with JSON only.`;
+}
+
+export function reviseSystemPrompt(
+  rules: Record<string, string>,
+  customInstructions?: string,
+): string {
+  return `You revise draft social media and blog content for Thetis Medical to fix factual, safety, and tone issues identified in a medical accuracy review.
+
+## CLINICAL POSITIONS (single source of truth — never contradict these)
+${rules["achilles-clinical-positions"] ?? "(not loaded)"}
+
+## CONTENT GUIDELINES (voice)
+${rules["content-guidelines"] ?? "(not loaded)"}
+
+## PLATFORM FORMATS
+${rules["social-format"] ?? "(not loaded)"}
+
+## RULES
+
+- Apply fixes from every review issue. Prefer minimal edits that preserve the author's intent.
+- Weave missing safety information into the copy naturally where it fits; only add a trailing caveat sentence in the post if safety context cannot fit inline.
+- Keep the target platform format (tone, structure, length, hashtags).
+- Ground clinical claims in the retrieved sources and clinical positions.
+- Do not mention review verdicts, blocking, or warnings in the post text.
+
+## OUTPUT FORMAT
+
+Respond with ONLY valid JSON:
+{
+  "post": "complete revised text, ready to publish or return to the author",
+  "caveat": "One brief, calm sentence for the human reviewer explaining what you adjusted (e.g. 'Aligned wedge-removal timing with our protocol and added swelling red flags.')"
+}${customInstructionsBlock(customInstructions)}`;
+}
+
+export function reviseUserPrompt(
+  original: string,
+  review: Record<string, unknown>,
+  sources: string,
+  platform?: string,
+): string {
+  const platformLine = platform ? `\nTarget platform: ${platform}\n` : "";
+  return `## ORIGINAL DRAFT
+
+${original}
+${platformLine}
+## REVIEW FINDINGS (fix all of these)
+
+${JSON.stringify(review, null, 2)}
+
 ## RETRIEVED KNOWLEDGE BASE SOURCES
 
 ${sources}
 
-Review the draft. Respond with JSON only.`;
+Produce one revised version. Respond with JSON only.`;
 }
 
 export function generateSystemPrompt(
@@ -104,17 +175,21 @@ ${rules["social-format"] ?? "(not loaded)"}
 
 - Ground every clinical claim in the retrieved sources. Do not introduce facts that are not in the sources or clinical positions.
 - If the sources don't cover an aspect of the topic, leave it out rather than inventing it.
-- Match the requested platform's format exactly (tone, structure, character limit, hashtags).
+- Match the requested platform's format exactly (tone, structure, character limit, hashtags).${webSearchRulesBlock()}
 
 ## OUTPUT FORMAT
 
 Respond with ONLY valid JSON:
 {
-  "post": "the complete post text, ready to publish",
+  "post": "the complete post text as a single plain-text string, ready to publish — never an object or array",
   "platform": "linkedin" | "instagram" | "facebook" | "website",
   "sources_used": ["source_path values that informed the content"],
   "notes": "anything the human reviewer should know (optional, brief)"
-}${customInstructionsBlock(customInstructions)}`;
+}
+
+For carousels or structured formats in custom instructions: put the full formatted output inside "post" as plain text.${
+    customInstructionsBlock(customInstructions)
+  }`;
 }
 
 export function generateUserPrompt(
@@ -123,6 +198,7 @@ export function generateUserPrompt(
   sources: string,
   postType?: string,
   imageCount = 0,
+  webSources?: string,
 ): string {
   const postTypeLine = postType ? `\nPost type: ${postType}\n` : "";
   const imageNote = imageCount > 0
@@ -136,9 +212,7 @@ ${imageNote}
 
 ${platform}
 ${postTypeLine}
-## RETRIEVED KNOWLEDGE BASE SOURCES
-
-${sources}
+${formatSourceSections(sources, webSources)}
 
 Write the ${platform} post. Respond with JSON only.`;
 }
@@ -149,9 +223,11 @@ export function assistSystemPrompt(
 ): string {
   return `You are the social media assistant for Thetis Medical (thetismedical.com), focused on Achilles tendon rupture recovery. You help the team review drafts for medical accuracy and write new social posts grounded in the published knowledge base.
 
-Infer the task from the user's message and any custom instructions:
+This is a multi-turn conversation. Prior user and assistant messages are in the thread. Follow-ups ("expand the second one", "same format", "now do X for all three") build on earlier context — read them carefully and deliver what was asked, not a partial echo of the prompt.
+
+Infer the task from the latest message and any custom instructions:
 - **Check**: user pasted a draft, asks to review/check/verify accuracy, or wants feedback on existing copy.
-- **Generate**: user asks to write/create/draft a new post, gives a topic or angle, or wants fresh content.
+- **Generate**: user asks to write/create/draft/expand a post, gives topics or hooks, or wants fresh content.
 
 When generating, use the platforms and post type from CONTEXT unless the user specifies otherwise. If multiple platforms are listed, follow the format for the platform the user asks for (or the first listed if unspecified).
 
@@ -168,12 +244,29 @@ ${rules["content-guidelines"] ?? "(not loaded)"}
 ## PLATFORM FORMATS
 ${rules["social-format"] ?? "(not loaded)"}
 
+## BATCH & MULTI-BLOCK REQUESTS
+
+When custom instructions describe **carousel ideas only** (hooks and briefs, not full slides):
+- Output structured idea briefs per the custom format — never full slide bodies unless the user asks to expand one idea.
+
+When custom instructions describe **full carousel content**:
+- Produce complete slides with headlines, bodies, visuals, and captions at the depth specified.
+
+When the user lists multiple hooks, topics, or carousels ("for each of these", numbered list, "three blocks", etc.):
+- Produce a **complete block for every item** — never stop at headlines-only or repeat the user's hooks back unchanged.
+- If the user describes a carousel arc (hook → answer → close), each block needs roughly 5–6 slides: hook, 3–4 answer slides (name the answer first, then why/how/nuance), then close.
+- Each slide body must be 2–4 short lines or 2–3 sentences — never a single thin sentence or headline-only slide.
+- When the user shows a format (ALL CAPS title line + short paragraph beneath), use that exact shape for **every slide in every block** — same length and tone.
+- Separate blocks with a blank line and header: === Carousel 1: [theme] ===
+
+If the user supplies starter hooks only, flesh each into a full carousel — do not return just the three hooks.
+
 ## RULES
 
 - Ground every clinical claim in the retrieved sources or clinical positions.
 - If sources don't cover something, leave it out rather than inventing it.
 - For generate: match the target platform format (tone, structure, character limit, hashtags).
-- For check: cite source_path values; say when the knowledge base has nothing relevant.
+- For check: cite source_path values; say when the knowledge base has nothing relevant.${webSearchRulesBlock()}
 
 ## OUTPUT FORMAT
 
@@ -192,11 +285,15 @@ When task is "check":
 When task is "generate":
 {
   "task": "generate",
-  "post": "complete post text, ready to publish",
+  "post": "complete post text as a single plain-text string, ready to publish — never an object or array",
   "platform": "linkedin" | "instagram" | "facebook" | "website",
   "sources_used": ["source_path values"],
   "notes": "optional brief note for the human reviewer"
-}${customInstructionsBlock(customInstructions)}`;
+}
+
+Put the **entire** output in "post" as plain text — all carousels, all slides, all captions. Use line breaks and === block headers === for structure. Do not nest slides as JSON.${
+    customInstructionsBlock(customInstructions)
+  }`;
 }
 
 export function assistUserPrompt(
@@ -205,6 +302,7 @@ export function assistUserPrompt(
   platforms?: string[],
   postType?: string,
   imageCount = 0,
+  webSources?: string,
 ): string {
   const contextLines = formatPlatformContext(platforms, postType);
 
@@ -217,9 +315,7 @@ export function assistUserPrompt(
 ${input}
 ${imageNote}
 ${contextLines ? `## CONTEXT\n\n${contextLines}\n` : ""}
-## RETRIEVED KNOWLEDGE BASE SOURCES
-
-${sources}
+${formatSourceSections(sources, webSources)}
 
 Respond with JSON only.`;
 }

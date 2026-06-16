@@ -1,11 +1,8 @@
 import { useRef } from "react";
 import { Button } from "@thetis/ui/button";
-import { Textarea } from "@thetis/ui/textarea";
-import { ImagePlus, Loader2, X } from "lucide-react";
-import {
-  addImageFiles,
-  handleImagePaste,
-} from "@/components/ImageAttachments";
+import { ArrowUp, ImagePlus, Loader2, X } from "lucide-react";
+import { addImageFiles, handleImagePaste } from "@/components/ImageAttachments";
+import { AutoResizeTextarea } from "@/components/AutoResizeTextarea";
 import type { ImageAttachment } from "@/lib/images";
 
 interface Props {
@@ -15,8 +12,6 @@ interface Props {
   onImagesChange: (images: ImageAttachment[]) => void;
   onSubmit: () => void;
   placeholder: string;
-  submitLabel: string;
-  submitIcon: React.ReactNode;
   isPending: boolean;
   disabled?: boolean;
 }
@@ -28,8 +23,6 @@ export function ChatComposer({
   onImagesChange,
   onSubmit,
   placeholder,
-  submitLabel,
-  submitIcon,
   isPending,
   disabled,
 }: Props) {
@@ -48,15 +41,15 @@ export function ChatComposer({
 
   return (
     <div
-      className="bg-background border border-border rounded-lg overflow-hidden"
+      className="mx-auto w-full max-w-3xl"
       onPaste={(e) => handleImagePaste(e, images, onImagesChange)}
     >
       {images.length > 0 && (
-        <div className="flex flex-wrap gap-2 p-3 border-border border-b">
+        <div className="flex flex-wrap gap-2 mb-2 px-1">
           {images.map((img) => (
             <div
               key={img.id}
-              className="group relative border border-border rounded-md w-16 h-16 overflow-hidden"
+              className="group relative border border-border rounded-lg w-14 h-14 overflow-hidden"
             >
               <img
                 src={img.previewUrl}
@@ -76,55 +69,59 @@ export function ChatComposer({
         </div>
       )}
 
-      <Textarea
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder={placeholder}
-        className="border-0 focus-visible:ring-0 shadow-none min-h-28 resize-none"
-        disabled={isPending}
-      />
-
-      <div className="flex justify-between items-center gap-2 px-3 py-2 border-border border-t">
-        <div className="flex items-center gap-2">
-          <Button
-            type="button"
-            variant="ghost"
-            size="sm"
-            disabled={isPending}
-            onClick={() => inputRef.current?.click()}
-          >
-            <ImagePlus className="mr-1 w-4 h-4" />
-            Add image
-          </Button>
-          <input
-            ref={inputRef}
-            type="file"
-            accept="image/*"
-            multiple
-            className="hidden"
-            onChange={(e) => {
-              if (e.target.files?.length) {
-                void addImageFiles(e.target.files, images, onImagesChange);
-              }
-              e.target.value = "";
-            }}
-          />
-          <span className="hidden sm:inline text-muted-foreground text-xs">
-            Paste images or attach for visual context
-          </span>
-        </div>
+      <div className="relative flex items-end gap-2 bg-muted/40 shadow-sm px-4 py-3 border border-border rounded-[1.75rem]">
         <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          className="mb-0.5 rounded-full w-8 h-8 shrink-0"
+          disabled={isPending}
+          onClick={() => inputRef.current?.click()}
+          aria-label="Add image"
+        >
+          <ImagePlus className="w-4 h-4" />
+        </Button>
+        <input
+          ref={inputRef}
+          type="file"
+          accept="image/*"
+          multiple
+          className="hidden"
+          onChange={(e) => {
+            if (e.target.files?.length) {
+              void addImageFiles(e.target.files, images, onImagesChange);
+            }
+            e.target.value = "";
+          }}
+        />
+
+        <AutoResizeTextarea
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder={placeholder}
+          disabled={isPending}
+          maxRows={8}
+          className="flex-1 py-1.5 text-sm leading-relaxed"
+        />
+
+        <Button
+          type="button"
+          size="icon"
+          className="mb-0.5 rounded-full w-8 h-8 shrink-0"
           onClick={onSubmit}
           disabled={disabled || isPending || !value.trim()}
-          size="sm"
+          aria-label={isPending ? "Working" : "Send"}
         >
           {isPending
-            ? <Loader2 className="mr-2 w-4 h-4 animate-spin" />
-            : submitIcon}
-          {isPending ? "Working..." : submitLabel}
+            ? <Loader2 className="w-4 h-4 animate-spin" />
+            : <ArrowUp className="w-4 h-4" />}
         </Button>
       </div>
+
+      <p className="mt-2 text-muted-foreground text-xs text-center">
+        Enter to send · Shift+Enter for new line
+      </p>
     </div>
   );
 }
