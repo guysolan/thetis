@@ -6,13 +6,63 @@ import { loadEnv } from "./load-env";
 // Load environment variables from .env file
 loadEnv();
 
+function mimeForExt(filePath: string): string {
+    const ext = path.extname(filePath).toLowerCase();
+    if (ext === ".png") return "image/png";
+    if (ext === ".gif") return "image/gif";
+    if (ext === ".webp") return "image/webp";
+    return "image/jpeg";
+}
+
+function loadImagePart(filePath: string): {
+    inlineData: { mimeType: string; data: string };
+} {
+    const buf = fs.readFileSync(filePath);
+    return {
+        inlineData: {
+            mimeType: mimeForExt(filePath),
+            data: buf.toString("base64"),
+        },
+    };
+}
+
+function parseRefArgs(argv: string[]): {
+    outputFileName?: string;
+    refPaths: string[];
+} {
+    const refPaths: string[] = [];
+    let outputFileName: string | undefined;
+    const tail = argv.slice(4);
+    let i = 0;
+    while (i < tail.length) {
+        const a = tail[i];
+        if (a === "--ref" && tail[i + 1]) {
+            refPaths.push(tail[i + 1]);
+            i += 2;
+            continue;
+        }
+        if (a?.startsWith("--ref=")) {
+            refPaths.push(a.slice("--ref=".length));
+            i += 1;
+            continue;
+        }
+        if (a && !a.startsWith("--")) {
+            outputFileName = a;
+            i += 1;
+            continue;
+        }
+        i += 1;
+    }
+    return { outputFileName, refPaths };
+}
+
 /**
  * Image Fix/Modification Service
  *
  * Takes an image and makes minor modifications based on a description.
  *
  * Usage:
- * bun src/fix-image.ts <input-image-path> "fix description" [output-filename.png]
+ * bun src/fix-image.ts <input-image-path> "fix description" [output-filename.png] [--ref path/to/reference.png ...]
  *
  * Examples:
  * bun src/fix-image.ts output/image.png "fix the text label to say 'Plantarflexion' instead of 'Plantar flexion'"
@@ -68,13 +118,28 @@ async function main() {
         process.exit(1);
     }
 
-    // Determine output path
-    const outputFileName = process.argv[4] ||
+    const { outputFileName: tailOut, refPaths } = parseRefArgs(process.argv);
+    for (const ref of refPaths) {
+        if (!fs.existsSync(ref)) {
+            console.error(`\x1b[31mError: Reference not found: ${ref}\x1b[0m`);
+            process.exit(1);
+        }
+    }
+
+    const outputFileName = tailOut ||
         path.basename(inputImagePath, path.extname(inputImagePath)) +
             "-fixed" +
             path.extname(inputImagePath);
     const outputDir = path.join(process.cwd(), "output");
-    const outputPath = path.join(outputDir, outputFileName);
+    const cwd = process.cwd();
+    const outputPath = path.isAbsolute(outputFileName)
+        ? outputFileName
+        : outputFileName.startsWith("." + path.sep) ||
+                outputFileName.startsWith(".." + path.sep) ||
+                outputFileName.startsWith("../") ||
+                outputFileName.startsWith(".\\")
+        ? path.resolve(cwd, outputFileName)
+        : path.join(outputDir, outputFileName);
 
     // Read input image
     const imageData = fs.readFileSync(inputImagePath);
@@ -97,16 +162,29 @@ async function main() {
 
     console.log(`\x1b[36mFixing image:\x1b[0m ${inputImagePath}`);
     console.log(`\x1b[36mFix description:\x1b[0m "${fixDescription}"`);
+    if (refPaths.length > 0) {
+        console.log(
+            `\x1b[36mReference image(s):\x1b[0m ${refPaths.join(", ")}`,
+        );
+    }
 
     try {
-        // Build content parts: image first, then modification instruction
         const parts: Array<
             { text: string } | {
                 inlineData: { mimeType: string; data: string };
             }
         > = [];
 
-        // Add the original image
+        if (refPaths.length > 0) {
+            parts.push({
+                text:
+                    "The following image(s) are MATERIAL / TEXTURE REFERENCE ONLY. Copy the specified surface finish, color, and structural pattern from the reference — not the product shape, layout, or subject matter.",
+            });
+            for (const refPath of refPaths) {
+                parts.push(loadImagePart(refPath));
+            }
+        }
+
         parts.push({
             inlineData: {
                 mimeType,
@@ -114,16 +192,20 @@ async function main() {
             },
         });
 
-        // Add modification instruction
+        const refClause = refPaths.length > 0
+            ? "\n- Use the REFERENCE image(s) only for the material/texture described in the fix. Do not copy their product geometry or scene.\n"
+            : "";
+
         parts.push({
             text:
-                `Make a very minor modification to this image: ${fixDescription}
-
+                `Make a very minor modification to the LAST image above (the content image): ${fixDescription}
+${refClause}
 Important:
 - Keep everything else exactly the same
 - Only make the specific small fix requested
 - Maintain the same style, colors, and overall composition
-- Preserve all other details unchanged`,
+- Preserve all other details unchanged
+- If the content image is a photograph, keep it photorealistic — do not convert to illustration or cartoon`,
         });
 
         // Generate content
@@ -143,9 +225,9 @@ Important:
                 const base64Data = imagePart.inlineData.data;
                 const buffer = Buffer.from(base64Data, "base64");
 
-                // Ensure output directory exists
-                if (!fs.existsSync(outputDir)) {
-                    fs.mkdirSync(outputDir, { recursive: true });
+                const outDir = path.dirname(outputPath);
+                if (!fs.existsSync(outDir)) {
+                    fs.mkdirSync(outDir, { recursive: true });
                 }
 
                 fs.writeFileSync(outputPath, new Uint8Array(buffer));

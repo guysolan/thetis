@@ -1,0 +1,34 @@
+---
+import SporlasticDeckSlides from "@/components/oped-deck/SporlasticDeckSlides.astro";
+import OpedDeckLayout from "@/layouts/OpedDeckLayout.astro";
+import {
+  SPORLASTIC_DECK_BASE_PATH,
+  SPORLASTIC_DECK_SLIDE_COUNT,
+} from "@/features/oped-deck/sporlasticDeckPitchContent";
+
+const rawPage = Number.parseInt(Astro.params.page ?? "1", 10);
+
+if (!Number.isFinite(rawPage) || rawPage < 1) {
+  return Astro.redirect(`${SPORLASTIC_DECK_BASE_PATH}/1`, 301);
+}
+
+if (rawPage > SPORLASTIC_DECK_SLIDE_COUNT) {
+  return Astro.redirect(
+    `${SPORLASTIC_DECK_BASE_PATH}/${SPORLASTIC_DECK_SLIDE_COUNT}`,
+    301,
+  );
+}
+
+const initialPage = rawPage;
+---
+
+<OpedDeckLayout
+  title="Achilles Recovery - SPORLASTIC x Thetis"
+  description="Confidential partnership overview for SPORLASTIC and Thetis Medical."
+  initialPage={initialPage}
+  slideCount={SPORLASTIC_DECK_SLIDE_COUNT}
+  basePath={SPORLASTIC_DECK_BASE_PATH}
+  partnerName="SPORLASTIC"
+>
+  <SporlasticDeckSlides initialPage={initialPage} />
+</OpedDeckLayout>
