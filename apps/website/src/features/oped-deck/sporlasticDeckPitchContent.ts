@@ -55,13 +55,6 @@ export const sporlasticPfNightSplintDorsiflexion = {
   caption: "Listed Fußlagerungsorthese — holds the foot in dorsiflexion for plantar fasciitis stretch",
 } as const;
 
-/** Same splint with wedge reversed to show plantarflexion angle ATR recovery requires */
-export const sporlasticPfNightSplintPlantarflexion = {
-  src: "/images/sporlastic/pf-night-splint-plantarflexion.png",
-  alt: "Plantar fasciitis night splint reversed to plantarflexion — angle needed for Achilles rupture",
-  caption: "~30° plantarflexion required for ATR — not achievable with listed PF splints",
-} as const;
-
 export const sporlasticPitchGermanyReimbursement = {
   eyebrow: "Routes to market",
   title: "Germany already reimburses night splints — but not for Achilles rupture",
@@ -72,6 +65,12 @@ export const sporlasticPitchGermanyReimbursement = {
     "23.03.01 Fußorthesen zur Immobilisierung · Produktart 23.03.01.0 Fußlagerungsorthesen",
   hilfsmittelNote:
     "Manufacturers list dorsal night splints under these positions when bundling with walker boots. Examples from the Hilfsmittelverzeichnis:",
+  wedgeNote: {
+    label: "Important",
+    headline: "They just reverse the wedge.",
+    detail:
+      "Same PG 23 code. Wrong angle for ATR. Still too bulky — sleep barely improves.",
+  },
   listedCodes: [
     {
       code: "23.03.01.0007",

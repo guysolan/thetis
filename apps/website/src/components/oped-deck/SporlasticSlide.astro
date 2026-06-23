@@ -12,7 +12,6 @@ import SlideSplit from "./SlideSplit.astro";
 import {
   sporlasticGenerativeDesignMockup,
   sporlasticPfNightSplintDorsiflexion,
-  sporlasticPfNightSplintPlantarflexion,
   sporlasticPitchDayStack,
   sporlasticPitchGermanyReimbursement,
   sporlasticPitchManufacturing,
@@ -195,7 +194,7 @@ const { page } = Astro.props;
           <div
             class="items-start gap-6 grid lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]"
           >
-            <div class="gap-4 grid sm:grid-cols-2 lg:grid-cols-1">
+            <div>
               <figure
                 class="bg-white dark:bg-neutral-900 shadow-sm p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl"
               >
@@ -205,7 +204,7 @@ const { page } = Astro.props;
                     alt={sporlasticPfNightSplintDorsiflexion.alt}
                     width={640}
                     height={480}
-                    class="w-full h-auto max-h-32 object-contain"
+                    class="w-full h-auto max-h-40 object-contain"
                     loading="lazy"
                   />
                 </div>
@@ -215,25 +214,30 @@ const { page } = Astro.props;
                   {sporlasticPfNightSplintDorsiflexion.caption}
                 </figcaption>
               </figure>
-              <figure
-                class="bg-white dark:bg-neutral-900 shadow-sm p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl"
+              <div
+                class="relative mt-4 bg-primary/15 shadow-md p-4 border-2 border-primary/50 rounded-xl overflow-hidden"
+                role="note"
               >
-                <div class="bg-neutral-50 rounded-lg overflow-hidden">
-                  <img
-                    src={sporlasticPfNightSplintPlantarflexion.src}
-                    alt={sporlasticPfNightSplintPlantarflexion.alt}
-                    width={640}
-                    height={480}
-                    class="w-full h-auto max-h-32 object-contain"
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption
-                  class="mt-2 text-neutral-600 dark:text-neutral-400 text-xs text-center leading-snug"
+                <div
+                  class="absolute inset-y-0 left-0 bg-primary w-1.5"
+                  aria-hidden="true"
+                />
+                <p
+                  class="mb-1 font-bold text-primary text-[10px] uppercase tracking-[0.14em]"
                 >
-                  {sporlasticPfNightSplintPlantarflexion.caption}
-                </figcaption>
-              </figure>
+                  {sporlasticPitchGermanyReimbursement.wedgeNote.label}
+                </p>
+                <p
+                  class="font-bold text-neutral-900 dark:text-neutral-100 text-sm md:text-base leading-snug"
+                >
+                  {sporlasticPitchGermanyReimbursement.wedgeNote.headline}
+                </p>
+                <p
+                  class="mt-1.5 font-semibold text-neutral-800 dark:text-neutral-200 text-xs md:text-sm leading-snug"
+                >
+                  {sporlasticPitchGermanyReimbursement.wedgeNote.detail}
+                </p>
+              </div>
             </div>
 
             <div class="space-y-4">
