@@ -11,10 +11,14 @@ import PitchStatGrid from "./PitchStatGrid.astro";
 import SlideSplit from "./SlideSplit.astro";
 import {
   sporlasticGenerativeDesignMockup,
+  sporlasticPfNightSplintDorsiflexion,
+  sporlasticPfNightSplintPlantarflexion,
   sporlasticPitchDayStack,
+  sporlasticPitchGermanyReimbursement,
   sporlasticPitchManufacturing,
   sporlasticPitchPartnershipOptions,
   sporlasticPitchProduct,
+  sporlasticPitchRegulatory,
   sporlasticPitchSalesChart,
   sporlasticPitchWhyNow,
 } from "@/features/oped-deck/sporlasticDeckPitchContent";
@@ -23,7 +27,6 @@ import {
   opedPitchDesignReviews,
   opedPitchIp,
   opedPitchPatientComplaint,
-  opedPitchRegulatory,
 } from "@/features/oped-deck/opedDeckPitchContent";
 
 interface Props {
@@ -179,6 +182,116 @@ const { page } = Astro.props;
 {
   page === 5 && (
     <DeckSection
+      title={sporlasticPitchGermanyReimbursement.title}
+      intro={sporlasticPitchGermanyReimbursement.intro}
+      eyebrow={sporlasticPitchGermanyReimbursement.eyebrow}
+      gradient
+    >
+      <div class="space-y-6 mx-auto max-w-5xl">
+        <div class="bg-primary/5 p-4 border border-primary/30 rounded-2xl">
+          <p class="mb-4 font-medium text-primary text-sm uppercase tracking-widest">
+            {sporlasticPitchGermanyReimbursement.germanyLabel}
+          </p>
+          <div
+            class="items-start gap-6 grid lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]"
+          >
+            <div class="gap-4 grid sm:grid-cols-2 lg:grid-cols-1">
+              <figure
+                class="bg-white dark:bg-neutral-900 shadow-sm p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl"
+              >
+                <div class="bg-neutral-50 rounded-lg overflow-hidden">
+                  <img
+                    src={sporlasticPfNightSplintDorsiflexion.src}
+                    alt={sporlasticPfNightSplintDorsiflexion.alt}
+                    width={640}
+                    height={480}
+                    class="w-full h-auto max-h-32 object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption
+                  class="mt-2 text-neutral-600 dark:text-neutral-400 text-xs text-center leading-snug"
+                >
+                  {sporlasticPfNightSplintDorsiflexion.caption}
+                </figcaption>
+              </figure>
+              <figure
+                class="bg-white dark:bg-neutral-900 shadow-sm p-3 border border-neutral-200 dark:border-neutral-700 rounded-2xl"
+              >
+                <div class="bg-neutral-50 rounded-lg overflow-hidden">
+                  <img
+                    src={sporlasticPfNightSplintPlantarflexion.src}
+                    alt={sporlasticPfNightSplintPlantarflexion.alt}
+                    width={640}
+                    height={480}
+                    class="w-full h-auto max-h-32 object-contain"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption
+                  class="mt-2 text-neutral-600 dark:text-neutral-400 text-xs text-center leading-snug"
+                >
+                  {sporlasticPfNightSplintPlantarflexion.caption}
+                </figcaption>
+              </figure>
+            </div>
+
+            <div class="space-y-4">
+              <p
+                class="font-medium text-neutral-900 dark:text-neutral-100 text-sm"
+              >
+                {sporlasticPitchGermanyReimbursement.hilfsmittelGroup}
+              </p>
+              <p
+                class="text-neutral-700 dark:text-neutral-300 text-sm leading-relaxed"
+              >
+                {sporlasticPitchGermanyReimbursement.hilfsmittelNote}
+              </p>
+              <ul class="gap-2 grid">
+                {sporlasticPitchGermanyReimbursement.listedCodes.map((item) => (
+                  <li class="bg-white dark:bg-neutral-900 shadow-sm px-3 py-2 border border-neutral-200 dark:border-neutral-700 rounded-lg">
+                    <p class="font-mono font-semibold text-primary text-sm">
+                      {item.code}
+                    </p>
+                    <p class="font-medium text-neutral-900 dark:text-neutral-100 text-sm">
+                      {item.product}
+                    </p>
+                    <p class="text-neutral-600 dark:text-neutral-400 text-xs leading-snug">
+                      {item.detail}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <ul class="gap-3 grid md:grid-cols-3">
+          {sporlasticPitchGermanyReimbursement.limitations.map((item) => (
+            <li class="bg-white dark:bg-neutral-900 shadow-sm p-4 border border-neutral-200 dark:border-neutral-700 rounded-xl">
+              <p class="mb-2 font-bold text-neutral-900 dark:text-neutral-100 text-sm">
+                {item.label}
+              </p>
+              <p class="text-neutral-600 dark:text-neutral-400 text-sm leading-relaxed">
+                {item.detail}
+              </p>
+            </li>
+          ))}
+        </ul>
+
+        <p
+          class="text-neutral-800 dark:text-neutral-200 text-sm md:text-base text-center leading-relaxed"
+        >
+          {sporlasticPitchGermanyReimbursement.closing}
+        </p>
+      </div>
+    </DeckSection>
+  )
+}
+
+{
+  page === 6 && (
+    <DeckSection
       title={opedPitchDesignReviews.title}
       intro={opedPitchDesignReviews.intro}
       eyebrow="Online launch"
@@ -190,7 +303,7 @@ const { page } = Astro.props;
 }
 
 {
-  page === 6 && (
+  page === 7 && (
     <DeckSection
       title="Surgeons say yes"
       intro="Leading foot and ankle surgeons recommend the splint for night-time use — the problem the walking boot cannot solve."
@@ -203,7 +316,7 @@ const { page } = Astro.props;
 }
 
 {
-  page === 7 && (
+  page === 8 && (
     <DeckSection
       title={opedPitchClinical.title}
       intro={opedPitchClinical.intro}
@@ -233,7 +346,7 @@ const { page } = Astro.props;
 }
 
 {
-  page === 8 && (
+  page === 9 && (
     <DeckSection
       title={opedPitchIp.title}
       intro={opedPitchIp.intro}
@@ -268,15 +381,15 @@ const { page } = Astro.props;
 }
 
 {
-  page === 9 && (
+  page === 10 && (
     <DeckSection
-      title={opedPitchRegulatory.title}
-      intro={opedPitchRegulatory.intro}
+      title={sporlasticPitchRegulatory.title}
+      intro={sporlasticPitchRegulatory.intro}
       eyebrow="Regulatory & quality"
       gradient
     >
       <div class="space-y-7 mx-auto max-w-5xl">
-        {opedPitchRegulatory.sections.map((section) => (
+        {sporlasticPitchRegulatory.sections.map((section) => (
           <div>
             <p class="mb-3 font-medium text-primary text-sm uppercase tracking-widest">
               {section.title}
@@ -296,7 +409,7 @@ const { page } = Astro.props;
           </div>
         ))}
         <p class="text-neutral-500 text-xs text-center">
-          {opedPitchRegulatory.footnote}
+          {sporlasticPitchRegulatory.footnote}
         </p>
       </div>
     </DeckSection>
@@ -304,7 +417,7 @@ const { page } = Astro.props;
 }
 
 {
-  page === 10 && (
+  page === 11 && (
     <DeckSection
       title={sporlasticPitchWhyNow.title}
       intro={sporlasticPitchWhyNow.intro}
@@ -331,7 +444,7 @@ const { page } = Astro.props;
 }
 
 {
-  page === 11 && (
+  page === 12 && (
     <DeckSection
       title={sporlasticPitchManufacturing.title}
       intro={sporlasticPitchManufacturing.intro}
@@ -376,7 +489,7 @@ const { page } = Astro.props;
 }
 
 {
-  page === 12 && (
+  page === 13 && (
     <DeckSection
       title={sporlasticPitchPartnershipOptions.title}
       intro={sporlasticPitchPartnershipOptions.intro}

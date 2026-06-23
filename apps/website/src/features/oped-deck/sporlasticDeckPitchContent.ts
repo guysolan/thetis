@@ -1,5 +1,7 @@
+import { splintRegulatorySections } from "@/content/trade/splintRegulatoryProfile";
+
 export const SPORLASTIC_DECK_BASE_PATH = "/decks/sporlastic";
-export const SPORLASTIC_DECK_SLIDE_COUNT = 12;
+export const SPORLASTIC_DECK_SLIDE_COUNT = 13;
 
 /** AI mockup: Thetis splint shell with SPORLASTIC generative-design lattice plastic */
 export const sporlasticGenerativeDesignMockup = {
@@ -20,8 +22,8 @@ export const sporlasticPitchDayStack = {
       role: "Day · immobilisation",
       detail:
         "Lower-leg and foot brace with dual air chambers, removable liner, and heel wedge for defined plantarflexion — already indicated for Achilles tendon rupture.",
-      image: "/images/catalogue-products/promedics-walker.webp",
-      imageAlt: "Walking boot for Achilles tendon rupture immobilisation",
+      image: "/images/sporlastic/sp-air-walker-plus.jpg",
+      imageAlt: "SPORLASTIC SP AIR WALKER PLUS walking boot for Achilles tendon rupture",
       productUrl:
         "https://www.sporlastic.de/en/product/item/sp-air-walker-plus/",
     },
@@ -44,6 +46,74 @@ export const sporlasticPitchDayStack = {
       imageAlt: "Thetis Achilles rupture night splint",
     },
   ],
+} as const;
+
+/** Typical reimbursed PF night splint — dorsiflexion wedge (wrong direction for ATR) */
+export const sporlasticPfNightSplintDorsiflexion = {
+  src: "/images/sporlastic/pf-night-splint-dorsiflexion.png",
+  alt: "Typical reimbursed plantar fasciitis night splint with dorsiflexion wedge",
+  caption: "Listed Fußlagerungsorthese — holds the foot in dorsiflexion for plantar fasciitis stretch",
+} as const;
+
+/** Same splint with wedge reversed to show plantarflexion angle ATR recovery requires */
+export const sporlasticPfNightSplintPlantarflexion = {
+  src: "/images/sporlastic/pf-night-splint-plantarflexion.png",
+  alt: "Plantar fasciitis night splint reversed to plantarflexion — angle needed for Achilles rupture",
+  caption: "~30° plantarflexion required for ATR — not achievable with listed PF splints",
+} as const;
+
+export const sporlasticPitchGermanyReimbursement = {
+  eyebrow: "Routes to market",
+  title: "Germany already reimburses night splints — but not for Achilles rupture",
+  intro:
+    "Sanitätshäuser can prescribe a generic plantar fasciitis night splint alongside the SP AIR WALKER on separate Hilfsmittelverordnungen. The reimbursement route is open — the listed devices are not.",
+  germanyLabel: "🇩🇪 GKV · Produktgruppe 23 Orthesen/Schienen",
+  hilfsmittelGroup:
+    "23.03.01 Fußorthesen zur Immobilisierung · Produktart 23.03.01.0 Fußlagerungsorthesen",
+  hilfsmittelNote:
+    "Manufacturers list dorsal night splints under these positions when bundling with walker boots. Examples from the Hilfsmittelverzeichnis:",
+  listedCodes: [
+    {
+      code: "23.03.01.0007",
+      product: "DARCO NightSplint®",
+      detail: "Fußlagerungsorthese · Fasciitis plantaris / postoperative Ruhigstellung",
+    },
+    {
+      code: "23.03.01.0009",
+      product: "DARCO Body Armor® Night Splint",
+      detail: "Dorsale Fußlagerungsorthese · plantare Faszie / Achillessehnenschwäche",
+    },
+    {
+      code: "23.03.01.0019",
+      product: "PROCARE® Plantar Fasciitis Night Splint",
+      detail:
+        "Marketed for simultaneous Verordnung with Aircast® walker — hygiene & wound healing, not ATR plantarflexion",
+    },
+    {
+      code: "23.03.01.0023",
+      product: "Universal Plantarfasziitis Orthese (UFO)",
+      detail: "Generic dorsal night splint · plantar fasciitis indication",
+    },
+  ],
+  limitations: [
+    {
+      label: "Wrong angle for ATR",
+      detail:
+        "Listed splints hold the foot in dorsiflexion to stretch the plantar fascia — the opposite of the ~30° plantarflexion Achilles rupture healing requires.",
+    },
+    {
+      label: "Still too bulky to sleep",
+      detail:
+        "Patients swap the boot for a slightly lighter splint — but it remains a rigid dorsal shell with straps. Sleep quality barely improves.",
+    },
+    {
+      label: "Workaround, not a category",
+      detail:
+        "Reps bundle an existing PG 23 code with the walker. No Hilfsmittel entry exists for a purpose-built ATR night splint — yet.",
+    },
+  ],
+  closing:
+    "SPORLASTIC could use the same reimbursement channel with the right device: lightweight, ~30° plantarflexion, and designed only for Achilles rupture rest and sleep.",
 } as const;
 
 export const sporlasticPitchProduct = {
@@ -186,6 +256,15 @@ export const sporlasticPitchProductFacts = {
         "Patented plantarflexion mechanism — portfolio available under NDA",
     },
   ],
+} as const;
+
+export const sporlasticPitchRegulatory = {
+  title: "Regulatory & quality",
+  intro:
+    "Class I device — cleared, documented, and registered across SPORLASTIC's core markets.",
+  sections: splintRegulatorySections,
+  footnote:
+    "Full technical file and registration certificates available to qualified partners under NDA.",
 } as const;
 
 export const sporlasticPitchPartnershipOptions = {
