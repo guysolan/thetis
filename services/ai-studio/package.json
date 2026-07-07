@@ -6,6 +6,11 @@
   "type": "module",
   "scripts": {
     "generate": "bun src/index.ts",
+    "generate-graphic": "bun src/generate-graphic.ts",
+    "generate-from-base": "bun src/generate-from-base.ts",
+    "generate-icon": "bun src/generate-icon.ts",
+    "restyle-icons": "bun src/restyle-icons.ts",
+    "rebuild-icons": "bun src/rebuild-icons.ts",
     "review": "bun src/review-image.ts",
     "review-batch": "bun src/review-batch.ts",
     "fix-image": "bun src/fix-image.ts",

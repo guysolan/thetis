@@ -1,0 +1,31 @@
+Create a SINGLE square patient-education panel that is a perfect stylistic match for the "How do I know if my night splint fits correctly?" infographic provided as a reference. This panel must look like one more cell taken straight out of that same 2x2 grid — specifically a fourth, additional BAD FIT panel from the identical design set. The final result must be indistinguishable in style from the original infographic panels.
+
+WHAT TO REUSE (do not redesign):
+- IMAGE 1 (the BASE) is a real, clean white-background SIDE-VIEW product photo of the Thetis Medical Achilles night splint correctly fitted on a foot. Reuse this EXACT device, skin, camera angle, focal length, framing, soft studio lighting and pure WHITE studio background.
+- IMAGE 2 is the existing infographic — copy its visual language EXACTLY: the rounded panel border, the pill-shaped header badge, the red "X" cross icon, the white-text-on-red rounded callout labels, the red circles and red arrows, the font and line weight.
+- IMAGE 3 is an additional clean side-view product photo for device accuracy.
+
+THE DEVICE (keep photorealistic and identical to the BASE photo in EVERY detail — do NOT redesign it):
+- Muted teal / seafoam-green moulded plastic shell, same colour and finish as the base photo (not over-saturated bright teal).
+- Keep the EXACT same strap layout as the base photo: do NOT add, remove, duplicate or move straps. Same number of slim black Velcro straps, same routing, with the small white square "Thetis Medical" label patch on the front strap.
+- Keep the same slim shell silhouette and thin footplate — do NOT bulk it up into a chunky sandal or boot sole.
+- The shell sits on the FRONT of the shin and curves under the foot. NO sandal sole sticking out, NOTHING behind the calf (bare skin at the back). Same as the reference photos.
+
+THE FAULT TO DEPICT — "SPLINT TOO LOW":
+Take the SAME device and foot from the base photo, but reposition the whole splint so it has slid DOWN the leg and too far FORWARD onto the foot. Make this obviously wrong at a glance:
+- The green shell sits too LOW — its top edge is down near the ankle instead of up the shin, so very little shin is covered.
+- The small white "Thetis Medical" alignment patch sits BELOW the ankle bone (it should sit higher, over the midfoot/ankle).
+- The front of the shell / footplate extends too far FORWARD, overshooting and covering the toes (toes buried under the footplate instead of resting naturally near the opening).
+Keep it the same photorealistic device, same white background, same lighting — only the POSITIONING is wrong.
+
+ANNOTATIONS (match the infographic's BAD FIT panel exactly):
+- A thin RED rounded rectangular border framing the whole panel.
+- A RED pill-shaped header badge at the top reading "BAD FIT" with a white circular red "X" cross icon, identical to the infographic.
+- RED circles around the problem areas: one around the low-sitting white alignment patch / ankle, one around the toes covered by the footplate.
+- RED arrows: one pointing DOWN the leg showing the splint sitting too low, one pointing FORWARD showing the shell overshooting the toes.
+- Short, crisp, correctly-spelled callout labels reading: "Splint sitting too low", "Patch below ankle", "Shell covers toes". CRITICAL: render these labels EXACTLY like the original infographic's BAD FIT labels — SOLID RED filled rounded rectangles with WHITE text inside (NOT white labels with red outline, NOT red text on white).
+
+STYLE:
+- Pure WHITE background, generous white space, clean and clinical, square composition, high resolution.
+- Use RED (matching the infographic) for ALL the incorrect indicators (border, badge, X, circles, arrows, callouts). No green anywhere on this panel.
+- No watermarks, no extra logos, no clutter. Understandable at a glance.

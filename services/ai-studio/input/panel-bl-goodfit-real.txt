@@ -1,0 +1,11 @@
+Use the provided product photo (IMAGE 1) UNCHANGED as the panel image. It is a real photo of the Thetis Medical Achilles night splint correctly fitted on a foot. Do NOT redraw, restyle, recolour, reposition, crop out, or alter the device, the foot, the lighting or the background in ANY way. Keep it 100% photorealistic and pixel-identical to the original photo. Treat it as a finished photo that you only ADD overlay graphics on top of.
+
+Place the photo on a clean white SQUARE panel (add white margin around it if needed so nothing important is cropped; keep the whole splint and foot visible).
+
+ADD overlay annotations matching the reference infographic (IMAGE 2) style EXACTLY:
+- A thin rounded GREEN border just inside the panel edges.
+- A green pill-shaped "GOOD FIT" header badge in a top corner, with the words on the left and a white circle containing a green check on the right.
+- SOLID-FILLED GREEN rounded callout labels with WHITE text, each with a short thin green pointer line/arrow to the relevant spot.
+- Use ONLY these three labels, correctly spelled, no duplicates and no extras: "Heel seated fully back", "Straps even & secure", "Toes resting naturally".
+
+GREEN (forest green, matching the reference) for all indicators. Short, crisp, legible sans-serif text. Square composition, pure white background, high resolution. No watermarks or extra logos.

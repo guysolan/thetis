@@ -1,0 +1,38 @@
+Create ONE single high-resolution square patient-education infographic that is a perfect match for the reference infographic provided (IMAGE 2). It must look like it was made by the exact same designer, from the exact same design set — indistinguishable in composition, spacing, colours, typography, borders, badges, icons and overall medical-instructional style.
+
+WHAT TO REUSE (do NOT redesign):
+- IMAGE 1 (the BASE) and IMAGE 4 are real clean white-background SIDE-VIEW product photos of the Thetis Medical Achilles night splint. Reuse this EXACT device, skin tone, soft studio lighting and pure WHITE studio background in every panel.
+- IMAGE 2 is the reference infographic — copy its visual language EXACTLY: dark navy title strip, the rounded GREEN borders on GOOD panels and rounded RED borders on BAD panels, the pill-shaped "GOOD FIT" (green, white check in a circle) and "BAD FIT" (red, white X in a circle) header badges, the solid-filled callout labels with white text, the red/green circles and arrows, the font, and the line weight.
+- IMAGE 3 is the device shown sitting too low (additional BAD-FIT reference for accuracy and style).
+
+THE DEVICE (keep photorealistic and identical in EVERY panel — do NOT redesign it):
+- Muted teal / seafoam-green moulded plastic shell, same colour and finish as the base photos (not over-saturated bright teal).
+- Same slim shell silhouette, thin footplate, and the SAME black Velcro strap layout as the base photos — do NOT add, remove or bulk up straps. Small white square "Thetis Medical" label patch on the front strap.
+- The shell sits on the FRONT of the shin and curves under the foot. NO sandal sole sticking out, NOTHING behind the calf (bare skin at the back).
+
+OVERALL LAYOUT
+- Pure WHITE background. A bold dark-navy title strip across the very top reading exactly: "How do I know if my night splint fits correctly?" (white sans-serif text).
+- Below it, a neat 2x2 GRID of four equally sized, evenly spaced panels — identical dimensions, identical margins, each photo on a clean white card with a thin rounded border (GREEN for the good panel, RED for the three bad panels).
+
+THE FOUR PANELS
+
+TOP-LEFT — BAD FIT (red border, red "BAD FIT" badge with white X):
+- Full side view. The whole splint has slid DOWN the leg and too far FORWARD: the green shell sits too low (top edge down near the ankle, little shin covered), the footplate overshoots and covers the toes, and the white "Thetis Medical" alignment patch sits BELOW the ankle bone.
+- Red circles + red arrows on the problems. Solid-red callout labels with white text: "Splint sitting too low", "White patch below ankle", "Shell covers toes".
+
+TOP-RIGHT — BAD FIT (red border, red "BAD FIT" badge with white X):
+- Full side view. The opposite fault: the whole splint sits too HIGH up the shin, riding up the leg so the white "Thetis Medical" alignment patch sits ABOVE the ankle bone and the foot is pulled too far back into the shell.
+- Red circles + red arrows pointing UP the leg. Solid-red callout labels with white text: "Splint sitting too high", "White patch above ankle".
+
+BOTTOM-LEFT — GOOD FIT (green border, green "GOOD FIT" badge with white check):
+- A CLOSE-UP side view focused on the HEEL and back of the ankle. The heel is fully seated deep into the back of the green heel cup, and the black heel elastic strap wraps correctly around the back of the heel with the proper, neat snug gap.
+- Green circle + green arrows on the correctly seated heel and elastic. Solid-green callout labels with white text: "Heel fully seated", "Correct heel elastic gap".
+
+BOTTOM-RIGHT — BAD FIT (red border, red "BAD FIT" badge with white X):
+- A CLOSE-UP side view focused on the HEEL, same framing as bottom-left. The heel is NOT fully seated — it has lifted/shifted forward leaving a clearly TOO-LARGE gap behind the heel, and the black heel elastic strap is loose and slack.
+- Red circle around the oversized heel gap + red arrows on the loose strap and lifted heel. Solid-red callout labels with white text: "Heel not seated", "Heel elastic gap too large", "Loose heel strap".
+
+STYLE
+- GREEN (forest green, matching the reference) for ALL correct indicators; RED (matching the reference) for ALL incorrect indicators.
+- Short, crisp, correctly-spelled sans-serif text, highly legible. Consistent panel size and spacing, generous white space, high resolution, square overall composition.
+- No watermarks, no extra logos, no clutter. Understandable at a glance.

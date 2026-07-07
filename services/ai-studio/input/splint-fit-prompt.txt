@@ -1,0 +1,42 @@
+Create a single high-resolution PATIENT-EDUCATION comparison graphic that answers the question: "How do I know if my walking boot fits correctly?"
+
+OVERALL LAYOUT
+- Clean, professional medical-education poster on a pure WHITE background.
+- A bold dark title strip across the very top with the question: "How do I know if my walking boot fits correctly?"
+- Below the title, a neat 2x2 GRID of four equally sized, evenly spaced photographic panels (same dimensions, same margins, same camera distance and angle for every panel so they look like a consistent set).
+- Each panel has a thin rounded border: GREEN border for correct examples, RED border for the incorrect example.
+- Every panel shows the SAME device from the base photo (teal / seafoam-green moulded splint shell, black Velcro straps, small white "Thetis Medical" label) on a person's lower leg and foot resting on white bedsheets, photorealistic, soft natural lighting matching the base photo.
+
+THE FOUR PANELS
+Three panels are GOOD FIT (correct). One panel is BAD FIT (incorrect). Make the BAD FIT panel OBVIOUSLY different at a glance — do not make the four images nearly identical. Vary the foot position and splint placement clearly.
+
+GOOD FIT panel A (green):
+- Heel pushed fully back, seated firmly at the back of the splint.
+- Foot perfectly centered and straight inside the shell.
+- Green check mark icon. Short green callout label: "Heel seated fully back".
+
+GOOD FIT panel B (green):
+- Both black straps evenly tightened, lying flat and parallel, snug and secure.
+- Green check mark icon. Short green callout label: "Straps even & secure".
+
+GOOD FIT panel C (green):
+- Toes resting naturally near the front opening with a small gap, not cramped or jammed.
+- Foot aligned with the splint, no sideways tilt.
+- Green check mark icon. Short green callout label: "Toes natural, foot aligned".
+
+BAD FIT panel (red):
+- Make the problems unmistakable: the heel is clearly lifted / shifted FORWARD with a visible gap behind the heel at the back of the splint; the foot has slid forward so the toes are jammed against the front; the splint sits crooked / off-center; one black strap is loose and dangling, the other is twisted and uneven.
+- Red circles around the heel gap and the loose strap, plus red arrows showing the foot sliding forward and the heel lifting.
+- Short red callout labels: "Heel not seated", "Foot sliding forward", "Loose, uneven straps".
+
+LABELS & INDICATORS
+- Put a clear pill-shaped badge on each panel: GREEN badge reading "GOOD FIT" on the three correct panels, RED badge reading "BAD FIT" on the incorrect panel.
+- Use GREEN (forest green, approx #2F5D45) for ALL correct indicators (checks, borders, badges, callouts).
+- Use RED for ALL incorrect indicators (circles, arrows, borders, badge, callouts).
+- Keep all text short, crisp, correctly spelled, sans-serif, highly legible.
+
+STYLE
+- Realistic photography (not illustration), patient-friendly, calm and clinical.
+- Clean modern layout, consistent panel size and spacing, generous white space.
+- High resolution, square overall composition.
+- No watermarks, no extra logos, no clutter. The educational message must be understandable at a glance without reading the small text.

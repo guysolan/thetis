@@ -1,0 +1,52 @@
+Create a single square 1:1 LinkedIn educational infographic (1080x1080 feel), clean and professional, matching the EXACT house style of the reference image: same older bearded doctor in white coat over Thetis-green scrubs, same friendly patient "Grant" (40-year-old white male, slim, short brown hair), same flat cartoon line-art illustration style, same Thetis forest-green (#2F5D45 / #4A6B5C) and sage palette, same modern clinic feel, same typography weight and polish.
+
+TITLE at top, large bold dark green sans-serif:
+"Plantar Fasciitis: Common Myths About Heel Pain"
+
+Thin green divider line under the title.
+
+SUBTITLE below divider, smaller dark green text:
+"Misinformation is often the hardest part of heel pain."
+
+MAIN CONTENT — a clean "MYTH vs REALITY" comparison table with 4 rows, easy to read at LinkedIn thumbnail size. Use a two-column layout:
+
+Left column header: "MYTH" (small caps, muted red-brown accent)
+Right column header: "REALITY" (small caps, Thetis green accent)
+
+Four rows, each with a small icon on the left (red X or crossed-out speech bubble) and green checkmark on the right:
+
+Row 1:
+MYTH: "It will never get better."
+REALITY: "Most cases improve with appropriate management."
+
+Row 2:
+MYTH: "I've tried everything."
+REALITY: "The basics often haven't been done consistently long enough."
+
+Row 3:
+MYTH: "I just need an injection."
+REALITY: "Injections may help symptoms in selected cases — they don't replace rehab."
+
+Row 4:
+MYTH: "Surgery is the answer."
+REALITY: "Surgery is rarely needed for straightforward plantar fasciitis."
+
+CENTER ILLUSTRATION (integrated above or beside the table, not cluttered):
+The bearded doctor points at the REALITY column on a small whiteboard or tablet, looking reassuring. Grant sits on an exam stool looking relieved, one shoe off, bare foot visible — he had been worried but is now listening. Keep characters small enough that the text remains the hero of the graphic.
+
+BOTTOM BANNER — dark green rounded bar with white text:
+"What actually works:" followed by four small pill-shaped labels/icons in a row:
+• Load management
+• Stretching & mobility
+• Strengthening
+• Patience & consistency
+
+FOOTER tagline, centered, italic dark green:
+"Simple treatments done well — not dramatic treatments done once."
+
+DESIGN RULES:
+- Text must be perfectly legible, correctly spelled, no typos.
+- No hashtags, no URLs, no logos.
+- Plenty of white/off-white breathing room; not overcrowded.
+- Professional, reassuring, patient-education tone — not alarmist.
+- LinkedIn-ready: readable when scrolled past quickly.

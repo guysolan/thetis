@@ -1,0 +1,10 @@
+Recreate this testimonial graphic EXACTLY the same — same soft mint-green gradient background, same cursive "Testimonial" header at top, same rounded light-green card with thin green border, same five gold stars, same fonts, same layout, same "Achilles Rupture Recovery Patient" subtitle.
+
+ONLY change these two text fields:
+
+1. Replace the quote with exactly this text (including the opening and closing single quotes):
+'Makes it so much easier to sleep at night without the boot. Worn this every night for 10 weeks — slept well and the splint stayed on and didn't move. Velcro straps fitted perfectly.'
+
+2. Replace the name "Josh" with "TW"
+
+Do not change anything else. Keep the same square format, colors, spacing, and design.

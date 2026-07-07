@@ -1,0 +1,28 @@
+Create a single high-resolution PATIENT-EDUCATION comparison graphic that answers: "How do I know if my night splint fits correctly?"
+
+YOU ARE GIVEN THREE REAL PRODUCT PHOTOS of the SAME device (a teal / seafoam-green moulded Achilles night splint with black Velcro straps and a small white "Thetis Medical" label):
+- IMAGE 1 (the base): a clean white-background SIDE-VIEW photo of the splint correctly fitted on a foot.
+- IMAGE 2: another clean white-background SIDE-VIEW photo of the splint correctly fitted on a foot.
+- IMAGE 3: a top-down photo of the splint correctly fitted on a foot resting on white bedsheets.
+
+USE THESE EXACT PHOTOS. Do NOT redraw, restyle, or redesign the device or the photos. Keep them photorealistic and identical to the originals — only ADD the overlay annotations described below. Treat each provided photo as a finished panel image that you place into the grid unchanged except for the added graphics.
+
+OVERALL LAYOUT
+- Clean professional medical-education poster on a pure WHITE background.
+- A bold dark title strip across the very top reading: "How do I know if my night splint fits correctly?"
+- Below it, a neat 2x2 GRID of four equally sized, evenly spaced panels (identical dimensions, identical margins). Put each photo on a clean white card.
+- GREEN rounded border on the three correct panels; RED rounded border on the one incorrect panel.
+
+THE FOUR PANELS
+GOOD FIT panel 1 — use IMAGE 1 (side view) unchanged. Add a green "GOOD FIT" pill badge, a green check-mark, and a green callout label: "Heel seated fully back".
+GOOD FIT panel 2 — use IMAGE 3 (top-down bed view) unchanged. Add a green "GOOD FIT" pill badge, a green check-mark, and a green callout label: "Foot centered & aligned".
+GOOD FIT panel 3 — use IMAGE 2 (side view) unchanged. Add a green "GOOD FIT" pill badge, a green check-mark, and a green callout label: "Straps even & secure, toes natural".
+
+BAD FIT panel — take the SAME device from the side-view photos but show it CLEARLY WRONG so it is obviously different at a glance: the foot has slid FORWARD so the toes stick out past the front pad, there is a visible GAP behind the heel (heel not seated at the back), the splint sits crooked, and the top black strap is loose / dangling / twisted. Keep the same device and white background and realistic photographic look. Add a red "BAD FIT" pill badge, a red cross (X) icon, red circles around the heel gap and the loose strap, red arrows showing the foot sliding forward and the heel lifting, and short red callout labels: "Heel not seated", "Foot sliding forward", "Loose, uneven straps".
+
+INDICATORS & STYLE
+- GREEN (forest green, approx #2F5D45) for ALL correct indicators (badges, checks, borders, callouts).
+- RED for ALL incorrect indicators (badge, X, circles, arrows, callouts).
+- Short, crisp, correctly spelled sans-serif text; highly legible.
+- Consistent panel size and spacing, generous white space, high resolution, square overall composition.
+- No watermarks, no extra logos, no clutter. The message must be understandable at a glance.

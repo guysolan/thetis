@@ -46,7 +46,12 @@ async function main() {
         process.exit(1);
     }
 
-    const fixDescription = process.argv[3];
+    let fixDescription = process.argv[3];
+    // If the fix description points to an existing file, read the prompt from it.
+    if (fixDescription && fs.existsSync(fixDescription)) {
+        fixDescription = fs.readFileSync(fixDescription, "utf-8");
+        console.log("\x1b[33mFix description loaded from file.\x1b[0m");
+    }
     if (!fixDescription) {
         console.error(
             "\x1b[31mError: No fix description provided.\x1b[0m",
