@@ -3,7 +3,9 @@ import type { ConditionId } from "@/content/conditions/registry";
 import type { Lang } from "@/config/languages";
 import { languages } from "@/config/languages";
 import { achillesRuptureGuideHubPhases } from "@/content/guide";
+import { plantarFasciitisGuideHubPhases } from "@/content/guide/plantar-fasciitis";
 import { recoveryPhaseRoutes } from "@/content/routes/achilles-rupture";
+import { plantarFasciitisGuideRoutes } from "@/content/routes/plantar-fasciitis";
 import {
     getRecoveryPhaseRoutesForCondition,
     generateRouteForLanguage,
@@ -119,6 +121,25 @@ function achillesCards(): PhaseCard[] {
     });
 }
 
+function plantarCards(): PhaseCard[] {
+    return plantarFasciitisGuideHubPhases.map((phase, index) => {
+        const base = plantarFasciitisGuideRoutes.find(
+            (r) => r.slug === phase.slug,
+        );
+        const href = base
+            ? generateRouteForLanguage(base, language).href
+            : `/${phase.slug}`;
+        return {
+            href,
+            title: phase.title,
+            description: phase.description,
+            shortLabel: phase.week.replace(/^Stage\s+/i, "").trim(),
+            highlights: phase.highlights,
+            color: hubPhaseColor(phase.color, index),
+        };
+    });
+}
+
 function genericCards(condition: ConditionId): PhaseCard[] {
     const bases = getRecoveryPhaseRoutesForCondition(condition);
     return bases.map((base, index) => {
@@ -137,7 +158,9 @@ function genericCards(condition: ConditionId): PhaseCard[] {
 const phases: PhaseCard[] =
     conditionId === "achilles-rupture"
         ? achillesCards()
-        : genericCards(conditionId);
+        : conditionId === "plantar-fasciitis"
+          ? plantarCards()
+          : genericCards(conditionId);
 
 const bubbleKicker =
     conditionId === "achilles-rupture" ? t.weekLabel : t.stageLabel;

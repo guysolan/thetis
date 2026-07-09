@@ -3,17 +3,19 @@ import type { BaseRoute } from "./types";
 import { CONDITION_LEARN_HUB_DESCRIPTION } from "../condition-hub-copy";
 import {
     COMING_SOON_ROUTE_DESCRIPTION,
+    PLANTAR_OVERVIEW_ROUTE_DESCRIPTION,
     PLANTAR_STAGE_1_ROUTE_DESCRIPTION,
 } from "./coming-soon-copy";
 
 const pfFaq = (
     slug: string,
     title: Record<string, string>,
+    desc: Record<string, string> = COMING_SOON_ROUTE_DESCRIPTION,
 ): BaseRoute => ({
     conditionId: "plantar-fasciitis",
     slug: `FAQs/${slug}`,
     title,
-    description: COMING_SOON_ROUTE_DESCRIPTION,
+    description: desc,
     slugTranslations: {
         en: `FAQs/${slug}`,
         de: `FAQs/${slug}`,
@@ -127,13 +129,17 @@ export const plantarFasciitisGuideHubNavRoute: BaseRoute = {
 
 /** FAQ routes — plantar fasciitis */
 export const plantarFasciitisArticleRoutes: BaseRoute[] = [
-    pfFaq("plantar-fasciitis-overview", {
-        en: "Plantar fasciitis — overview",
-        de: "Plantar fasciitis — overview",
-        fr: "Plantar fasciitis — overview",
-        es: "Plantar fasciitis — overview",
-        it: "Plantar fasciitis — overview",
-    }),
+    pfFaq(
+        "plantar-fasciitis-overview",
+        {
+            en: "Plantar fasciitis — overview",
+            de: "Plantar fasciitis — overview",
+            fr: "Plantar fasciitis — overview",
+            es: "Plantar fasciitis — overview",
+            it: "Plantar fasciitis — overview",
+        },
+        PLANTAR_OVERVIEW_ROUTE_DESCRIPTION,
+    ),
     pfFaq("plantar-fasciitis-diagnosis-and-symptoms", {
         en: "Plantar fasciitis — diagnosis & symptoms",
         de: "Plantar fasciitis — diagnosis & symptoms",

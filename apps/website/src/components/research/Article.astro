@@ -7,9 +7,19 @@ import type { Lang } from '@/config/languages';
 export interface Props {
     title: string;
     lang?: Lang;
+    /** Hero side illustration; omit for Achilles FAQ default */
+    illustration?: "achilles" | "plantar-fasciitis" | "none";
 }
 
-const { title, lang = "en" } = Astro.props;
+const { title, lang = "en", illustration = "achilles" } = Astro.props;
+
+const plantarFasciitisAlt: Record<Lang, string> = {
+    en: "Side view of the foot showing plantar fascia inflammation at the heel",
+    de: "Seitenansicht des Fußes mit Plantarfaszie-Entzündung an der Ferse",
+    fr: "Vue latérale du pied montrant l'inflammation de la fascia plantaire au talon",
+    es: "Vista lateral del pie con inflamación de la fascia plantar en el talón",
+    it: "Vista laterale del piede con infiammazione della fascia plantare al tallone",
+};
 
 const translations = {
     en: "Get free recovery tips delivered to your inbox.",
@@ -29,12 +39,24 @@ const subtitle = translations[lang] || translations.en;
         </div>
         <SubscribeBlock source="faq_article" variant="compact" lang={lang} />
     </div>
-    <Image 
-    class="hidden lg:block flex-shrink-0 max-h-[50vh] object-contain" 
-        height={600} 
-        width={450} 
-        src={AchillesRuptureDrawing} 
-        alt="achilles-drawing" 
-    />
+    {
+        illustration === "achilles" ? (
+            <Image
+                class="hidden lg:block flex-shrink-0 max-h-[50vh] object-contain"
+                height={600}
+                width={450}
+                src={AchillesRuptureDrawing}
+                alt="Achilles tendon illustration"
+            />
+        ) : illustration === "plantar-fasciitis" ? (
+            <img
+                class="hidden lg:block flex-shrink-0 max-h-[50vh] w-auto object-contain"
+                src="/images/guide/plantar-fasciitis/plantar-fasciitis-side-view.png"
+                alt={plantarFasciitisAlt[lang]}
+                width={450}
+                height={600}
+            />
+        ) : null
+    }
 </section>
 
