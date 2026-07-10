@@ -1,19 +1,46 @@
 ---
-import FAQsLayout from "@/layouts/FAQsLayout.astro";
-import type { Lang } from "@/config/languages";
+import FAQsLayout from "../../layouts/FAQsLayout.astro";
+import PlantarFasciitisDiagnosisSection from "@/sections/FAQs/plantar-fasciitis-diagnosis-and-symptoms.astro";
+import type { Lang } from "../../config/languages";
 
-interface Props {
-  lang?: Lang;
-}
+const { lang = "en" } = Astro.props as { lang: Lang };
 
-const { lang = "en" } = Astro.props;
-const title = "Plantar fasciitis — diagnosis & symptoms";
-const description =
-  "Coming soon — Signs and assessment of plantar fasciitis.";
+const content: Record<Lang, { title: string; description: string }> = {
+    en: {
+        title: "Plantar fasciitis — diagnosis & symptoms",
+        description:
+            "Typical heel pain signs, where plantar fasciitis hurts, how it is diagnosed, when scans help, and when to seek urgent review.",
+    },
+    de: {
+        title: "Plantarfasziitis — Diagnose & Symptome",
+        description:
+            "Typische Anzeichen, wo es weh tut, wie die Diagnose gestellt wird, wann Bildgebung hilft und wann dringend untersucht werden sollte.",
+    },
+    fr: {
+        title: "Fasciite plantaire — diagnostic et symptômes",
+        description:
+            "Signes typiques, localisation de la douleur, diagnostic, utilité des examens d’imagerie et quand consulter en urgence.",
+    },
+    es: {
+        title: "Fascitis plantar — diagnóstico y síntomas",
+        description:
+            "Signos típicos, dónde duele, cómo se diagnostica, cuándo ayudan las pruebas de imagen y cuándo acudir con urgencia.",
+    },
+    it: {
+        title: "Fascite plantare — diagnosi e sintomi",
+        description:
+            "Segni tipici, dove fa male, come si diagnostica, quando servono esami di imaging e quando consultare con urgenza.",
+    },
+};
+
+const currentContent = content[lang];
 ---
 
-<FAQsLayout title={title} description={description} lang={lang} illustration="plantar-fasciitis">
-  <section class="mx-auto px-4 py-8 max-w-3xl prose prose-neutral">
-    <p>Coming soon.</p>
-  </section>
+<FAQsLayout
+    title={currentContent.title}
+    description={currentContent.description}
+    lang={lang}
+    illustration="plantar-fasciitis"
+>
+    <PlantarFasciitisDiagnosisSection lang={lang} />
 </FAQsLayout>

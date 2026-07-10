@@ -2,61 +2,34 @@
 import FAQsLayout from "../../layouts/FAQsLayout.astro";
 import PlantarFasciitisOverviewSection from "@/sections/FAQs/plantar-fasciitis-overview.astro";
 import type { Lang } from "../../config/languages";
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 const { lang = "en" } = Astro.props as { lang: Lang };
 
-const content = {
+const content: Record<Lang, { title: string; description: string }> = {
     en: {
         title: "Plantar fasciitis — overview",
         description:
             "What plantar fasciitis is, whether heel pain gets better, first-step pain, how long recovery takes, and where to start.",
-        intro:
-            "Heel pain under the foot is extremely common. Most people who land here have persistent pain underneath the heel — plantar fasciitis — rather than at the back of the ankle. This overview answers the questions we hear most often, with links to our staged guides and course.",
-        stageCta: "Stage 1: Foundation guide",
-        learnCta: "Plantar fasciitis learn hub",
-        courseCta: "Plantar fasciitis course",
     },
     de: {
         title: "Plantarfasziitis — Überblick",
         description:
             "Was Plantarfasziitis ist, ob Fersenschmerz besser wird, Morgenschmerz, Dauer der Genesung und wo Sie anfangen.",
-        intro:
-            "Schmerz unter dem Fuß ist sehr häufig. Die meisten haben anhaltenden Schmerz unter der Ferse — Plantarfasziitis — und nicht hinten an der Wade. Dieser Überblick beantwortet die häufigsten Fragen mit Links zu gestaffelten Leitfäden und Kurs.",
-        stageCta: "Stufe 1: Grundlagen-Leitfaden",
-        learnCta: "Plantarfasziitis-Lern-Hub",
-        courseCta: "Plantarfasziitis-Kurs",
     },
     fr: {
         title: "Fasciite plantaire — aperçu",
         description:
             "Qu’est-ce que la fasciite plantaire, si la douleur s’améliore, douleur matinale, durée et par où commencer.",
-        intro:
-            "La douleur sous le pied est très fréquente. La plupart ont une douleur persistante sous le talon — fasciite plantaire — plutôt qu’à l’arrière de la cheville. Cet aperçu répond aux questions les plus courantes, avec liens vers guides par étapes et cours.",
-        stageCta: "Guide Étape 1 : Fondations",
-        learnCta: "Espace fasciite plantaire",
-        courseCta: "Cours fasciite plantaire",
     },
     es: {
         title: "Fascitis plantar — resumen",
         description:
             "Qué es la fascitis plantar, si el dolor mejora, dolor matutino, duración y por dónde empezar.",
-        intro:
-            "El dolor bajo el pie es muy común. La mayoría tiene dolor persistente bajo el talón — fascitis plantar — y no detrás del tobillo. Este resumen responde las preguntas más frecuentes, con enlaces a guías por etapas y curso.",
-        stageCta: "Guía Etapa 1: Fundamentos",
-        learnCta: "Centro de aprendizaje",
-        courseCta: "Curso de fascitis plantar",
     },
     it: {
         title: "Fascite plantare — panoramica",
         description:
             "Cos’è la fascite plantare, se il dolore migliora, dolore mattutino, durata e da dove iniziare.",
-        intro:
-            "Il dolore sotto il piede è molto comune. La maggior parte ha dolore persistente sotto il tallone — fascite plantare — non dietro la caviglia. Questa panoramica risponde alle domande più frequenti, con link a guide a fasi e corso.",
-        stageCta: "Guida Fase 1: Fondamenta",
-        learnCta: "Hub fascite plantare",
-        courseCta: "Corso fascite plantare",
     },
 };
 
@@ -69,31 +42,5 @@ const currentContent = content[lang];
     lang={lang}
     illustration="plantar-fasciitis"
 >
-    <section class="mx-auto px-4 py-8 max-w-3xl">
-        <p class="mb-8 text-neutral-600 dark:text-neutral-400 text-lg leading-relaxed">
-            {currentContent.intro}
-        </p>
-        <div class="flex flex-wrap gap-3 mb-10">
-            <a
-                href="/guide/plantar-fasciitis/stage-1"
-                class={cn(buttonVariants({ variant: "default", size: "lg" }), "font-semibold")}
-            >
-                {currentContent.stageCta}
-            </a>
-            <a
-                href="/learn/plantar-fasciitis"
-                class={cn(buttonVariants({ variant: "outline", size: "lg" }), "font-semibold")}
-            >
-                {currentContent.learnCta}
-            </a>
-            <a
-                href="/course/plantar-fasciitis"
-                class={cn(buttonVariants({ variant: "outline", size: "lg" }), "font-semibold")}
-            >
-                {currentContent.courseCta}
-            </a>
-        </div>
-    </section>
-
     <PlantarFasciitisOverviewSection lang={lang} />
 </FAQsLayout>

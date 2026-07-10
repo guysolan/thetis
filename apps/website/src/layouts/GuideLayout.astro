@@ -4,6 +4,7 @@ import type { Lang } from "@/config/languages";
 import { getAlternateRoutesForSlug } from "@/content/routes";
 import { Image } from "astro:assets";
 import AchillesRuptureDrawing from "@/assets/drawings/achilles-drawing.svg";
+import PlantarFasciitisDrawing from "@/assets/drawings/plantar-fasciitis-side-view.png";
 import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
 import CourseCTA from "@/components/CTA/CourseCTA.astro";
 import NightSplintAdvert from "@/components/products/night-splint/NightSplintAdvert.astro";
@@ -136,12 +137,12 @@ const nextPhase =
                             alt="Achilles tendon illustration"
                         />
                     ) : isPlantarFasciitisGuide ? (
-                        <img
-                            class="hidden lg:block flex-shrink-0 max-h-[50vh] w-auto object-contain"
-                            src="/images/guide/plantar-fasciitis/plantar-fasciitis-side-view.png"
-                            alt={plantarFasciitisHeroAlt[lang]}
-                            width={375}
+                        <Image
+                            class="hidden lg:block flex-shrink-0 max-h-[50vh] max-w-[331px] w-full object-contain"
                             height={500}
+                            width={375}
+                            src={PlantarFasciitisDrawing}
+                            alt={plantarFasciitisHeroAlt[lang]}
                         />
                     ) : null
                 }

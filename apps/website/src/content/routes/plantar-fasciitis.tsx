@@ -3,8 +3,11 @@ import type { BaseRoute } from "./types";
 import { CONDITION_LEARN_HUB_DESCRIPTION } from "../condition-hub-copy";
 import {
     COMING_SOON_ROUTE_DESCRIPTION,
+    PLANTAR_DIAGNOSIS_ROUTE_DESCRIPTION,
     PLANTAR_OVERVIEW_ROUTE_DESCRIPTION,
     PLANTAR_STAGE_1_ROUTE_DESCRIPTION,
+    PLANTAR_STAGE_2_ROUTE_DESCRIPTION,
+    PLANTAR_TREATMENT_ROUTE_DESCRIPTION,
 } from "./coming-soon-copy";
 
 const pfFaq = (
@@ -67,7 +70,7 @@ export const plantarFasciitisGuideRoutes: BaseRoute[] = [
             es: "Plantar fasciitis — Stage 2: Subacute / loading",
             it: "Plantar fasciitis — Stage 2: Subacute / loading",
         },
-        COMING_SOON_ROUTE_DESCRIPTION,
+        PLANTAR_STAGE_2_ROUTE_DESCRIPTION,
     ),
     ph(
         "stage-3",
@@ -140,20 +143,28 @@ export const plantarFasciitisArticleRoutes: BaseRoute[] = [
         },
         PLANTAR_OVERVIEW_ROUTE_DESCRIPTION,
     ),
-    pfFaq("plantar-fasciitis-diagnosis-and-symptoms", {
-        en: "Plantar fasciitis — diagnosis & symptoms",
-        de: "Plantar fasciitis — diagnosis & symptoms",
-        fr: "Plantar fasciitis — diagnosis & symptoms",
-        es: "Plantar fasciitis — diagnosis & symptoms",
-        it: "Plantar fasciitis — diagnosis & symptoms",
-    }),
-    pfFaq("plantar-fasciitis-treatment-and-footwear", {
-        en: "Plantar fasciitis — treatment & footwear",
-        de: "Plantar fasciitis — treatment & footwear",
-        fr: "Plantar fasciitis — treatment & footwear",
-        es: "Plantar fasciitis — treatment & footwear",
-        it: "Plantar fasciitis — treatment & footwear",
-    }),
+    pfFaq(
+        "plantar-fasciitis-diagnosis-and-symptoms",
+        {
+            en: "Plantar fasciitis — diagnosis & symptoms",
+            de: "Plantar fasciitis — diagnosis & symptoms",
+            fr: "Plantar fasciitis — diagnosis & symptoms",
+            es: "Plantar fasciitis — diagnosis & symptoms",
+            it: "Plantar fasciitis — diagnosis & symptoms",
+        },
+        PLANTAR_DIAGNOSIS_ROUTE_DESCRIPTION,
+    ),
+    pfFaq(
+        "plantar-fasciitis-treatment-and-footwear",
+        {
+            en: "Plantar fasciitis — treatment & footwear",
+            de: "Plantar fasciitis — treatment & footwear",
+            fr: "Plantar fasciitis — treatment & footwear",
+            es: "Plantar fasciitis — treatment & footwear",
+            it: "Plantar fasciitis — treatment & footwear",
+        },
+        PLANTAR_TREATMENT_ROUTE_DESCRIPTION,
+    ),
     pfFaq("plantar-fasciitis-exercises-and-return", {
         en: "Plantar fasciitis — exercises & return to activity",
         de: "Plantar fasciitis — exercises & return to activity",
