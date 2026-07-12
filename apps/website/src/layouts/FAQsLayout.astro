@@ -9,6 +9,8 @@ export interface Props {
         lang: string;
         url: string;
     }>;
+    /** Hero side illustration */
+    illustration?: "achilles" | "plantar-fasciitis" | "none";
 }
 
 const {
@@ -16,7 +18,13 @@ const {
     description,
     lang = "en",
     alternateLanguages = [],
+    illustration = "achilles",
 } = Astro.props;
+
+const ogImage =
+    illustration === "plantar-fasciitis"
+        ? "https://thetismedical.com/images/guide/plantar-fasciitis/plantar-fasciitis-side-view.png"
+        : "https://thetismedical.com/images/achilles-drawing-image.png";
 
 import Layout from "./Layout.astro";
 import OtherArticles from "@/components/OtherArticles.astro";
@@ -28,12 +36,12 @@ import StickyAddToCart from "@/components/StickyAddToCart.tsx";
 <Layout
     title={title}
     description={description}
-    image="https://thetismedical.com/images/achilles-drawing-image.png"
+    image={ogImage}
     lang={lang}
     alternateLanguages={alternateLanguages}
 >
     <main class="relative flex flex-col gap-4 print:w-full print:max-w-none">
-        <Article title={title} />
+        <Article title={title} lang={lang} {illustration} />
         <slot />
         <OtherArticles lang={lang} />
         <ShareControls client:load />

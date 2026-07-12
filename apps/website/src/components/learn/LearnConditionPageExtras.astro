@@ -17,6 +17,10 @@ import {
 } from "@/content/routes";
 import { recoveryPhaseRoutes } from "@/content/routes/achilles-rupture";
 import {
+    plantarFasciitisArticleRoutes,
+    plantarFasciitisGuideRoutes,
+} from "@/content/routes/plantar-fasciitis";
+import {
     getLocalizedLearnHubHref,
     getLocalizedShopHubHref,
 } from "@/lib/condition-nav";
@@ -122,7 +126,12 @@ const productCopy: Record<Lang, string> = {
 
 const quickCopy: Record<
     Lang,
-    { title: string; blurb: string; achilles: Record<string, string> }
+    {
+        title: string;
+        blurb: string;
+        achilles: Record<string, string>;
+        plantar: Record<string, string>;
+    }
 > = {
     en: {
         title: "Not sure where to start?",
@@ -132,6 +141,10 @@ const quickCopy: Record<
             weeks46: "In the boot",
             weeks1012: "Leaving the boot",
             weeks1325: "Physio phase",
+        },
+        plantar: {
+            overview: "Start here — overview",
+            stage1: "Stage 1: Foundation",
         },
     },
     de: {
@@ -143,6 +156,10 @@ const quickCopy: Record<
             weeks1012: "Boot wird abgesetzt",
             weeks1325: "Physio-Phase",
         },
+        plantar: {
+            overview: "Hier starten — Überblick",
+            stage1: "Stufe 1: Grundlagen",
+        },
     },
     fr: {
         title: "Vous ne savez pas par où commencer ?",
@@ -152,6 +169,10 @@ const quickCopy: Record<
             weeks46: "Dans la botte",
             weeks1012: "Sortie de botte",
             weeks1325: "Kinésithérapie",
+        },
+        plantar: {
+            overview: "Commencer ici — aperçu",
+            stage1: "Étape 1 : Fondations",
         },
     },
     es: {
@@ -163,6 +184,10 @@ const quickCopy: Record<
             weeks1012: "Quitando la bota",
             weeks1325: "Fisioterapia",
         },
+        plantar: {
+            overview: "Empieza aquí — resumen",
+            stage1: "Etapa 1: Fundamentos",
+        },
     },
     it: {
         title: "Non sai da dove iniziare?",
@@ -172,6 +197,10 @@ const quickCopy: Record<
             weeks46: "Con lo stivale",
             weeks1012: "Tolgo lo stivale",
             weeks1325: "Fisioterapia",
+        },
+        plantar: {
+            overview: "Inizia qui — panoramica",
+            stage1: "Fase 1: Fondamenta",
         },
     },
 };
@@ -226,6 +255,31 @@ function achillesQuickLinks(): {
     });
 }
 
+function plantarQuickLinks(): {
+    href: string;
+    label: string;
+    variant: "default" | "outline";
+}[] {
+    const pairs: [string, keyof typeof qc.plantar][] = [
+        ["FAQs/plantar-fasciitis-overview", "overview"],
+        ["guide/plantar-fasciitis/stage-1", "stage1"],
+    ];
+    return pairs.map(([slug, key], i) => {
+        const base =
+            slug.startsWith("FAQs/")
+                ? plantarFasciitisArticleRoutes.find((r) => r.slug === slug)
+                : plantarFasciitisGuideRoutes.find((r) => r.slug === slug);
+        const href = base
+            ? generateRouteForLanguage(base, language).href
+            : `/${slug}`;
+        return {
+            href,
+            label: qc.plantar[key],
+            variant: i === 0 ? ("default" as const) : ("outline" as const),
+        };
+    });
+}
+
 const guideBases = getRecoveryPhaseRoutesForCondition(conditionId);
 const genericQuickLinks = guideBases.slice(0, 4).map((base, i) => {
     const r = generateRouteForLanguage(base, language);
@@ -241,7 +295,9 @@ const genericQuickLinks = guideBases.slice(0, 4).map((base, i) => {
 const quickLinks =
     conditionId === "achilles-rupture"
         ? achillesQuickLinks()
-        : genericQuickLinks;
+        : conditionId === "plantar-fasciitis"
+          ? plantarQuickLinks()
+          : genericQuickLinks;
 
 const courseRoute = getCourseRouteForCondition(conditionId, lang);
 ---
@@ -420,6 +476,9 @@ const courseRoute = getCourseRouteForCondition(conditionId, lang);
                         >
                             {conditionId === "achilles-rupture" &&
                             variant === "default" ? (
+                                <Clock className="w-4 h-4" />
+                            ) : conditionId === "plantar-fasciitis" &&
+                              variant === "default" ? (
                                 <Clock className="w-4 h-4" />
                             ) : null}
                             {label}

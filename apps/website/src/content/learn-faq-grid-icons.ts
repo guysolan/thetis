@@ -2,6 +2,7 @@ import type { LucideIcon } from "lucide-react";
 import {
   Activity,
   Calendar,
+  Footprints,
   Heart,
   HelpCircle,
   Hourglass,
@@ -16,6 +17,10 @@ const iconByFaqSlug: Record<string, LucideIcon> = {
   "FAQs/torn-achilles-recovery": Hourglass,
   "FAQs/what-happens-if-my-achilles-is-ruptured": HelpCircle,
   "FAQs/life-after-achilles-rupture": Heart,
+  "FAQs/plantar-fasciitis-overview": Footprints,
+  "FAQs/plantar-fasciitis-diagnosis-and-symptoms": Stethoscope,
+  "FAQs/plantar-fasciitis-treatment-and-footwear": Activity,
+  "FAQs/plantar-fasciitis-exercises-and-return": Calendar,
 };
 
 export function getLearnFaqCardIcon(slug: string): LucideIcon {

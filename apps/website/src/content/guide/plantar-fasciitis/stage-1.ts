@@ -1,4 +1,4 @@
-import type { GuideContent, GuideMetadata } from "@/components/guide/types";
+﻿import type { GuideContent, GuideMetadata } from "@/components/guide/types";
 
 export const metadata: GuideMetadata = {
   slug: "stage-1",
@@ -34,7 +34,7 @@ export const content: GuideContent = {
     {
       type: "image",
       src: "/images/guide/plantar-fasciitis/stretching-exercises.png",
-      alt: "Plantar fasciitis stretching exercises guide sheet.",
+      alt: "Plantar fasciitis stretching exercises guide: seated toe stretch, towel stretch, balance, wall calf stretch, foot massage, and step stretch.",
       caption:
         "A simple daily programme is better than a complicated plan you cannot sustain.",
     },

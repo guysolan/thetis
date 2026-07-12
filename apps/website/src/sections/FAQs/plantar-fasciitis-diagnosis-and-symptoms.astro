@@ -1,0 +1,453 @@
+---
+import FAQsSection, {
+    type ContentWithLinks,
+} from "../../components/FAQsSection.astro";
+import type { Lang } from "../../config/languages";
+
+const { lang } = Astro.props as { lang: Lang };
+
+const content: Record<Lang, ContentWithLinks> = {
+    en: {
+        title: "Find your answer:",
+        answers: [
+            {
+                title: "How do I know if I have plantar fasciitis?",
+                content: [
+                    {
+                        text: "You cannot diagnose yourself from a webpage — but the pattern is often recognisable. Typical plantar fasciitis causes pain, stiffness, and tenderness under the heel or along the arch, often worst with the first few steps after rest. Pain at the back of the heel that worsens with uphill walking or pushing off fits better with Achilles problems. If the pattern sounds familiar, start the foundation work in ",
+                    },
+                    {
+                        text: "Stage 1: Foundation",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    {
+                        text: " while arranging a review if anything feels atypical.",
+                    },
+                ],
+            },
+            {
+                title: "What are the typical symptoms?",
+                content: [
+                    {
+                        text: "Common features include pain under the heel, stiffness after sitting or sleeping, and tenderness when you press the inside front of the heel bone. Pain often begins gradually, though it can sometimes appear quite suddenly after a change in activity, shoes, or weight. Swelling is usually mild compared with an acute injury.",
+                    },
+                ],
+            },
+            {
+                title: "Why is the first step in the morning so painful?",
+                content: [
+                    {
+                        text: "This is a classic sign. Overnight, the plantar fascia and calf can shorten and stiffen. The first few steps stretch tissues that have been off load, which causes a sharp pain that often eases as you get moving. A slow toe stretch before standing and supportive shoes from the first step often help — see our ",
+                    },
+                    {
+                        text: "morning routine in Stage 1",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "Where exactly does plantar fasciitis hurt?",
+                content: [
+                    {
+                        text: "The sore spot is usually on the underside of the heel, where the plantar fascia attaches to the heel bone — not at the back of the ankle. Some people also feel pain along the arch. Achilles tendinopathy tends to hurt at the back of the heel or lower calf, especially when loading the tendon. Your clinician will check where you are most tender.",
+                    },
+                ],
+            },
+            {
+                title: "How is plantar fasciitis diagnosed?",
+                content: [
+                    {
+                        text: "In most cases, diagnosis is clinical: your doctor or physiotherapist asks about your symptoms, examines where you are tender, and may watch you walk. If the story is typical and tenderness is in the usual place, plantar fasciitis can be diagnosed confidently in over 90% of cases without any scans. Imaging is usually reserved when the diagnosis is unclear or not improving as expected.",
+                    },
+                ],
+            },
+            {
+                title: "Do I need an ultrasound or MRI?",
+                content: [
+                    {
+                        text: "Usually not at first. Ultrasound is quick, inexpensive, and very good at showing plantar fascia thickening — it is the preferred first scan when imaging is needed. MRI is helpful when something else might be going on, such as a stress fracture, fascia rupture, nerve compression, or unusual swelling. If your pain is typical and you are following the basics, a scan seldom changes the first steps of treatment.",
+                    },
+                ],
+            },
+            {
+                title: "What else could cause my heel pain?",
+                content: [
+                    {
+                        text: "Problems affecting bone, nerve, joint, or tendon can all produce heel pain. The most common cause by far is plantar fasciitis. Less common possibilities include a calcaneal stress fracture, fat-pad bruising, tarsal tunnel syndrome, or Achilles tendinopathy at the insertion. If you are not improving, it is much more likely that load or stretching has not been adjusted enough than that you have a rare alternative diagnosis — but persistent or atypical pain deserves a proper review.",
+                    },
+                ],
+            },
+            {
+                title: "When should I get checked urgently?",
+                content: [
+                    {
+                        text: "Arrange urgent or routine medical review — whichever your situation warrants — if you have severe pain after an injury, cannot put weight through the foot, marked swelling or redness, fever, numbness, or symptoms that do not fit a simple plantar heel pain story. Also seek help if pain is worsening despite sensible self-care, or if you have followed the ",
+                    },
+                    {
+                        text: "foundation programme",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    {
+                        text: " properly for a fair period and are still stuck.",
+                    },
+                ],
+            },
+        ],
+    },
+    de: {
+        title: "Finden Sie Ihre Antwort:",
+        answers: [
+            {
+                title: "Woher weiß ich, ob ich eine Plantarfasziitis habe?",
+                content: [
+                    {
+                        text: "Eine sichere Selbstdiagnose per Webseite ist nicht möglich — aber das Muster ist oft erkennbar. Typisch sind Schmerz, Steifigkeit und Druckschmerz unter der Ferse oder am Fußgewölbe, oft am stärksten bei den ersten Schritten nach Ruhe. Schmerz hinten an der Wade passt eher zu Achilles-Problemen. Wenn das Muster passt, beginnen Sie mit ",
+                    },
+                    {
+                        text: "Stufe 1: Grundlagen",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    {
+                        text: " und lassen Sie sich untersuchen, wenn etwas untypisch wirkt.",
+                    },
+                ],
+            },
+            {
+                title: "Welche Symptome sind typisch?",
+                content: [
+                    {
+                        text: "Häufig sind Schmerz unter der Ferse, Steifigkeit nach Sitzen oder Schlafen und Druckschmerz an der vorderen Innenseite des Fersenbeins. Der Schmerz beginnt oft allmählich, kann aber auch plötzlich nach mehr Belastung, anderen Schuhen oder Gewichtszunahme auftreten. Schwellung ist meist mild im Vergleich zu einer akuten Verletzung.",
+                    },
+                ],
+            },
+            {
+                title: "Warum tut der erste Schritt morgens so weh?",
+                content: [
+                    {
+                        text: "Das ist ein klassisches Zeichen. Über Nacht können Plantarfaszie und Wade verkürzen und versteifen. Die ersten Schritte dehnen entlastetes Gewebe — oft stechender Schmerz, der beim Gehen nachlässt. Langsames Zehendehnen vor dem Aufstehen und stützende Schuhe helfen oft — siehe ",
+                    },
+                    {
+                        text: "Morgenroutine in Stufe 1",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "Wo genau tut Plantarfasziitis weh?",
+                content: [
+                    {
+                        text: "Der Schmerzpunkt sitzt meist unter der Ferse, wo die Plantarfaszie am Fersenbein ansetzt — nicht hinten am Sprunggelenk. Manche spüren auch Schmerz am Gewölbe. Achilles-Tendinopathie schmerzt eher hinten an der Ferse oder im unteren Wadenbereich, besonders bei Belastung. Ihr Behandler prüft, wo Sie am empfindlichsten sind.",
+                    },
+                ],
+            },
+            {
+                title: "Wie wird Plantarfasziitis diagnostiziert?",
+                content: [
+                    {
+                        text: "Meist klinisch: Anamnese, Druckschmerz, ggf. Gangbild. Bei typischem Verlauf und typischer Druckstelle kann Plantarfasziitis in über 90 % der Fälle ohne Bildgebung sicher diagnostiziert werden. Bildgebung bleibt für unklare Fälle oder ausbleibende Besserung.",
+                    },
+                ],
+            },
+            {
+                title: "Brauche ich Ultraschall oder MRT?",
+                content: [
+                    {
+                        text: "Meist nicht zuerst. Ultraschall ist schnell, günstig und gut für Verdickung der Plantarfaszie — bevorzugtes erstes Bild. MRT hilft, wenn etwas anderes möglich ist: Stressfraktur, Faszenriss, Nervenkompression oder ungewöhnliche Schwellung. Bei typischen Beschwerden und konsequenten Basics ändert ein Scan selten die ersten Behandlungsschritte.",
+                    },
+                ],
+            },
+            {
+                title: "Was könnte sonst meinen Fersenschmerz verursachen?",
+                content: [
+                    {
+                        text: "Knochen-, Nerven-, Gelenk- oder Sehnenprobleme können Fersenschmerz auslösen. Am häufigsten ist Plantarfasziitis. Seltener: Stressfraktur der Ferse, Fettpolster-Kontusion, Tarsaltunnelsyndrom oder Achillesanlagerung. Bei ausbleibender Besserung ist es wahrscheinlicher, dass Belastung oder Dehnung noch nicht angepasst wurden, als dass eine seltene Diagnose vorliegt — aber anhaltende oder untypische Schmerzen verdienen eine gründliche Abklärung.",
+                    },
+                ],
+            },
+            {
+                title: "Wann sollte ich dringend untersucht werden?",
+                content: [
+                    {
+                        text: "Lassen Sie sich dringend oder zeitnah untersuchen bei starkem Schmerz nach Verletzung, Unfähigkeit zu belasten, ausgeprägter Schwellung oder Rötung, Fieber, Taubheit oder wenn die Beschwerden nicht zu einfachem Plantarfersenschmerz passen. Auch bei Verschlechterung trotz sinnvoller Selbstfürsorge oder wenn Sie das ",
+                    },
+                    {
+                        text: "Grundlagenprogramm",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    {
+                        text: " ausreichend lange konsequent versucht haben ohne Fortschritt.",
+                    },
+                ],
+            },
+        ],
+    },
+    fr: {
+        title: "Trouvez votre réponse :",
+        answers: [
+            {
+                title: "Comment savoir si j’ai une fasciite plantaire ?",
+                content: [
+                    {
+                        text: "On ne peut pas se diagnostiquer sur une page web — mais le tableau est souvent reconnaissable. Douleur, raideur et sensibilité sous le talon ou le long de la voûte, souvent pires aux premiers pas après le repos. Une douleur à l’arrière du talon évoque plutôt l’Achille. Si le tableau vous parle, commencez ",
+                    },
+                    {
+                        text: "l’étape 1 : Fondations",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    {
+                        text: " et consultez si quelque chose semble atypique.",
+                    },
+                ],
+            },
+            {
+                title: "Quels sont les symptômes typiques ?",
+                content: [
+                    {
+                        text: "Douleur sous le talon, raideur après être assis ou au réveil, sensibilité à la pression sur l’avant interne du talon. La douleur débute souvent progressivement, parfois brutalement après un changement d’activité, de chaussures ou de poids. Le gonflement reste en général modéré.",
+                    },
+                ],
+            },
+            {
+                title: "Pourquoi la première foulée du matin fait-elle si mal ?",
+                content: [
+                    {
+                        text: "C’est un signe classique. La nuit, fascia et mollet peuvent se raccourcir. Les premiers pas étirent des tissus au repos — douleur vive qui diminue souvent en marchant. Étirement lent des orteils avant de se lever et chaussures de soutien aident souvent — voir ",
+                    },
+                    {
+                        text: "la routine matinale de l’étape 1",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "Où fait mal la fasciite plantaire exactement ?",
+                content: [
+                    {
+                        text: "La zone douloureuse est en général sous le talon, là où le fascia plantaire s’insère — pas à l’arrière de la cheville. Certains ressentent aussi une douleur le long de la voûte. La tendinopathie d’Achille fait plutôt mal à l’arrière du talon ou dans le mollet inférieur, surtout à la charge.",
+                    },
+                ],
+            },
+            {
+                title: "Comment diagnostique-t-on la fasciite plantaire ?",
+                content: [
+                    {
+                        text: "Le plus souvent cliniquement : interrogatoire, palpation, parfois observation de la marche. Si le tableau est typique, le diagnostic est fiable dans plus de 90 % des cas sans imagerie. L’imagerie est réservée aux cas douteux ou qui n’évoluent pas comme prévu.",
+                    },
+                ],
+            },
+            {
+                title: "Ai-je besoin d’une échographie ou d’une IRM ?",
+                content: [
+                    {
+                        text: "Pas en premier lieu, en général. L’échographie est rapide, peu coûteuse et montre bien l’épaississement du fascia — premier examen d’imagerie utile. L’IRM aide quand une autre cause est possible : fracture de fatigue, rupture, compression nerveuse ou gonflement inhabituel. Pour une douleur typique avec les bases bien suivies, un scan change rarement les premières étapes.",
+                    },
+                ],
+            },
+            {
+                title: "Qu’est-ce qui pourrait expliquer ma douleur au talon ?",
+                content: [
+                    {
+                        text: "Os, nerfs, articulations ou tendons peuvent tous provoquer une douleur au talon. La fasciite plantaire reste de loin la cause la plus fréquente. Plus rarement : fracture de stress, contusion du coussinet graisseux, syndrome du tunnel tarsien ou tendinopathie d’Achille. Si vous n’améliorez pas, il est plus probable que charge ou étirements n’aient pas encore été ajustés qu’il s’agisse d’un diagnostic rare — mais une douleur persistante ou atypique mérite un avis médical.",
+                    },
+                ],
+            },
+            {
+                title: "Quand consulter en urgence ?",
+                content: [
+                    {
+                        text: "Consultez en urgence ou rapidement en cas de douleur intense après traumatisme, d’impossibilité à supporter le poids, de gonflement ou rougeur marqués, de fièvre, d’engourdissement, ou si les symptômes ne correspondent pas à une simple douleur plantaire. Aussi si la douleur augmente malgré des soins raisonnables, ou si le ",
+                    },
+                    {
+                        text: "programme de fondations",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    {
+                        text: " a été suivi correctement pendant une période suffisante sans progrès.",
+                    },
+                ],
+            },
+        ],
+    },
+    es: {
+        title: "Encuentra tu respuesta:",
+        answers: [
+            {
+                title: "¿Cómo sé si tengo fascitis plantar?",
+                content: [
+                    {
+                        text: "No puedes diagnosticarte solo con una página web — pero el patrón suele ser reconocible. Dolor, rigidez y sensibilidad bajo el talón o a lo largo del arco, a menudo peor en los primeros pasos tras el reposo. El dolor detrás del talón encaja mejor con problemas del Aquiles. Si el cuadro te suena, empieza ",
+                    },
+                    {
+                        text: "Etapa 1: Fundamentos",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    {
+                        text: " y consulta si algo parece atípico.",
+                    },
+                ],
+            },
+            {
+                title: "¿Cuáles son los síntomas típicos?",
+                content: [
+                    {
+                        text: "Dolor bajo el talón, rigidez tras sentarse o dormir y sensibilidad al presionar la parte anterior interna del hueso del talón. El dolor suele comenzar gradualmente, aunque a veces aparece de repente tras más actividad, otros zapatos o aumento de peso. La hinchazón suele ser leve.",
+                    },
+                ],
+            },
+            {
+                title: "¿Por qué duele tanto el primer paso por la mañana?",
+                content: [
+                    {
+                        text: "Es un signo clásico. Por la noche, la fascia y la pantorrilla pueden acortarse. Los primeros pasos estiran tejidos en reposo — dolor agudo que a menudo cede al caminar. Un estiramiento lento de los dedos antes de levantarse y calzado de apoyo suelen ayudar — ver ",
+                    },
+                    {
+                        text: "la rutina matutina de la Etapa 1",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "¿Dónde duele exactamente la fascitis plantar?",
+                content: [
+                    {
+                        text: "El punto doloroso suele estar en la planta del talón, donde la fascia se une al hueso — no detrás del tobillo. Algunos también sienten dolor en el arco. La tendinopatía de Aquiles duele más atrás del talón o en la pantorrilla baja, especialmente al cargar. Tu clínico comprobará dónde eres más sensible.",
+                    },
+                ],
+            },
+            {
+                title: "¿Cómo se diagnostica la fascitis plantar?",
+                content: [
+                    {
+                        text: "En la mayoría de los casos es clínico: preguntas sobre síntomas, exploración de la zona sensible y a veces observación al caminar. Si el cuadro es típico, se puede diagnosticar con más del 90 % de confianza sin pruebas de imagen. La imagen se reserva cuando el diagnóstico es incierto o no mejoras como se esperaba.",
+                    },
+                ],
+            },
+            {
+                title: "¿Necesito ecografía o resonancia?",
+                content: [
+                    {
+                        text: "Normalmente no al principio. La ecografía es rápida, económica y muy útil para ver engrosamiento de la fascia — primera prueba de imagen cuando hace falta. La resonancia ayuda cuando podría haber otra causa: fractura por estrés, rotura, compresión nerviosa o hinchazón inusual. Con un dolor típico y lo básico bien hecho, una prueba rara vez cambia los primeros pasos.",
+                    },
+                ],
+            },
+            {
+                title: "¿Qué más podría causar mi dolor de talón?",
+                content: [
+                    {
+                        text: "Problemas de hueso, nervio, articulación o tendón pueden producir dolor de talón. La fascitis plantar es con diferencia la causa más común. Menos frecuentes: fractura por estrés, contusión del cojín graso, síndrome del túnel tarsiano o tendinopatía del Aquiles. Si no mejoras, es más probable que la carga o los estiramientos no estén bien ajustados que que tengas un diagnóstico raro — pero el dolor persistente o atípico merece revisión.",
+                    },
+                ],
+            },
+            {
+                title: "¿Cuándo debo acudir con urgencia?",
+                content: [
+                    {
+                        text: "Consulta con urgencia o de forma prioritaria si hay dolor intenso tras una lesión, no puedes apoyar el pie, hinchazón o enrojecimiento marcados, fiebre, entumecimiento o síntomas que no encajan con un dolor plantar simple. También si el dolor empeora a pesar del autocuidado sensato, o si has seguido el ",
+                    },
+                    {
+                        text: "programa de fundamentos",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    {
+                        text: " correctamente durante un tiempo razonable sin mejorar.",
+                    },
+                ],
+            },
+        ],
+    },
+    it: {
+        title: "Trova la tua risposta:",
+        answers: [
+            {
+                title: "Come faccio a sapere se ho la fascite plantare?",
+                content: [
+                    {
+                        text: "Non puoi diagnosticarti da una pagina web — ma il quadro è spesso riconoscibile. Dolore, rigidità e sensibilità sotto il tallone o lungo l’arco, spesso peggiori ai primi passi dopo il riposo. Il dolore dietro il tallone suggerisce piuttosto problemi dell’Achille. Se il quadro ti suona familiare, inizia ",
+                    },
+                    {
+                        text: "Fase 1: Fondamenta",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    {
+                        text: " e consulta se qualcosa sembra atipico.",
+                    },
+                ],
+            },
+            {
+                title: "Quali sono i sintomi tipici?",
+                content: [
+                    {
+                        text: "Dolore sotto il tallone, rigidità dopo essere seduti o al risveglio, sensibilità premendo la parte anteriore interna del calcagno. Il dolore inizia spesso gradualmente, a volte improvvisamente dopo più attività, scarpe diverse o aumento di peso. Il gonfiore è di solito lieve.",
+                    },
+                ],
+            },
+            {
+                title: "Perché il primo passo al mattino fa così male?",
+                content: [
+                    {
+                        text: "È un segno classico. Di notte fascia e polpaccio possono accorciarsi. I primi passi allungano tessuti a riposo — dolore acuto che spesso cala camminando. Un lento stretching delle dita prima di alzarsi e scarpe di supporto spesso aiutano — vedi ",
+                    },
+                    {
+                        text: "la routine mattutina della Fase 1",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "Dove fa male esattamente la fascite plantare?",
+                content: [
+                    {
+                        text: "Il punto dolente è di solito sotto il tallone, dove la fascia si inserisce sull’osso — non dietro la caviglia. Alcuni sentono dolore anche lungo l’arco. La tendinopatia dell’Achille fa più male dietro il tallone o nel polpaccio basso, soprattutto in carico. Il clinico verificherà dove sei più sensibile.",
+                    },
+                ],
+            },
+            {
+                title: "Come si diagnostica la fascite plantare?",
+                content: [
+                    {
+                        text: "Nella maggior parte dei casi è clinica: anamnesi, palpazione, a volite osservazione del passo. Se il quadro è tipico, la diagnosi è affidabile in oltre il 90 % dei casi senza imaging. L’imaging si riserva a casi incerti o che non migliorano come previsto.",
+                    },
+                ],
+            },
+            {
+                title: "Ho bisogno di ecografia o risonanza?",
+                content: [
+                    {
+                        text: "Di solito non subito. L’ecografia è rapida, economica e utile per lo ispessimento della fascia — primo esame quando serve imaging. La risonanza aiuta quando potrebbe esserci altro: frattura da stress, rottura, compressione nervosa o gonfiore insolito. Con dolore tipico e basi seguite bene, uno scan cambia raramente i primi passi.",
+                    },
+                ],
+            },
+            {
+                title: "Cos’altro potrebbe causare il mio dolore al tallone?",
+                content: [
+                    {
+                        text: "Problemi di osso, nervo, articolazione o tendine possono produrre dolore al tallone. La fascite plantare è di gran lunga la causa più comune. Più raramente: frattura da stress, contusione del cuscinetto adiposo, sindrome del tunnel tarsale o tendinopatia dell’Achille. Se non migliori, è più probabile che carico o stretching non siano ancora adeguati che una diagnosi rara — ma dolore persistente o atipico merita una valutazione.",
+                    },
+                ],
+            },
+            {
+                title: "Quando devo fare un controllo urgente?",
+                content: [
+                    {
+                        text: "Consulta con urgenza o tempestività in caso di dolore intenso dopo un trauma, impossibilità a caricare il piede, gonfiore o arrossamento marcati, febbre, intorpidimento, o sintomi che non corrispondono a un semplice dolore plantare. Anche se il dolore peggiora nonostante cure sensate, o se hai seguito il ",
+                    },
+                    {
+                        text: "programma di fondamenta",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    {
+                        text: " correttamente per un periodo ragionevole senza progressi.",
+                    },
+                ],
+            },
+        ],
+    },
+};
+---
+
+<FAQsSection content={content[lang]} />
