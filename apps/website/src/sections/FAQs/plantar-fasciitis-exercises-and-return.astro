@@ -1,0 +1,588 @@
+---
+import FAQsSection, {
+    type ContentWithLinks,
+} from "../../components/FAQsSection.astro";
+import type { Lang } from "../../config/languages";
+
+const { lang } = Astro.props as { lang: Lang };
+
+const content: Record<Lang, ContentWithLinks> = {
+    en: {
+        title: "Find your answer:",
+        answers: [
+            {
+                title: "When can I start exercises beyond stretching?",
+                content: [
+                    {
+                        text: "Add strengthening when morning first-step pain is easing, walking feels manageable in supportive shoes, and you have had a fair trial of the Stage 1 basics plus sensible load changes. You do not need zero pain — but symptoms should be stable or improving. Start with ",
+                    },
+                    {
+                        text: "Stage 3: Strengthening",
+                        href: "/guide/plantar-fasciitis/stage-3",
+                    },
+                    {
+                        text: " — not jumping straight to running.",
+                    },
+                ],
+            },
+            {
+                title: "What strengthening exercises help?",
+                content: [
+                    {
+                        text: "The most useful exercises are usually slow calf heel raises (bilateral first, then single-leg), plus simple foot control work such as towel scrunches and balance holds. These support the calf–heel unit that loads the plantar fascia. Our ",
+                    },
+                    {
+                        text: "Stage 3 guide",
+                        href: "/guide/plantar-fasciitis/stage-3",
+                    },
+                    {
+                        text: " has a week-by-week progression. Stretching from ",
+                    },
+                    {
+                        text: "Stage 1",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    {
+                        text: " should continue several times per week.",
+                    },
+                ],
+            },
+            {
+                title: "When can I return to running?",
+                content: [
+                    {
+                        text: "Not until walking is comfortable, strength work is progressing well, and symptoms recover within 24 hours after loading. Use a walk–run plan — for example jog 1 minute, walk 4 minutes, and build slowly over weeks. See ",
+                    },
+                    {
+                        text: "Stage 4: Return to activity",
+                        href: "/guide/plantar-fasciitis/stage-4",
+                    },
+                    {
+                        text: " for a structured progression. Pushing back to a full run because you feel good for one day is a common cause of relapse.",
+                    },
+                ],
+            },
+            {
+                title: "Can I use the gym or do other workouts?",
+                content: [
+                    {
+                        text: "Often yes, if you modify load. Cycling, swimming, and upper-body gym work are usually fine if they do not provoke heel pain. Avoid heavy jumping, long treadmill runs, and aggressive calf work until Stage 3 strength is established. Listen to the 24-hour rule: mild soreness that settles is different from worse morning pain the next day.",
+                    },
+                ],
+            },
+            {
+                title: "Should I keep stretching once I feel better?",
+                content: [
+                    {
+                        text: "Yes. Once pain settles, you can reduce how often you stretch — but do not stop completely. Several sessions per week of calf and plantar fascia mobility work act as preventative maintenance. Many relapses happen when stretching stops as soon as people feel better or return to sport.",
+                    },
+                ],
+            },
+            {
+                title: "How do I know if I'm doing too much?",
+                content: [
+                    {
+                        text: "Warning signs include sharper heel pain during exercise, worse first-step pain the next morning, or a week-on-week upward trend in symptoms. Mild muscle fatigue in the calf is fine; sharp pain at the heel is not. If symptoms flare, hold your current level for a week or step back to ",
+                    },
+                    {
+                        text: "Stage 2 load management",
+                        href: "/guide/plantar-fasciitis/stage-2",
+                    },
+                    { text: " before pushing again." },
+                ],
+            },
+            {
+                title: "What if pain flares when I return to activity?",
+                content: [
+                    {
+                        text: "Do not panic — but do not push through either. Drop back one level: shorter sessions, more walk breaks, or return to strength work only for a week. A single busy day flare usually means hold steady, not start from zero. If pain keeps worsening despite sensible changes, see our ",
+                    },
+                    {
+                        text: "diagnosis & symptoms FAQ",
+                        href: "/FAQs/plantar-fasciitis-diagnosis-and-symptoms",
+                    },
+                    {
+                        text: " and arrange a review if needed.",
+                    },
+                ],
+            },
+            {
+                title: "When can I return to sport?",
+                content: [
+                    {
+                        text: "Wait until easy jogging feels solid, heel raises and light hopping are comfortable, and morning pain stays manageable. Reintroduce sport at half pace and half duration first, then build over 2–3 weeks of pain-free sessions. ",
+                    },
+                    {
+                        text: "Stage 4",
+                        href: "/guide/plantar-fasciitis/stage-4",
+                    },
+                    {
+                        text: " covers walk–run and sport-specific return. The ",
+                    },
+                    {
+                        text: "plantar fasciitis course",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    {
+                        text: " walks through the full stepwise plan in more detail.",
+                    },
+                ],
+            },
+        ],
+    },
+    de: {
+        title: "Finden Sie Ihre Antwort:",
+        answers: [
+            {
+                title: "Wann kann ich über Dehnen hinaus trainieren?",
+                content: [
+                    {
+                        text: "Kräftigung, wenn Morgenschmerz nachlässt, Gehen in stützenden Schuhen gut geht und Stufe 1 plus sinnvolle Belastungsanpassung ausreichend waren. Null Schmerz ist nicht nötig — Beschwerden sollten stabil oder besser sein. Beginnen Sie mit ",
+                    },
+                    {
+                        text: "Stufe 3: Kräftigung",
+                        href: "/guide/plantar-fasciitis/stage-3",
+                    },
+                    { text: " — nicht direkt mit Laufen." },
+                ],
+            },
+            {
+                title: "Welche Kräftigungsübungen helfen?",
+                content: [
+                    {
+                        text: "Am nützlichsten sind langsame Waden-Fersenheben (zuerst beidbeinig, dann einbeinig) sowie einfache Fußkontrollübungen wie Handtuch-Krallen und Balance. Siehe ",
+                    },
+                    {
+                        text: "Stufe-3-Leitfaden",
+                        href: "/guide/plantar-fasciitis/stage-3",
+                    },
+                    {
+                        text: ". Dehnen aus ",
+                    },
+                    {
+                        text: "Stufe 1",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: " mehrmals pro Woche fortsetzen." },
+                ],
+            },
+            {
+                title: "Wann kann ich wieder laufen?",
+                content: [
+                    {
+                        text: "Erst wenn Gehen gut geht, Krafttraining vorankommt und Beschwerden innerhalb von 24 Stunden nach Belastung abklingen. Walk-Run-Plan nutzen — siehe ",
+                    },
+                    {
+                        text: "Stufe 4: Rückkehr zur Aktivität",
+                        href: "/guide/plantar-fasciitis/stage-4",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "Kann ich ins Fitnessstudio oder anderes Training?",
+                content: [
+                    {
+                        text: "Oft ja, mit angepasster Belastung. Radfahren, Schwimmen und Oberkörpertraining sind meist in Ordnung, wenn die Ferse nicht reagiert. Sprünge und lange Laufbandläufe erst nach Stufe-3-Kraft. 24-Stunden-Regel beachten.",
+                    },
+                ],
+            },
+            {
+                title: "Soll ich weiter dehnen, wenn es besser wird?",
+                content: [
+                    {
+                        text: "Ja. Häufigkeit reduzieren, aber nicht ganz aufhören. Mehrmals pro Woche Waden- und Plantarfaszie-Mobilität als Erhaltung. Viele Rückfälle entstehen, wenn Dehnen beim Besserwerden stoppt.",
+                    },
+                ],
+            },
+            {
+                title: "Woher weiß ich, dass es zu viel ist?",
+                content: [
+                    {
+                        text: "Warnzeichen: stärkerer Fersenschmerz beim Training, schlimmerer Morgenschmerz am nächsten Tag oder ansteigende Beschwerden über Wochen. Bei Schub eine Woche halten oder zurück zu ",
+                    },
+                    {
+                        text: "Stufe 2",
+                        href: "/guide/plantar-fasciitis/stage-2",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "Was, wenn es beim Zurückkehren zur Aktivität schmerzt?",
+                content: [
+                    {
+                        text: "Eine Stufe zurück: kürzere Einheiten, mehr Gehpausen oder eine Woche nur Kraft. Ein Tag Überlastung heißt meist halten, nicht von vorn. Bei anhaltender Verschlechterung ",
+                    },
+                    {
+                        text: "Diagnose-FAQ",
+                        href: "/FAQs/plantar-fasciitis-diagnosis-and-symptoms",
+                    },
+                    { text: " und ärztliche Abklärung." },
+                ],
+            },
+            {
+                title: "Wann kann ich wieder Sport machen?",
+                content: [
+                    {
+                        text: "Wenn lockeres Joggen stabil ist, Fersenheben und leichtes Hüpfen gut gehen und Morgenschmerz beherrschbar bleibt. Sport zuerst mit halber Intensität und Dauer. Siehe ",
+                    },
+                    {
+                        text: "Stufe 4",
+                        href: "/guide/plantar-fasciitis/stage-4",
+                    },
+                    {
+                        text: " und den ",
+                    },
+                    {
+                        text: "Plantarfasziitis-Kurs",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    { text: "." },
+                ],
+            },
+        ],
+    },
+    fr: {
+        title: "Trouvez votre réponse :",
+        answers: [
+            {
+                title: "Quand commencer au-delà des étirements ?",
+                content: [
+                    {
+                        text: "Ajoutez le renforcement quand la douleur matinale diminue, la marche est gérable en chaussures de soutien, et les bases de l’étape 1 ont eu un essai sérieux. Commencez par ",
+                    },
+                    {
+                        text: "l’étape 3 : Renforcement",
+                        href: "/guide/plantar-fasciitis/stage-3",
+                    },
+                    { text: " — pas la course directement." },
+                ],
+            },
+            {
+                title: "Quels exercices de renforcement aident ?",
+                content: [
+                    {
+                        text: "Les plus utiles sont les relevés de talon lents (deux pieds puis un pied), les froissements de serviette et l’équilibre. Voir le ",
+                    },
+                    {
+                        text: "guide étape 3",
+                        href: "/guide/plantar-fasciitis/stage-3",
+                    },
+                    {
+                        text: ". Maintenez les étirements de ",
+                    },
+                    {
+                        text: "l’étape 1",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: " plusieurs fois par semaine." },
+                ],
+            },
+            {
+                title: "Quand reprendre la course ?",
+                content: [
+                    {
+                        text: "Quand la marche est confortable, le renforcement progresse et les symptômes se résorbent en 24 h. Plan marche-course progressif — voir ",
+                    },
+                    {
+                        text: "étape 4 : Retour à l’activité",
+                        href: "/guide/plantar-fasciitis/stage-4",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "Puis-je aller à la salle ou faire d’autres sports ?",
+                content: [
+                    {
+                        text: "Souvent oui, en adaptant la charge. Vélo, natation et haut du corps conviennent souvent. Évitez sauts et longues courses sur tapis tant que l’étape 3 n’est pas établie. Règle des 24 heures.",
+                    },
+                ],
+            },
+            {
+                title: "Dois-je continuer à m’étirer une fois mieux ?",
+                content: [
+                    {
+                        text: "Oui. Réduisez la fréquence mais n’arrêtez pas. Plusieurs séances par semaine servent d’entretien. Beaucoup de rechutes surviennent quand les étirements cessent trop tôt.",
+                    },
+                ],
+            },
+            {
+                title: "Comment savoir si j’en fais trop ?",
+                content: [
+                    {
+                        text: "Signes d’alerte : douleur vive à l’exercice, pire douleur matinale le lendemain, ou aggravation semaine après semaine. En cas de poussée, maintenez le niveau ou revenez à ",
+                    },
+                    {
+                        text: "l’étape 2",
+                        href: "/guide/plantar-fasciitis/stage-2",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "Et si la douleur revient en reprenant l’activité ?",
+                content: [
+                    {
+                        text: "Reculez d’un cran : séances plus courtes, plus de marche, ou une semaine de renforcement seul. Une journée chargée signifie souvent tenir le cap. Si ça empire malgré tout, voir ",
+                    },
+                    {
+                        text: "FAQ diagnostic",
+                        href: "/FAQs/plantar-fasciitis-diagnosis-and-symptoms",
+                    },
+                    { text: " et consulter." },
+                ],
+            },
+            {
+                title: "Quand reprendre le sport ?",
+                content: [
+                    {
+                        text: "Quand le jogging facile est solide, relevés et petits sauts confortables, douleur matinale gérable. Reprenez à moitié vitesse et durée. Voir ",
+                    },
+                    {
+                        text: "étape 4",
+                        href: "/guide/plantar-fasciitis/stage-4",
+                    },
+                    {
+                        text: " et le ",
+                    },
+                    {
+                        text: "cours fasciite plantaire",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    { text: "." },
+                ],
+            },
+        ],
+    },
+    es: {
+        title: "Encuentra tu respuesta:",
+        answers: [
+            {
+                title: "¿Cuándo puedo hacer más que estiramientos?",
+                content: [
+                    {
+                        text: "Añada fortalecimiento cuando el dolor matutino mejore, caminar sea manejable con calzado de apoyo y haya probado bien la etapa 1. Empiece con ",
+                    },
+                    {
+                        text: "Etapa 3: Fortalecimiento",
+                        href: "/guide/plantar-fasciitis/stage-3",
+                    },
+                    { text: " — no corra de inmediato." },
+                ],
+            },
+            {
+                title: "¿Qué ejercicios de fortalecimiento ayudan?",
+                content: [
+                    {
+                        text: "Los más útiles suelen ser elevaciones de talón lentas (ambos pies, luego un pie), arrugado de toalla y equilibrio. Vea la ",
+                    },
+                    {
+                        text: "guía Etapa 3",
+                        href: "/guide/plantar-fasciitis/stage-3",
+                    },
+                    {
+                        text: ". Mantenga estiramientos de ",
+                    },
+                    {
+                        text: "Etapa 1",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: " varias veces por semana." },
+                ],
+            },
+            {
+                title: "¿Cuándo puedo volver a correr?",
+                content: [
+                    {
+                        text: "Cuando caminar sea cómodo, el fortalecimiento progrese y los síntomas se resuelvan en 24 horas. Plan caminar-correr — ver ",
+                    },
+                    {
+                        text: "Etapa 4: Volver a la actividad",
+                        href: "/guide/plantar-fasciitis/stage-4",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "¿Puedo ir al gimnasio u otros entrenamientos?",
+                content: [
+                    {
+                        text: "A menudo sí, adaptando la carga. Ciclismo, natación y tren superior suelen estar bien. Evite saltos y carreras largas en cinta hasta establecer la etapa 3. Regla de las 24 horas.",
+                    },
+                ],
+            },
+            {
+                title: "¿Debo seguir estirando cuando mejore?",
+                content: [
+                    {
+                        text: "Sí. Reduzca la frecuencia pero no pare del todo. Varias sesiones semanales son mantenimiento preventivo. Muchas recaídas ocurren al dejar los estiramientos al sentirse mejor.",
+                    },
+                ],
+            },
+            {
+                title: "¿Cómo sé si estoy haciendo demasiado?",
+                content: [
+                    {
+                        text: "Señales: dolor agudo al ejercitar, peor dolor matutino al día siguiente, o empeoramiento semana a semana. Si hay brote, mantenga el nivel o vuelva a ",
+                    },
+                    {
+                        text: "Etapa 2",
+                        href: "/guide/plantar-fasciitis/stage-2",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "¿Qué si duele al volver a la actividad?",
+                content: [
+                    {
+                        text: "Baje un nivel: sesiones más cortas, más caminar, o una semana solo de fuerza. Un día cargado suele significar mantener, no empezar de cero. Si empeora, ver ",
+                    },
+                    {
+                        text: "FAQ diagnóstico",
+                        href: "/FAQs/plantar-fasciitis-diagnosis-and-symptoms",
+                    },
+                    { text: " y consultar." },
+                ],
+            },
+            {
+                title: "¿Cuándo puedo volver al deporte?",
+                content: [
+                    {
+                        text: "Cuando el trote fácil sea sólido, elevaciones y saltos leves cómodos, y el dolor matutino manejable. Reintroduzca el deporte a mitad de ritmo y duración. Ver ",
+                    },
+                    {
+                        text: "Etapa 4",
+                        href: "/guide/plantar-fasciitis/stage-4",
+                    },
+                    {
+                        text: " y el ",
+                    },
+                    {
+                        text: "curso de fascitis plantar",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    { text: "." },
+                ],
+            },
+        ],
+    },
+    it: {
+        title: "Trova la tua risposta:",
+        answers: [
+            {
+                title: "Quando posso fare più degli stretching?",
+                content: [
+                    {
+                        text: "Aggiungete il rinforzo quando il dolore mattutino cala, la camminata è gestibile con scarpe di supporto e la fase 1 ha avuto una prova seria. Iniziate con ",
+                    },
+                    {
+                        text: "Fase 3: Rinforzo",
+                        href: "/guide/plantar-fasciitis/stage-3",
+                    },
+                    { text: " — non la corsa subito." },
+                ],
+            },
+            {
+                title: "Quali esercizi di rinforzo aiutano?",
+                content: [
+                    {
+                        text: "I più utili sono sollevamenti del tallone lenti (due piedi poi un piede), arricciamento asciugamano e equilibrio. Vedi la ",
+                    },
+                    {
+                        text: "guida Fase 3",
+                        href: "/guide/plantar-fasciitis/stage-3",
+                    },
+                    {
+                        text: ". Mantenete gli stretching della ",
+                    },
+                    {
+                        text: "Fase 1",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: " più volte a settimana." },
+                ],
+            },
+            {
+                title: "Quando posso tornare a correre?",
+                content: [
+                    {
+                        text: "Quando camminare è comodo, il rinforzo progredisce e i sintomi si risolvono entro 24 ore. Piano cammino-corsa — vedi ",
+                    },
+                    {
+                        text: "Fase 4: Ritorno all’attività",
+                        href: "/guide/plantar-fasciitis/stage-4",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "Posso andare in palestra o fare altro?",
+                content: [
+                    {
+                        text: "Spesso sì, adattando il carico. Ciclismo, nuoto e parte superiore di solito vanno bene. Evitate salti e lunghe corse sul tapis roulant finché la fase 3 non è stabile. Regola delle 24 ore.",
+                    },
+                ],
+            },
+            {
+                title: "Devo continuare a stirare quando sto meglio?",
+                content: [
+                    {
+                        text: "Sì. Riducete la frequenza ma non fermatevi del tutto. Più sessioni a settimana sono manutenzione preventiva. Molte ricadute accadono quando si smette di stirare appena si sta meglio.",
+                    },
+                ],
+            },
+            {
+                title: "Come capisco se sto esagerando?",
+                content: [
+                    {
+                        text: "Segnali: dolore acuto durante l’esercizio, peggior dolore mattutino il giorno dopo, o peggioramento settimana dopo settimana. Se c’è un flare, mantenete il livello o tornate alla ",
+                    },
+                    {
+                        text: "Fase 2",
+                        href: "/guide/plantar-fasciitis/stage-2",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "E se il dolore torna riprendendo l’attività?",
+                content: [
+                    {
+                        text: "Scendete di un livello: sessioni più brevi, più cammino, o una settimana solo di forza. Un giorno intenso di solito significa tenere il livello. Se peggiora, vedete ",
+                    },
+                    {
+                        text: "FAQ diagnosi",
+                        href: "/FAQs/plantar-fasciitis-diagnosis-and-symptoms",
+                    },
+                    { text: " e consultate." },
+                ],
+            },
+            {
+                title: "Quando posso tornare allo sport?",
+                content: [
+                    {
+                        text: "Quando il jogging leggero è solido, sollevamenti e piccoli salti comodi, dolore mattutino gestibile. Riprendete lo sport a metà ritmo e durata. Vedi ",
+                    },
+                    {
+                        text: "Fase 4",
+                        href: "/guide/plantar-fasciitis/stage-4",
+                    },
+                    {
+                        text: " e il ",
+                    },
+                    {
+                        text: "corso fascite plantare",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    { text: "." },
+                ],
+            },
+        ],
+    },
+};
+---
+
+<FAQsSection content={content[lang]} />
