@@ -6,6 +6,9 @@ import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import CourseBuyButton from "@/components/CourseBuyButton";
 import { SHOPIFY_COURSE_PRODUCTS } from "@/lib/shopify-course-price";
+import { COURSE_VARIANTS } from "@/lib/shopify/products";
+import VariantPriceDisplay from "@/components/shop/VariantPriceDisplay";
+import { ACHILLES_COURSE_PURCHASE_COUNT } from "@/content/course/achilles-rupture/stats";
 import InfiniteReviews from "@/components/reviews/InfiniteReviews.astro";
 import { Image as AstroImage } from "astro:assets";
 import Review1Image from "@/assets/review-1.png";
@@ -35,6 +38,10 @@ export interface Props {
 }
 
 const { lang = "en", t, lessonPreviews } = Astro.props;
+const purchaseProof = t.hero.purchaseProof.replace(
+    "{count}",
+    ACHILLES_COURSE_PURCHASE_COUNT,
+);
 ---
 
 
@@ -78,13 +85,29 @@ const { lang = "en", t, lessonPreviews } = Astro.props;
                             set:html={t.hero.subtitle}
                         />
                         <p
-                            class="mx-auto lg:mx-0 mb-8 max-w-2xl text-neutral-500 text-base"
+                            class="mx-auto lg:mx-0 mb-6 max-w-2xl text-neutral-500 text-base"
                             set:html={t.hero.subtitlePlain}
                         />
 
+                        <!-- Price -->
+                        <div
+                            class="flex flex-wrap justify-center lg:justify-start items-baseline gap-2 mb-6"
+                        >
+                            <VariantPriceDisplay
+                                client:load
+                                variantId={COURSE_VARIANTS.ESSENTIALS}
+                                size="lg"
+                                stripUsPrefix
+                                className="!mb-0"
+                            />
+                            <span class="text-neutral-500 text-lg">
+                                {t.hero.priceOneTime}
+                            </span>
+                        </div>
+
                         <!-- Primary CTA -->
                         <div
-                            class="flex sm:flex-row flex-col justify-center lg:justify-start gap-4 mb-6"
+                            class="flex sm:flex-row flex-col justify-center lg:justify-start gap-4 mb-3"
                         >
                             <CourseBuyButton
                                 productId={SHOPIFY_COURSE_PRODUCTS.ESSENTIALS_COURSE}
@@ -95,6 +118,12 @@ const { lang = "en", t, lessonPreviews } = Astro.props;
                                 {t.hero.cta}
                             </CourseBuyButton>
                         </div>
+
+                        <p
+                            class="mb-6 font-semibold text-neutral-700 text-sm text-center lg:text-left"
+                        >
+                            {purchaseProof}
+                        </p>
 
                         <!-- Trust Signals -->
                         <div
