@@ -5,19 +5,19 @@ import sharp from "sharp";
 const baseImagePath = path.join(
     process.cwd(),
     "output",
-    "review-graphic-josh-better-rest-v4-name-fixed.png",
+    "review-graphic-recent-patient-enjoyable-recovery-v2.png",
 );
 
 const outputPath = path.join(
     process.cwd(),
     "output",
-    "review-graphic-mark-night-splint-first-night-v7-josh-style.png",
+    "review-graphic-caius-kim-highly-recommended-v2.png",
 );
 
 const quote =
-    "Good morning after my first (and much better) night’s sleep with your Night Splint product… I’m glad I tried it. I hope it makes the long Achilles rupture repair journey easier.";
+    "Highly recommended! Makes the recovery from Achilles rupture more convenient and comfortable!";
 
-const name = "Mark";
+const name = "Caius Kim";
 const subtitle = "Achilles Rupture Recovery Patient";
 
 function escapeXml(value: string): string {
@@ -62,17 +62,14 @@ function textLines(lines: string[], startY: number, lineHeight: number): string 
 }
 
 const quoteLines = [
-    "'Good morning after my first",
-    "(and much better) night’s sleep",
-    "with your Night Splint product…",
-    "I’m glad I tried it. I hope it",
-    "makes the long Achilles rupture",
-    "repair journey easier.'",
+    "'Highly recommended! Makes the",
+    "recovery from Achilles rupture",
+    "more convenient and comfortable!'",
 ];
-const quoteStartY = 375;
-const quoteLineHeight = 40;
-const nameY = 674;
-const subtitleY = 742;
+const quoteStartY = 430;
+const quoteLineHeight = 42;
+const nameY = 610;
+const subtitleY = 678;
 
 const overlaySvg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="1024" height="1024" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg">

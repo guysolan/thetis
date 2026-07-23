@@ -53,3 +53,39 @@ export const PLANTAR_TREATMENT_ROUTE_DESCRIPTION: Record<Lang, string> = {
   es: "First-line care, supportive shoes and insoles, night splints and taping, injections, shockwave, and when surgery is considered.",
   it: "First-line care, supportive shoes and insoles, night splints and taping, injections, shockwave, and when surgery is considered.",
 };
+
+/** Plantar fasciitis stage 3 guide is published — match hub nav to guide metadata (EN copy for all locales until translated). */
+export const PLANTAR_STAGE_3_ROUTE_DESCRIPTION: Record<Lang, string> = {
+  en: "Calf and foot strength progressions: when to add loading exercises, heel raises, and building tolerance without flaring symptoms.",
+  de: "Calf and foot strength progressions: when to add loading exercises, heel raises, and building tolerance without flaring symptoms.",
+  fr: "Calf and foot strength progressions: when to add loading exercises, heel raises, and building tolerance without flaring symptoms.",
+  es: "Calf and foot strength progressions: when to add loading exercises, heel raises, and building tolerance without flaring symptoms.",
+  it: "Calf and foot strength progressions: when to add loading exercises, heel raises, and building tolerance without flaring symptoms.",
+};
+
+/** Plantar fasciitis stage 4 guide is published — match hub nav to guide metadata (EN copy for all locales until translated). */
+export const PLANTAR_STAGE_4_ROUTE_DESCRIPTION: Record<Lang, string> = {
+  en: "Building volume and returning to sport: walk–run progression, load rules, and when it is safe to push harder.",
+  de: "Building volume and returning to sport: walk–run progression, load rules, and when it is safe to push harder.",
+  fr: "Building volume and returning to sport: walk–run progression, load rules, and when it is safe to push harder.",
+  es: "Building volume and returning to sport: walk–run progression, load rules, and when it is safe to push harder.",
+  it: "Building volume and returning to sport: walk–run progression, load rules, and when it is safe to push harder.",
+};
+
+/** Plantar fasciitis exercises FAQ — match hub nav to published content (EN copy for all locales until translated). */
+export const PLANTAR_EXERCISES_ROUTE_DESCRIPTION: Record<Lang, string> = {
+  en: "When to add strength work, heel raises, returning to running and sport, and how to tell if you are doing too much.",
+  de: "When to add strength work, heel raises, returning to running and sport, and how to tell if you are doing too much.",
+  fr: "When to add strength work, heel raises, returning to running and sport, and how to tell if you are doing too much.",
+  es: "When to add strength work, heel raises, returning to running and sport, and how to tell if you are doing too much.",
+  it: "When to add strength work, heel raises, returning to running and sport, and how to tell if you are doing too much.",
+};
+
+/** Plantar fasciitis stage 5 guide is published — match hub nav to guide metadata (EN copy for all locales until translated). */
+export const PLANTAR_STAGE_5_ROUTE_DESCRIPTION: Record<Lang, string> = {
+  en: "Staying comfortable long-term: maintenance stretching, footwear habits, load awareness, and what to do if symptoms creep back.",
+  de: "Staying comfortable long-term: maintenance stretching, footwear habits, load awareness, and what to do if symptoms creep back.",
+  fr: "Staying comfortable long-term: maintenance stretching, footwear habits, load awareness, and what to do if symptoms creep back.",
+  es: "Staying comfortable long-term: maintenance stretching, footwear habits, load awareness, and what to do if symptoms creep back.",
+  it: "Staying comfortable long-term: maintenance stretching, footwear habits, load awareness, and what to do if symptoms creep back.",
+};
