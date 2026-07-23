@@ -5,6 +5,7 @@ import type { Lang } from "@/config/languages";
 import { getAlternateRoutesForSlug } from "@/content/routes";
 import { Image } from "astro:assets";
 import AchillesRuptureDrawing from "@/assets/drawings/achilles-drawing.svg";
+import PlantarFasciitisDrawing from "@/assets/drawings/plantar-fasciitis-side-view.png";
 import SubscribeBlock from "@/components/CTA/SubscribeBlock.astro";
 import CourseCTA from "@/components/CTA/CourseCTA.astro";
 import NightSplintAdvert from "@/components/products/night-splint/NightSplintAdvert.astro";
@@ -38,10 +39,22 @@ const {
     navPhases: navPhasesProp,
 } = Astro.props;
 const guidePhases = navPhasesProp ?? achillesRuptureGuideNavPhases;
-const learnHubHref = getLocalizedLearnHubHref(
-    lang,
-    getConditionIdFromGuideSlug(slug),
-);
+const conditionId = getConditionIdFromGuideSlug(slug);
+const isAchillesRuptureGuide = conditionId === "achilles-rupture";
+const isPlantarFasciitisGuide = conditionId === "plantar-fasciitis";
+const learnHubHref = getLocalizedLearnHubHref(lang, conditionId);
+
+const plantarFasciitisHeroAlt: Record<Lang, string> = {
+    en: "Side view of the foot showing plantar fascia inflammation at the heel",
+    de: "Seitenansicht des Fußes mit Plantarfaszie-Entzündung an der Ferse",
+    fr: "Vue latérale du pied montrant l'inflammation de la fascia plantaire au talon",
+    es: "Vista lateral del pie con inflamación de la fascia plantar en el talón",
+    it: "Vista laterale del piede con infiammazione della fascia plantare al tallone",
+};
+
+const layoutOgImage = isPlantarFasciitisGuide
+    ? "https://thetismedical.com/images/guide/plantar-fasciitis/plantar-fasciitis-side-view.png"
+    : "https://thetismedical.com/images/achilles-drawing-image.png";
 
 // Get current year dynamically
 const currentYear = new Date().getFullYear();
@@ -77,7 +90,7 @@ const nextPhase =
 <Layout
     title={titleWithYear}
     description={description}
-    image="https://thetismedical.com/images/achilles-drawing-image.png"
+    image={layoutOgImage}
     lang={lang}
     alternateLanguages={alternateLanguages}
 >
@@ -124,13 +137,25 @@ const nextPhase =
                         lang={lang}
                     />
                 </div>
-                <Image
-                    class="hidden lg:block flex-shrink-0 max-h-[50vh] object-contain"
-                    height={500}
-                    width={375}
-                    src={AchillesRuptureDrawing}
-                    alt="Achilles tendon illustration"
-                />
+                {
+                    isAchillesRuptureGuide ? (
+                        <Image
+                            class="hidden lg:block flex-shrink-0 max-h-[50vh] object-contain"
+                            height={500}
+                            width={375}
+                            src={AchillesRuptureDrawing}
+                            alt="Achilles tendon illustration"
+                        />
+                    ) : isPlantarFasciitisGuide ? (
+                        <Image
+                            class="hidden lg:block flex-shrink-0 max-h-[50vh] max-w-[331px] w-full object-contain"
+                            height={500}
+                            width={375}
+                            src={PlantarFasciitisDrawing}
+                            alt={plantarFasciitisHeroAlt[lang]}
+                        />
+                    ) : null
+                }
             </div>
         </section>
 
@@ -280,10 +305,10 @@ const nextPhase =
         </section>
 
         <!-- Course CTA -->
-        <CourseCTA lang={lang} variant="full" />
+        {isAchillesRuptureGuide ? <CourseCTA lang={lang} variant="full" /> : null}
 
         <!-- Night Splint Advert -->
-        <NightSplintAdvert lang={lang} />
+        {isAchillesRuptureGuide ? <NightSplintAdvert lang={lang} /> : null}
 
         <!-- Share Controls -->
         <ShareControls client:load />

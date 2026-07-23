@@ -18,6 +18,8 @@ export const achillesRuptureCourseTranslations = {
             subtitlePlain:
                 "We know recovery feels overwhelming. This course gives you clear, week-by-week guidance so you know exactly what to do—and what <em>not</em> to do—at every stage.",
             cta: "Start Your Safe Recovery →",
+            priceOneTime: "one-time payment",
+            purchaseProof: "{count} patients have purchased this course",
             trust1: "31 structured lessons",
             trust2: "Reviewed by foot & ankle specialists",
             trust3: "Based on 100+ research articles",
@@ -245,6 +247,8 @@ export const achillesRuptureCourseTranslations = {
             subtitlePlain:
                 "Vermeiden Sie die Fehler, die zu Sehnenverlängerung und Re-Ruptur führen. Erhalten Sie Expertenführung zu genau dem, was zu tun ist—und was <em>nicht</em> zu tun ist—in jeder Phase.",
             cta: "Starten Sie Ihre sichere Genesung →",
+            priceOneTime: "Einmalzahlung",
+            purchaseProof: "{count} Patienten haben diesen Kurs gekauft",
             trust1: "31 strukturierte Lektionen",
             trust2: "Von Fuß- & Sprunggelenk-Spezialisten überprüft",
             trust3: "Basierend auf 100+ Forschungsartikeln",
@@ -475,6 +479,8 @@ export const achillesRuptureCourseTranslations = {
             subtitlePlain:
                 "Évitez les erreurs qui causent l'élongation du tendon et la re-rupture. Obtenez des conseils d'experts sur exactement quoi faire—et quoi <em>ne pas</em> faire—à chaque étape.",
             cta: "Commencez votre récupération sécurisée →",
+            priceOneTime: "paiement unique",
+            purchaseProof: "{count} patients ont acheté ce cours",
             trust1: "31 leçons structurées",
             trust2: "Revu par des spécialistes du pied et de la cheville",
             trust3: "Basé sur 100+ articles de recherche",
@@ -711,6 +717,8 @@ export const achillesRuptureCourseTranslations = {
             subtitlePlain:
                 "Evite los errores que causan elongación del tendón y re-rotura. Obtenga orientación experta sobre exactamente qué hacer—y qué <em>no</em> hacer—en cada etapa.",
             cta: "Comience su recuperación segura →",
+            priceOneTime: "pago único",
+            purchaseProof: "{count} pacientes han comprado este curso",
             trust1: "31 lecciones estructuradas",
             trust2: "Revisado por especialistas en pie y tobillo",
             trust3: "Basado en 100+ artículos de investigación",
@@ -944,6 +952,8 @@ export const achillesRuptureCourseTranslations = {
             subtitlePlain:
                 "Evita gli errori che causano l'allungamento del tendine e la ri-rottura. Ottieni guida esperta su esattamente cosa fare—e cosa <em>non</em> fare—in ogni fase.",
             cta: "Inizia il tuo recupero sicuro →",
+            priceOneTime: "pagamento unico",
+            purchaseProof: "{count} pazienti hanno acquistato questo corso",
             trust1: "31 lezioni strutturate",
             trust2: "Revisionato da specialisti del piede e della caviglia",
             trust3: "Basato su 100+ articoli di ricerca",

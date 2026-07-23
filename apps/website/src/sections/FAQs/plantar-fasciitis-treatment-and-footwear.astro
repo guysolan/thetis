@@ -1,0 +1,474 @@
+---
+import FAQsSection, {
+    type ContentWithLinks,
+} from "../../components/FAQsSection.astro";
+import type { Lang } from "../../config/languages";
+
+const { lang } = Astro.props as { lang: Lang };
+
+const content: Record<Lang, ContentWithLinks> = {
+    en: {
+        title: "Find your answer:",
+        answers: [
+            {
+                title: "What is the best first-line treatment?",
+                content: [
+                    {
+                        text: "For most people, Level 1 basics work best: a simple daily stretching programme (slant-board calf stretches are especially effective), supportive footwear, sensible load management, and patience. There are no magic cures — boring consistency beats dramatic one-off treatments. Our ",
+                    },
+                    {
+                        text: "Stage 1: Foundation guide",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    {
+                        text: " covers the daily routine; ",
+                    },
+                    {
+                        text: "Stage 2",
+                        href: "/guide/plantar-fasciitis/stage-2",
+                    },
+                    {
+                        text: " covers adjusting activity if overuse is part of the problem.",
+                    },
+                ],
+            },
+            {
+                title: "What shoes should I wear?",
+                content: [
+                    {
+                        text: "Choose cushioned, supportive trainers or walking shoes — especially on hard floors. Avoid very flat flip-flops, thin sandals, and minimalist shoes while symptoms are active. Supportive slippers indoors are fine if bare feet on tile or wood provokes pain. Wear supportive shoes from the first step in the morning, not just when you go out.",
+                    },
+                ],
+            },
+            {
+                title: "Do I need insoles or custom orthotics?",
+                content: [
+                    {
+                        text: "Often a simple off-the-shelf arch-support insole is enough. Start in your most worn shoes, build up wear time over 1–2 weeks, and replace worn insoles when support flattens. Custom orthotics are usually not first-line unless simpler options have had a fair trial. If an insole feels too aggressive, try a softer or lower-profile option rather than giving up on support altogether.",
+                    },
+                ],
+            },
+            {
+                title: "Should I avoid walking barefoot?",
+                content: [
+                    {
+                        text: "While symptoms are active, yes — long periods barefoot on hard floors usually aggravate heel pain. That does not mean you must never be barefoot; it means being sensible at home and wearing something supportive when you are on your feet. Combine footwear changes with daily stretching — footwear alone rarely fixes the problem.",
+                    },
+                ],
+            },
+            {
+                title: "Do night splints or taping help?",
+                content: [
+                    {
+                        text: "Night splints do not have strong evidence, but some people find them useful alongside stretching — especially for morning first-step pain. A slow toe stretch before standing often helps too. Heel taping or arch taping is sometimes used in clinic to offload the fascia short-term; it can ease pain for a window but does not replace stretching, footwear, and load management.",
+                    },
+                ],
+            },
+            {
+                title: "Do steroid injections work?",
+                content: [
+                    {
+                        text: "Injections are Level 2 — not a substitute for giving Level 1 basics a proper trial (often months, not days). Rigorous trials suggest cortisone injections may give short-term pain relief but often no lasting difference by 8–12 weeks. Repeated injections carry risks your clinician should explain. If you are considering an injection, ask whether it is ultrasound-guided and what the plan is for rehabilitation afterwards.",
+                    },
+                ],
+            },
+            {
+                title: "What about shockwave therapy?",
+                content: [
+                    {
+                        text: "Shockwave therapy is another Level 2 option for persistent symptoms after a fair trial of the basics. Roughly six in ten patients report useful improvement, though nobody knows exactly how it works. It is usually delivered as a short course of sessions. Like injections, it works best as part of a broader plan — not instead of stretching and sensible footwear.",
+                    },
+                ],
+            },
+            {
+                title: "When is surgery needed?",
+                content: [
+                    {
+                        text: "Very rarely for straightforward plantar heel pain. Most people never need an operation if they give simple treatments a proper chance. Surgery is reserved for persistent cases after conservative care has been tried properly. If you are being offered surgery early, ask what Level 1 steps have been tried and for how long. See our ",
+                    },
+                    {
+                        text: "overview FAQ",
+                        href: "/FAQs/plantar-fasciitis-overview",
+                    },
+                    {
+                        text: " and the ",
+                    },
+                    {
+                        text: "plantar fasciitis course",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    {
+                        text: " for the stepwise approach.",
+                    },
+                ],
+            },
+        ],
+    },
+    de: {
+        title: "Finden Sie Ihre Antwort:",
+        answers: [
+            {
+                title: "Was ist die beste Erstbehandlung?",
+                content: [
+                    {
+                        text: "Für die meisten wirken Level-1-Basics am besten: einfaches tägliches Dehnprogramm (Schrägbrett-Wadendehnen besonders wirksam), stützendes Schuhwerk, sinnvolle Belastungssteuerung und Geduld. Keine Wundermittel — langweilige Konsequenz schlägt dramatische Einmal-Behandlungen. Unser ",
+                    },
+                    {
+                        text: "Stufe 1: Grundlagen-Leitfaden",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: " erklärt die Tagesroutine; " },
+                    {
+                        text: "Stufe 2",
+                        href: "/guide/plantar-fasciitis/stage-2",
+                    },
+                    {
+                        text: " passt die Aktivität an, wenn Überlastung mit im Spiel ist.",
+                    },
+                ],
+            },
+            {
+                title: "Welche Schuhe soll ich tragen?",
+                content: [
+                    {
+                        text: "Gedämpfte, stützende Turn- oder Wanderschuhe — besonders auf harten Böden. Vermeiden Sie flache Flip-Flops, dünne Sandalen und Minimalistenschuhe bei aktiven Beschwerden. Stützende Hausschuhe sind in Ordnung. Tragen Sie stützende Schuhe vom ersten Morgenschritt an, nicht nur draußen.",
+                    },
+                ],
+            },
+            {
+                title: "Brauche ich Einlagen oder Maßorthopädie?",
+                content: [
+                    {
+                        text: "Oft reicht eine einfache fertige Einlage mit Gewölbestütze. Beginnen Sie in den am häufigsten getragenen Schuhen, steigern Sie die Tragezeit über 1–2 Wochen und ersetzen Sie abgenutzte Einlagen. Maßorthopädie ist meist nicht erste Wahl. Fühlt sich eine Einlage zu aggressiv an, probieren Sie eine weichere Variante statt ganz aufzugeben.",
+                    },
+                ],
+            },
+            {
+                title: "Soll ich barfuß laufen vermeiden?",
+                content: [
+                    {
+                        text: "Bei aktiven Beschwerden ja — langes Barfußlaufen auf harten Böden verschlechtert meist den Fersenschmerz. Das heißt nicht nie barfuß; sein Sie zu Hause vernünftig und tragen Sie Stütze, wenn Sie auf den Beinen sind. Kombinieren Sie Schuhe mit täglichem Dehnen — Schuhe allein reichen selten.",
+                    },
+                ],
+            },
+            {
+                title: "Helfen Nachtschiene oder Taping?",
+                content: [
+                    {
+                        text: "Nachtschienen haben keine starke Evidenz, manche finden sie aber neben dem Dehnen hilfreich — besonders bei Morgenschmerz. Langsames Zehendehnen vor dem Aufstehen hilft oft. Fersen- oder Gewölbe-Taping kann kurzfristig entlasten, ersetzt aber nicht Dehnen, Schuhwerk und Belastungsmanagement.",
+                    },
+                ],
+            },
+            {
+                title: "Wirken Steroidinjektionen?",
+                content: [
+                    {
+                        text: "Injektionen sind Level 2 — kein Ersatz für einen echten Level-1-Versuch (oft Monate, nicht Tage). Studien deuten auf kurzfristige Schmerzlinderung hin, oft ohne anhaltenden Unterschied nach 8–12 Wochen. Wiederholte Injektionen haben Risiken. Fragen Sie nach Ultraschall-Führung und Rehabilitationsplan danach.",
+                    },
+                ],
+            },
+            {
+                title: "Was ist mit Stoßwellentherapie?",
+                content: [
+                    {
+                        text: "Stoßwellentherapie ist eine weitere Level-2-Option bei anhaltenden Beschwerden nach fairen Basics. Etwa sechs von zehn berichten über spürbare Besserung. Meist als kurze Serie von Sitzungen. Wie Injektionen wirkt sie am besten im Gesamtplan — nicht statt Dehnen und stützendem Schuhwerk.",
+                    },
+                ],
+            },
+            {
+                title: "Wann ist eine Operation nötig?",
+                content: [
+                    {
+                        text: "Sehr selten bei typischem Plantarfersenschmerz. Die meisten brauchen keine OP, wenn einfache Maßnahmen eine echte Chance bekommen. Operation bleibt für hartnäckige Fälle nach ordentlicher konservativer Therapie. Sehen Sie unsere ",
+                    },
+                    {
+                        text: "Übersicht-FAQ",
+                        href: "/FAQs/plantar-fasciitis-overview",
+                    },
+                    { text: " und den " },
+                    {
+                        text: "Plantarfasziitis-Kurs",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    { text: " für den schrittweisen Ansatz." },
+                ],
+            },
+        ],
+    },
+    fr: {
+        title: "Trouvez votre réponse :",
+        answers: [
+            {
+                title: "Quel est le meilleur traitement de première ligne ?",
+                content: [
+                    {
+                        text: "Pour la plupart, les bases du niveau 1 fonctionnent le mieux : étirements quotidiens simples (mollet sur planche inclinée surtout), chaussures de soutien, charge raisonnable et patience. Pas de miracle — la régularité simple bat les traitements spectaculaires. Notre ",
+                    },
+                    {
+                        text: "guide Étape 1 : Fondations",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: " détaille la routine ; " },
+                    {
+                        text: "l’étape 2",
+                        href: "/guide/plantar-fasciitis/stage-2",
+                    },
+                    {
+                        text: " ajuste l’activité si la surcharge joue un rôle.",
+                    },
+                ],
+            },
+            {
+                title: "Quelles chaussures porter ?",
+                content: [
+                    {
+                        text: "Baskets ou chaussures de marche amorties et de soutien — surtout sur sol dur. Évitez tongs très plates, sandales fines et chaussures minimalistes tant que les symptômes sont actifs. Chaussons de soutien à la maison conviennent. Portez des chaussures de soutien dès le premier pas du matin.",
+                    },
+                ],
+            },
+            {
+                title: "Ai-je besoin de semelles ou d’orthèses sur mesure ?",
+                content: [
+                    {
+                        text: "Souvent une semelle prête à l’emploi avec soutien de voûte suffit. Commencez dans vos chaussures les plus portées, augmentez progressivement sur 1–2 semaines, remplacez les semelles usées. Les orthèses sur mesure ne sont pas le premier recours. Si une semelle semble trop agressive, essayez une option plus douce.",
+                    },
+                ],
+            },
+            {
+                title: "Dois-je éviter de marcher pieds nus ?",
+                content: [
+                    {
+                        text: "Tant que les symptômes sont actifs, oui — longtemps pieds nus sur sol dur aggrave souvent la douleur. Cela ne signifie jamais pieds nus ; soyez raisonnable à la maison et portez du soutien debout. Associez chaussures et étirements quotidiens — les chaussures seules suffisent rarement.",
+                    },
+                ],
+            },
+            {
+                title: "Les attelles de nuit ou le strapping aident-ils ?",
+                content: [
+                    {
+                        text: "Les attelles nocturnes n’ont pas de forte preuve, mais certaines personnes les trouvent utiles avec les étirements — surtout pour la douleur matinale. Un étirement lent des orteils avant de se lever aide souvent. Le strapping peut soulager temporairement mais ne remplace pas étirements, chaussures et gestion de la charge.",
+                    },
+                ],
+            },
+            {
+                title: "Les injections de stéroïdes fonctionnent-elles ?",
+                content: [
+                    {
+                        text: "Les injections sont niveau 2 — pas un substitut à un vrai essai des bases (souvent des mois). Les essais rigoureux suggèrent un soulagement à court terme, souvent sans différence durable à 8–12 semaines. Les injections répétées ont des risques. Demandez si elles sont échoguidées et quel plan de rééducation suit.",
+                    },
+                ],
+            },
+            {
+                title: "Qu’en est-il des ondes de choc ?",
+                content: [
+                    {
+                        text: "Les ondes de choc sont une autre option niveau 2 si les bases n’ont pas suffi après un essai sérieux. Environ six personnes sur dix rapportent une amélioration utile. Généralement en quelques séances. Comme les injections, cela fonctionne mieux dans un plan global — pas à la place des étirements et chaussures de soutien.",
+                    },
+                ],
+            },
+            {
+                title: "Quand une opération est-elle nécessaire ?",
+                content: [
+                    {
+                        text: "Très rarement pour une douleur plantaire simple. La plupart n’ont jamais besoin d’opération si les traitements simples ont eu leur chance. La chirurgie est réservée aux cas persistants après soins conservateurs sérieux. Voir notre ",
+                    },
+                    {
+                        text: "FAQ aperçu",
+                        href: "/FAQs/plantar-fasciitis-overview",
+                    },
+                    { text: " et le " },
+                    {
+                        text: "cours fasciite plantaire",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    { text: " pour l’approche par étapes." },
+                ],
+            },
+        ],
+    },
+    es: {
+        title: "Encuentra tu respuesta:",
+        answers: [
+            {
+                title: "¿Cuál es el mejor tratamiento de primera línea?",
+                content: [
+                    {
+                        text: "Para la mayoría, lo básico del nivel 1 funciona mejor: estiramientos diarios simples (los de pantorrilla en tabla inclinada son especialmente eficaces), calzado de apoyo, carga sensata y paciencia. No hay curas milagrosas — la constancia simple supera tratamientos dramáticos. Nuestra ",
+                    },
+                    {
+                        text: "guía Etapa 1: Fundamentos",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: " cubre la rutina diaria; " },
+                    {
+                        text: "Etapa 2",
+                        href: "/guide/plantar-fasciitis/stage-2",
+                    },
+                    {
+                        text: " ajusta la actividad si el exceso de carga es parte del problema.",
+                    },
+                ],
+            },
+            {
+                title: "¿Qué zapatos debo usar?",
+                content: [
+                    {
+                        text: "Zapatillas o calzado de marcha acolchado y de apoyo — especialmente en suelos duros. Evite chanclas muy planas, sandalias finas y calzado minimalista mientras los síntomas estén activos. Pantuflas de apoyo en casa están bien. Use calzado de apoyo desde el primer paso por la mañana.",
+                    },
+                ],
+            },
+            {
+                title: "¿Necesito plantillas u ortesis a medida?",
+                content: [
+                    {
+                        text: "A menudo basta una plantilla sencilla de arch support. Empiece en los zapatos que más usa, aumente el tiempo de uso en 1–2 semanas y reemplace plantillas desgastadas. Las ortesis a medida no suelen ser lo primero. Si una plantilla se siente demasiado agresiva, pruebe una opción más suave.",
+                    },
+                ],
+            },
+            {
+                title: "¿Debo evitar caminar descalzo?",
+                content: [
+                    {
+                        text: "Con síntomas activos, sí — mucho tiempo descalzo en suelos duros suele empeorar el dolor. No significa nunca ir descalzo; sea sensato en casa y use apoyo cuando esté de pie. Combine calzado con estiramientos diarios — el calzado solo rara vez basta.",
+                    },
+                ],
+            },
+            {
+                title: "¿Ayudan las férulas nocturnas o el vendaje?",
+                content: [
+                    {
+                        text: "Las férulas nocturnas no tienen evidencia fuerte, pero algunas personas las encuentran útiles con los estiramientos — sobre todo para el dolor matutino. Un estiramiento lento de los dedos antes de levantarse suele ayudar. El vendaje puede aliviar a corto plazo pero no sustituye estiramientos, calzado y gestión de carga.",
+                    },
+                ],
+            },
+            {
+                title: "¿Funcionan las inyecciones de esteroides?",
+                content: [
+                    {
+                        text: "Las inyecciones son nivel 2 — no sustituyen una prueba real de lo básico (a menudo meses, no días). Los ensayos rigurosos sugieren alivio a corto plazo, a menudo sin diferencia duradera a las 8–12 semanas. Las inyecciones repetidas tienen riesgos. Pregunte si son guiadas por ecografía y qué plan de rehabilitación sigue.",
+                    },
+                ],
+            },
+            {
+                title: "¿Qué hay de la terapia de ondas de choque?",
+                content: [
+                    {
+                        text: "La ondas de choque es otra opción de nivel 2 para síntomas persistentes tras probar bien lo básico. Aproximadamente seis de cada diez reportan mejora útil. Suele darse en pocas sesiones. Como las inyecciones, funciona mejor dentro de un plan amplio — no en lugar de estiramientos y calzado de apoyo.",
+                    },
+                ],
+            },
+            {
+                title: "¿Cuándo hace falta cirugía?",
+                content: [
+                    {
+                        text: "Muy raramente para un dolor plantar sencillo. La mayoría nunca necesita operación si da una oportunidad real a los tratamientos simples. La cirugía queda para casos persistentes tras conservador serio. Vea nuestras ",
+                    },
+                    {
+                        text: "preguntas frecuentes de resumen",
+                        href: "/FAQs/plantar-fasciitis-overview",
+                    },
+                    { text: " y el " },
+                    {
+                        text: "curso de fascitis plantar",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    { text: " para el enfoque por etapas." },
+                ],
+            },
+        ],
+    },
+    it: {
+        title: "Trova la tua risposta:",
+        answers: [
+            {
+                title: "Qual è il miglior trattamento di prima linea?",
+                content: [
+                    {
+                        text: "Per la maggior parte, le basi del livello 1 funzionano meglio: stretching quotidiano semplice (polpaccio su pedana inclinata soprattutto), calzature di supporto, carico sensato e pazienza. Niente cure miracolose — la costanza semplice batte trattamenti drammatici. La nostra ",
+                    },
+                    {
+                        text: "guida Fase 1: Fondamenta",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: " copre la routine quotidiana; " },
+                    {
+                        text: "Fase 2",
+                        href: "/guide/plantar-fasciitis/stage-2",
+                    },
+                    {
+                        text: " regola l’attività se il sovraccarico è parte del problema.",
+                    },
+                ],
+            },
+            {
+                title: "Quali scarpe devo indossare?",
+                content: [
+                    {
+                        text: "Scarpe da ginnastica o da camminata ammortizzate e di supporto — soprattutto su pavimenti duri. Evitate infradito molto piatti, sandali sottili e scarpe minimaliste con sintomi attivi. Pantofole di supporto in casa vanno bene. Indossate scarpe di supporto dal primo passo del mattino.",
+                    },
+                ],
+            },
+            {
+                title: "Ho bisogno di plantari o ortesi su misura?",
+                content: [
+                    {
+                        text: "Spesso basta un plantare semplice da banco con supporto dell’arco. Iniziate nelle scarpe più usate, aumentate gradualmente in 1–2 settimane, sostituite plantari consumati. Le ortesi su misura di solito non sono il primo passo. Se un plantare sembra troppo aggressivo, provate una versione più morbida.",
+                    },
+                ],
+            },
+            {
+                title: "Devo evitare di camminare a piedi nudi?",
+                content: [
+                    {
+                        text: "Con sintomi attivi, sì — lunghi periodi a piedi nudi su pavimenti duri di solito peggiorano il dolore. Non significa mai piedi nudi; siate sensati in casa e usate supporto quando siete in piedi. Abbinate calzature e stretching quotidiano — le scarpe da sole raramente bastano.",
+                    },
+                ],
+            },
+            {
+                title: "Stecche notturne o taping aiutano?",
+                content: [
+                    {
+                        text: "Le stecche notturne non hanno evidenza forte, ma alcuni le trovano utili con lo stretching — soprattutto per il dolore mattutino. Un lento stretching delle dita prima di alzarsi spesso aiuta. Il taping può alleggerire a breve ma non sostituisce stretching, calzature e gestione del carico.",
+                    },
+                ],
+            },
+            {
+                title: "Le iniezioni di steroidi funzionano?",
+                content: [
+                    {
+                        text: "Le iniezioni sono livello 2 — non sostituiscono una prova seria delle basi (spesso mesi, non giorni). Studi rigorosi suggeriscono sollievo a breve termine, spesso senza differenza duratura a 8–12 settimane. Iniezioni ripetute hanno rischi. Chiedete se sono ecoguidate e quale piano di riabilitazione segue.",
+                    },
+                ],
+            },
+            {
+                title: "E la terapia con onde d’urto?",
+                content: [
+                    {
+                        text: "Le onde d’urto sono un’altra opzione di livello 2 per sintomi persistenti dopo una prova seria delle basi. Circa sei su dieci riportano miglioramento utile. Di solito in poche sedute. Come le iniezioni, funziona meglio in un piano più ampio — non al posto di stretching e calzature di supporto.",
+                    },
+                ],
+            },
+            {
+                title: "Quando serve un intervento?",
+                content: [
+                    {
+                        text: "Molto raramente per un dolore plantare semplice. La maggior parte non ha mai bisogno di chirurgia se dà una vera possibilità ai trattamenti semplici. L’intervento è per casi persistenti dopo cure conservative serie. Vedi le nostre ",
+                    },
+                    {
+                        text: "FAQ panoramica",
+                        href: "/FAQs/plantar-fasciitis-overview",
+                    },
+                    { text: " e il " },
+                    {
+                        text: "corso fascite plantare",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    { text: " per l’approccio a fasi." },
+                ],
+            },
+        ],
+    },
+};
+---
+
+<FAQsSection content={content[lang]} />

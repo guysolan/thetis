@@ -3,17 +3,26 @@ import type { BaseRoute } from "./types";
 import { CONDITION_LEARN_HUB_DESCRIPTION } from "../condition-hub-copy";
 import {
     COMING_SOON_ROUTE_DESCRIPTION,
+    PLANTAR_DIAGNOSIS_ROUTE_DESCRIPTION,
+    PLANTAR_OVERVIEW_ROUTE_DESCRIPTION,
     PLANTAR_STAGE_1_ROUTE_DESCRIPTION,
+    PLANTAR_STAGE_2_ROUTE_DESCRIPTION,
+    PLANTAR_STAGE_3_ROUTE_DESCRIPTION,
+    PLANTAR_STAGE_4_ROUTE_DESCRIPTION,
+    PLANTAR_TREATMENT_ROUTE_DESCRIPTION,
+    PLANTAR_EXERCISES_ROUTE_DESCRIPTION,
+    PLANTAR_STAGE_5_ROUTE_DESCRIPTION,
 } from "./coming-soon-copy";
 
 const pfFaq = (
     slug: string,
     title: Record<string, string>,
+    desc: Record<string, string> = COMING_SOON_ROUTE_DESCRIPTION,
 ): BaseRoute => ({
     conditionId: "plantar-fasciitis",
     slug: `FAQs/${slug}`,
     title,
-    description: COMING_SOON_ROUTE_DESCRIPTION,
+    description: desc,
     slugTranslations: {
         en: `FAQs/${slug}`,
         de: `FAQs/${slug}`,
@@ -65,7 +74,7 @@ export const plantarFasciitisGuideRoutes: BaseRoute[] = [
             es: "Plantar fasciitis — Stage 2: Subacute / loading",
             it: "Plantar fasciitis — Stage 2: Subacute / loading",
         },
-        COMING_SOON_ROUTE_DESCRIPTION,
+        PLANTAR_STAGE_2_ROUTE_DESCRIPTION,
     ),
     ph(
         "stage-3",
@@ -76,7 +85,7 @@ export const plantarFasciitisGuideRoutes: BaseRoute[] = [
             es: "Plantar fasciitis — Stage 3: Strengthening",
             it: "Plantar fasciitis — Stage 3: Strengthening",
         },
-        COMING_SOON_ROUTE_DESCRIPTION,
+        PLANTAR_STAGE_3_ROUTE_DESCRIPTION,
     ),
     ph(
         "stage-4",
@@ -87,7 +96,7 @@ export const plantarFasciitisGuideRoutes: BaseRoute[] = [
             es: "Plantar fasciitis — Stage 4: Return to activity",
             it: "Plantar fasciitis — Stage 4: Return to activity",
         },
-        COMING_SOON_ROUTE_DESCRIPTION,
+        PLANTAR_STAGE_4_ROUTE_DESCRIPTION,
     ),
     ph(
         "stage-5",
@@ -98,7 +107,7 @@ export const plantarFasciitisGuideRoutes: BaseRoute[] = [
             es: "Plantar fasciitis — Stage 5: Maintenance & long-term",
             it: "Plantar fasciitis — Stage 5: Maintenance & long-term",
         },
-        COMING_SOON_ROUTE_DESCRIPTION,
+        PLANTAR_STAGE_5_ROUTE_DESCRIPTION,
     ),
 ];
 
@@ -127,34 +136,50 @@ export const plantarFasciitisGuideHubNavRoute: BaseRoute = {
 
 /** FAQ routes — plantar fasciitis */
 export const plantarFasciitisArticleRoutes: BaseRoute[] = [
-    pfFaq("plantar-fasciitis-overview", {
-        en: "Plantar fasciitis — overview",
-        de: "Plantar fasciitis — overview",
-        fr: "Plantar fasciitis — overview",
-        es: "Plantar fasciitis — overview",
-        it: "Plantar fasciitis — overview",
-    }),
-    pfFaq("plantar-fasciitis-diagnosis-and-symptoms", {
-        en: "Plantar fasciitis — diagnosis & symptoms",
-        de: "Plantar fasciitis — diagnosis & symptoms",
-        fr: "Plantar fasciitis — diagnosis & symptoms",
-        es: "Plantar fasciitis — diagnosis & symptoms",
-        it: "Plantar fasciitis — diagnosis & symptoms",
-    }),
-    pfFaq("plantar-fasciitis-treatment-and-footwear", {
-        en: "Plantar fasciitis — treatment & footwear",
-        de: "Plantar fasciitis — treatment & footwear",
-        fr: "Plantar fasciitis — treatment & footwear",
-        es: "Plantar fasciitis — treatment & footwear",
-        it: "Plantar fasciitis — treatment & footwear",
-    }),
-    pfFaq("plantar-fasciitis-exercises-and-return", {
-        en: "Plantar fasciitis — exercises & return to activity",
-        de: "Plantar fasciitis — exercises & return to activity",
-        fr: "Plantar fasciitis — exercises & return to activity",
-        es: "Plantar fasciitis — exercises & return to activity",
-        it: "Plantar fasciitis — exercises & return to activity",
-    }),
+    pfFaq(
+        "plantar-fasciitis-overview",
+        {
+            en: "Plantar fasciitis — overview",
+            de: "Plantar fasciitis — overview",
+            fr: "Plantar fasciitis — overview",
+            es: "Plantar fasciitis — overview",
+            it: "Plantar fasciitis — overview",
+        },
+        PLANTAR_OVERVIEW_ROUTE_DESCRIPTION,
+    ),
+    pfFaq(
+        "plantar-fasciitis-diagnosis-and-symptoms",
+        {
+            en: "Plantar fasciitis — diagnosis & symptoms",
+            de: "Plantar fasciitis — diagnosis & symptoms",
+            fr: "Plantar fasciitis — diagnosis & symptoms",
+            es: "Plantar fasciitis — diagnosis & symptoms",
+            it: "Plantar fasciitis — diagnosis & symptoms",
+        },
+        PLANTAR_DIAGNOSIS_ROUTE_DESCRIPTION,
+    ),
+    pfFaq(
+        "plantar-fasciitis-treatment-and-footwear",
+        {
+            en: "Plantar fasciitis — treatment & footwear",
+            de: "Plantar fasciitis — treatment & footwear",
+            fr: "Plantar fasciitis — treatment & footwear",
+            es: "Plantar fasciitis — treatment & footwear",
+            it: "Plantar fasciitis — treatment & footwear",
+        },
+        PLANTAR_TREATMENT_ROUTE_DESCRIPTION,
+    ),
+    pfFaq(
+        "plantar-fasciitis-exercises-and-return",
+        {
+            en: "Plantar fasciitis — exercises & return to activity",
+            de: "Plantar fasciitis — exercises & return to activity",
+            fr: "Plantar fasciitis — exercises & return to activity",
+            es: "Plantar fasciitis — exercises & return to activity",
+            it: "Plantar fasciitis — exercises & return to activity",
+        },
+        PLANTAR_EXERCISES_ROUTE_DESCRIPTION,
+    ),
 ];
 
 export const plantarFasciitisCourseRoutes: BaseRoute[] = [

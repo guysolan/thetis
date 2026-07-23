@@ -1,0 +1,434 @@
+---
+import FAQsSection, {
+    type ContentWithLinks,
+} from "../../components/FAQsSection.astro";
+import type { Lang } from "../../config/languages";
+
+const { lang } = Astro.props as { lang: Lang };
+
+const content: Record<Lang, ContentWithLinks> = {
+    en: {
+        title: "Find your answer:",
+        answers: [
+            {
+                title: "What is plantar fasciitis?",
+                content: [
+                    {
+                        text: "Plantar fasciitis is pain from the strong band of tissue under the foot — the plantar fascia — where it attaches to the heel bone. It is one of the most common causes of heel pain. The pain is usually felt under the heel or along the arch, not at the back of the ankle (that pattern fits better with Achilles problems). For the first practical steps, see our ",
+                    },
+                    {
+                        text: "Stage 1: Foundation guide",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    {
+                        text: ".",
+                    },
+                ],
+            },
+            {
+                title: "Will my heel pain get better?",
+                content: [
+                    {
+                        text: "In the vast majority of cases, yes. Plantar fasciitis is usually self-limiting: it tends to settle with time. Many people improve even without formal treatment, but the right basics — stretching, supportive footwear, and sensible load — usually speed things up. There are no magic cures; boring consistency beats dramatic one-off treatments.",
+                    },
+                ],
+            },
+            {
+                title: "Why is the first step in the morning so painful?",
+                content: [
+                    {
+                        text: "This is a classic feature. After rest, the plantar fascia and calf can stiffen overnight. The first few steps stretch tissues that have shortened while you were off your feet, which causes a sharp pain that often eases as you get moving. A slow toe stretch before standing, supportive shoes from the first step, and daily calf stretching (especially on a slant board) often help — see ",
+                    },
+                    {
+                        text: "Stage 1: Foundation",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    {
+                        text: " for the full routine.",
+                    },
+                ],
+            },
+            {
+                title: "How long does plantar fasciitis last?",
+                content: [
+                    {
+                        text: "It varies. Some people notice early improvement within a few weeks once they follow a simple daily programme. Others need several months. \"Chronic\" means it has lasted longer than you hoped — not that you are sentenced to lifelong pain. If Level 1 basics have had a fair trial (often months, not days) and you are still stuck, that is when scans, injections, or other options are worth discussing with your clinician.",
+                    },
+                ],
+            },
+            {
+                title: "What should I do first?",
+                content: [
+                    {
+                        text: "Start with the foundation work: a simple daily stretching programme (slant-board calf stretches are especially effective), supportive footwear, avoiding long periods barefoot on hard floors, and building any changes gradually. Our ",
+                    },
+                    {
+                        text: "plantar fasciitis learn hub",
+                        href: "/learn/plantar-fasciitis",
+                    },
+                    {
+                        text: " links the staged guides and FAQs, and the ",
+                    },
+                    {
+                        text: "plantar fasciitis course",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    {
+                        text: " walks through the same approach in more detail.",
+                    },
+                ],
+            },
+            {
+                title: "Do I need an injection or surgery?",
+                content: [
+                    {
+                        text: "Usually not at first. Injections can sometimes reduce pain for a window but seldom replace the fundamentals, and they carry risks your clinician should explain. Surgery is very rarely necessary for straightforward plantar heel pain. Most people never need an operation if they give the simple treatments a proper chance.",
+                    },
+                ],
+            },
+            {
+                title: "When should I see a doctor?",
+                content: [
+                    {
+                        text: "Arrange a review if you have severe pain after an injury, cannot put weight through the foot, marked swelling or redness, fever, numbness, or symptoms that do not fit a simple plantar heel pain story. Also seek help if you have followed the basics properly for a fair period and are not improving, or if pain is worsening despite sensible self-care.",
+                    },
+                ],
+            },
+        ],
+    },
+    de: {
+        title: "Finden Sie Ihre Antwort:",
+        answers: [
+            {
+                title: "Was ist eine Plantarfasziitis?",
+                content: [
+                    {
+                        text: "Die Plantarfasziitis ist Schmerz von der kräftigen Gewebebahn unter dem Fuß — der Plantarfaszie — dort, wo sie am Fersenbein ansetzt. Sie gehört zu den häufigsten Ursachen für Fersenschmerz. Der Schmerz sitzt meist unter der Ferse oder entlang des Fußgewölbes, nicht hinten an der Wade (das passt eher zu Achilles-Problemen). Die ersten praktischen Schritte finden Sie in unserem ",
+                    },
+                    {
+                        text: "Stufe 1: Grundlagen-Leitfaden",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "Werden meine Fersenschmerzen besser?",
+                content: [
+                    {
+                        text: "In der überwiegenden Mehrheit der Fälle ja. Plantarfasziitis ist meist selbstlimitierend: Sie klingt mit der Zeit ab. Viele verbessern sich auch ohne formelle Behandlung, aber die richtigen Basics — Dehnen, stützendes Schuhwerk und sinnvolle Belastung — beschleunigen die Erholung meist. Es gibt keine Wundermittel; langweilige Konsequenz schlägt dramatische Einmal-Behandlungen.",
+                    },
+                ],
+            },
+            {
+                title: "Warum tut der erste Schritt morgens so weh?",
+                content: [
+                    {
+                        text: "Das ist typisch. Nach Ruhe können Plantarfaszie und Wade über Nacht versteifen. Die ersten Schritte dehnen Gewebe, das sich verkürzt hat — das verursacht einen stechenden Schmerz, der oft nachlässt, wenn Sie in Bewegung kommen. Ein langsames Zehendehnen vor dem Aufstehen, stützende Schuhe vom ersten Schritt an und tägliches Wadendehnen (besonders auf einem Schrägbrett) helfen oft — siehe ",
+                    },
+                    {
+                        text: "Stufe 1: Grundlagen",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: " für das vollständige Programm." },
+                ],
+            },
+            {
+                title: "Wie lange dauert eine Plantarfasziitis?",
+                content: [
+                    {
+                        text: "Das ist individuell. Manche merken erste Besserung innerhalb weniger Wochen mit einem einfachen Tagesprogramm. Andere brauchen mehrere Monate. „Chronisch“ heißt nur, dass es länger dauert als erhofft — nicht, dass der Schmerz lebenslang bleibt. Wenn Level-1-Basics ausreichend lange (oft Monate, nicht Tage) versucht wurden und Sie feststecken, lohnt sich das Gespräch über weitere Schritte.",
+                    },
+                ],
+            },
+            {
+                title: "Was soll ich zuerst tun?",
+                content: [
+                    {
+                        text: "Beginnen Sie mit den Grundlagen: ein einfaches tägliches Dehnprogramm (Schrägbrett-Wadendehnen ist besonders wirksam), stützendes Schuhwerk, wenig Barfußlaufen auf harten Böden und alles schrittweise steigern. Unser ",
+                    },
+                    {
+                        text: "Plantarfasziitis-Lern-Hub",
+                        href: "/learn/plantar-fasciitis",
+                    },
+                    {
+                        text: " verlinkt gestaffelte Leitfäden und FAQs, und der ",
+                    },
+                    {
+                        text: "Plantarfasziitis-Kurs",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    { text: " führt denselben Ansatz ausführlicher durch." },
+                ],
+            },
+            {
+                title: "Brauche ich eine Injektion oder Operation?",
+                content: [
+                    {
+                        text: "Meist nicht zuerst. Injektionen können manchmal Schmerz für eine Weile lindern, ersetzen aber selten die Grundlagen und haben Risiken. Eine Operation ist bei typischem Plantarfersenschmerz sehr selten nötig. Die meisten brauchen keine OP, wenn sie einfachen Maßnahmen eine echte Chance geben.",
+                    },
+                ],
+            },
+            {
+                title: "Wann sollte ich zum Arzt?",
+                content: [
+                    {
+                        text: "Lassen Sie sich untersuchen bei starkem Schmerz nach einer Verletzung, wenn Sie nicht belasten können, ausgeprägter Schwellung oder Rötung, Fieber, Taubheit oder wenn die Beschwerden nicht zu einfachem Plantarfersenschmerz passen. Auch bei ausbleibender Besserung trotz konsequenter Basics oder zunehmenden Schmerzen trotz sinnvoller Selbstfürsorge.",
+                    },
+                ],
+            },
+        ],
+    },
+    fr: {
+        title: "Trouvez votre réponse :",
+        answers: [
+            {
+                title: "Qu’est-ce que la fasciite plantaire ?",
+                content: [
+                    {
+                        text: "La fasciite plantaire est une douleur liée au bandeau résistant sous le pied — la fascia plantaire — là où il s’attache au talon. C’est l’une des causes les plus fréquentes de douleur au talon. La douleur se situe en général sous le talon ou le long de la voûte, pas à l’arrière de la cheville (ce schéma évoque plutôt l’Achille). Pour les premières étapes pratiques, voir notre ",
+                    },
+                    {
+                        text: "guide Étape 1 : Fondations",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "Ma douleur au talon va-t-elle s’améliorer ?",
+                content: [
+                    {
+                        text: "Dans la grande majorité des cas, oui. La fasciite plantaire est en général auto-limitée : elle tend à s’apaiser avec le temps. Beaucoup s’améliorent sans traitement formel, mais les bons réflexes — étirements, chaussures de soutien et charge raisonnable — accélèrent souvent la récupération. Pas de miracle : la régularité simple bat les traitements spectaculaires ponctuels.",
+                    },
+                ],
+            },
+            {
+                title: "Pourquoi la première foulée du matin fait-elle si mal ?",
+                content: [
+                    {
+                        text: "C’est un signe classique. Au repos, fascia et mollet peuvent se raidir la nuit. Les premiers pas étirent des tissus raccourcis — d’où une douleur vive qui diminue souvent en marchant. Un étirement lent des orteils avant de se lever, des chaussures de soutien dès le premier pas et des étirements quotidiens du mollet (surtout sur planche inclinée) aident souvent — voir ",
+                    },
+                    {
+                        text: "Étape 1 : Fondations",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: " pour le programme complet." },
+                ],
+            },
+            {
+                title: "Combien de temps dure la fasciite plantaire ?",
+                content: [
+                    {
+                        text: "Cela varie. Certaines personnes voient une amélioration en quelques semaines avec un programme quotidien simple. D’autres ont besoin de plusieurs mois. « Chronique » signifie que cela dure plus longtemps qu’espéré — pas une condamnation à vie. Si les bases du niveau 1 ont été essayées sérieusement (souvent des mois, pas des jours) sans progrès, il est temps d’en discuter avec un professionnel.",
+                    },
+                ],
+            },
+            {
+                title: "Que faire en premier ?",
+                content: [
+                    {
+                        text: "Commencez par les fondations : étirements quotidiens simples (mollet sur planche inclinée surtout), chaussures de soutien, éviter longtemps pieds nus sur sol dur, et progresser graduellement. Notre ",
+                    },
+                    {
+                        text: "espace fasciite plantaire",
+                        href: "/learn/plantar-fasciitis",
+                    },
+                    {
+                        text: " regroupe guides par étapes et FAQ, et le ",
+                    },
+                    {
+                        text: "cours fasciite plantaire",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    { text: " détaille la même approche." },
+                ],
+            },
+            {
+                title: "Ai-je besoin d’une injection ou d’une opération ?",
+                content: [
+                    {
+                        text: "Pas en premier lieu, en général. Les injections peuvent parfois soulager temporairement mais remplacent rarement les fondamentaux et comportent des risques. La chirurgie est très rarement nécessaire pour une douleur plantaire simple. La plupart n’ont jamais besoin d’opération si les traitements simples ont eu leur chance.",
+                    },
+                ],
+            },
+            {
+                title: "Quand consulter un médecin ?",
+                content: [
+                    {
+                        text: "Consultez en cas de douleur intense après un traumatisme, d’impossibilité à supporter le poids, de gonflement ou rougeur marqués, de fièvre, d’engourdissement, ou si les symptômes ne correspondent pas à une simple douleur plantaire. Aussi si les bases correctes n’améliorent pas la situation après un essai suffisant, ou si la douleur augmente malgré des soins raisonnables.",
+                    },
+                ],
+            },
+        ],
+    },
+    es: {
+        title: "Encuentra tu respuesta:",
+        answers: [
+            {
+                title: "¿Qué es la fascitis plantar?",
+                content: [
+                    {
+                        text: "La fascitis plantar es dolor de la banda resistente bajo el pie — la fascia plantar — donde se une al hueso del talón. Es una de las causas más comunes de dolor de talón. El dolor suele estar bajo el talón o a lo largo del arco, no detrás del tobillo (eso encaja mejor con problemas del Aquiles). Para los primeros pasos prácticos, consulta nuestra ",
+                    },
+                    {
+                        text: "guía Etapa 1: Fundamentos",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "¿Mejorará mi dolor de talón?",
+                content: [
+                    {
+                        text: "En la gran mayoría de los casos, sí. La fascitis plantar suele ser autolimitada: tiende a mejorar con el tiempo. Muchas personas mejoran sin tratamiento formal, pero lo básico correcto — estiramientos, calzado de apoyo y carga sensata — suele acelerar la recuperación. No hay curas milagrosas; la constancia simple supera tratamientos dramáticos puntuales.",
+                    },
+                ],
+            },
+            {
+                title: "¿Por qué duele tanto el primer paso por la mañana?",
+                content: [
+                    {
+                        text: "Es un signo clásico. Tras el reposo, la fascia y la pantorrilla pueden endurecerse por la noche. Los primeros pasos estiran tejidos acortados — provocan un dolor agudo que a menudo cede al moverse. Un estiramiento lento de los dedos antes de levantarse, calzado de apoyo desde el primer paso y estiramientos diarios de pantorrilla (especialmente en tabla inclinada) suelen ayudar — ver ",
+                    },
+                    {
+                        text: "Etapa 1: Fundamentos",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: " para la rutina completa." },
+                ],
+            },
+            {
+                title: "¿Cuánto dura la fascitis plantar?",
+                content: [
+                    {
+                        text: "Varía. Algunas personas notan mejoría en pocas semanas con un programa diario simple. Otras necesitan varios meses. «Crónica» significa que ha durado más de lo esperado — no una condena de por vida. Si lo básico del nivel 1 se ha probado bien (a menudo meses, no días) y sigues atascado, conviene hablar de otras opciones con tu médico.",
+                    },
+                ],
+            },
+            {
+                title: "¿Qué debo hacer primero?",
+                content: [
+                    {
+                        text: "Empieza con los fundamentos: un programa diario simple de estiramientos (los de pantorrilla en tabla inclinada son especialmente eficaces), calzado de apoyo, evitar mucho tiempo descalzo en suelos duros y aumentar los cambios gradualmente. Nuestro ",
+                    },
+                    {
+                        text: "centro de aprendizaje de fascitis plantar",
+                        href: "/learn/plantar-fasciitis",
+                    },
+                    {
+                        text: " enlaza guías por etapas y preguntas frecuentes, y el ",
+                    },
+                    {
+                        text: "curso de fascitis plantar",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    { text: " desarrolla el mismo enfoque con más detalle." },
+                ],
+            },
+            {
+                title: "¿Necesito una inyección o cirugía?",
+                content: [
+                    {
+                        text: "Normalmente no al principio. Las inyecciones a veces alivian el dolor por un tiempo pero rara vez sustituyen lo fundamental y tienen riesgos. La cirugía es muy rara para un dolor plantar sencillo. La mayoría nunca necesita operación si da una oportunidad real a los tratamientos simples.",
+                    },
+                ],
+            },
+            {
+                title: "¿Cuándo debo ver a un médico?",
+                content: [
+                    {
+                        text: "Consulta si hay dolor intenso tras una lesión, no puedes apoyar el pie, hay hinchazón o enrojecimiento marcados, fiebre, entumecimiento, o los síntomas no encajan con un dolor plantar simple. También si no mejoras tras probar lo básico correctamente durante un tiempo razonable, o el dolor empeora a pesar del autocuidado sensato.",
+                    },
+                ],
+            },
+        ],
+    },
+    it: {
+        title: "Trova la tua risposta:",
+        answers: [
+            {
+                title: "Cos’è la fascite plantare?",
+                content: [
+                    {
+                        text: "La fascite plantare è dolore dalla fascia resistente sotto il piede — la fascia plantare — dove si inserisce sull’osso del tallone. È una delle cause più comuni di dolore al tallone. Il dolore è di solito sotto il tallone o lungo l’arco, non dietro la caviglia (quel pattern suggerisce piuttosto problemi dell’Achille). Per i primi passi pratici, vedi la nostra ",
+                    },
+                    {
+                        text: "guida Fase 1: Fondamenta",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: "." },
+                ],
+            },
+            {
+                title: "Il mio dolore al tallone migliorerà?",
+                content: [
+                    {
+                        text: "Nella stragrande maggioranza dei casi, sì. La fascite plantare è di solito autolimitante: tende a risolversi col tempo. Molti migliorano anche senza trattamento formale, ma le basi giuste — stretching, calzature di supporto e carico sensato — di solito accelerano il recupero. Non ci sono cure miracolose; la costanza semplice batte trattamenti drammatici una tantum.",
+                    },
+                ],
+            },
+            {
+                title: "Perché il primo passo al mattino fa così male?",
+                content: [
+                    {
+                        text: "È un segno classico. A riposo, fascia e polpaccio possono irrigidirsi di notte. I primi passi allungano tessuti accorciati — causano un dolore acuto che spesso cala muovendosi. Un lento stretching delle dita prima di alzarsi, scarpe di supporto dal primo passo e stretching quotidiano del polpaccio (soprattutto su pedana inclinata) spesso aiutano — vedi ",
+                    },
+                    {
+                        text: "Fase 1: Fondamenta",
+                        href: "/guide/plantar-fasciitis/stage-1",
+                    },
+                    { text: " per la routine completa." },
+                ],
+            },
+            {
+                title: "Quanto dura la fascite plantare?",
+                content: [
+                    {
+                        text: "Varia. Alcuni notano miglioramenti in poche settimane con un programma quotidiano semplice. Altri hanno bisogno di mesi. «Cronica» significa che dura più del previsto — non una condanna a vita. Se le basi del livello 1 sono state provate a lungo (spesso mesi, non giorni) senza progressi, vale la pena discutere altre opzioni con il medico.",
+                    },
+                ],
+            },
+            {
+                title: "Cosa devo fare per primo?",
+                content: [
+                    {
+                        text: "Inizia con le fondamenta: un programma quotidiano semplice di stretching (il polpaccio su pedana inclinata è particolarmente efficace), calzature di supporto, evitare lunghi periodi a piedi nudi su pavimenti duri e aumentare gradualmente. Il nostro ",
+                    },
+                    {
+                        text: "hub fascite plantare",
+                        href: "/learn/plantar-fasciitis",
+                    },
+                    {
+                        text: " collega guide a fasi e FAQ, e il ",
+                    },
+                    {
+                        text: "corso fascite plantare",
+                        href: "/course/plantar-fasciitis",
+                    },
+                    { text: " approfondisce lo stesso approccio." },
+                ],
+            },
+            {
+                title: "Ho bisogno di un’iniezione o di un intervento?",
+                content: [
+                    {
+                        text: "Di solito non subito. Le iniezioni a volte riducono il dolore per un periodo ma raramente sostituiscono le basi e hanno rischi. L’intervento è raramente necessario per un dolore plantare semplice. La maggior parte non ha mai bisogno di chirurgia se dà una vera possibilità ai trattamenti semplici.",
+                    },
+                ],
+            },
+            {
+                title: "Quando devo vedere un medico?",
+                content: [
+                    {
+                        text: "Consulta in caso di dolore intenso dopo un infortunio, impossibilità a caricare il piede, gonfiore o arrossamento marcati, febbre, intorpidimento, o sintomi che non corrispondono a un semplice dolore plantare. Anche se non migliori dopo aver provato correttamente le basi per un periodo ragionevole, o il dolore peggiora nonostante cure sensate.",
+                    },
+                ],
+            },
+        ],
+    },
+};
+---
+
+<FAQsSection content={content[lang]} />

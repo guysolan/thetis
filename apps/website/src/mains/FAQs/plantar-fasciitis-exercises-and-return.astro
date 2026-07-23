@@ -1,20 +1,46 @@
 ---
-import FAQsLayout from "@/layouts/FAQsLayout.astro";
-import type { Lang } from "@/config/languages";
+import FAQsLayout from "../../layouts/FAQsLayout.astro";
+import PlantarFasciitisExercisesSection from "@/sections/FAQs/plantar-fasciitis-exercises-and-return.astro";
+import type { Lang } from "../../config/languages";
 
-interface Props {
-  lang?: Lang;
-}
+const { lang = "en" } = Astro.props as { lang: Lang };
 
-const { lang = "en" } = Astro.props;
-const title =
-  "Plantar fasciitis — exercises & return to activity";
-const description =
-  "Coming soon — Loading, strength, and getting back to sport.";
+const content: Record<Lang, { title: string; description: string }> = {
+    en: {
+        title: "Plantar fasciitis — exercises & return to activity",
+        description:
+            "When to add strength work, heel raises, returning to running and sport, and how to tell if you are doing too much.",
+    },
+    de: {
+        title: "Plantarfasziitis — Übungen & Rückkehr zur Aktivität",
+        description:
+            "Wann Krafttraining, Fersenheben, Rückkehr zum Laufen und Sport — und wie Sie Überlastung erkennen.",
+    },
+    fr: {
+        title: "Fasciite plantaire — exercices et retour à l’activité",
+        description:
+            "Quand ajouter le renforcement, relevés de talon, reprise de la course et du sport, et signes de surcharge.",
+    },
+    es: {
+        title: "Fascitis plantar — ejercicios y vuelta a la actividad",
+        description:
+            "Cuándo añadir fuerza, elevaciones de talón, volver a correr y al deporte, y cómo detectar exceso de carga.",
+    },
+    it: {
+        title: "Fascite plantare — esercizi e ritorno all’attività",
+        description:
+            "Quando aggiungere rinforzo, sollevamenti del tallone, ritorno alla corsa e allo sport, e come capire se state esagerando.",
+    },
+};
+
+const currentContent = content[lang];
 ---
 
-<FAQsLayout title={title} description={description} lang={lang}>
-  <section class="mx-auto px-4 py-8 max-w-3xl prose prose-neutral">
-    <p>Coming soon.</p>
-  </section>
+<FAQsLayout
+    title={currentContent.title}
+    description={currentContent.description}
+    lang={lang}
+    illustration="plantar-fasciitis"
+>
+    <PlantarFasciitisExercisesSection lang={lang} />
 </FAQsLayout>

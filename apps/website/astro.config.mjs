@@ -37,6 +37,19 @@ export default defineConfig({
     resolve: {
       dedupe: ["react", "react-dom"],
     },
+    server: {
+      watch: {
+        ignored: [
+          "**/node_modules/**",
+          "**/.git/**",
+          "**/.vercel/**",
+          "**/dist/**",
+          "**/.astro/**",
+        ],
+        usePolling: process.platform === "win32",
+        interval: 1000,
+      },
+    },
     build: {
       rollupOptions: {
         external: ["googleapis"],

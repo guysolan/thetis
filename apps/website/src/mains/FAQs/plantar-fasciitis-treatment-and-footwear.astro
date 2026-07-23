@@ -1,19 +1,46 @@
 ---
-import FAQsLayout from "@/layouts/FAQsLayout.astro";
-import type { Lang } from "@/config/languages";
+import FAQsLayout from "../../layouts/FAQsLayout.astro";
+import PlantarFasciitisTreatmentSection from "@/sections/FAQs/plantar-fasciitis-treatment-and-footwear.astro";
+import type { Lang } from "../../config/languages";
 
-interface Props {
-  lang?: Lang;
-}
+const { lang = "en" } = Astro.props as { lang: Lang };
 
-const { lang = "en" } = Astro.props;
-const title = "Plantar fasciitis — treatment & footwear";
-const description =
-  "Coming soon — Taping, footwear, and first-line care.";
+const content: Record<Lang, { title: string; description: string }> = {
+    en: {
+        title: "Plantar fasciitis — treatment & footwear",
+        description:
+            "First-line care, supportive shoes and insoles, night splints and taping, injections, shockwave, and when surgery is considered.",
+    },
+    de: {
+        title: "Plantarfasziitis — Behandlung & Schuhwerk",
+        description:
+            "Erstbehandlung, stützende Schuhe und Einlagen, Nachtschienen und Taping, Injektionen, Stoßwelle und wann eine Operation infrage kommt.",
+    },
+    fr: {
+        title: "Fasciite plantaire — traitement et chaussures",
+        description:
+            "Soins de première ligne, chaussures et semelles de soutien, attelles nocturnes et strapping, injections, ondes de choc et quand envisager une opération.",
+    },
+    es: {
+        title: "Fascitis plantar — tratamiento y calzado",
+        description:
+            "Cuidados de primera línea, calzado y plantillas de apoyo, férulas nocturnas y vendaje, inyecciones, ondas de choque y cuándo considerar cirugía.",
+    },
+    it: {
+        title: "Fascite plantare — trattamento e calzature",
+        description:
+            "Cure di prima linea, scarpe e plantari di supporto, stecche notturne e taping, iniezioni, onde d’urto e quando considerare un intervento.",
+    },
+};
+
+const currentContent = content[lang];
 ---
 
-<FAQsLayout title={title} description={description} lang={lang}>
-  <section class="mx-auto px-4 py-8 max-w-3xl prose prose-neutral">
-    <p>Coming soon.</p>
-  </section>
+<FAQsLayout
+    title={currentContent.title}
+    description={currentContent.description}
+    lang={lang}
+    illustration="plantar-fasciitis"
+>
+    <PlantarFasciitisTreatmentSection lang={lang} />
 </FAQsLayout>
