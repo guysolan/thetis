@@ -1,5 +1,5 @@
 {
-  "installCommand": "cd ../.. && pnpm install",
+  "installCommand": "cd ../.. && pnpm install --filter @thetis/website...",
   "buildCommand": "cd ../.. && pnpm --filter @thetis/website build",
   "outputDirectory": ".vercel/output",
   "ignoreCommand": "(git rev-list --count HEAD | grep -q '^1$' || git diff HEAD^ HEAD --quiet -- apps/website/ packages/ui/ package.json pnpm-lock.yaml) && exit 1 || exit 0",
