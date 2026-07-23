@@ -1,0 +1,25 @@
+---
+import SporlasticSlide from "./SporlasticSlide.astro";
+import { SPORLASTIC_DECK_SLIDE_COUNT } from "@/features/oped-deck/sporlasticDeckPitchContent";
+
+interface Props {
+  initialPage: number;
+}
+
+const { initialPage } = Astro.props;
+---
+
+{
+  Array.from({ length: SPORLASTIC_DECK_SLIDE_COUNT }, (_, index) => {
+    const page = index + 1;
+    return (
+      <div
+        data-oped-slide={page}
+        class="oped-slide-panel"
+        hidden={page !== initialPage}
+      >
+        <SporlasticSlide page={page} />
+      </div>
+    );
+  })
+}

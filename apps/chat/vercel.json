@@ -1,0 +1,20 @@
+{
+  "framework": "vite",
+  "installCommand": "cd ../.. && pnpm install --frozen-lockfile --ignore-scripts",
+  "buildCommand": "cd ../.. && pnpm --filter @thetis/chat build",
+  "outputDirectory": "dist",
+  "ignoreCommand": "(git rev-list --count HEAD | grep -q '^1$' || git diff HEAD^ HEAD --quiet -- apps/chat/ packages/ui/ package.json pnpm-lock.yaml) && exit 1 || exit 0",
+  "git": {
+    "deploymentEnabled": {
+      "main": true,
+      "master": true,
+      "dev": false,
+      "preview": false
+    }
+  },
+  "env": {
+    "NODE_ENV": "production",
+    "NODE_OPTIONS": "--max-old-space-size=4096"
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+}

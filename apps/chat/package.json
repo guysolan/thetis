@@ -1,0 +1,35 @@
+{
+  "name": "@thetis/chat",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vp dev --port=2123",
+    "build": "vp build",
+    "serve": "vp preview"
+  },
+  "dependencies": {
+    "@supabase/auth-ui-react": "^0.4.7",
+    "@supabase/auth-ui-shared": "^0.1.8",
+    "@supabase/supabase-js": "^2.45.4",
+    "@tanstack/react-query": "^5.59.3",
+    "@tanstack/react-router": "^1.85.0",
+    "@thetis/ui": "workspace:*",
+    "lucide-react": "^0.451.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.2.0",
+    "sonner": "^1.5.0",
+    "tailwindcss-animate": "^1.0.7"
+  },
+  "devDependencies": {
+    "@tanstack/router-vite-plugin": "^1.84.4",
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^6.0.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.13",
+    "typescript": "^5.5.4",
+    "vite": "^8.0.0"
+  }
+}

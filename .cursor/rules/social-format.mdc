@@ -1,0 +1,55 @@
+---
+description: Platform format specifications for all Thetis Medical social media content. Use when generating or reviewing LinkedIn, Instagram, or Facebook posts.
+---
+
+# Social Media Format Specifications
+
+All social content is written for Thetis Medical (thetismedical.com), a medical device company focused on Achilles tendon rupture recovery. Follow clinical positions and content guidelines at all times. Be practical and safety-first.
+
+## Platform audiences (internal)
+
+| Platform | Audience |
+|----------|----------|
+| LinkedIn | **Clinicians** — orthopaedic surgeons, physiotherapists, sports medicine professionals |
+| Instagram | **Patients** |
+| Facebook | **Patients** |
+| Website blog | **Patients** |
+
+## LinkedIn
+
+**Audience: clinicians.** Professional tone for orthopaedic surgeons and clinicians. **1300 characters max.**
+
+- Bold title line
+- Clinical insight with key points (evidence-led, cite studies where relevant)
+- Discussion question for clinicians at the end
+- Hashtags: #AchillesRupture #FootAndAnkle #Orthopaedics #Rehabilitation #SportsMedicine
+
+## Instagram
+
+**Audience: patients.** Patient-facing, punchy. **2200 characters max.**
+
+- Short lines, one idea per line
+- Timeline or key facts format works well
+- Plain language — explain medical terms inline
+- Engagement question with emoji at the end
+
+## Facebook
+
+**Audience: patients.** Community tone for patients. Empathetic and practical.
+
+- Longer paragraphs than Instagram
+- Practical advice the reader can act on
+- Acknowledge the emotional side of recovery where relevant
+- Community question with emoji at the end
+
+## Website blog
+
+**Audience: patients.** Longer-form visual guides and patient education articles. Plain language, structured with clear subheadings. Surgeon-to-patient voice. Include illustration briefs where relevant.
+
+## All platforms
+
+- Never contradict the clinical positions (.cursor/rules/achilles-clinical-positions.mdc)
+- Surgeon-to-patient voice for patient content (content-guidelines.mdc)
+- Include warning signs / when to seek help whenever the topic touches risk
+- No invented statistics or false precision; flag uncertainty honestly
+- No green colors in any visual references — use primary brand color

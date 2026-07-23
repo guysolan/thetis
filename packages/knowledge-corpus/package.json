@@ -1,0 +1,23 @@
+{
+  "name": "@thetis/knowledge-corpus",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./types": "./src/types.ts"
+  },
+  "scripts": {
+    "extract": "bun run src/cli.ts extract",
+    "sync": "bun run src/cli.ts sync",
+    "stats": "bun run src/cli.ts stats"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
+    "openai": "^4.73.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.4"
+  }
+}
