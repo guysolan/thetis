@@ -5,7 +5,7 @@
   "installCommand": "cd ../.. && pnpm install --frozen-lockfile",
   "git": {
     "deploymentEnabled": {
-      "main": true,
+      "main": false,
       "master": true,
       "dev": false,
       "preview": false
