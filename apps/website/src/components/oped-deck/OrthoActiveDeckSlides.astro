@@ -1,0 +1,25 @@
+---
+import OrthoActiveSlide from "./OrthoActiveSlide.astro";
+import { ORTHO_ACTIVE_DECK_SLIDE_COUNT } from "@/features/oped-deck/orthoActiveDeckPitchContent";
+
+interface Props {
+  initialPage: number;
+}
+
+const { initialPage } = Astro.props;
+---
+
+{
+  Array.from({ length: ORTHO_ACTIVE_DECK_SLIDE_COUNT }, (_, index) => {
+    const page = index + 1;
+    return (
+      <div
+        data-oped-slide={page}
+        class="oped-slide-panel"
+        hidden={page !== initialPage}
+      >
+        <OrthoActiveSlide page={page} />
+      </div>
+    );
+  })
+}

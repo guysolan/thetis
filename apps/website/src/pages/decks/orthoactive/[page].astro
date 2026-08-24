@@ -1,0 +1,34 @@
+---
+import OrthoActiveDeckSlides from "@/components/oped-deck/OrthoActiveDeckSlides.astro";
+import OpedDeckLayout from "@/layouts/OpedDeckLayout.astro";
+import {
+  ORTHO_ACTIVE_DECK_BASE_PATH,
+  ORTHO_ACTIVE_DECK_SLIDE_COUNT,
+} from "@/features/oped-deck/orthoActiveDeckPitchContent";
+
+const rawPage = Number.parseInt(Astro.params.page ?? "1", 10);
+
+if (!Number.isFinite(rawPage) || rawPage < 1) {
+  return Astro.redirect(`${ORTHO_ACTIVE_DECK_BASE_PATH}/1`, 301);
+}
+
+if (rawPage > ORTHO_ACTIVE_DECK_SLIDE_COUNT) {
+  return Astro.redirect(
+    `${ORTHO_ACTIVE_DECK_BASE_PATH}/${ORTHO_ACTIVE_DECK_SLIDE_COUNT}`,
+    301,
+  );
+}
+
+const initialPage = rawPage;
+---
+
+<OpedDeckLayout
+  title="How the splint sells — Ortho Active × Thetis"
+  description="Working discussion for Ortho Active and Thetis Medical: four ways the night splint moves volume."
+  initialPage={initialPage}
+  slideCount={ORTHO_ACTIVE_DECK_SLIDE_COUNT}
+  basePath={ORTHO_ACTIVE_DECK_BASE_PATH}
+  partnerName="Ortho Active"
+>
+  <OrthoActiveDeckSlides initialPage={initialPage} />
+</OpedDeckLayout>
