@@ -2,1686 +2,936 @@
   "name": "Subscribe",
   "steps": [
     {
-      "channel_key": "resend",
-      "channel_type": "email",
       "name": "Day 0 - Who is Thetis",
-      "ref": "email_1",
+      "type": "channel",
       "template": {
-        "is_mjml": false,
-        "settings": {
-          "attachment_key": "attachments",
-          "layout_key": "default"
-        },
         "subject": "Welcome to Thetis",
+        "settings": {
+          "layout_key": "default",
+          "attachment_key": "attachments"
+        },
+        "is_mjml": false,
         "visual_blocks@": "email_1/visual_blocks.json"
       },
-      "type": "channel"
+      "ref": "email_1",
+      "channel_type": "email",
+      "channel_key": "resend"
     },
     {
-      "channel_key": "twilio",
-      "channel_type": "sms",
       "name": "Day 0 - Who is Thetis (SMS)",
-      "ref": "email_1_sms",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
+      "type": "channel",
       "template": {
         "text_body@": "email_1_sms/text_body.txt"
       },
-      "type": "channel"
+      "ref": "email_1_sms",
+      "channel_type": "sms",
+      "channel_key": "twilio",
+      "send_windows": [
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "monday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "tuesday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "wednesday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "thursday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "friday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "saturday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "sunday",
+          "from": "07:00:00"
+        }
+      ]
     },
     {
+      "type": "delay",
       "ref": "delay_1",
       "settings": {
         "delay_for": {
           "unit": "days",
-          "value": 1
+          "value": 2
         }
-      },
-      "type": "delay"
+      }
     },
     {
-      "channel_key": "resend",
-      "channel_type": "email",
-      "name": "Day 1 - Protect the tendon",
-      "ref": "email_2",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
+      "name": "Day 2 - Protect the tendon",
+      "type": "channel",
       "template": {
-        "is_mjml": false,
-        "settings": {
-          "attachment_key": "attachments",
-          "layout_key": "default"
-        },
         "subject": "Protect the tendon (toes down)",
+        "settings": {
+          "layout_key": "default",
+          "attachment_key": "attachments"
+        },
+        "is_mjml": false,
         "visual_blocks@": "email_2/visual_blocks.json"
       },
-      "type": "channel"
-    },
-    {
-      "channel_key": "twilio",
-      "channel_type": "sms",
-      "name": "Day 1 - Protect the tendon (SMS)",
-      "ref": "email_2_sms",
+      "ref": "email_2",
+      "channel_type": "email",
+      "channel_key": "resend",
       "send_windows": [
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
-          "day": "sunday",
-          "from": "07:00:00",
           "type": "send",
-          "until": "21:30:00"
+          "until": "21:30:00",
+          "day": "sunday",
+          "from": "07:00:00"
         }
-      ],
+      ]
+    },
+    {
+      "name": "Day 2 - Protect the tendon (SMS)",
+      "type": "channel",
       "template": {
         "text_body@": "email_2_sms/text_body.txt"
       },
-      "type": "channel"
-    },
-    {
-      "ref": "delay_2a",
-      "settings": {
-        "delay_for": {
-          "unit": "days",
-          "value": 1
-        }
-      },
-      "type": "delay"
-    },
-    {
-      "channel_key": "resend",
-      "channel_type": "email",
-      "name": "Day 2 - Pain management",
-      "ref": "email_12",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
-      "template": {
-        "is_mjml": false,
-        "settings": {
-          "attachment_key": "attachments",
-          "layout_key": "default"
-        },
-        "subject": "Managing pain: what's normal vs when to worry",
-        "visual_blocks@": "email_12/visual_blocks.json"
-      },
-      "type": "channel"
-    },
-    {
-      "channel_key": "twilio",
+      "ref": "email_2_sms",
       "channel_type": "sms",
-      "name": "Day 2 - Pain management (SMS)",
-      "ref": "email_12_sms",
+      "channel_key": "twilio",
       "send_windows": [
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
-          "day": "sunday",
-          "from": "07:00:00",
           "type": "send",
-          "until": "21:30:00"
+          "until": "21:30:00",
+          "day": "sunday",
+          "from": "07:00:00"
         }
-      ],
-      "template": {
-        "text_body@": "email_12_sms/text_body.txt"
-      },
-      "type": "channel"
+      ]
     },
     {
+      "type": "delay",
       "ref": "delay_2",
       "settings": {
         "delay_for": {
           "unit": "days",
-          "value": 1
+          "value": 2
         }
-      },
-      "type": "delay"
+      }
     },
     {
-      "channel_key": "resend",
-      "channel_type": "email",
-      "name": "Day 3 - Questions for specialist",
-      "ref": "email_3",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
+      "name": "Day 4 - Pain management",
+      "type": "channel",
       "template": {
-        "is_mjml": false,
+        "subject": "Managing pain: what's normal vs when to worry",
         "settings": {
-          "attachment_key": "attachments",
-          "layout_key": "default"
+          "layout_key": "default",
+          "attachment_key": "attachments"
         },
-        "subject": "Essential questions for your specialist appointment",
-        "visual_blocks@": "email_3/visual_blocks.json"
+        "is_mjml": false,
+        "visual_blocks@": "email_12/visual_blocks.json"
       },
-      "type": "channel"
-    },
-    {
-      "channel_key": "twilio",
-      "channel_type": "sms",
-      "name": "Day 3 - Questions for specialist (SMS)",
-      "ref": "email_3_sms",
+      "ref": "email_12",
+      "channel_type": "email",
+      "channel_key": "resend",
       "send_windows": [
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
-          "day": "sunday",
-          "from": "07:00:00",
           "type": "send",
-          "until": "21:30:00"
+          "until": "21:30:00",
+          "day": "sunday",
+          "from": "07:00:00"
         }
-      ],
-      "template": {
-        "text_body@": "email_3_sms/text_body.txt"
-      },
-      "type": "channel"
+      ]
     },
     {
+      "name": "Day 4 - Pain management (SMS)",
+      "type": "channel",
+      "template": {
+        "text_body@": "email_12_sms/text_body.txt"
+      },
+      "ref": "email_12_sms",
+      "channel_type": "sms",
+      "channel_key": "twilio",
+      "send_windows": [
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "monday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "tuesday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "wednesday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "thursday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "friday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "saturday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "sunday",
+          "from": "07:00:00"
+        }
+      ]
+    },
+    {
+      "type": "delay",
       "ref": "delay_3",
       "settings": {
         "delay_for": {
           "unit": "days",
-          "value": 2
+          "value": 3
         }
-      },
-      "type": "delay"
+      }
     },
     {
-      "channel_key": "resend",
-      "channel_type": "email",
-      "name": "Day 5 - Helpful products",
-      "ref": "email_4",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
+      "name": "Day 7 - Questions for specialist",
+      "type": "channel",
       "template": {
-        "is_mjml": false,
+        "subject": "Essential questions for your specialist appointment",
         "settings": {
-          "attachment_key": "attachments",
-          "layout_key": "default"
+          "layout_key": "default",
+          "attachment_key": "attachments"
         },
-        "subject": "Essential items and mobility tips",
-        "visual_blocks@": "email_4/visual_blocks.json"
+        "is_mjml": false,
+        "visual_blocks@": "email_3/visual_blocks.json"
       },
-      "type": "channel"
-    },
-    {
-      "channel_key": "twilio",
-      "channel_type": "sms",
-      "name": "Day 5 - Helpful products (SMS)",
-      "ref": "email_4_sms",
+      "ref": "email_3",
+      "channel_type": "email",
+      "channel_key": "resend",
       "send_windows": [
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
-          "day": "sunday",
-          "from": "07:00:00",
           "type": "send",
-          "until": "21:30:00"
+          "until": "21:30:00",
+          "day": "sunday",
+          "from": "07:00:00"
         }
-      ],
-      "template": {
-        "text_body@": "email_4_sms/text_body.txt"
-      },
-      "type": "channel"
+      ]
     },
     {
+      "name": "Day 7 - Questions for specialist (SMS)",
+      "type": "channel",
+      "template": {
+        "text_body@": "email_3_sms/text_body.txt"
+      },
+      "ref": "email_3_sms",
+      "channel_type": "sms",
+      "channel_key": "twilio",
+      "send_windows": [
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "monday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "tuesday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "wednesday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "thursday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "friday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "saturday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "sunday",
+          "from": "07:00:00"
+        }
+      ]
+    },
+    {
+      "type": "delay",
       "ref": "delay_4",
       "settings": {
         "delay_for": {
           "unit": "days",
-          "value": 2
+          "value": 3
         }
-      },
-      "type": "delay"
+      }
     },
     {
-      "channel_key": "resend",
-      "channel_type": "email",
-      "name": "Day 7 - Treatment options",
-      "ref": "email_5",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
+      "name": "Day 10 - Treatment options",
+      "type": "channel",
       "template": {
-        "is_mjml": false,
-        "settings": {
-          "attachment_key": "attachments",
-          "layout_key": "default"
-        },
         "subject": "Understanding treatment options",
+        "settings": {
+          "layout_key": "default",
+          "attachment_key": "attachments"
+        },
+        "is_mjml": false,
         "visual_blocks@": "email_5/visual_blocks.json"
       },
-      "type": "channel"
-    },
-    {
-      "channel_key": "twilio",
-      "channel_type": "sms",
-      "name": "Day 7 - Treatment options (SMS)",
-      "ref": "email_5_sms",
+      "ref": "email_5",
+      "channel_type": "email",
+      "channel_key": "resend",
       "send_windows": [
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
-          "day": "sunday",
-          "from": "07:00:00",
           "type": "send",
-          "until": "21:30:00"
+          "until": "21:30:00",
+          "day": "sunday",
+          "from": "07:00:00"
         }
-      ],
-      "template": {
-        "text_body@": "email_5_sms/text_body.txt"
-      },
-      "type": "channel"
+      ]
     },
     {
+      "type": "delay",
       "ref": "delay_5",
-      "settings": {
-        "delay_for": {
-          "unit": "days",
-          "value": 2
-        }
-      },
-      "type": "delay"
-    },
-    {
-      "channel_key": "resend",
-      "channel_type": "email",
-      "name": "Day 9 - Boot basics",
-      "ref": "email_6",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
-      "template": {
-        "is_mjml": false,
-        "settings": {
-          "attachment_key": "attachments",
-          "layout_key": "default"
-        },
-        "subject": "Your walking boot basics",
-        "visual_blocks@": "email_6/visual_blocks.json"
-      },
-      "type": "channel"
-    },
-    {
-      "channel_key": "twilio",
-      "channel_type": "sms",
-      "name": "Day 9 - Boot basics (SMS)",
-      "ref": "email_6_sms",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
-      "template": {
-        "text_body@": "email_6_sms/text_body.txt"
-      },
-      "type": "channel"
-    },
-    {
-      "ref": "delay_6",
-      "settings": {
-        "delay_for": {
-          "unit": "days",
-          "value": 1
-        }
-      },
-      "type": "delay"
-    },
-    {
-      "channel_key": "resend",
-      "channel_type": "email",
-      "name": "Day 10 - Week 1 routine",
-      "ref": "email_7",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
-      "template": {
-        "is_mjml": false,
-        "settings": {
-          "attachment_key": "attachments",
-          "layout_key": "default"
-        },
-        "subject": "Week 1 routine + what's normal",
-        "visual_blocks@": "email_7/visual_blocks.json"
-      },
-      "type": "channel"
-    },
-    {
-      "channel_key": "twilio",
-      "channel_type": "sms",
-      "name": "Day 10 - Week 1 routine (SMS)",
-      "ref": "email_7_sms",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
-      "template": {
-        "text_body@": "email_7_sms/text_body.txt"
-      },
-      "type": "channel"
-    },
-    {
-      "ref": "delay_7a",
-      "settings": {
-        "delay_for": {
-          "unit": "days",
-          "value": 7
-        }
-      },
-      "type": "delay"
-    },
-    {
-      "channel_key": "resend",
-      "channel_type": "email",
-      "name": "Day 17 - Returning to work",
-      "ref": "email_13",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
-      "template": {
-        "is_mjml": false,
-        "settings": {
-          "attachment_key": "attachments",
-          "layout_key": "default"
-        },
-        "subject": "Thinking about returning to work?",
-        "visual_blocks@": "email_13/visual_blocks.json"
-      },
-      "type": "channel"
-    },
-    {
-      "channel_key": "twilio",
-      "channel_type": "sms",
-      "name": "Day 17 - Returning to work (SMS)",
-      "ref": "email_13_sms",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
-      "template": {
-        "text_body@": "email_13_sms/text_body.txt"
-      },
-      "type": "channel"
-    },
-    {
-      "ref": "delay_7",
       "settings": {
         "delay_for": {
           "unit": "days",
           "value": 4
         }
-      },
-      "type": "delay"
+      }
     },
     {
-      "channel_key": "resend",
+      "name": "Day 14 - Boot basics and early routine",
+      "type": "channel",
+      "template": {
+        "subject": "Your walking boot and early routine",
+        "settings": {
+          "layout_key": "default",
+          "attachment_key": "attachments"
+        },
+        "is_mjml": false,
+        "visual_blocks@": "email_6/visual_blocks.json"
+      },
+      "ref": "email_6",
       "channel_type": "email",
-      "name": "Day 21 - Mobility and daily life",
-      "ref": "email_8",
+      "channel_key": "resend",
       "send_windows": [
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
-          "day": "sunday",
-          "from": "07:00:00",
           "type": "send",
-          "until": "21:30:00"
+          "until": "21:30:00",
+          "day": "sunday",
+          "from": "07:00:00"
         }
-      ],
+      ]
+    },
+    {
+      "type": "delay",
+      "ref": "delay_6",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 7
+        }
+      }
+    },
+    {
+      "name": "Day 21 - Returning to work",
+      "type": "channel",
       "template": {
-        "is_mjml": false,
+        "subject": "Thinking about returning to work?",
         "settings": {
-          "attachment_key": "attachments",
-          "layout_key": "default"
+          "layout_key": "default",
+          "attachment_key": "attachments"
         },
+        "is_mjml": false,
+        "visual_blocks@": "email_13/visual_blocks.json"
+      },
+      "ref": "email_13",
+      "channel_type": "email",
+      "channel_key": "resend",
+      "send_windows": [
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "monday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "tuesday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "wednesday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "thursday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "friday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "saturday",
+          "from": "07:00:00"
+        },
+        {
+          "type": "send",
+          "until": "21:30:00",
+          "day": "sunday",
+          "from": "07:00:00"
+        }
+      ]
+    },
+    {
+      "type": "delay",
+      "ref": "delay_7",
+      "settings": {
+        "delay_for": {
+          "unit": "days",
+          "value": 7
+        }
+      }
+    },
+    {
+      "name": "Day 28 - Mobility and daily life",
+      "type": "channel",
+      "template": {
         "subject": "Why your gait feels weird (and tips to help)",
+        "settings": {
+          "layout_key": "default",
+          "attachment_key": "attachments"
+        },
+        "is_mjml": false,
         "visual_blocks@": "email_8/visual_blocks.json"
       },
-      "type": "channel"
-    },
-    {
-      "channel_key": "twilio",
-      "channel_type": "sms",
-      "name": "Day 21 - Mobility and daily life (SMS)",
-      "ref": "email_8_sms",
+      "ref": "email_8",
+      "channel_type": "email",
+      "channel_key": "resend",
       "send_windows": [
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
-          "day": "sunday",
-          "from": "07:00:00",
           "type": "send",
-          "until": "21:30:00"
+          "until": "21:30:00",
+          "day": "sunday",
+          "from": "07:00:00"
         }
-      ],
-      "template": {
-        "text_body@": "email_8_sms/text_body.txt"
-      },
-      "type": "channel"
+      ]
     },
     {
+      "type": "delay",
       "ref": "delay_8",
       "settings": {
         "delay_for": {
           "unit": "days",
           "value": 14
         }
-      },
-      "type": "delay"
+      }
     },
     {
-      "channel_key": "resend",
-      "channel_type": "email",
-      "name": "Day 35 - Preparing for physio",
-      "ref": "email_9",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
+      "name": "Day 42 - Preparing for physio",
+      "type": "channel",
       "template": {
-        "is_mjml": false,
-        "settings": {
-          "attachment_key": "attachments",
-          "layout_key": "default"
-        },
         "subject": "Getting ready to rebuild strength",
+        "settings": {
+          "layout_key": "default",
+          "attachment_key": "attachments"
+        },
+        "is_mjml": false,
         "visual_blocks@": "email_9/visual_blocks.json"
       },
-      "type": "channel"
-    },
-    {
-      "channel_key": "twilio",
-      "channel_type": "sms",
-      "name": "Day 35 - Preparing for physio (SMS)",
-      "ref": "email_9_sms",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
-      "template": {
-        "text_body@": "email_9_sms/text_body.txt"
-      },
-      "type": "channel"
-    },
-    {
-      "ref": "delay_9a",
-      "settings": {
-        "delay_for": {
-          "unit": "days",
-          "value": 7
-        }
-      },
-      "type": "delay"
-    },
-    {
-      "channel_key": "resend",
+      "ref": "email_9",
       "channel_type": "email",
-      "name": "Day 42 - Rerupture prevention",
-      "ref": "email_14",
+      "channel_key": "resend",
       "send_windows": [
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
-          "day": "sunday",
-          "from": "07:00:00",
           "type": "send",
-          "until": "21:30:00"
+          "until": "21:30:00",
+          "day": "sunday",
+          "from": "07:00:00"
         }
-      ],
-      "template": {
-        "is_mjml": false,
-        "settings": {
-          "attachment_key": "attachments",
-          "layout_key": "default"
-        },
-        "subject": "Preventing rerupture: what you need to know",
-        "visual_blocks@": "email_14/visual_blocks.json"
-      },
-      "type": "channel"
+      ]
     },
     {
-      "channel_key": "twilio",
-      "channel_type": "sms",
-      "name": "Day 42 - Rerupture prevention (SMS)",
-      "ref": "email_14_sms",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
-      "template": {
-        "text_body@": "email_14_sms/text_body.txt"
-      },
-      "type": "channel"
-    },
-    {
+      "type": "delay",
       "ref": "delay_9",
       "settings": {
         "delay_for": {
           "unit": "days",
           "value": 7
         }
-      },
-      "type": "delay"
+      }
     },
     {
-      "channel_key": "resend",
-      "channel_type": "email",
-      "name": "Day 49 - Preparing for boot removal",
-      "ref": "email_10",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
+      "name": "Day 49 - Rerupture prevention",
+      "type": "channel",
       "template": {
-        "is_mjml": false,
+        "subject": "Preventing rerupture: what you need to know",
         "settings": {
-          "attachment_key": "attachments",
-          "layout_key": "default"
+          "layout_key": "default",
+          "attachment_key": "attachments"
         },
-        "subject": "Preparing for life after the boot",
-        "visual_blocks@": "email_10/visual_blocks.json"
+        "is_mjml": false,
+        "visual_blocks@": "email_14/visual_blocks.json"
       },
-      "type": "channel"
-    },
-    {
-      "channel_key": "twilio",
-      "channel_type": "sms",
-      "name": "Day 49 - Preparing for boot removal (SMS)",
-      "ref": "email_10_sms",
+      "ref": "email_14",
+      "channel_type": "email",
+      "channel_key": "resend",
       "send_windows": [
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
-          "day": "sunday",
-          "from": "07:00:00",
           "type": "send",
-          "until": "21:30:00"
+          "until": "21:30:00",
+          "day": "sunday",
+          "from": "07:00:00"
         }
-      ],
-      "template": {
-        "text_body@": "email_10_sms/text_body.txt"
-      },
-      "type": "channel"
+      ]
     },
     {
+      "type": "delay",
       "ref": "delay_10",
       "settings": {
         "delay_for": {
           "unit": "days",
           "value": 21
         }
-      },
-      "type": "delay"
+      }
     },
     {
-      "channel_key": "resend",
-      "channel_type": "email",
-      "name": "Day 70 - Week 10 check-in",
-      "ref": "email_11",
-      "send_windows": [
-        {
-          "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        },
-        {
-          "day": "sunday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
-        }
-      ],
+      "name": "Day 70 - Preparing for boot removal",
+      "type": "channel",
       "template": {
-        "is_mjml": false,
+        "subject": "Preparing for life after the boot",
         "settings": {
-          "attachment_key": "attachments",
-          "layout_key": "default"
+          "layout_key": "default",
+          "attachment_key": "attachments"
         },
-        "subject": "How far you've come",
-        "visual_blocks@": "email_11/visual_blocks.json"
+        "is_mjml": false,
+        "visual_blocks@": "email_10/visual_blocks.json"
       },
-      "type": "channel"
-    },
-    {
-      "channel_key": "twilio",
-      "channel_type": "sms",
-      "name": "Day 70 - Week 10 check-in (SMS)",
-      "ref": "email_11_sms",
+      "ref": "email_10",
+      "channel_type": "email",
+      "channel_key": "resend",
       "send_windows": [
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "monday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "tuesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "wednesday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "thursday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "friday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
+          "type": "send",
+          "until": "21:30:00",
           "day": "saturday",
-          "from": "07:00:00",
-          "type": "send",
-          "until": "21:30:00"
+          "from": "07:00:00"
         },
         {
-          "day": "sunday",
-          "from": "07:00:00",
           "type": "send",
-          "until": "21:30:00"
+          "until": "21:30:00",
+          "day": "sunday",
+          "from": "07:00:00"
         }
-      ],
-      "template": {
-        "text_body@": "email_11_sms/text_body.txt"
-      },
-      "type": "channel"
+      ]
     }
   ],
   "trigger_frequency": "every_trigger",

@@ -12,7 +12,7 @@ const EXCLUDED_SITEMAP_SEGMENTS = new Set([
   "mapa-del-sitio",
   "mappa-del-sito",
 ]);
-const EXCLUDED_EXACT_PATHS = new Set(["/old-index"]);
+const EXCLUDED_EXACT_PATHS = new Set(["/old-index", "/unsubscribe"]);
 
 /** B2B trade decks (noindex) — keep out of XML sitemap. */
 const EXCLUDED_B2B_TRADE_PATHS = new Set([

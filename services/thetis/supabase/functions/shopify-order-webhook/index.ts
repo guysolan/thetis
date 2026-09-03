@@ -1,6 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
 import { createHmac } from "node:crypto";
+import { buildUnsubscribeUrl } from "../_shared/unsubscribe-token.ts";
 
 // Shopify product IDs -> product_slug. Keep splint in sync with SHOPIFY_SPLINT_PRODUCT_ID in apps/website/src/lib/shopify-course-price.ts
 const PRODUCT_TO_SLUG: Record<string, string> = {
@@ -440,6 +441,11 @@ Deno.serve(async (req) => {
             "https://course.thetismedical.com";
         const REVIEW_URL = Deno.env.get("REVIEW_URL") ||
             "https://www.thetismedical.com/leave-review";
+        // Signed one-click link the email layout renders in its footer. Only
+        // available once the user row exists, since the link is keyed on its id.
+        const unsubscribeUrl = userId
+            ? await buildUnsubscribeUrl(String(userId))
+            : null;
         const triggerData = {
             order_id: String(order.id),
             order_number: order.order_number,
@@ -447,6 +453,7 @@ Deno.serve(async (req) => {
             purchased_at: order.created_at,
             course_url: COURSE_URL,
             review_url: REVIEW_URL,
+            unsubscribe_url: unsubscribeUrl || undefined,
         };
 
         for (const courseSlug of courseSlugsOrdered) {

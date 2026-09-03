@@ -2,6 +2,6 @@ Thank you for choosing the Thetis Splint ({{ data.order_number }}).
 
 It's designed to be lightweight and maintain a 30° healing angle for better sleep and rest.
 
-We'll send some setup tips in a few days. In the meantime, reply anytime if you have questions.
+We'll send some setup tips in a few days. Reply STOP to opt out of texts.
 
 - Thetis

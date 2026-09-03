@@ -1,4 +1,5 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import { buildUnsubscribeUrl } from "../_shared/unsubscribe-token.ts";
 
 const KNOCK_API_KEY = Deno.env.get("KNOCK_API_KEY");
 const KNOCK_WORKFLOW_KEY = "subscribe"; // The workflow key in Knock
@@ -76,6 +77,9 @@ Deno.serve(async (req) => {
 
     console.log(`Triggering Knock workflow for new user: ${record.email}`);
 
+    // Signed one-click link the email layout renders in its footer
+    const unsubscribeUrl = await buildUnsubscribeUrl(record.id);
+
     // Trigger the Knock workflow
     // Using Knock's REST API directly (simpler than SDK in Deno)
     const knockResponse = await fetch(
@@ -103,6 +107,7 @@ Deno.serve(async (req) => {
             email: record.email,
             rupture_date: record.rupture_date || null,
             signed_up_at: record.created_at || new Date().toISOString(),
+            unsubscribe_url: unsubscribeUrl || undefined,
           },
         }),
       },

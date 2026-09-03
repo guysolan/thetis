@@ -8,6 +8,7 @@ export interface Props {
   bodyClass?: string;
   hideFooter?: boolean;
   hideNav?: boolean;
+  hidePopups?: boolean;
   logoColor?: "black" | "white";
   name?: string;
   lang: Lang;
@@ -26,6 +27,7 @@ const {
   bodyClass,
   hideFooter,
   hideNav,
+  hidePopups,
   logoColor,
   lang = "en",
   alternateLanguages = [],
@@ -70,7 +72,7 @@ import WelcomePopup from "../components/WelcomePopup";
     <InstantlyPixel />
     {!hideNav && <Nav lang={lang} />}
     <CartSheet client:load />
-    <WelcomePopup client:idle delaySeconds={5} />
+    {!hidePopups && <WelcomePopup client:idle delaySeconds={5} />}
     <slot />
     {!hideFooter && <Footer lang={lang} />}
     <script type="text/partytown" src="@/services/lucide.ts"></script>

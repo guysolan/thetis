@@ -1,0 +1,259 @@
+---
+export const prerender = false;
+
+import Layout from "../layouts/Layout.astro";
+import Slide from "../components/Slide.astro";
+import { buttonVariants } from "../components/ui/button";
+import {
+    isValidEmail,
+    requestUnsubscribe,
+    type UnsubscribeResult,
+} from "../lib/unsubscribe";
+
+const url = new URL(Astro.request.url);
+let userId = url.searchParams.get("u");
+let token = url.searchParams.get("t");
+
+let result: UnsubscribeResult | null = null;
+let error: string | null = null;
+let email = "";
+
+// A GET only ever renders the confirmation step. Mail clients and link
+// scanners prefetch links, so the opt-out itself has to be a POST.
+if (Astro.request.method === "POST") {
+    const form = await Astro.request.formData();
+    const action =
+        form.get("action") === "resubscribe" ? "resubscribe" : "unsubscribe";
+    userId = (form.get("u") as string | null) || userId;
+    token = (form.get("t") as string | null) || token;
+    email = ((form.get("email") as string | null) ?? "").trim();
+
+    const signed = Boolean(userId && token);
+    if (!signed && !isValidEmail(email)) {
+        error = email
+            ? "That does not look like a valid email address."
+            : "Please enter your email address.";
+    }
+
+    if (!error) {
+        const outcome = await requestUnsubscribe({
+            userId,
+            token,
+            email: email || null,
+            action,
+        });
+        if (outcome.ok) {
+            result = outcome;
+        } else {
+            error = outcome.error ?? null;
+            // An invalid link should fall through to the email form
+            if (outcome.error?.includes("no longer valid")) {
+                userId = null;
+                token = null;
+            }
+        }
+    }
+}
+
+const hasSignedLink = Boolean(userId && token);
+const isResubscribed = result?.action === "resubscribe";
+---
+
+<Layout
+    title="Unsubscribe - Thetis Medical"
+    description="Stop receiving recovery emails and texts from Thetis Medical."
+    lang="en"
+    hidePopups
+>
+    <meta name="robots" content="noindex, nofollow" slot="head" />
+
+    <main>
+        <Slide
+            title={isResubscribed ? "You're back on the list" : "Unsubscribe"}
+        >
+            <div class="bg-white shadow-lg mx-auto p-8 rounded-2xl max-w-xl">
+                {
+                    result && !isResubscribed && (
+                        <div class="space-y-5">
+                            <p class="text-gray-700">
+                                {result.alreadyUnsubscribed
+                                    ? "You were already unsubscribed, so there is nothing left to do."
+                                    : "Done. You will not receive any more recovery emails or texts from us."}
+                                {result.email && (
+                                    <>
+                                        {" "}
+                                        We have recorded this for{" "}
+                                        <strong>{result.email}</strong>.
+                                    </>
+                                )}
+                            </p>
+                            <p class="text-gray-700">
+                                Anything already in your inbox will stay there,
+                                but nothing further is scheduled. Order and
+                                delivery updates for purchases are separate and
+                                will still reach you.
+                            </p>
+
+                            {hasSignedLink && (
+                                <form method="POST" class="pt-2">
+                                    <input
+                                        type="hidden"
+                                        name="u"
+                                        value={userId}
+                                    />
+                                    <input
+                                        type="hidden"
+                                        name="t"
+                                        value={token}
+                                    />
+                                    <input
+                                        type="hidden"
+                                        name="action"
+                                        value="resubscribe"
+                                    />
+                                    <p class="mb-3 text-gray-500 text-sm">
+                                        Unsubscribed by mistake?
+                                    </p>
+                                    <button
+                                        type="submit"
+                                        class={buttonVariants({
+                                            variant: "outline",
+                                        })}
+                                    >
+                                        Resubscribe me
+                                    </button>
+                                </form>
+                            )}
+
+                            <p class="pt-4 border-t text-gray-500 text-sm">
+                                Still need a hand with your recovery? Everything
+                                is on our{" "}
+                                <a
+                                    href="/learn/achilles-rupture"
+                                    class="text-primary hover:underline"
+                                >
+                                    advice pages
+                                </a>
+                                , no email required.
+                            </p>
+                        </div>
+                    )
+                }
+
+                {
+                    isResubscribed && (
+                        <div class="space-y-5">
+                            <p class="text-gray-700">
+                                Welcome back. Your recovery emails will carry on
+                                where they left off
+                                {result?.email && (
+                                    <>
+                                        {" "}
+                                        for <strong>{result.email}</strong>
+                                    </>
+                                )}
+                                .
+                            </p>
+                            <a href="/" class={buttonVariants({})}>
+                                Back to the site
+                            </a>
+                        </div>
+                    )
+                }
+
+                {
+                    !result && (
+                        <div class="space-y-6">
+                            {error && (
+                                <p
+                                    class="bg-red-50 p-4 border-red-500 border-l-4 rounded text-red-800 text-sm"
+                                    role="alert"
+                                >
+                                    {error}
+                                </p>
+                            )}
+
+                            {hasSignedLink ? (
+                                <>
+                                    <p class="text-gray-700">
+                                        Confirm below and we will stop sending
+                                        you recovery emails and texts. You can
+                                        undo it straight afterwards if you
+                                        change your mind.
+                                    </p>
+                                    <form method="POST">
+                                        <input
+                                            type="hidden"
+                                            name="u"
+                                            value={userId}
+                                        />
+                                        <input
+                                            type="hidden"
+                                            name="t"
+                                            value={token}
+                                        />
+                                        <button
+                                            type="submit"
+                                            class={buttonVariants({
+                                                size: "lg",
+                                            })}
+                                        >
+                                            Confirm unsubscribe
+                                        </button>
+                                    </form>
+                                </>
+                            ) : (
+                                <>
+                                    <p class="text-gray-700">
+                                        Enter the email address you would like
+                                        us to stop writing to and we will remove
+                                        it.
+                                    </p>
+                                    <form method="POST" class="space-y-4">
+                                        <div>
+                                            <label
+                                                for="email"
+                                                class="block mb-2 font-medium text-gray-700 text-sm"
+                                            >
+                                                Email address
+                                            </label>
+                                            <input
+                                                type="email"
+                                                id="email"
+                                                name="email"
+                                                required
+                                                autocomplete="email"
+                                                value={email}
+                                                placeholder="you@example.com"
+                                                class="px-4 py-2 border border-gray-300 focus:border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/30 w-full"
+                                            />
+                                        </div>
+                                        <button
+                                            type="submit"
+                                            class={buttonVariants({
+                                                size: "lg",
+                                            })}
+                                        >
+                                            Unsubscribe
+                                        </button>
+                                    </form>
+                                </>
+                            )}
+
+                            <p class="pt-4 border-t text-gray-500 text-sm">
+                                Prefer to talk to a person? Email{" "}
+                                <a
+                                    href="mailto:info@thetismedical.com"
+                                    class="text-primary hover:underline"
+                                >
+                                    info@thetismedical.com
+                                </a>{" "}
+                                and we will sort it out for you.
+                            </p>
+                        </div>
+                    )
+                }
+            </div>
+        </Slide>
+    </main>
+</Layout>

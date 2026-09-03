@@ -15,6 +15,10 @@ This edge function triggers the Knock "subscribe" email workflow when a new user
 Required in Supabase Dashboard → Project Settings → Edge Functions:
 
 - `KNOCK_API_KEY` - Your Knock API key (from Knock dashboard → Developers → API Keys)
+- `UNSUBSCRIBE_SECRET` - HMAC key used to sign the one-click unsubscribe link passed to Knock as
+  `data.unsubscribe_url`. Without it the emails fall back to the plain unsubscribe page. See
+  `../unsubscribe/README.md`.
+- `WEBSITE_URL` - Base URL for that link. Defaults to `https://thetismedical.com`.
 
 ## Deployment
 
@@ -68,10 +72,11 @@ curl -X POST \
 
 ## Cancellation
 
-To cancel a user's email sequence (e.g., if they unsubscribe):
+Recipient-driven opt-outs are handled by the `unsubscribe` function, which cancels queued runs and
+records consent in one step. To cancel a sequence by hand:
 
 ```bash
-curl -X DELETE \
+curl -X POST \
   'https://api.knock.app/v1/workflows/subscribe/cancel' \
   -H 'Authorization: Bearer YOUR_KNOCK_API_KEY' \
   -H 'Content-Type: application/json' \

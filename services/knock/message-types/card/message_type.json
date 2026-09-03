@@ -1,321 +1,321 @@
 {
-  "description": "An inline card to place in our application.",
-  "icon_name": "PanelTop",
   "name": "Card",
+  "description": "An inline card to place in our application.",
   "variants": [
     {
+      "name": "Default",
       "fields": [
         {
-          "key": "headline",
           "label": "Headline",
+          "type": "text",
+          "key": "headline",
           "settings": {
             "default": "Headline",
             "required": true
-          },
-          "type": "text"
+          }
         },
         {
-          "key": "title",
           "label": "Title",
+          "type": "text",
+          "key": "title",
           "settings": {
             "default": "Card title",
             "required": true
-          },
-          "type": "text"
+          }
         },
         {
-          "key": "body",
           "label": "Body",
+          "type": "markdown",
+          "key": "body",
           "settings": {
             "default": "Copy about the feature or general information to highlight. Try to provide a CTA where possible.",
             "required": true
-          },
-          "type": "markdown"
+          }
         },
         {
+          "label": "Image",
+          "type": "image",
+          "key": "image",
           "action": {
-            "key": "action",
             "label": "Image action",
+            "type": "text",
+            "key": "action",
             "settings": {
               "default": "",
               "required": false
-            },
-            "type": "text"
+            }
           },
           "alt": {
-            "key": "alt",
             "label": "Alt text",
+            "type": "text",
+            "key": "alt",
             "settings": {
               "default": "",
               "required": false
-            },
-            "type": "text"
+            }
           },
-          "key": "image",
-          "label": "Image",
           "settings": {
             "description": "An image to display on the card",
             "required": false
           },
-          "type": "image",
           "url": {
-            "key": "url",
             "label": "Image URL",
+            "type": "url",
+            "key": "url",
             "settings": {
               "default": "",
               "required": false
-            },
-            "type": "url"
+            }
           }
         },
         {
-          "key": "dismissible",
           "label": "Dismissible?",
+          "type": "boolean",
+          "key": "dismissible",
           "settings": {
             "default": true,
             "required": false
-          },
-          "type": "boolean"
+          }
         }
       ],
-      "key": "default",
-      "name": "Default"
+      "key": "default"
     },
     {
+      "name": "Single-action",
       "fields": [
         {
-          "key": "headline",
           "label": "Headline",
+          "type": "text",
+          "key": "headline",
           "settings": {
             "default": "Headline",
             "required": true
-          },
-          "type": "text"
+          }
         },
         {
-          "key": "title",
           "label": "Title",
+          "type": "text",
+          "key": "title",
           "settings": {
             "default": "Card title",
             "required": true
-          },
-          "type": "text"
+          }
         },
         {
-          "key": "body",
           "label": "Body",
+          "type": "markdown",
+          "key": "body",
           "settings": {
             "default": "Copy about the feature or general information to highlight. Try to provide a CTA where possible.",
             "required": true
-          },
-          "type": "markdown"
+          }
         },
         {
+          "label": "Image",
+          "type": "image",
+          "key": "image",
           "action": {
-            "key": "action",
             "label": "Image action",
+            "type": "text",
+            "key": "action",
             "settings": {
               "default": "",
               "required": false
-            },
-            "type": "text"
+            }
           },
           "alt": {
-            "key": "alt",
             "label": "Alt text",
+            "type": "text",
+            "key": "alt",
             "settings": {
               "default": "",
               "required": false
-            },
-            "type": "text"
+            }
           },
-          "key": "image",
-          "label": "Image",
           "settings": {
             "description": "An image to display on the card",
             "required": false
           },
-          "type": "image",
           "url": {
-            "key": "url",
             "label": "Image URL",
+            "type": "url",
+            "key": "url",
             "settings": {
               "default": "",
               "required": false
-            },
-            "type": "url"
+            }
           }
         },
         {
-          "key": "dismissible",
           "label": "Dismissible?",
+          "type": "boolean",
+          "key": "dismissible",
           "settings": {
             "default": true,
             "required": false
-          },
-          "type": "boolean"
+          }
         },
         {
-          "action": {
-            "key": "action",
-            "label": "Button action",
-            "settings": {
-              "default": "action",
-              "required": true
-            },
-            "type": "text"
-          },
-          "key": "primary_button",
           "label": "Primary button",
-          "settings": {
-            "required": true
-          },
+          "type": "button",
           "text": {
-            "key": "text",
             "label": "Button text",
+            "type": "text",
+            "key": "text",
             "settings": {
               "default": "Primary",
               "required": true
-            },
-            "type": "text"
+            }
           },
-          "type": "button"
+          "key": "primary_button",
+          "action": {
+            "label": "Button action",
+            "type": "text",
+            "key": "action",
+            "settings": {
+              "default": "action",
+              "required": true
+            }
+          },
+          "settings": {
+            "required": true
+          }
         }
       ],
-      "key": "single-action",
-      "name": "Single-action"
+      "key": "single-action"
     },
     {
+      "name": "Multi-action",
       "fields": [
         {
-          "key": "headline",
           "label": "Headline",
+          "type": "text",
+          "key": "headline",
           "settings": {
             "default": "Headline",
             "required": true
-          },
-          "type": "text"
+          }
         },
         {
-          "key": "title",
           "label": "Title",
+          "type": "text",
+          "key": "title",
           "settings": {
             "default": "Card title",
             "required": true
-          },
-          "type": "text"
+          }
         },
         {
-          "key": "body",
           "label": "Body",
+          "type": "markdown",
+          "key": "body",
           "settings": {
             "default": "Copy about the feature or general information to highlight. Try to provide a CTA where possible.",
             "required": true
-          },
-          "type": "markdown"
+          }
         },
         {
+          "label": "Image",
+          "type": "image",
+          "key": "image",
           "action": {
-            "key": "action",
             "label": "Image action",
+            "type": "text",
+            "key": "action",
             "settings": {
               "default": "",
               "required": false
-            },
-            "type": "text"
+            }
           },
           "alt": {
-            "key": "alt",
             "label": "Alt text",
+            "type": "text",
+            "key": "alt",
             "settings": {
               "default": "",
               "required": false
-            },
-            "type": "text"
+            }
           },
-          "key": "image",
-          "label": "Image",
           "settings": {
             "description": "An image to display on the card",
             "required": false
           },
-          "type": "image",
           "url": {
-            "key": "url",
             "label": "Image URL",
+            "type": "url",
+            "key": "url",
             "settings": {
               "default": "",
               "required": false
-            },
-            "type": "url"
+            }
           }
         },
         {
-          "key": "dismissible",
           "label": "Dismissible?",
+          "type": "boolean",
+          "key": "dismissible",
           "settings": {
             "default": true,
             "required": false
-          },
-          "type": "boolean"
+          }
         },
         {
-          "action": {
-            "key": "action",
-            "label": "Button action",
-            "settings": {
-              "default": "action",
-              "required": true
-            },
-            "type": "text"
-          },
-          "key": "primary_button",
           "label": "Primary button",
-          "settings": {
-            "required": true
-          },
+          "type": "button",
           "text": {
-            "key": "text",
             "label": "Button text",
+            "type": "text",
+            "key": "text",
             "settings": {
               "default": "Primary",
               "required": true
-            },
-            "type": "text"
+            }
           },
-          "type": "button"
-        },
-        {
+          "key": "primary_button",
           "action": {
-            "key": "action",
             "label": "Button action",
+            "type": "text",
+            "key": "action",
             "settings": {
               "default": "action",
               "required": true
-            },
-            "type": "text"
+            }
           },
-          "key": "secondary_button",
+          "settings": {
+            "required": true
+          }
+        },
+        {
           "label": "Secondary button",
-          "settings": {
-            "required": true
-          },
+          "type": "button",
           "text": {
-            "key": "text",
             "label": "Button text",
+            "type": "text",
+            "key": "text",
             "settings": {
               "default": "Secondary",
               "required": true
-            },
-            "type": "text"
+            }
           },
-          "type": "button"
+          "key": "secondary_button",
+          "action": {
+            "label": "Button action",
+            "type": "text",
+            "key": "action",
+            "settings": {
+              "default": "action",
+              "required": true
+            }
+          },
+          "settings": {
+            "required": true
+          }
         }
       ],
-      "key": "multi-action",
-      "name": "Multi-action"
+      "key": "multi-action"
     }
   ],
+  "icon_name": "PanelTop",
   "preview@": "preview.html",
   "__readonly": {
     "key": "card",

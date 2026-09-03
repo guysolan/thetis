@@ -7,3 +7,5 @@
 {{ vars.app_name }}
 
 {{ footer_links }}
+
+{% if vars.commercial_unsubscribe_url %}Unsubscribe: {{ vars.commercial_unsubscribe_url }}{% elsif data.unsubscribe_url %}Unsubscribe: {{ data.unsubscribe_url }}{% else %}Unsubscribe: https://thetismedical.com/unsubscribe{% endif %}

@@ -4,6 +4,6 @@ Thank you for your {{ data.course_name }} order ({{ data.order_number }}).
 Log in here: {{ data.course_url }}
 We recommend starting with {{ data.sms_start_lessons }}.
 
-Reply anytime if you have questions.
+Reply STOP to opt out of texts.
 
 - Thetis
