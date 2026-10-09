@@ -1,0 +1,58 @@
+---
+description: Preferred Thetis LinkedIn infographic style with Mike and Doc. Use when generating LinkedIn, Instagram, or Facebook graphics in ai-studio.
+globs: services/ai-studio/**
+alwaysApply: false
+---
+
+# LinkedIn graphics (Mike + Doc)
+
+Keep **Mike, Doc, and the illustration style**. Change **composition and scenery** to fit the post. Do not clone the last graphic or always use the same London consult room.
+
+## House style (constant)
+
+- Square 1:1 (~1080x1080). Forest-green + cream. Flat cartoon line-art.
+- Characters from `services/ai-studio/input/mike-and-doc.png`.
+- Perfect spelling. No hashtags, URLs, logos, or prompt labels (`Eyebrow:`, `Title:`).
+- Generate with Gemini via `services/ai-studio`.
+
+## Scenery (must vary)
+
+Match the **place** to the post. Do not default to Big Ben windows every time.
+
+- Treatment decision / evidence talk → clinic consult room
+- Early mobilisation / loading → physio gym, corridor, or walking practice
+- First weeks / protect the repair → hospital ward or first walk with crutches
+- Boot coming off / gait → marked walkway or gait lab, unused boot on the side
+- After independent walking → outdoor path past a walking milestone, more road ahead
+- Return to sport → gym, track, or outdoor path
+- Sleep / night splint → bedroom
+- Exam / special test → treatment plinth, close-up
+- Imaging / tendon monitoring → ultrasound room (keep it cartoon, no fake scan numbers)
+
+London details can appear sometimes, not always.
+
+## Layout (must vary)
+
+Pick a structure that matches **this post’s idea**, not a default template.
+
+Examples:
+- Trade-off / evidence → balance scale, two paths, or a large comparison board
+- Process / rehab → timeline, steps on the floor, walking sequence
+- Test / exam → close-up of the test, two poses side by side
+- Myth vs evidence → split beat, not three identical footer cards
+- Return to sport → action pose, checklist in Doc’s hands, not another consult chair
+
+**Do not reuse** “Doc left + Mike on chair + whiteboard + three bottom cards + green pill” unless that is genuinely the best fit. The Achilles `*-v3.png` trio is one look, not the only look.
+
+## Do not do this
+
+- Canva split: boxed photo on the left, stacked white cards on the right
+- Typographic SVG-only grids with no characters, unless the user asks for no characters
+- Giant comedy props, mad-scientist Doc, or invented statistics
+
+## Characters
+
+- **Doc:** older, balding, white hair at sides, white beard, round glasses, Thetis-green scrubs, green crocs, yellow clipboard.
+- **Mike:** 40s, slim, short brown hair, white t-shirt, blue jeans.
+- **Achilles rupture:** ONE walking boot on the injured foot, white sneaker on the other.
+- **Plantar fasciitis / heel pain:** no boot, no cast. White sneakers on both feet.
