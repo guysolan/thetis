@@ -352,6 +352,18 @@
                               {% endif %}
 
                               {{ footer_links }}
+
+                              <!-- Unsubscribe. Prefers Knock's own one-click URL
+                                   (present once the workflow is marked Commercial),
+                                   falls back to the signed link in trigger data, then
+                                   to the page where a recipient can enter their email. -->
+                              {% if vars.commercial_unsubscribe_url %}
+                                <a href="{{ vars.commercial_unsubscribe_url }}">Unsubscribe</a>
+                              {% elsif data.unsubscribe_url %}
+                                <a href="{{ data.unsubscribe_url }}">Unsubscribe</a>
+                              {% else %}
+                                <a href="https://thetismedical.com/unsubscribe">Unsubscribe</a>
+                              {% endif %}
                             </div>
                           </td>
                           {% if vars.branding.icon_url %}

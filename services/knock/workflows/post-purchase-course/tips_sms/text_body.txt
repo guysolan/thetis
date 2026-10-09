@@ -6,4 +6,6 @@ A few tips to get the most from your {{ data.course_name }}:
 
 Most importantly: {{ data.sms_key_principle }}
 
+Reply STOP to opt out of texts.
+
 - Thetis

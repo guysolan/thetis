@@ -31,19 +31,28 @@
     "packageJson": {
       "dependencies": [
         "npm:@astrojs/vercel@^8.0.7",
-        "npm:@biomejs/biome@1.8.3",
         "npm:@changesets/cli@^2.27.1",
         "npm:@radix-ui/react-focus-scope@^1.1.2",
         "npm:react-dom@^18.3.1",
         "npm:react@^18.3.1",
         "npm:supabase@^2.2.1",
-        "npm:turbo@2.1.1",
-        "npm:turborepo@^0.0.1",
         "npm:typescript@^5.5.4",
-        "npm:vercel@^39.2.2"
+        "npm:vercel@^39.2.2",
+        "npm:vite-plus@~0.1.13"
       ]
     },
     "members": {
+      "agents/course-content-posts": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@anthropic-ai/sdk@~0.32.1",
+            "npm:@google/generative-ai@0.21",
+            "npm:@notionhq/client@^2.2.15",
+            "npm:notion-to-md@^3.1.1",
+            "npm:openai@4"
+          ]
+        }
+      },
       "apps/achilles-rupture": {
         "packageJson": {
           "dependencies": [
@@ -64,30 +73,69 @@
           ]
         }
       },
+      "apps/chat": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@supabase/auth-ui-react@~0.4.7",
+            "npm:@supabase/auth-ui-shared@~0.1.8",
+            "npm:@supabase/supabase-js@^2.45.4",
+            "npm:@tanstack/react-query@^5.59.3",
+            "npm:@tanstack/react-router@^1.85.0",
+            "npm:@tanstack/router-vite-plugin@^1.84.4",
+            "npm:@types/react-dom@^18.2.18",
+            "npm:@types/react@^18.3.1",
+            "npm:@vitejs/plugin-react@6",
+            "npm:autoprefixer@^10.4.20",
+            "npm:lucide-react@0.451",
+            "npm:postcss@^8.4.47",
+            "npm:react-dom@^18.2.0",
+            "npm:react@^18.3.1",
+            "npm:sonner@^1.5.0",
+            "npm:tailwindcss-animate@^1.0.7",
+            "npm:tailwindcss@^3.4.13",
+            "npm:typescript@^5.5.4",
+            "npm:vite@8"
+          ]
+        }
+      },
       "apps/course": {
         "packageJson": {
           "dependencies": [
+            "npm:@radix-ui/react-alert-dialog@^1.1.2",
+            "npm:@radix-ui/react-aspect-ratio@^1.1.0",
+            "npm:@radix-ui/react-avatar@^1.1.1",
+            "npm:@radix-ui/react-context-menu@^2.2.2",
+            "npm:@radix-ui/react-dropdown-menu@^2.1.2",
+            "npm:@radix-ui/react-hover-card@^1.1.2",
+            "npm:@radix-ui/react-navigation-menu@^1.2.1",
+            "npm:@radix-ui/react-progress@^1.1.0",
+            "npm:@radix-ui/react-scroll-area@^1.1.0",
+            "npm:@radix-ui/react-separator@^1.1.0",
             "npm:@supabase/supabase-js@^2.90.1",
             "npm:@tanstack/react-query@^5.59.3",
             "npm:@tanstack/react-router@^1.85.0",
             "npm:@tanstack/router-vite-plugin@^1.84.4",
             "npm:@types/react-dom@^18.2.18",
             "npm:@types/react@^18.2.0",
-            "npm:@vitejs/plugin-react@^4.3.2",
+            "npm:@vitejs/plugin-react@6",
             "npm:autoprefixer@^10.4.20",
             "npm:class-variance-authority@0.7",
             "npm:clsx@^2.1.1",
+            "npm:country-flag-icons@^1.5.16",
             "npm:date-fns@^4.1.0",
+            "npm:html2canvas@^1.4.1",
+            "npm:jspdf@^4.2.0",
             "npm:lucide-react@0.451",
             "npm:postcss@^8.4.47",
-            "npm:react-dom@^18.2.0",
+            "npm:react-dom@^18.3.1",
             "npm:react@^18.3.1",
+            "npm:recharts@^2.15.1",
             "npm:sonner@^1.5.0",
             "npm:tailwind-merge@^2.5.3",
             "npm:tailwindcss-animate@^1.0.7",
             "npm:tailwindcss@^3.4.13",
             "npm:typescript@^5.5.4",
-            "npm:vite@6.2.2"
+            "npm:vite@8"
           ]
         }
       },
@@ -110,7 +158,7 @@
             "npm:@types/file-saver@^2.0.7",
             "npm:@types/react-csv@^1.1.10",
             "npm:@types/react-dom@^18.2.18",
-            "npm:@vitejs/plugin-react@^4.3.2",
+            "npm:@vitejs/plugin-react@6",
             "npm:autoprefixer@^10.4.20",
             "npm:change-case@^5.4.4",
             "npm:class-variance-authority@0.7",
@@ -136,8 +184,8 @@
             "npm:tailwind-merge@^2.5.3",
             "npm:tailwindcss-animate@^1.0.7",
             "npm:tailwindcss@^3.4.13",
-            "npm:vite@^5.4.8",
-            "npm:vitest@^2.1.2",
+            "npm:vite@8",
+            "npm:vitest@^4.1.0",
             "npm:zod@^3.23.8",
             "npm:zustand@^5.0.1"
           ]
@@ -155,17 +203,16 @@
             "npm:@supabase/auth-ui-react@~0.4.7",
             "npm:@supabase/auth-ui-shared@~0.1.8",
             "npm:@supabase/supabase-js@^2.45.4",
-            "npm:@tanstack/react-form@^1.23.8",
             "npm:@tanstack/react-query-devtools@^5.59.0",
             "npm:@tanstack/react-query@^5.59.3",
             "npm:@tanstack/react-router@^1.85.0",
+            "npm:@tanstack/react-table@^8.21.3",
             "npm:@tanstack/router-devtools@^1.85.0",
             "npm:@tanstack/router-vite-plugin@^1.84.4",
-            "npm:@tanstack/zod-form-adapter@~0.42.1",
             "npm:@types/file-saver@^2.0.7",
             "npm:@types/react-csv@^1.1.10",
             "npm:@types/react-dom@^18.2.18",
-            "npm:@vitejs/plugin-react@^4.3.2",
+            "npm:@vitejs/plugin-react@6",
             "npm:autoprefixer@^10.4.20",
             "npm:change-case@^5.4.4",
             "npm:class-variance-authority@0.7",
@@ -190,8 +237,8 @@
             "npm:tailwind-merge@^2.5.3",
             "npm:tailwindcss-animate@^1.0.7",
             "npm:tailwindcss@^3.4.13",
-            "npm:vite@6.2.2",
-            "npm:vitest@^3.1.1",
+            "npm:vite@8",
+            "npm:vitest@^4.1.0",
             "npm:zod@^3.25.76",
             "npm:zustand@^5.0.1"
           ]
@@ -208,6 +255,7 @@
             "npm:@astrojs/tailwind@5.1.2",
             "npm:@astrojs/vercel@8.0.7",
             "npm:@astropub/md@1",
+            "npm:@formspree/react@3",
             "npm:@hookform/resolvers@^5.1.1",
             "npm:@nanostores/react@~0.8.4",
             "npm:@notionhq/client@^2.2.3",
@@ -282,7 +330,7 @@
             "npm:tailwindcss-animate@^1.0.6",
             "npm:tailwindcss@^3.3.3",
             "npm:vaul@^1.1.2",
-            "npm:vitest@1",
+            "npm:vitest@^4.1.0",
             "npm:zod@^4.0.5"
           ]
         }
@@ -315,6 +363,16 @@
           ]
         }
       },
+      "packages/knowledge-corpus": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@supabase/supabase-js@^2.45.4",
+            "npm:@types/node@22",
+            "npm:openai@^4.73.0",
+            "npm:typescript@^5.5.4"
+          ]
+        }
+      },
       "packages/kv": {
         "packageJson": {
           "dependencies": [
@@ -341,34 +399,22 @@
       "packages/ui": {
         "packageJson": {
           "dependencies": [
+            "npm:@base-ui/react@1",
             "npm:@number-flow/react@~0.5.8",
-            "npm:@radix-ui/react-accordion@^1.2.3",
-            "npm:@radix-ui/react-alert-dialog@^1.1.6",
-            "npm:@radix-ui/react-aspect-ratio@^1.1.2",
-            "npm:@radix-ui/react-avatar@^1.1.3",
-            "npm:@radix-ui/react-checkbox@^1.1.4",
-            "npm:@radix-ui/react-collapsible@^1.1.3",
-            "npm:@radix-ui/react-context-menu@^2.2.6",
-            "npm:@radix-ui/react-dialog@^1.1.6",
-            "npm:@radix-ui/react-dropdown-menu@^2.1.6",
-            "npm:@radix-ui/react-hover-card@^1.1.6",
-            "npm:@radix-ui/react-icons@^1.3.2",
-            "npm:@radix-ui/react-label@^2.1.8",
-            "npm:@radix-ui/react-menubar@^1.1.6",
-            "npm:@radix-ui/react-navigation-menu@^1.2.5",
-            "npm:@radix-ui/react-popover@^1.1.6",
-            "npm:@radix-ui/react-progress@^1.1.2",
-            "npm:@radix-ui/react-radio-group@^1.2.3",
-            "npm:@radix-ui/react-scroll-area@^1.2.3",
+            "npm:@radix-ui/react-alert-dialog@^1.1.2",
+            "npm:@radix-ui/react-aspect-ratio@^1.1.0",
+            "npm:@radix-ui/react-avatar@^1.1.1",
+            "npm:@radix-ui/react-collapsible@^1.1.1",
+            "npm:@radix-ui/react-context-menu@^2.2.2",
+            "npm:@radix-ui/react-dialog@^1.1.15",
+            "npm:@radix-ui/react-dropdown-menu@^2.1.2",
+            "npm:@radix-ui/react-hover-card@^1.1.2",
+            "npm:@radix-ui/react-progress@^1.1.0",
+            "npm:@radix-ui/react-scroll-area@^1.1.0",
             "npm:@radix-ui/react-select@^2.1.6",
             "npm:@radix-ui/react-separator@^1.1.8",
-            "npm:@radix-ui/react-slider@^1.2.3",
-            "npm:@radix-ui/react-slot@^1.1.2",
-            "npm:@radix-ui/react-switch@^1.1.3",
-            "npm:@radix-ui/react-tabs@^1.1.3",
-            "npm:@radix-ui/react-toast@^1.2.6",
-            "npm:@radix-ui/react-toggle@^1.1.2",
-            "npm:@radix-ui/react-tooltip@^1.1.8",
+            "npm:@radix-ui/react-slot@^1.2.4",
+            "npm:@radix-ui/react-tooltip@^1.2.8",
             "npm:@tabler/icons-react@3",
             "npm:@tailwindcss/line-clamp@~0.4.4",
             "npm:@tiptap/extension-link@^2.10.3",
@@ -385,7 +431,7 @@
             "npm:date-fns@^4.1.0",
             "npm:embla-carousel-react@^8.5.2",
             "npm:framer-motion@^11.18.2",
-            "npm:lucide-react@0.483",
+            "npm:lucide-react@0.563",
             "npm:next-themes@0.3",
             "npm:postcss@^8.4.43",
             "npm:react-day-picker@^8.10.1",
@@ -409,7 +455,8 @@
         "packageJson": {
           "dependencies": [
             "npm:@google/generative-ai@0.21",
-            "npm:openai@4"
+            "npm:openai@4",
+            "npm:sharp@~0.34.5"
           ]
         }
       },
@@ -417,6 +464,31 @@
         "packageJson": {
           "dependencies": [
             "npm:supabase@^1.191.3"
+          ]
+        }
+      },
+      "services/analytics": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@google-analytics/data@^4.12.0"
+          ]
+        }
+      },
+      "services/notion": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@notionhq/client@^2.2.15",
+            "npm:notion-to-md@^3.1.1"
+          ]
+        }
+      },
+      "services/search-console": {
+        "packageJson": {
+          "dependencies": [
+            "npm:@types/node@^22.10.0",
+            "npm:googleapis@144",
+            "npm:tsx@^4.19.2",
+            "npm:typescript@^5.5.4"
           ]
         }
       },

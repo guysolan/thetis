@@ -1,7 +1,0 @@
-We hope your {{ data.course_name }} is helping with your recovery.
-
-We'd really value your feedback. If you have a moment, please leave a review here: {{ data.review_url }}
-
-Thank you for choosing Thetis.
-
-- Thetis

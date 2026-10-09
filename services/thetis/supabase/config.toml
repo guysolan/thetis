@@ -161,3 +161,7 @@ backend = "postgres"
 # Shopify POSTs without a Supabase JWT; auth is handled in-code via HMAC.
 [functions.shopify-order-webhook]
 verify_jwt = false
+
+# Reached from the public /unsubscribe page; auth is the HMAC in the link.
+[functions.unsubscribe]
+verify_jwt = false
