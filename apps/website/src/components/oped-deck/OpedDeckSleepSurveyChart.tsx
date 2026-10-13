@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import SleepSurveyDonutChart from "@/components/trade/SleepSurveyDonutChart";
 import { opedCannotSleepPct } from "@/features/oped-deck/opedDeckContent";
 
@@ -13,19 +13,27 @@ export default function OpedDeckSleepSurveyChart() {
   const hostRef = useRef<HTMLDivElement>(null);
   const [ready, setReady] = useState(false);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
+    const node = hostRef.current;
+    const panel = node?.closest("[data-oped-slide]");
     const sync = () => {
-      setReady(isPanelVisible(hostRef.current));
+      setReady(isPanelVisible(node));
     };
 
     sync();
 
+    const observer = panel
+      ? new MutationObserver(sync)
+      : null;
+    observer?.observe(panel as HTMLElement, {
+      attributes: true,
+      attributeFilter: ["hidden"],
+    });
     window.addEventListener("oped-deck-slide-change", sync);
-    window.addEventListener("resize", sync);
 
     return () => {
+      observer?.disconnect();
       window.removeEventListener("oped-deck-slide-change", sync);
-      window.removeEventListener("resize", sync);
     };
   }, []);
 
