@@ -1,5 +1,5 @@
 {
-  "installCommand": "cd ../.. && pnpm install --filter @thetis/website... --frozen-lockfile --ignore-scripts",
+  "installCommand": "cd ../.. && pnpm install --filter @thetis/website...",
   "buildCommand": "cd ../.. && pnpm --filter @thetis/website build",
   "outputDirectory": ".vercel/output",
   "ignoreCommand": "git diff --quiet HEAD^ HEAD -- apps/website/ packages/ui/ package.json pnpm-lock.yaml || exit 1",

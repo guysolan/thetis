@@ -1,6 +1,7 @@
 {
   "name": "@thetis/website",
   "version": "0.0.1",
+  "packageManager": "pnpm@9.15.0",
   "type": "module",
   "scripts": {
     "sync-catalogue-images": "node ../../packages/catalogue/scripts/sync-product-images.mjs",
