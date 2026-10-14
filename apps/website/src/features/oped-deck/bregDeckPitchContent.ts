@@ -5,7 +5,7 @@ export const BREG_DECK_SLIDE_COUNT = 13;
 
 export const bregAchillesBootImage = {
   src: "/images/breg/achilles-boot.png",
-  alt: "Breg Achilles Boot, a hi-top walking boot with heel wedges",
+  alt: "Breg Achilles Boot, shown on its own against a white background",
 } as const;
 
 export const bregPitchDayStack = {
@@ -20,7 +20,7 @@ export const bregPitchDayStack = {
       detail:
         "Hi-top walker with four 10° heel wedges and an air bladder. It holds the foot in plantarflexion after an Achilles injury or reconstruction — the boot patients already use for weight-bearing walks.",
       image: "/images/breg/achilles-boot.png",
-      imageAlt: "Breg Achilles Boot hi-top walking boot",
+      imageAlt: "Breg Achilles Boot, shown on its own against a white background",
       productUrl:
         "https://www.breg.com/products/foot-ankle-bracing/walker-boots/achilles-boot/",
     },
@@ -47,54 +47,25 @@ export const bregPitchDayStack = {
 
 export const bregPitchDayPathway = {
   eyebrow: "The Breg pathway",
-  title: "The Achilles Boot solves the day. Sleep is still open.",
+  title: "The boot covers the day. Night is still open.",
   intro:
-    "Breg already places the foot in plantarflexion for Achilles recovery. Patients still take that boot off at night. A generic night splint, when one is offered, usually points the foot the other way.",
-  callout: {
-    label: "Important",
-    headline: "Right angle by day. Still a boot at night.",
-    detail:
-      "Four 10° wedges. Correct plantarflexion for walking. Hot, heavy, and off the leg once the patient lies down.",
-  },
-  rangeLabel: "What Breg already fits for Achilles rupture",
-  rangeNote:
-    "The day pathway is in the catalogue. The night-time device is not.",
-  range: [
+    "Breg already holds the foot in plantarflexion for walking. Patients take that boot off to sleep.",
+  points: [
     {
-      name: "Achilles Boot w/ Air",
+      label: "Right boot for the day",
       detail:
-        "AL23601XBB · Hi-top frame, air bladder, four 10° wedges locked to the boot. Immediate use after Achilles injury, and after reconstruction.",
+        "Achilles Boot with four 10° wedges. The right position for walking.",
     },
     {
-      name: "Achilles Boot",
+      label: "Off at night",
       detail:
-        "AL03601XBB · The same hi-top boot and wedge stack, without the air bladder.",
+        "Hot and heavy once the patient lies down. The tendon is left unprotected.",
     },
     {
-      name: "Achilles Wedges",
-      detail:
-        "00092–00094 · Rigid polypropylene wedges for other Breg walkers. Plantarflexion that does not compress like foam.",
+      label: "Nothing in the range for night",
+      detail: "Breg has the day boot. There is still no Achilles night splint.",
     },
   ],
-  limitations: [
-    {
-      label: "Patients take it off to sleep",
-      detail:
-        "The boot is the right device for weight-bearing. At night it is hot, heavy, and off the leg — and the tendon is unprotected.",
-    },
-    {
-      label: "Generic night splints point the wrong way",
-      detail:
-        "Plantar fasciitis splints hold the foot in dorsiflexion. Achilles rupture healing needs about 30° of plantarflexion.",
-    },
-    {
-      label: "No ATR night device in the range",
-      detail:
-        "Breg owns the day boot and the wedges. There is still no purpose-built night splint for Achilles rupture rest and sleep.",
-    },
-  ],
-  closing:
-    "Breg could pair the Achilles Boot with the right night device: lightweight, about 30° plantarflexion, and designed only for Achilles rupture rest and sleep.",
 } as const;
 
 export const bregPitchPatientReview = {

@@ -10,6 +10,7 @@ interface Props {
   appendix?: boolean;
   basePath?: string;
   partnerName?: string;
+  partnerLogo?: string;
 }
 
 const {
@@ -20,6 +21,7 @@ const {
   appendix = false,
   basePath = "/decks/oped",
   partnerName = "OPED Medical",
+  partnerLogo,
 } = Astro.props;
 ---
 
@@ -50,9 +52,19 @@ const {
           />
           <div class="bg-neutral-200 w-px h-5 shrink-0" aria-hidden="true">
           </div>
-          <span class="font-bold text-neutral-800 text-sm tracking-tight">
-            {partnerName}
-          </span>
+          {
+            partnerLogo ? (
+              <img
+                src={partnerLogo}
+                alt={partnerName}
+                class="h-8 w-auto shrink-0"
+              />
+            ) : (
+              <span class="font-bold text-neutral-800 text-sm tracking-tight">
+                {partnerName}
+              </span>
+            )
+          }
           <span class="font-light text-neutral-300 text-sm" aria-hidden="true"
             >×</span
           >
